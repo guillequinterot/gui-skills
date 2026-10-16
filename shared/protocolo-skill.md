@@ -60,8 +60,8 @@ pasos, **sin pedir permiso** (regla aprobada por el mantenedor): solo se informa
 3. **Publica en GitHub, solo, sin preguntar:** `python <repo>/tools/publish_job.py --tema <caso-o-tema>`
    (p. ej. `--tema caso-web-universidad-01`). Con los cambios aún sin commitear en `main`, crea la rama
    `aporte/<alias>/<fecha>-<tema>`, hace commit (el hook `pre-commit` vuelve a pasar el escáner), sube la
-   rama y abre el Pull Request. Los amigos obtienen un PR que revisa el mantenedor; el mantenedor puede
-   añadir `--merge` para fusionarlo de inmediato. Nunca empuja a `main` ni fuerza nada.
+   rama y abre el Pull Request. Los amigos obtienen un PR que revisa el mantenedor. Si eres el mantenedor (`"mantenedor": true` en `~/.gui-skills/config.json`), tu aporte se integra solo: el PR se fusiona en el acto (`PUBLICADO <url>`); `--no-merge` lo evita.
+   Nunca empuja a `main` ni fuerza nada.
 4. Cuéntale al usuario el resultado, según la primera palabra de la salida:
    - `PR_CREADO <url>` → PR abierto para revisión del mantenedor; pásale el enlace.
    - `PUBLICADO <url>` → PR fusionado en `main` (solo con `--merge`).

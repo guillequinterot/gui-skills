@@ -8,6 +8,9 @@ changes uncommitted in the working tree:
   python tools/publish_job.py --tema caso-web-universidad-01 --merge   # maintainer: merge the PR right away
   python tools/publish_job.py --reintentar                             # push + PR for pending aporte/* branches
 
+With "mantenedor": true in ~/.gui-skills/config.json the PR is merged automatically (as with --merge)
+unless --no-merge is given; without that key the behaviour is PR only.
+
 First word of the output is the status token:
 PR_CREADO <url> | PUBLICADO <url> | PR_MANUAL <url> | PENDIENTE <rama> | BLOQUEADO | SIN_CAMBIOS | DRY_RUN | ERROR
 Exit code: 0 for everything except BLOQUEADO / ERROR (1) and usage errors (2).
@@ -531,6 +534,8 @@ def main(argv=None) -> int:
     ap.add_argument("--tema", help="identificador de la rama: caso-o-tema en minúsculas, números y guiones")
     ap.add_argument("--mensaje", help='resumen del commit y título del PR (por defecto "Registro de trabajo: <tema>")')
     ap.add_argument("--merge", action="store_true", help="fusiona el PR de inmediato (pensado para el mantenedor)")
+    ap.add_argument("--no-merge", action="store_true",
+                    help='no fusiona aunque config.json diga "mantenedor": true (solo deja el PR)')
     ap.add_argument("--reintentar", action="store_true", help="sube y abre PR de las ramas aporte/* pendientes")
     ap.add_argument("--incluir-todo", action="store_true", help="permite cambios en shared/, templates/, tools/ y documentación")
     ap.add_argument("--dry-run", action="store_true", help="muestra los pasos sin cambiar nada")
@@ -546,6 +551,10 @@ def main(argv=None) -> int:
             ap.error("--tema solo admite minúsculas, números y guiones (máx. 60)")
     if not DATE_RE.match(a.fecha):
         ap.error("--fecha debe ser AAAA-MM-DD")
+    if a.merge and a.no_merge:
+        ap.error("--merge y --no-merge se excluyen")
+    if not a.no_merge and gui_common.is_maintainer():
+        a.merge = True  # maintainer: the contribution is integrated by itself
     repo = gui_common.resolve_repo(a.repo, __file__)
     try:
         if git(repo, "rev-parse", "--git-dir")[0] != 0:

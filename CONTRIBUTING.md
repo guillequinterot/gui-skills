@@ -77,7 +77,8 @@ intactos y avisa `BLOQUEADO`) -> `git push -u origin` (sin force, nunca a `main`
 Solo publica cambios dentro de `skills/`; para tocar `shared/`, `templates/`, `tools/` o la documentación agrega
 `--incluir-todo` (y avisa en el PR, porque afecta a todas las skills).
 
-Resultados: `PR_CREADO <url>`, `PUBLICADO <url>` (con `--merge`, solo el mantenedor: fusiona el PR y borra la rama),
+Resultados: `PR_CREADO <url>`, `PUBLICADO <url>` (solo el mantenedor: fusiona el PR y borra la rama; sale con `--merge` o, de forma automática, con
+`"mantenedor": true` en `~/.gui-skills/config.json`; `--no-merge` lo evita),
 `PR_MANUAL <url>`, `PENDIENTE <rama>` (sin red: queda guardada, se sube con `publish_job.py --reintentar`; el Paso 0
 lo avisa en cada uso de una skill), `BLOQUEADO`, `SIN_CAMBIOS`. `--dry-run` muestra los pasos sin hacer nada.
 

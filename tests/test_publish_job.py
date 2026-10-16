@@ -364,5 +364,57 @@ class PublishTests(PublishBase):
         self.assertEqual(mock.calls("POST")[0][3]["head"], BRANCH)
 
 
+class MaintainerTests(PublishBase):
+    def set_maintainer(self, value):
+        import json
+        cfg = self.home / "config.json"
+        data = json.loads(cfg.read_text(encoding="utf-8"))
+        data["mantenedor"] = value
+        cfg.write_text(json.dumps(data), encoding="utf-8")
+
+    def env_for(self, mock):
+        env = dict(self.env)
+        env["GUI_SKILLS_API_URL"] = mock.url
+        env["GH_TOKEN"] = FAKE_TOKEN
+        return env
+
+    def test_maintainer_true_merges_automatically(self):
+        self.set_maintainer(True)
+        self.as_github()
+        self.edit(self.c)
+        with MockGitHub(self.remote) as mock:
+            rc, out, err = self.publish("--tema", "demo-uno", env=self.env_for(mock))
+        self.assertEqual(rc, 0, out + err)
+        self.assertTrue(out.startswith("PUBLICADO https://github.com/fake/repo/pull/7"), out)
+        self.assertEqual(len(mock.calls("PUT")), 1)
+        self.assertBackOnCleanMain()
+
+    def test_no_merge_flag_keeps_pr_only(self):
+        self.set_maintainer(True)
+        self.as_github()
+        self.edit(self.c)
+        with MockGitHub(self.remote) as mock:
+            rc, out, err = self.publish("--tema", "demo-uno", "--no-merge", env=self.env_for(mock))
+        self.assertTrue(out.startswith("PR_CREADO"), out + err)
+        self.assertEqual(mock.calls("PUT"), [])
+
+    def test_missing_or_false_means_pr_only(self):
+        for value in (None, False, "true"):  # only the JSON boolean true counts
+            with self.subTest(value=value):
+                if value is not None:
+                    self.set_maintainer(value)
+                self.as_github()
+                self.edit(self.c, text=f"\nvuelta {value}\n")
+                with MockGitHub(self.remote) as mock:
+                    rc, out, err = self.publish("--tema", "demo-uno", env=self.env_for(mock))
+                self.assertTrue(out.startswith("PR_CREADO"), out + err)
+                self.assertEqual(mock.calls("PUT"), [])
+                self.assertBackOnCleanMain()
+
+    def test_merge_and_no_merge_conflict(self):
+        rc, _, _ = self.publish("--tema", "demo-uno", "--merge", "--no-merge")
+        self.assertEqual(rc, 2)
+
+
 if __name__ == "__main__":
     unittest.main()

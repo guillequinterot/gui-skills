@@ -23,8 +23,8 @@ Estas 9 skills viven en el repo privado **gui-skills**: `direct-visual-design`, 
   `python <repo>/tools/log_job.py --skill <nombre> --caso <código> --hecho "..." --bien "..." --mal "..."`
   en el HANDOFF de cada skill que intervino; (2) actualiza el `HANDSHAKE.md` si cambió el estado vivo;
   (3) publícalo con `python <repo>/tools/publish_job.py --tema <caso-o-tema>` (crea la rama
-  `aporte/<alias>/<fecha>-<tema>`, hace commit, sube y abre el Pull Request; el mantenedor puede añadir
-  `--merge`); (4) cuéntale al usuario el resultado: `PR_CREADO <url>`, `PUBLICADO <url>`, `PR_MANUAL <url>`,
+  `aporte/<alias>/<fecha>-<tema>`, hace commit, sube y abre el Pull Request; si eres el mantenedor
+  (`"mantenedor": true` en `config.json`), tu aporte se integra solo); (4) cuéntale al usuario el resultado: `PR_CREADO <url>`, `PUBLICADO <url>`, `PR_MANUAL <url>`,
   `PENDIENTE` o `BLOQUEADO`.
 - **Obsidian es opcional:** si el usuario tiene un vault configurado (`obsidian_vault` en
   `~/.gui-skills/config.json`) o el MCP de Obsidian responde, registra también allí (nota del proyecto y

@@ -55,6 +55,18 @@ class LogJobTests(Sandbox):
         self.assertIn("[dry-run]", out)
         self.assertEqual(self.text(), before)
 
+    def test_lf_file_stays_lf_and_crlf_file_stays_crlf(self):
+        self.assertNotIn(b"\r", self.handoff.read_bytes())
+        rc, out, err = self.log()
+        self.assertEqual(rc, 0, out + err)
+        self.assertNotIn(b"\r", self.handoff.read_bytes())
+        self.handoff.write_bytes(self.handoff.read_bytes().replace(b"\n", b"\r\n"))
+        rc, out, err = self.log(caso="caso-demo-02")
+        self.assertEqual(rc, 0, out + err)
+        data = self.handoff.read_bytes()
+        self.assertEqual(data.count(b"\n"), data.count(b"\r\n"))  # every line break is still CRLF
+        self.assertIn(b"caso-demo-02", data)
+
 
 if __name__ == "__main__":
     unittest.main()

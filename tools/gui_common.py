@@ -46,3 +46,8 @@ def resolve_repo(arg: str | None, script_file: str) -> Path:
     if cfg:
         return Path(str(cfg)).expanduser().resolve()
     return script_repo_root(script_file)
+
+
+def is_maintainer() -> bool:
+    """True only when ~/.gui-skills/config.json has "mantenedor": true (a real JSON boolean)."""
+    return load_config().get("mantenedor") is True

@@ -190,7 +190,8 @@ def current_files(out_dir: Path) -> dict[str, bytes]:
                 rel = path.relative_to(out_dir).as_posix()
                 if rel in MANUAL_FILES:
                     continue
-                found[rel] = path.read_bytes()
+                # a Windows checkout may have turned LF into CRLF (core.autocrlf): compare by content
+                found[rel] = path.read_bytes().replace(b"\r\n", b"\n")
     return found
 
 

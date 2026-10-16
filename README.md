@@ -81,7 +81,8 @@ Para pasar el alias sin preguntar: `-Alias ana` / `--alias ana`. Qué hace:
 - Abre `~/.gui-skills/private-terms.txt` y escribe, uno por línea, los nombres de **tus** clientes, marcas y
   personas (el formato está en el encabezado del archivo). Ese archivo nunca sale de tu computadora.
 
-`~/.gui-skills/config.json` también acepta, opcionales, `obsidian_vault`, `obsidian_registry_note` y
+`~/.gui-skills/config.json` también acepta, opcionales, `"mantenedor": true` (solo para quien mantiene el repo: sus
+aportes se fusionan solos), `obsidian_vault`, `obsidian_registry_note` y
 `obsidian_projects_folder` si usas Obsidian.
 
 ### Si el instalador falla
@@ -202,8 +203,7 @@ Al **terminar un trabajo que el usuario aprueba**, Claude hace sin pedir permiso
 registra la entrada con `log_job.py` en el HANDOFF de cada skill que intervino, actualiza el HANDSHAKE si hizo
 falta y corre `python <repo>/tools/publish_job.py --tema <caso-o-tema>`, que crea la rama
 `aporte/<alias>/<fecha>-<tema>`, hace commit (pasa el escáner de privacidad), la sube y abre un Pull Request hacia
-`main`. Los amigos obtienen un PR que revisa el mantenedor; el mantenedor puede añadir `--merge` para fusionarlo de
-inmediato. Si no hay red, la rama queda guardada en tu clon (`PENDIENTE`) y el Paso 0 te avisa hasta que se suba
+`main`. Los amigos obtienen un PR que revisa el mantenedor. Si eres el mantenedor (`"mantenedor": true` en `~/.gui-skills/config.json`), tu aporte se integra solo: el PR se fusiona en el acto (`PUBLICADO <url>`); `--no-merge` lo evita. Si no hay red, la rama queda guardada en tu clon (`PENDIENTE`) y el Paso 0 te avisa hasta que se suba
 con `publish_job.py --reintentar`. El PR se abre con `gh` si está autenticado, si no con la API de GitHub usando el
 token de tu credencial de git (nunca se imprime ni se guarda) y, si tampoco, te da el enlace para abrirlo a mano.
 

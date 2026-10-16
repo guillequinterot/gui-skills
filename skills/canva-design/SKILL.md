@@ -19,8 +19,8 @@ Esta skill vive en el repo **gui-skills** y sigue [`shared/protocolo-skill.md`](
 3. **Paso final — obligatorio y preaprobado** (trabajo terminado y aprobado por el usuario; no pidas permiso):
    (1) `python <repo>/tools/log_job.py --skill canva-design ...` por cada skill que intervino (qué se hizo, qué
    salió bien, qué salió mal, incidencias); (2) actualiza `HANDSHAKE.md` si cambió el estado vivo;
-   (3) publica con `python <repo>/tools/publish_job.py --tema <caso-o-tema>` (rama + push + PR; el mantenedor
-   puede añadir `--merge`); (4) dile al usuario el resultado (`PR_CREADO <url>` / `PUBLICADO <url>` /
+   (3) publica con `python <repo>/tools/publish_job.py --tema <caso-o-tema>` (rama + push + PR; si eres el
+   mantenedor, tu aporte se integra solo); (4) dile al usuario el resultado (`PR_CREADO <url>` / `PUBLICADO <url>` /
    `PENDIENTE` / `BLOQUEADO`). Obsidian es opcional: si el usuario lo tiene, registra también allí.
 
 `<repo>` = `repo_path` de `~/.gui-skills/config.json`, o dos carpetas arriba de esta skill.
