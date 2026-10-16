@@ -3,7 +3,8 @@
   Instalador de gui-skills para Windows. Es idempotente: se puede volver a correr sin riesgo.
 .DESCRIPTION
   Clona el repo (si falta), crea ~/.gui-skills, enlaza cada skill en ~/.claude/skills con una
-  junction, activa los hooks de git y agrega el aviso de actualización a SessionStart.
+  junction, activa los hooks de git y agrega a SessionStart la actualización automática
+  (check_update.py --hook --pull: al abrir cada sesión descarga los cambios si el clon está limpio).
 .EXAMPLE
   powershell -ExecutionPolicy Bypass -File tools\install.ps1 -Alias ana
 #>
@@ -167,7 +168,7 @@ if ($NoHook) {
 } elseif (-not $pyCmd) {
   Say '[5/6] No encuentro Python 3.9+, omito el hook. Instala Python y vuelve a correr este script.'
 } else {
-  Say "[5/6] Hook SessionStart en $settings"
+  Say "[5/6] Hook SessionStart (actualización automática: check_update.py --hook --pull) en $settings"
   $pyExe = $pyCmd[0]; $pyPre = @($pyCmd | Select-Object -Skip 1)
   $pyName = ($pyCmd -join ' ')
   Invoke-Native $pyExe @pyPre (Join-Path $RepoDir 'tools\settings_hook.py') --settings $settings `

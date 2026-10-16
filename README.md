@@ -62,7 +62,7 @@ powershell -ExecutionPolicy Bypass -File "$HOME\gui-skills\tools\install.ps1"
 bash ~/gui-skills/tools/install.sh
 ```
 
-Es seguro correrlo otra vez. Para no usar el aviso de actualización: `-NoHook` (Windows) o `--no-hook` (Mac).
+Es seguro correrlo otra vez. Para no usar la actualización automática: `-NoHook` (Windows) o `--no-hook` (Mac).
 Para pasar el alias sin preguntar: `-Alias ana` / `--alias ana`. Qué hace:
 
 - crea `~/.gui-skills/config.json` (tu alias y la ruta del clon) y una plantilla `private-terms.txt`;
@@ -70,8 +70,9 @@ Para pasar el alias sin preguntar: `-Alias ana` / `--alias ana`. Qué hace:
   tenías una carpeta con ese nombre, la mueve a `~/.gui-skills/backup-<fecha>/` antes de enlazar;
 - activa los hooks de git del clon (`core.hooksPath .githooks`) y fija tu `user.name` y un `user.email`
   no personal (`<alias>@gui-skills.local`) en el clon;
-- agrega a `~/.claude/settings.json` un hook `SessionStart` que avisa si hay cambios nuevos (conserva tus hooks
-  y hace una copia de seguridad antes de tocar el archivo).
+- agrega a `~/.claude/settings.json` un hook `SessionStart` que actualiza las skills solo si hay cambios nuevos
+  (conserva tus hooks, reemplaza un hook anterior de gui-skills en vez de duplicarlo y hace una copia de
+  seguridad antes de tocar el archivo).
 
 **5. Dos cosas a mano y reinicia Claude Code.**
 
@@ -182,25 +183,42 @@ y repite el paso 2 con el token nuevo. El aviso de actualización dice `SIN_CRED
 
 ## Cómo se mantienen al día
 
-- **Al abrir cada sesión**, un hook `SessionStart` corre `python <repo>/tools/check_update.py --hook`: compara tu
-  clon con GitHub (máximo una vez cada 6 horas, con 8 segundos de espera como tope) y deja una línea que Claude lee.
-  Nunca rompe la sesión: sin red, sigue con tu copia local.
-- **Paso 0 en cada skill** (respaldo): antes de usarla, Claude corre `check_update.py --quiet` y lee el
-  `HANDSHAKE.md` y el registro de trabajos. Si hay cambios, te avisa y ofrece `git pull --ff-only`.
-- Resultados posibles de `check_update.py`: `AL_DIA`, `ATRASADA <n>` (hay n cambios nuevos), `CAMBIOS_LOCALES`
-  (tu clon tiene cambios sin subir: no hace pull), `SIN_RED`, `SIN_CREDENCIAL`.
+- **Al abrir cada sesión**, un hook `SessionStart` corre `python <repo>/tools/check_update.py --hook --pull`:
+  compara tu clon con GitHub (en cada sesión, con 8 segundos de espera como tope) y, si estás atrasado y el clon
+  está limpio, **se actualiza solo** (`git pull --ff-only`). Deja una línea que Claude lee. Nunca rompe la
+  sesión: sin red, sigue con tu copia local.
+- **Paso 0 en cada skill, cada vez que se usa:** Claude corre `check_update.py --quiet --pull`, vuelve a leer el
+  `SKILL.md` si hubo cambios (`ACTUALIZADA n`) y lee el `HANDSHAKE.md` y el registro de trabajos.
+- Resultados posibles de `check_update.py`: `AL_DIA`, `ACTUALIZADA <n>` (se descargaron n cambios), `ATRASADA <n>`
+  (hay n cambios nuevos pero no se pudieron bajar solos, o no se pidió `--pull`), `CAMBIOS_LOCALES` (tu clon tiene
+  cambios sin subir: nunca hace pull), `SIN_RED`, `SIN_CREDENCIAL`. Solo se actualiza un clon limpio, en `main`
+  y sin commits sin subir. Si hay ramas `aporte/*` sin publicar, agrega un `AVISO` (se resuelve con
+  `publish_job.py --reintentar`).
 - Para actualizar a mano: `git -C ~/gui-skills pull --ff-only`. Como las skills son enlaces al clon, no hay que copiar nada.
+
+## Cómo se publica lo aprendido (automático)
+
+Al **terminar un trabajo que el usuario aprueba**, Claude hace sin pedir permiso el "Paso final" del protocolo:
+registra la entrada con `log_job.py` en el HANDOFF de cada skill que intervino, actualiza el HANDSHAKE si hizo
+falta y corre `python <repo>/tools/publish_job.py --tema <caso-o-tema>`, que crea la rama
+`aporte/<alias>/<fecha>-<tema>`, hace commit (pasa el escáner de privacidad), la sube y abre un Pull Request hacia
+`main`. Los amigos obtienen un PR que revisa el mantenedor; el mantenedor puede añadir `--merge` para fusionarlo de
+inmediato. Si no hay red, la rama queda guardada en tu clon (`PENDIENTE`) y el Paso 0 te avisa hasta que se suba
+con `publish_job.py --reintentar`. El PR se abre con `gh` si está autenticado, si no con la API de GitHub usando el
+token de tu credencial de git (nunca se imprime ni se guarda) y, si tampoco, te da el enlace para abrirlo a mano.
 
 ## Herramientas (`tools/`)
 
 | Herramienta | Qué hace |
 |---|---|
-| `check_update.py` | Compara tu clon con GitHub (`--quiet`, `--hook`, `--repo`). |
+| `check_update.py` | Compara tu clon con GitHub y lo actualiza si es seguro (`--quiet`, `--pull`, `--hook`, `--repo`). |
 | `privacy_scan.py` | Escáner de privacidad; lo usan el hook `pre-commit`, GitHub Actions y `log_job.py`. |
 | `log_job.py` | Agrega al HANDOFF de una skill la entrada de un trabajo terminado, ya revisada por el escáner. |
+| `publish_job.py` | Publica lo que dejó un trabajo: rama `aporte/...`, commit, push y Pull Request (`--tema`, `--merge`, `--reintentar`, `--dry-run`). |
 | `install.ps1` / `install.sh` | Instaladores para Windows / Mac. |
-| `settings_hook.py` | Agrega o quita el hook `SessionStart` en `~/.claude/settings.json` (lo usan los instaladores). |
+| `settings_hook.py` | Agrega, actualiza o quita el hook `SessionStart` (`check_update.py --hook --pull`) en `~/.claude/settings.json` (lo usan los instaladores). |
 | `build_hosted.py` | Regenera `seo-content-system-web-hosted` desde `seo-content-system`. |
+| `tests/` | Pruebas de las herramientas (repo y remoto temporales, nunca el real): `python -m unittest discover -s tests`. |
 
 ## Desinstalar
 

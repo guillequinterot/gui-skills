@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Merge (or remove) the gui-skills SessionStart hook in a Claude Code settings.json.
 
-Keeps every existing key and hook, never duplicates, backs the file up before changing it.
+The hook runs `check_update.py --hook --pull` (checks GitHub and fast-forwards a clean clone at every
+session start). Keeps every existing key and hook, never duplicates (any older gui-skills hook command,
+identified by `check_update.py` in the command, is replaced), backs the file up before changing it.
 Exit codes: 0 ok (changed or not), 1 unreadable/invalid settings.json (file untouched), 2 usage.
 """
 from __future__ import annotations
@@ -17,16 +19,17 @@ sys.dont_write_bytecode = True
 
 MARKER = "check_update.py"
 MATCHER = "startup|resume|clear"
+HOOK_TIMEOUT = 30  # fetch (8 s) + pull (10 s) + git calls, with margin
 
 
 def is_ours(hook: dict) -> bool:
     cmd = hook.get("command") if isinstance(hook, dict) else None
-    return isinstance(cmd, str) and MARKER in cmd and "--hook" in cmd
+    return isinstance(cmd, str) and MARKER in cmd
 
 
 def build_command(python: str, script: str) -> str:
     # forward slashes work in bash, cmd, PowerShell and Python alike
-    return f'{python} "{script.replace(chr(92), "/")}" --hook'
+    return f'{python} "{script.replace(chr(92), "/")}" --hook --pull'
 
 
 def merge(settings: dict, command: str) -> str:
@@ -37,14 +40,27 @@ def merge(settings: dict, command: str) -> str:
     groups = hooks.setdefault("SessionStart", [])
     if not isinstance(groups, list):
         raise ValueError("'hooks.SessionStart' en settings.json no es una lista")
-    for group in groups:
-        for hook in (group.get("hooks", []) if isinstance(group, dict) else []):
-            if is_ours(hook):
-                if hook.get("command") == command:
-                    return "unchanged"
-                hook["command"] = command
-                return "updated"
-    groups.append({"matcher": MATCHER, "hooks": [{"type": "command", "command": command, "timeout": 20}]})
+    found = None
+    changed = False
+    for group in list(groups):
+        if not isinstance(group, dict) or not isinstance(group.get("hooks"), list):
+            continue
+        for hook in list(group["hooks"]):
+            if not is_ours(hook):
+                continue
+            if found is None:
+                found = hook
+                if hook.get("command") != command or hook.get("timeout") != HOOK_TIMEOUT:
+                    hook["command"], hook["timeout"] = command, HOOK_TIMEOUT
+                    changed = True
+            else:  # an extra, older gui-skills hook: drop it instead of running the check twice
+                group["hooks"].remove(hook)
+                changed = True
+        if not group["hooks"]:
+            groups.remove(group)
+    if found is not None:
+        return "updated" if changed else "unchanged"
+    groups.append({"matcher": MATCHER, "hooks": [{"type": "command", "command": command, "timeout": HOOK_TIMEOUT}]})
     return "added"
 
 

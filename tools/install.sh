@@ -16,7 +16,7 @@ Uso: bash tools/install.sh [opciones]
   --repo-dir RUTA    dónde está o dónde clonar el repo (por defecto: este clon, o ~/gui-skills)
   --repo-url URL     de dónde clonar si aún no existe (por defecto: GitHub guillequinterot/gui-skills)
   --home RUTA        usa otra carpeta como HOME (pruebas)
-  --no-hook          no instala el aviso de actualización de SessionStart
+  --no-hook          no instala la actualización automática de SessionStart (check_update.py --hook --pull)
   -h, --help         esta ayuda
 USAGE
 }
@@ -169,7 +169,7 @@ if [ "$NO_HOOK" -eq 1 ]; then
 elif [ -z "$PY" ]; then
   say "[5/6] No encuentro Python 3.9+, omito el hook. Instala Python y vuelve a correr este script."
 else
-  say "[5/6] Hook SessionStart en $HOME_DIR/.claude/settings.json"
+  say "[5/6] Hook SessionStart (actualización automática: check_update.py --hook --pull) en $HOME_DIR/.claude/settings.json"
   "$PY" "$REPO_DIR/tools/settings_hook.py" --settings "$HOME_DIR/.claude/settings.json" \
     --python "$PY" --script "$REPO_DIR/tools/check_update.py" --backup-dir "$BACKUP"
 fi

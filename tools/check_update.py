@@ -2,8 +2,13 @@
 """Compare the local gui-skills clone with GitHub.
 
 First word of the output is the status token:
-AL_DIA | ATRASADA <n> | CAMBIOS_LOCALES | SIN_RED | SIN_CREDENCIAL
+AL_DIA | ATRASADA <n> | ACTUALIZADA <n> | CAMBIOS_LOCALES | SIN_RED | SIN_CREDENCIAL
 Exit code is 0 for every status (usage errors: 2). With --hook it never fails.
+
+--pull: when the clone is behind, clean and on main (tracking origin/main), run `git pull --ff-only`
+and report ACTUALIZADA <n>. Never pulls with local changes, unpushed commits, offline or on other branches.
+Whatever the status, local `aporte/*` branches with unpublished commits add a warning after the status
+(on its own line, or at the end of the hook line); the first token never changes because of it.
 """
 from __future__ import annotations
 
@@ -13,6 +18,7 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 
@@ -21,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import gui_common  # noqa: E402
 
 FETCH_TIMEOUT = 8
+PULL_TIMEOUT = 10
 HOOK_INTERVAL = 6 * 3600
 AUTH_RE = re.compile(
     r"\b40[13]\b|authentication failed|could not read (username|password)|terminal prompts disabled|"
@@ -37,41 +44,59 @@ def git_env() -> dict:
     return env
 
 
-def run_git(repo: Path, args: list, timeout: float = 20):
-    """Return (returncode, stdout, stderr); returncode None on timeout. Kills the whole process tree."""
-    cmd = ["git", "-C", str(repo), *args]
+def _kill_tree(proc) -> None:
+    if os.name == "nt":
+        subprocess.run(["taskkill", "/F", "/T", "/PID", str(proc.pid)], capture_output=True)
+    else:
+        try:
+            import signal
+            os.killpg(proc.pid, signal.SIGKILL)
+        except OSError:
+            pass
+    try:
+        proc.kill()
+    except OSError:
+        pass
+
+
+def run_proc(cmd: list, timeout: float, env=None, cwd=None, stdin_text=None):
+    """Return (returncode, stdout, stderr); returncode None on timeout. Kills the whole process tree.
+
+    Output goes through temp files, not pipes: a grandchild that keeps a handle open (a detached
+    `git gc`, a credential helper) can never leave us waiting for EOF, and there are no reader threads
+    to deadlock when the tree is killed.
+    """
     kwargs = {}
     if os.name == "nt":
         kwargs["creationflags"] = 0x00000200  # CREATE_NEW_PROCESS_GROUP
     else:
         kwargs["start_new_session"] = True
-    try:
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                stdin=subprocess.DEVNULL, env=git_env(), **kwargs)
-    except OSError as exc:
-        return 127, "", str(exc)
-    try:
-        out, err = proc.communicate(timeout=timeout)
-    except subprocess.TimeoutExpired:
-        if os.name == "nt":
-            subprocess.run(["taskkill", "/F", "/T", "/PID", str(proc.pid)], capture_output=True)
-        else:
+    with tempfile.TemporaryFile() as fout, tempfile.TemporaryFile() as ferr, tempfile.TemporaryFile() as fin:
+        if stdin_text is not None:
+            fin.write(stdin_text.encode("utf-8"))
+            fin.seek(0)
+        try:
+            proc = subprocess.Popen(cmd, stdout=fout, stderr=ferr, stdin=fin if stdin_text is not None else subprocess.DEVNULL,
+                                    env=env, cwd=cwd, **kwargs)
+        except OSError as exc:
+            return 127, "", str(exc)
+        try:
+            proc.wait(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            _kill_tree(proc)
             try:
-                import signal
-                os.killpg(proc.pid, signal.SIGKILL)
-            except OSError:
-                proc.kill()
-        for pipe in (proc.stdout, proc.stderr):
-            try:
-                pipe.close()
+                proc.wait(timeout=5)
             except Exception:
                 pass
-        try:
-            proc.wait(timeout=2)
-        except Exception:
-            pass
-        return None, "", "timeout"
-    return proc.returncode, out.decode("utf-8", "replace"), err.decode("utf-8", "replace")
+            return None, "", "timeout"
+        fout.seek(0)
+        ferr.seek(0)
+        return proc.returncode, fout.read().decode("utf-8", "replace"), ferr.read().decode("utf-8", "replace")
+
+
+def run_git(repo: Path, args: list, timeout: float = 20):
+    """Return (returncode, stdout, stderr); returncode None on timeout."""
+    return run_proc(["git", "-C", str(repo), *args], timeout, env=git_env())
 
 
 def last_check_path() -> Path:
@@ -123,9 +148,84 @@ def first_line(text: str) -> str:
     return ""
 
 
-def compute(repo: Path, do_fetch: bool):
+def current_branch(repo: Path) -> str:
+    rc, out, _ = run_git(repo, ["rev-parse", "--abbrev-ref", "HEAD"])
+    return out.strip() if rc == 0 else ""
+
+
+def _ok(repo: Path, args: list) -> bool:
+    return run_git(repo, args)[0] == 0
+
+
+def pending_branches(repo: Path) -> list:
+    """Local `aporte/*` branches whose commits are not on GitHub yet.
+
+    Pending = no remote counterpart (and its changes are not already in origin/main, which covers branches
+    merged on GitHub and deleted there, also squash merges) or commits ahead of its remote counterpart.
+    """
+    rc, out, _ = run_git(repo, ["for-each-ref", "--format=%(refname:short)", "refs/heads/aporte/"])
+    if rc != 0:
+        return []
+    pending = []
+    main_ok = _ok(repo, ["rev-parse", "--verify", "--quiet", "origin/main"])
+    for name in (l.strip() for l in out.splitlines()):
+        if not name:
+            continue
+        remote = f"refs/remotes/origin/{name}"
+        if _ok(repo, ["rev-parse", "--verify", "--quiet", remote]):
+            rc, cnt, _ = run_git(repo, ["rev-list", "--count", f"{remote}..refs/heads/{name}"])
+            if rc == 0 and cnt.strip().isdigit() and int(cnt) > 0:
+                pending.append(name)
+            continue
+        if not main_ok:
+            pending.append(name)
+            continue
+        rc, cnt, _ = run_git(repo, ["rev-list", "--count", f"origin/main..refs/heads/{name}"])
+        if rc == 0 and cnt.strip() == "0":
+            continue  # everything it has is already in main
+        rc, base, _ = run_git(repo, ["merge-base", "origin/main", f"refs/heads/{name}"])
+        if rc == 0 and base.strip():
+            rc, files, _ = run_git(repo, ["diff", "--name-only", base.strip(), f"refs/heads/{name}"])
+            paths = [f for f in files.splitlines() if f.strip()]
+            if rc == 0 and paths and _ok(repo, ["diff", "--quiet", "origin/main", f"refs/heads/{name}", "--", *paths]):
+                continue  # same content already in main (squash merge)
+        pending.append(name)
+    return pending
+
+
+def pending_warning(repo: Path, branches: list) -> str:
+    if not branches:
+        return ""
+    return (f"hay aportes sin publicar: {', '.join(branches)}; "
+            f"corre `python \"{repo.as_posix()}/tools/publish_job.py\" --reintentar`")
+
+
+def pull_now(repo: Path, ref: str, behind: int, detail: dict):
+    """`git pull --ff-only` when it is safe. Returns (token, n)."""
+    branch = current_branch(repo)
+    if branch != "main" or ref != "origin/main":
+        detail["pull_error"] = (f"la rama actual es {branch or 'desconocida'} (referencia {ref}); "
+                                "solo se actualiza main con origin/main")
+        return "ATRASADA", behind
+    rc, _, err = run_git(repo, ["pull", "--ff-only", "--quiet", "origin", "main"], timeout=PULL_TIMEOUT)
+    if rc is None:
+        detail["pull_error"] = f"sin respuesta de GitHub en {PULL_TIMEOUT} s"
+        return "ATRASADA", behind
+    if rc != 0:
+        detail["pull_error"] = ("GitHub rechazó la credencial" if AUTH_RE.search(err)
+                                else first_line(err) or f"git pull terminó con código {rc}")
+        return "ATRASADA", behind
+    rc, cnt, _ = run_git(repo, ["rev-list", "--count", "HEAD..origin/main"])
+    if rc == 0 and cnt.strip() not in ("", "0"):
+        detail["pull_error"] = "el pull no dejó el clon al día"
+        return "ATRASADA", behind
+    detail["pulled"] = True
+    return "ACTUALIZADA", behind
+
+
+def compute(repo: Path, do_fetch: bool, do_pull: bool = False):
     """Return (token, n, detail dict)."""
-    detail = {"fetched": False, "age_h": None}
+    detail = {"fetched": False, "age_h": None, "pending": [], "pulled": False, "pull_error": ""}
     rc, _, err = run_git(repo, ["rev-parse", "--git-dir"])
     if rc != 0:
         return "SIN_RED", 0, {"reason": "la ruta no es un clon de git", **detail}
@@ -153,17 +253,26 @@ def compute(repo: Path, do_fetch: bool):
         if rc == 0 and out.split():
             ahead, behind = (int(x) for x in out.split()[:2])
     detail.update(dirty=dirty, ahead=ahead, behind=behind, fetch_err=fetch_err, fetch_status=fetch_status)
+    token, n = _status(repo, ref, dirty, ahead, behind, detail, do_pull)
+    detail["pending"] = pending_branches(repo)
+    return token, n, detail
+
+
+def _status(repo: Path, ref, dirty: int, ahead: int, behind: int, detail: dict, do_pull: bool):
+    fetch_status = detail["fetch_status"]
 
     if dirty or ahead:
-        return "CAMBIOS_LOCALES", 0, detail
+        return "CAMBIOS_LOCALES", 0
     if fetch_status:
-        return fetch_status, 0, detail
+        return fetch_status, 0
     if not ref:
         detail["reason"] = "no hay rama remota de referencia"
-        return "SIN_RED", 0, detail
+        return "SIN_RED", 0
     if behind:
-        return "ATRASADA", behind, detail
-    return "AL_DIA", 0, detail
+        if do_pull:
+            return pull_now(repo, ref, behind, detail)
+        return "ATRASADA", behind
+    return "AL_DIA", 0
 
 
 def plural(n: int, one: str, many: str) -> str:
@@ -173,9 +282,15 @@ def plural(n: int, one: str, many: str) -> str:
 def describe(token: str, n: int, d: dict, repo: Path) -> str:
     if token == "AL_DIA":
         return "Las skills están al día con GitHub."
+    if token == "ACTUALIZADA":
+        return (f"Se descargaron {plural(n, 'cambio', 'cambios')} de las skills; "
+                "vuelve a leer el SKILL.md de la skill que estás usando.")
     if token == "ATRASADA":
-        return (f"Hay {plural(n, 'cambio nuevo', 'cambios nuevos')} en GitHub. "
-                f"Para actualizar: git -C \"{repo}\" pull --ff-only")
+        base = f"Hay {plural(n, 'cambio nuevo', 'cambios nuevos')} en GitHub"
+        if d.get("pull_error"):
+            return (f"{base} y no se pudieron descargar solos ({d['pull_error']}). "
+                    f"Para actualizar: git -C \"{repo}\" pull --ff-only")
+        return f"{base}. Para actualizar: git -C \"{repo}\" pull --ff-only"
     if token == "CAMBIOS_LOCALES":
         parts = []
         if d.get("dirty"):
@@ -199,6 +314,12 @@ def hook_line(token: str, n: int, d: dict, repo: Path, skipped_age) -> str:
     age = f" (última comprobación hace {skipped_age:.0f} h)" if skipped_age is not None else ""
     if token == "AL_DIA":
         return f"gui-skills: skills al día{age}."
+    if token == "ACTUALIZADA":
+        return (f"gui-skills: se descargaron {plural(n, 'cambio', 'cambios')} de las skills desde GitHub "
+                "(actualización automática). Si ya leíste el SKILL.md de alguna, vuelve a leerlo.")
+    if token == "ATRASADA" and d.get("pull_error"):
+        return (f"gui-skills: hay {plural(n, 'cambio nuevo', 'cambios nuevos')} de las skills en GitHub y no se pudieron "
+                f"descargar solos ({d['pull_error']}). Avísale al usuario y ofrécele: git -C \"{repo}\" pull --ff-only")
     if token == "ATRASADA":
         return (f"gui-skills: hay {plural(n, 'cambio nuevo', 'cambios nuevos')} de las skills en GitHub{age}. "
                 f"Avísale al usuario al empezar y ofrécele actualizar con: git -C \"{repo}\" pull --ff-only "
@@ -219,6 +340,8 @@ def main(argv=None) -> int:
     ap.add_argument("--repo", help="ruta del clon (por defecto, repo_path de config.json o este repo)")
     ap.add_argument("--quiet", action="store_true", help="solo el token de estado")
     ap.add_argument("--hook", action="store_true", help="una linea para un hook SessionStart; nunca falla")
+    ap.add_argument("--pull", action="store_true",
+                    help="si esta atrasada y es seguro (clon limpio, rama main), hace git pull --ff-only")
     args = ap.parse_args(argv)
 
     if args.hook:
@@ -229,11 +352,14 @@ def main(argv=None) -> int:
             return 0
 
     repo = gui_common.resolve_repo(args.repo, __file__)
-    token, n, d = compute(repo, do_fetch=True)
+    token, n, d = compute(repo, do_fetch=True, do_pull=args.pull)
     if d.get("fetched"):
         write_last_check(repo, token)
-    label = f"{token} {n}" if token == "ATRASADA" else token
+    label = f"{token} {n}" if token in ("ATRASADA", "ACTUALIZADA") else token
     print(label if args.quiet else f"{label} - {describe(token, n, d, repo)}")
+    warn = pending_warning(repo, d.get("pending") or [])
+    if warn:
+        print(f"AVISO: {warn}")
     return 0
 
 
@@ -241,11 +367,16 @@ def run_hook(args) -> int:
     repo = gui_common.resolve_repo(args.repo, __file__)
     last = read_last_check(repo)
     age = (time.time() - last) if last is not None else None
-    skip = age is not None and 0 <= age < HOOK_INTERVAL
-    token, n, d = compute(repo, do_fetch=not skip)
+    # with --pull every session start fetches (and updates); without it the old 6 h rate limit applies
+    skip = (not args.pull) and age is not None and 0 <= age < HOOK_INTERVAL
+    token, n, d = compute(repo, do_fetch=not skip, do_pull=args.pull)
     if d.get("fetched"):
         write_last_check(repo, token)
-    print(hook_line(token, n, d, repo, (age / 3600) if skip else None))
+    line = hook_line(token, n, d, repo, (age / 3600) if skip else None)
+    warn = pending_warning(repo, d.get("pending") or [])
+    if warn:
+        line += f" Aviso: {warn}."
+    print(" ".join(line.split()))
     return 0
 
 

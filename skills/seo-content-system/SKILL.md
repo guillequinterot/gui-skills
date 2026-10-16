@@ -9,13 +9,19 @@ description: Investiga, planifica, redacta, optimiza, audita, mide y actualiza c
 
 Esta skill vive en el repo **gui-skills** y sigue [`shared/protocolo-skill.md`](../../shared/protocolo-skill.md):
 
-1. **Paso 0 — al día:** corre `python <repo>/tools/check_update.py --quiet`; si sale `ATRASADA`, ofrece
-   `git pull` antes de seguir. Luego lee `HANDSHAKE.md` y el "Registro de trabajos" de `HANDOFF.md`.
+1. **Paso 0 — cada vez que uses la skill:** corre `python <repo>/tools/check_update.py --quiet --pull`.
+   `ACTUALIZADA n` → díselo al usuario en una línea y **vuelve a leer este `SKILL.md`** antes de seguir;
+   `CAMBIOS_LOCALES` → avisa y no actualices; `SIN_RED` / `SIN_CREDENCIAL` → sigue con la copia local y dilo.
+   Si avisa de aportes sin publicar, corre `python <repo>/tools/publish_job.py --reintentar` (preaprobado).
+   Luego lee `HANDSHAKE.md` y el "Registro de trabajos" de `HANDOFF.md`.
 2. **Privacidad:** en el repo los clientes solo se nombran con un código `caso-<tipo>-<NN>`; nunca
    nombres, marcas, dominios, correos, rutas personales ni credenciales.
-3. **Paso final — memoria:** al cerrar un trabajo bien implementado, registra siempre la entrada con
-   `python <repo>/tools/log_job.py --skill seo-content-system ...` (qué se hizo, qué salió bien, qué salió mal,
-   incidencias). Obsidian es opcional: si el usuario lo tiene, registra también allí.
+3. **Paso final — obligatorio y preaprobado** (trabajo terminado y aprobado por el usuario; no pidas permiso):
+   (1) `python <repo>/tools/log_job.py --skill seo-content-system ...` por cada skill que intervino (qué se hizo, qué
+   salió bien, qué salió mal, incidencias); (2) actualiza `HANDSHAKE.md` si cambió el estado vivo;
+   (3) publica con `python <repo>/tools/publish_job.py --tema <caso-o-tema>` (rama + push + PR; el mantenedor
+   puede añadir `--merge`); (4) dile al usuario el resultado (`PR_CREADO <url>` / `PUBLICADO <url>` /
+   `PENDIENTE` / `BLOQUEADO`). Obsidian es opcional: si el usuario lo tiene, registra también allí.
 
 `<repo>` = `repo_path` de `~/.gui-skills/config.json`, o dos carpetas arriba de esta skill.
 
@@ -27,7 +33,7 @@ Esta skill no se ejecuta desde memoria del modelo. Siempre que se invoque —de 
 
 Antes de producir cualquier salida:
 
-1. Cumplir el Protocolo gui-skills de arriba: `check_update.py`, y leer [`HANDSHAKE.md`](HANDSHAKE.md) (estado vivo, herramientas verificadas, pendientes) y el "Registro de trabajos" de [`HANDOFF.md`](HANDOFF.md) (decisiones vigentes y lecciones de casos anteriores).
+1. Cumplir el Protocolo gui-skills de arriba (`check_update.py --quiet --pull` en cada uso de la skill), y leer [`HANDSHAKE.md`](HANDSHAKE.md) (estado vivo, herramientas verificadas, pendientes) y el "Registro de trabajos" de [`HANDOFF.md`](HANDOFF.md) (decisiones vigentes y lecciones de casos anteriores).
 2. Revisar la memoria de la propia skill por tema (no entera): `memoria/aprendizaje/inbox/` (candidatos aún sin validar), `memoria/decisiones/` (cambios aprobados) y `memoria/fuentes/` (fuentes ya evaluadas) antes de afirmar datos, cifras o reglas SEO.
 3. **Si el usuario usa Obsidian** (clave `obsidian_vault` en `~/.gui-skills/config.json`, la clave heredada `vault` en `~/.seo-content-system.json` o el MCP de Obsidian responde): consultar además la carpeta de esta skill en su bóveda (`06_Aprendizaje/`, `08_Fuentes/`, `09_Proyectos/`, ver [memory-integration.md](references/memory-integration.md)) y la nota madre del proyecto en la carpeta de proyectos que indique `obsidian_projects_folder`. Sin Obsidian, este punto se salta sin más.
 4. Si el trabajo pertenece a un proyecto del usuario, abrir su brief o nota de proyecto (en la carpeta del proyecto del usuario, nunca dentro del repo).
