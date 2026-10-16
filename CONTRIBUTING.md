@@ -2,12 +2,12 @@
 
 Este repo mejora con cada trabajo real. Estas son las reglas para que siga siendo útil y privado.
 
-## 1. La regla del registro: cada trabajo terminado deja una entrada
+## 1. La regla del registro: cada trabajo terminado deja una entrada y se publica solo
 
 Cuando un trabajo queda **terminado o implementado y el usuario lo da por bueno**, se registra siempre, en el
-`HANDOFF.md` de **cada skill que intervino** (sección "4. Registro de trabajos"). No hace falta pedir permiso
-cada vez; solo avisar que se registró. Claude lo hace en el "Paso final" del
-[protocolo](shared/protocolo-skill.md); tú también puedes hacerlo a mano:
+`HANDOFF.md` de **cada skill que intervino** (sección "4. Registro de trabajos") y **se publica en GitHub
+automáticamente** (sección 3). No hace falta pedir permiso cada vez; solo informar el resultado. Claude lo hace
+en el "Paso final" del [protocolo](shared/protocolo-skill.md); tú también puedes hacerlo a mano:
 
 ```
 python <repo>/tools/log_job.py --skill direct-visual-design --caso caso-web-universidad-01 \
@@ -61,7 +61,30 @@ el contenido (es estado, no historia). Si el HANDSHAKE contradice lo que "sabes"
 
 ## 3. Ramas y Pull Requests
 
-1. Trabaja siempre en una rama `aporte/<alias>/<tema>` (ejemplo: `aporte/ana/registro-caso-web-01`):
+### Lo normal: `publish_job.py` lo hace solo
+
+Con los cambios del trabajo (normalmente las entradas de `log_job.py`) todavía sin commitear en `main`:
+
+```
+python <repo>/tools/publish_job.py --tema caso-web-universidad-01
+```
+
+Qué hace, en orden: actualiza `main` si está atrás (guarda tus cambios, `pull --ff-only`, los devuelve; si chocan,
+se detiene sin tocar nada) -> crea la rama `aporte/<alias>/<AAAA-MM-DD>-<tema>` (si existe, agrega `-2`, `-3`...) ->
+`git add` y commit (el hook `pre-commit` corre el escáner; si bloquea, devuelve todo a `main` con tus cambios
+intactos y avisa `BLOQUEADO`) -> `git push -u origin` (sin force, nunca a `main`) -> abre el Pull Request
+(`gh`, o la API de GitHub con tu credencial de git, o te da el enlace de comparación) -> vuelve a `main` limpio.
+Solo publica cambios dentro de `skills/`; para tocar `shared/`, `templates/`, `tools/` o la documentación agrega
+`--incluir-todo` (y avisa en el PR, porque afecta a todas las skills).
+
+Resultados: `PR_CREADO <url>`, `PUBLICADO <url>` (solo el mantenedor: fusiona el PR y borra la rama; sale con `--merge` o, de forma automática, con
+`"mantenedor": true` en `~/.gui-skills/config.json`; `--no-merge` lo evita),
+`PR_MANUAL <url>`, `PENDIENTE <rama>` (sin red: queda guardada, se sube con `publish_job.py --reintentar`; el Paso 0
+lo avisa en cada uso de una skill), `BLOQUEADO`, `SIN_CAMBIOS`. `--dry-run` muestra los pasos sin hacer nada.
+
+### A mano
+
+1. Trabaja en una rama `aporte/<alias>/<tema>` (ejemplo: `aporte/ana/registro-caso-web-01`):
 
    ```
    git -C <repo> switch -c aporte/<alias>/<tema>
@@ -80,6 +103,9 @@ el contenido (es estado, no historia). Si el HANDSHAKE contradice lo que "sabes"
 
 **No hay protección técnica de `main`**: GitHub Free no permite proteger ramas en repos privados, así que
 "no empujar directo a `main`" es un acuerdo entre todos. Un push directo con un error afecta a las 9 skills de todos.
+
+Con la actualización automática (`check_update.py --pull`), tu clon se mantiene al día solo mientras esté limpio y en
+`main`: un trabajo a medias en el clon (`CAMBIOS_LOCALES`) detiene la actualización hasta que lo publiques o descartes.
 
 Tu `user.name` en el clon debe ser tu alias (lo fija el instalador) para que cada commit diga quién fue, aunque
 el token sea compartido. Usa también un correo no personal (`<alias>@gui-skills.local`).
@@ -104,3 +130,4 @@ regeneración y las dos versiones se desalinean. Cambia siempre `seo-content-sys
 - [ ] No reescribí entradas viejas del registro.
 - [ ] Si cambió el estado vivo de una skill, actualicé su `HANDSHAKE.md`.
 - [ ] `python tools/privacy_scan.py` pasa en limpio.
+- [ ] Si cambiaste las herramientas: `python -m unittest discover -s tests` pasa.
