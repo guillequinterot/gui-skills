@@ -1,0 +1,35 @@
+{
+  "_comentario": "Ejemplo de configuración para scripts/make_partes.py. Las rutas son relativas a este archivo. 'proyecto' es la carpeta descargada del constructor y editada en local; 'salida' es donde se escriben PARTE-n-de-N.txt.",
+  "proyecto": "../mi-proyecto-descargado",
+  "salida": "../entrega-2/C-COPIAR-Y-PEGAR",
+  "titulo": "ENTREGA 2 · Listado con filtros + ficha de cada elemento",
+  "limite": 50000,
+  "reglas": [
+    "Aplica EXACTAMENTE estos cambios. No rediseñes, no cambies textos, no cambies nada más.",
+    "Crea SOLO los archivos nuevos que se indican; si no puedes, dímelo y no los sustituyas por otros.",
+    "No toques IMG_URLS, img() ni las imágenes; no toques archivos protegidos (routeTree.gen.ts, .env, vite.config.ts, start.ts, server.ts, integrations/*).",
+    "Antes de reemplazar un archivo, compáralo con el actual: si el actual tiene cambios que NO están en este, dímelo y no los pises."
+  ],
+  "partes": [
+    [
+      { "modo": "crear", "file": "src/lib/mi-datos.ts", "nota": "CREA el archivo NUEVO src/lib/mi-datos.ts con EXACTAMENTE este contenido." }
+    ],
+    [
+      { "modo": "crear", "file": "src/routes/listado.tsx", "nota": "CREA el archivo NUEVO src/routes/listado.tsx." },
+      { "modo": "crear", "file": "src/routes/listado_.$slug.tsx", "nota": "CREA el archivo NUEVO src/routes/listado_.$slug.tsx (el guion bajo después de «listado» es a propósito: evita que se anide dentro de listado.tsx)." },
+      { "modo": "anexar", "file": "src/mi-proyecto.css", "desde": "/* ===== Listado", "nota": "AÑADE este bloque AL FINAL de src/mi-proyecto.css. No cambies nada de lo anterior." }
+    ],
+    [
+      { "modo": "reemplazar", "file": "AGENTS.md", "nota": "REEMPLAZA TODO el contenido de AGENTS.md por este (reglas actualizadas)." },
+      { "modo": "reemplazar", "file": "README.md", "nota": "REEMPLAZA TODO el contenido de README.md por este (estado, pendientes y registro al día)." }
+    ]
+  ],
+  "texto_tras_parte": {
+    "2": "ELIMINA ESTE ARCHIVO (ya no se usa): src/components/viejo.tsx. Comprueba que nada más lo importa."
+  },
+  "cierre": [
+    "1. Comprueba en la vista previa: /listado muestra los elementos y los filtros funcionan; /listado/<slug> muestra la ficha con un solo h1; una URL inexistente muestra la 404. Sin errores en consola.",
+    "2. README.md ya viene actualizado: añade AL FINAL de su registro una entrada con lo que comprobaste y lo que no coincidió.",
+    "3. Respóndeme con un resumen corto."
+  ]
+}

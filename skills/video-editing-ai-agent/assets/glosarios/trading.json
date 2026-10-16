@@ -1,0 +1,28 @@
+{
+  "nombre": "trading",
+  "descripcion": "Vocabulario de trading cuantitativo y ML financiero (es/en). Se usa con video_aprender.py --glosario trading: (1) el vocabulario va al reconocedor como `hotwords` (se aplica en todas las ventanas de 30 s, a diferencia de initial_prompt) y (2) se corrigen en contenido.md los errores de oido conocidos. transcripcion.json conserva SIEMPRE el texto crudo. Cada correccion nacio de un error REAL visto en reels de Instagram (2026-10-16, Whisper small). No anadir correcciones de palabras comunes del espanol sin una prueba.",
+  "vocab": "GARCH, Hurst, FinBERT, Sharpe ratio, deflated Sharpe ratio, stop loss, take profit, backtest, overfitting, drawdown, ATR, RSI, QQQ, Nasdaq, XAUUSD, triple barrera, meta-labeling, López de Prado, Bailey, Engle, Mandelbrot, heterocedasticidad, volatility clustering, cross-attention, early fusion, LSTM, transformer, GAN, SSRN, VaR, expected shortfall, EURUSD, USDJPY, MetaTrader, MQL5, grid, hedge, lote, spread",
+  "correcciones": [
+    ["\\b(?:garche|garch[eé]|gar[ck]h?e?)\\b", "GARCH"],
+    ["\\b(?:horst|horts|hurts|jurst|hurt)\\b(?=[^.]{0,40}(?:exponente|persisten|0\\.5|r[eé]gimen))", "Hurst"],
+    ["\\b(?:exponente de )(?:horst|horts|hurts|jurst)\\b", "exponente de Hurst"],
+    ["\\bfin ?(?:b[eé]rt|v[eé]rt|vert)\\b|\\bfimber\\b|\\bfin ?bert\\b", "FinBERT"],
+    ["\\b(?:esoblos|soblogos|soblos|stoploss|stop-loss)\\b", "stop loss"],
+    ["\\b(?:shared|shape|sharp|shard|sharpe?) ratio\\b", "Sharpe ratio"],
+    ["\\bdeflated shape ratio\\b", "deflated Sharpe ratio"],
+    ["\\b(?:cuckoo|cu cu cu|cuc[uú]|q q q)\\b", "QQQ"],
+    ["\\b(?:tripela|tripla|triple) barrera\\b", "triple barrera"],
+    ["\\bheteros?[ce]+d?[aá]?sticidad\\b|\\bheteroseasticidad\\b", "heterocedasticidad"],
+    ["\\b(?:baptism|backtis|backtes|back test)\\b", "backtest"],
+    ["\\b(?:metalabel|meta label|meta-label)\\b", "meta-label"],
+    ["\\bover ?fitting\\b", "overfitting"],
+    ["\\bdraw ?down\\b", "drawdown"],
+    ["\\bcross ?attention\\b|\\btensi[oó]n cruzada\\b", "cross-attention"],
+    ["\\bearly fusion\\b|\\bfusi[oó]n temprana\\b", "early fusion"]
+  ],
+  "pistas_pantalla": [
+    "\\bpodemos ver\\b", "\\bcomo (?:pueden|puedes|puedo|se) ver\\b", "\\bmiren\\b", "\\bmira (?:esto|aqu[ií]|ac[aá])\\b",
+    "\\best[ae] (?:gr[aá]fica|gr[aá]fico|tabla|curva|ecuaci[oó]n|f[oó]rmula|diagrama)\\b", "\\ben pantalla\\b", "\\ba (?:la )?izquierda\\b", "\\ba (?:la )?derecha\\b",
+    "\\baqu[ií] (?:tenemos|vemos|hay)\\b", "\\bobserva\\b", "\\bnotas? (?:que|como)\\b", "\\bwe can see\\b", "\\bas you can see\\b", "\\blook at (?:this|the)\\b", "\\bin this (?:chart|graph|table)\\b"
+  ]
+}

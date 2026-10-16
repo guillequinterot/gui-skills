@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/rss.xml",
+    "format": "feed",
+    "authority": "official"
+  },
+  {
+    "name": "Google Search Status - Ranking",
+    "url": "https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history",
+    "format": "page",
+    "authority": "official"
+  },
+  {
+    "name": "Google AI features and your website",
+    "url": "https://developers.google.com/search/docs/appearance/ai-features",
+    "format": "page",
+    "authority": "official"
+  },
+  {
+    "name": "Google Search documentation updates",
+    "url": "https://developers.google.com/search/updates",
+    "format": "page",
+    "authority": "official"
+  },
+  {
+    "name": "Schema.org releases",
+    "url": "https://github.com/schemaorg/schemaorg/releases.atom",
+    "format": "feed",
+    "authority": "primary"
+  },
+  {
+    "name": "Google Analytics release notes",
+    "url": "https://support.google.com/analytics/answer/9164320",
+    "format": "page",
+    "authority": "official"
+  }
+]

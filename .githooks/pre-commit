@@ -1,0 +1,41 @@
+#!/bin/sh
+# gui-skills pre-commit: runs the privacy scanner on what is about to be committed.
+
+root=$(git rev-parse --show-toplevel) || exit 1
+cd "$root" || exit 1
+
+PY=""
+for cand in python3 python "py -3"; do
+  if $cand -c 'import sys; sys.exit(0 if sys.version_info >= (3, 9) else 1)' >/dev/null 2>&1; then
+    PY=$cand
+    break
+  fi
+done
+
+if [ -z "$PY" ]; then
+  echo "gui-skills: no encuentro Python 3.9 o superior, necesario para revisar la privacidad antes de commitear." >&2
+  echo "Instala Python 3 (python.org) y vuelve a intentarlo." >&2
+  exit 1
+fi
+
+if $PY tools/privacy_scan.py --staged; then
+  exit 0
+fi
+
+cat >&2 <<'MSG'
+
+gui-skills: commit bloqueado por el escáner de privacidad.
+
+Qué hacer:
+  1. Abre los archivos y líneas que aparecen arriba.
+  2. Quita o reemplaza el dato: en el repo los clientes se nombran solo con un
+     código (caso-<tipo>-<NN>); nada de nombres, marcas, dominios, correos,
+     teléfonos, rutas personales ni credenciales. Usa <usuario>, <repo>, etc.
+  3. Si es un ejemplo inventado y legítimo, agrégalo a tools/privacy-allowlist.txt
+     o añade al final de esa línea el marcador: privacy-scan: ignore
+  4. Vuelve a preparar los archivos (git add) y repite el commit.
+
+Si el aviso es de un término privado tuyo, el dato real no debe quedar escrito
+en ninguna parte del repo. Más detalles en PRIVACY.md.
+MSG
+exit 1

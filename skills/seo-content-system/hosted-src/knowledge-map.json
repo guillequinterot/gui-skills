@@ -1,0 +1,137 @@
+{
+  "_comentario": "Mapa de la versión hosted: qué archivos de la skill se consolidan en cada documento de knowledge/. Lo lee tools/build_hosted.py. Rutas relativas a skills/seo-content-system/. Del frontmatter de cada fuente se descarta todo. layout=sections: título + intro + una sección '## Fuente original' por archivo; layout=single: título + el archivo completo, sin separadores.",
+  "knowledge": [
+    {
+      "name": "01-estrategia-y-arquitectura.md",
+      "title": "Estrategia, arquitectura y keyword research",
+      "intro": "Cómo investigar demanda, construir el mapa temático del sitio, redactar briefs y diseñar enlazado interno. Consolidado a partir de varios archivos de referencia de la skill `seo-content-system` — cada sección conserva el archivo de origen para trazabilidad.",
+      "layout": "sections",
+      "sources": [
+        "references/search-intent-and-customer-journey.md",
+        "references/keyword-research-and-query-mapping.md",
+        "references/keyword-research-cadence-and-triggers.md",
+        "references/topical-map-and-content-architecture.md",
+        "references/content-brief-and-architecture.md",
+        "references/internal-linking-and-conversion-paths.md"
+      ]
+    },
+    {
+      "name": "02-redaccion-y-estilo.md",
+      "title": "Redacción, estilo y calidad editorial",
+      "intro": "Cómo escribir con precisión semántica, evitar patrones robóticos, respetar el estilo en español, mantener consistencia de voz de marca y aplicar los controles de calidad antes de publicar.",
+      "layout": "sections",
+      "sources": [
+        "references/semantic-writing-and-meaning.md",
+        "references/natural-writing-and-robotic-patterns.md",
+        "references/spanish-style-and-capitalization.md",
+        "references/brand-voice-and-language-variants.md",
+        "references/editorial-pattern-long-form.md",
+        "references/editorial-quality-gates.md"
+      ]
+    },
+    {
+      "name": "03-on-page-y-datos-estructurados.md",
+      "title": "On-page, imágenes y datos estructurados",
+      "intro": "Metadatos, URLs, SEO de imágenes, y priorización de Schema markup orientada tanto a Google como a citación en sistemas de IA.",
+      "layout": "sections",
+      "sources": [
+        "references/on-page-metadata-and-urls.md",
+        "references/image-seo-and-accessibility.md",
+        "references/structured-data-and-search-features.md",
+        "references/schema-markup-for-ai-citation.md"
+      ]
+    },
+    {
+      "name": "04-seo-tecnico.md",
+      "title": "SEO técnico y acceso de bots de IA",
+      "intro": "Rastreo, indexación, canonicals, renderizado, rendimiento, y la capa específica de bots de entrenamiento/recuperación de IA (robots.txt, llms.txt).",
+      "layout": "sections",
+      "sources": [
+        "references/technical-seo-and-indexability.md",
+        "references/technical-seo-lineamientos-generales.md",
+        "references/ai-crawler-access-and-llms-txt.md"
+      ]
+    },
+    {
+      "name": "05-geo-y-citacion-ia.md",
+      "title": "GEO: citación en IA, entidades y densidad de señales",
+      "intro": "Visibilidad ante LLMs, construcción de entidad y grafo de conocimiento, la Metodología de Densidad de Señales de Los Creativos, y diversificación de canales (YouTube, comunidades).",
+      "layout": "sections",
+      "sources": [
+        "references/ai-citation-and-geo-playbook.md",
+        "references/entity-presence-and-knowledge-graph.md",
+        "references/signal-density-methodology-and-kpi.md",
+        "references/channel-diversification-and-youtube-seo.md",
+        "references/community-search-reddit-quora.md"
+      ]
+    },
+    {
+      "name": "06-local-programatico-social.md",
+      "title": "SEO local, programático y social search",
+      "intro": "Entidades y necesidades geográficas reales, páginas escalables con datos, y adaptación de contenido a descubrimiento social.",
+      "layout": "sections",
+      "sources": [
+        "references/programmatic-and-local-seo.md",
+        "references/social-search-and-copywriting.md"
+      ]
+    },
+    {
+      "name": "07-medicion-y-decisiones.md",
+      "title": "Medición, Search Console y decisiones",
+      "intro": "Cómo leer Search Console, GA4 y Clarity, diagnosticar señales, diseñar experimentos, y el patrón de automatización de keywords de oportunidad vía IA + GSC + CMS (para cuando exista un puente de Google Sheets).",
+      "layout": "sections",
+      "sources": [
+        "references/analytics-search-console-and-decisions.md",
+        "references/conversion-and-content-performance.md",
+        "references/ai-assisted-search-console-workflow.md"
+      ]
+    },
+    {
+      "name": "08-fuentes-y-gobernanza.md",
+      "title": "Fuentes, evidencia y gobernanza de actualizaciones",
+      "intro": "Cómo verificar y jerarquizar fuentes, el registro oficial de referencias, y cómo promover un aprendizaje de candidato a regla estable.",
+      "layout": "sections",
+      "sources": [
+        "references/source-verification-and-evidence.md",
+        "references/official-source-register.md",
+        "references/update-governance-and-research.md"
+      ]
+    },
+    {
+      "name": "09-keyword-research-hosted.md",
+      "title": "Keyword research asistido por IA en entornos alojados",
+      "intro": "",
+      "layout": "single",
+      "sources": [
+        "references/keyword-research-ia-web-hosted.md"
+      ]
+    },
+    {
+      "name": "11-plantillas.md",
+      "title": "Plantillas de la skill",
+      "intro": "Plantillas reutilizables: brief de contenido, brief GEO/AEO, registro de fuente, registro de decisión, paquete de página SEO.",
+      "layout": "sections",
+      "sources": [
+        "assets/templates/content-brief.md",
+        "assets/templates/ai-citation-content-brief.md",
+        "assets/templates/source-record.md",
+        "assets/templates/decision-record.md",
+        "assets/templates/seo-page-package.md"
+      ]
+    }
+  ],
+  "excluidos": [
+    {
+      "source": "references/keyword-research-ia-local-desktop.md",
+      "motivo": "Específico de un entorno con acceso local (sistema de archivos, MCP local, Screaming Frog local)."
+    },
+    {
+      "source": "references/memory-integration.md",
+      "motivo": "Describe la memoria en el repo y en Obsidian; en el entorno alojado la sustituye 10-memoria-sin-obsidian.md."
+    },
+    {
+      "source": "references/platform-installation-and-sync.md",
+      "motivo": "Instalación de la skill de archivos (Claude Code, Codex, Antigravity); no aplica a un Project/GPT."
+    }
+  ]
+}

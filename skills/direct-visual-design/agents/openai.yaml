@@ -1,0 +1,12 @@
+interface:
+  display_name: Visual Design Director
+  short_description: "Dirige, eval\xFAa y mejora cualquier dise\xF1o visual"
+  default_prompt: "Usa $direct-visual-design para analizar este brief y dirigir la\
+    \ soluci\xF3n visual completa."
+policy:
+  allow_implicit_invocation: true
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas

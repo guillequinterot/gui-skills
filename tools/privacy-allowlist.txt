@@ -1,0 +1,18 @@
+# Excepciones del escaner de privacidad (tools/privacy_scan.py).
+# Una expresion regular de Python por linea. Una excepcion solo cubre el fragmento de la linea
+# que ella misma encuentra: si en la misma linea hay otro dato real, sigue bloqueando.
+# Para una sola linea puntual tambien sirve el marcador final "privacy-scan: ignore".
+# Antes de agregar algo aqui, pregunta: es de verdad un ejemplo inventado? Los nombres reales
+# de clientes, marcas o personas NUNCA van en este archivo (esta en el repo).
+
+# Correos de ejemplo
+[\w.+-]+@(?:ejemplo|example)\.(?:com|org|net)
+# Dominio de correo no personal para los commits (lo configuran los instaladores)
+[\w.+-]+@gui-skills\.local
+# Correos tecnicos publicos
+noreply@anthropic\.com
+[\w.+-]+@users\.noreply\.github\.com
+git@github\.com
+
+# Rutas de ejemplo con carpeta de datos del sistema (no personales)
+[A-Za-z]:[\\/]+(?:Windows|Program Files|Program Files \(x86\)|ProgramData)[\\/]

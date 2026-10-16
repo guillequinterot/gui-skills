@@ -1,0 +1,340 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EDL neutro Video-Editing-AI-Agent",
+  "description": "Contrato de traspaso entre motores (Shotcut, ffmpeg, CapCut, Canva, Premiere, After Effects). Tiempos en segundos; el adaptador convierte a frames del perfil. Compatible con el EDL de video-use: sources + ranges[{source,start,end,beat,quote,reason}] + grade + overlays + subtitles (edl_to_shotcut.py lo consume).",
+  "type": "object",
+  "required": [
+    "version",
+    "sources"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1"
+    },
+    "brand": {
+      "type": "string"
+    },
+    "copy_source": {
+      "type": "string"
+    },
+    "profile": {
+      "type": "object",
+      "required": [
+        "width",
+        "height",
+        "fps"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "fps": {
+          "type": "number"
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "description": "id -> ruta absoluta",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "properties": {
+        "clips": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "source",
+              "start",
+              "end"
+            ],
+            "properties": {
+              "source": {
+                "type": "string"
+              },
+              "in": {
+                "type": "number",
+                "description": "segundo de origen"
+              },
+              "out": {
+                "type": "number"
+              },
+              "start": {
+                "type": "number",
+                "description": "segundo en el timeline"
+              },
+              "end": {
+                "type": "number"
+              },
+              "beat": {
+                "type": "string"
+              },
+              "zoom": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "number"
+                  },
+                  "to": {
+                    "type": "number"
+                  },
+                  "anchor_y": {
+                    "type": "number"
+                  },
+                  "curve": {
+                    "type": "string"
+                  }
+                }
+              },
+              "gain_db": {
+                "type": "number"
+              },
+              "denoise": {
+                "type": "number",
+                "description": "0-1 (RNNoise mix)"
+              }
+            }
+          }
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "between",
+              "type",
+              "duration"
+            ],
+            "properties": {
+              "between": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "type": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "text": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "text",
+              "start",
+              "end"
+            ],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              },
+              "style": {
+                "type": "string",
+                "enum": [
+                  "phrase",
+                  "word",
+                  "cta",
+                  "hook"
+                ]
+              },
+              "accent": {
+                "type": "boolean"
+              },
+              "y": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "overlays": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "file",
+              "start",
+              "end"
+            ],
+            "properties": {
+              "file": {
+                "type": "string"
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              },
+              "fade_in": {
+                "type": "number"
+              },
+              "fade_out": {
+                "type": "number"
+              },
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "audio": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "file",
+              "start",
+              "end"
+            ],
+            "properties": {
+              "file": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "music",
+                  "sfx",
+                  "voice"
+                ]
+              },
+              "in": {
+                "type": "number"
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              },
+              "volume_db_keyframes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "t": {
+                      "type": "number"
+                    },
+                    "db": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "end_card": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "string"
+            },
+            "duration": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "export": {
+      "type": "object",
+      "properties": {
+        "preset": {
+          "type": "string"
+        },
+        "output": {
+          "type": "string"
+        },
+        "target_lufs": {
+          "type": "number"
+        }
+      }
+    },
+    "ranges": {
+      "type": "array",
+      "description": "Formato video-use: tramos en orden de salida",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "start": {
+            "type": "number"
+          },
+          "end": {
+            "type": "number"
+          },
+          "beat": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "grade": {
+      "type": "string",
+      "description": "nombre de preset (subtle, neutral_punch, warm_cinematic, none), 'auto' o cadena ffmpeg cruda"
+    },
+    "subtitles": {
+      "type": "string",
+      "description": "ruta a SRT en tiempos de la línea de salida (solo cortes duros)"
+    },
+    "total_duration_s": {
+      "type": "number"
+    },
+    "overlays": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "start_in_output": {
+            "type": "number"
+          },
+          "duration": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

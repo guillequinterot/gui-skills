@@ -1,0 +1,12 @@
+interface:
+  display_name: SEO Content System
+  short_description: Investiga, redacta y mejora SEO con evidencia
+  default_prompt: Usa $seo-content-system para investigar, planear, redactar y medir
+    este contenido SEO.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

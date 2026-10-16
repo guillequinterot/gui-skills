@@ -1,0 +1,799 @@
+{
+ "url": "https://rea.tools/",
+ "title": "REA — Reverse Engineering for Your Coding Agent",
+ "lang": "en",
+ "meta": {
+  "description": "Reverse engineer apps, binaries and browser behavior with your coding agent. Follow clear guides and try interactive examples with REA.",
+  "robots": null,
+  "viewport": "width=device-width, initial-scale=1",
+  "generator": null,
+  "og:title": "REA — Reverse Engineering for Your Coding Agent",
+  "og:image": "https://rea.tools/assets/social-card.png",
+  "og:type": "website",
+  "twitter:card": "summary_large_image",
+  "theme-color": "#ffffff"
+ },
+ "canonical": "https://rea.tools/",
+ "hreflang": [
+  [
+   "en",
+   "https://rea.tools/"
+  ],
+  [
+   "zh-CN",
+   "https://rea.tools/zh-CN/"
+  ],
+  [
+   "zh-TW",
+   "https://rea.tools/zh-TW/"
+  ],
+  [
+   "ja",
+   "https://rea.tools/ja/"
+  ],
+  [
+   "ko",
+   "https://rea.tools/ko/"
+  ],
+  [
+   "tr",
+   "https://rea.tools/tr/"
+  ],
+  [
+   "ru",
+   "https://rea.tools/ru/"
+  ],
+  [
+   "vi",
+   "https://rea.tools/vi/"
+  ],
+  [
+   "th",
+   "https://rea.tools/th/"
+  ],
+  [
+   "de",
+   "https://rea.tools/de/"
+  ],
+  [
+   "es",
+   "https://rea.tools/es/"
+  ],
+  [
+   "fr",
+   "https://rea.tools/fr/"
+  ],
+  [
+   "uk",
+   "https://rea.tools/uk/"
+  ],
+  [
+   "pl",
+   "https://rea.tools/pl/"
+  ],
+  [
+   "pt-BR",
+   "https://rea.tools/pt-BR/"
+  ],
+  [
+   "ar",
+   "https://rea.tools/ar/"
+  ],
+  [
+   "fa",
+   "https://rea.tools/fa/"
+  ],
+  [
+   "id",
+   "https://rea.tools/id/"
+  ],
+  [
+   "it",
+   "https://rea.tools/it/"
+  ],
+  [
+   "el",
+   "https://rea.tools/el/"
+  ],
+  [
+   "x-default",
+   "https://rea.tools/"
+  ]
+ ],
+ "headings": [
+  [
+   "H1",
+   "Find out howsoftware works."
+  ],
+  [
+   "H2",
+   "Set up REA"
+  ],
+  [
+   "H2",
+   "How it works"
+  ],
+  [
+   "H3",
+   "Ask about one feature"
+  ],
+  [
+   "H3",
+   "Inspect the program"
+  ],
+  [
+   "H3",
+   "Explain it, then try a change"
+  ],
+  [
+   "H3",
+   "Follow the instructions step by step"
+  ],
+  [
+   "H2",
+   "Why does the dinosaur get faster?"
+  ],
+  [
+   "H3",
+   "1. Ask about the speed"
+  ],
+  [
+   "H3",
+   "2. Find the speed rule"
+  ],
+  [
+   "H3",
+   "3. Play the result"
+  ],
+  [
+   "H2",
+   "Rebuild Calculator’s % button."
+  ],
+  [
+   "H3",
+   "1. Ask about the % button"
+  ],
+  [
+   "H3",
+   "2. Find both rules"
+  ],
+  [
+   "H3",
+   "3. Try the % button"
+  ],
+  [
+   "H2",
+   "REA case studies."
+  ],
+  [
+   "H3",
+   "How an authenticator generates a login code"
+  ],
+  [
+   "H3",
+   "How Notion copies text and HTML"
+  ],
+  [
+   "H3",
+   "DX-Ball's sound-pan calculation"
+  ],
+  [
+   "H2",
+   "Try REA on a small app."
+  ],
+  [
+   "H2",
+   "Choose your target."
+  ],
+  [
+   "H3",
+   "Native binaries"
+  ],
+  [
+   "H3",
+   "JavaScript & Electron"
+  ],
+  [
+   "H3",
+   "Browser & runtime activity"
+  ],
+  [
+   "H2",
+   "Any questions?"
+  ]
+ ],
+ "jsonld": [],
+ "textLength": 5044,
+ "links": {
+  "internal": 62,
+  "external": 14,
+  "nofollow": 0,
+  "mailto": 0,
+  "tel": 0
+ },
+ "nav": [
+  "REAReverse Engineer Anything",
+  "Get started",
+  "Showcases",
+  "Blog",
+  "Guides",
+  "FAQ",
+  "Contributors",
+  "English",
+  "简体中文",
+  "繁體中文",
+  "日本語",
+  "한국어",
+  "Türkçe",
+  "Русский",
+  "Tiếng Việt",
+  "ไทย",
+  "Deutsch",
+  "Español",
+  "Français",
+  "Українська",
+  "Polski",
+  "Português (Brasil)",
+  "العربية",
+  "فارسی"
+ ],
+ "images": {
+  "total": 1,
+  "sinAlt": 0,
+  "altVacio": 1,
+  "lazy": 0,
+  "sobredimensionadas": 0,
+  "formatos": {
+   "svg": 1
+  },
+  "picture": 0,
+  "svgInline": 7,
+  "video": 0,
+  "iframe": 0,
+  "canvas": 1
+ },
+ "tokens": {
+  "fuentes": [
+   [
+    "-apple-system",
+    247
+   ],
+   [
+    "SFMono-Regular",
+    43
+   ]
+  ],
+  "tamanos": [
+   [
+    "14.4px",
+    74
+   ],
+   [
+    "12.8px",
+    44
+   ],
+   [
+    "12px",
+    38
+   ],
+   [
+    "14px",
+    37
+   ],
+   [
+    "16px",
+    23
+   ],
+   [
+    "15.2px",
+    16
+   ],
+   [
+    "13.6px",
+    10
+   ],
+   [
+    "19.2px",
+    9
+   ],
+   [
+    "12.48px",
+    7
+   ],
+   [
+    "38.4px",
+    7
+   ],
+   [
+    "16.8px",
+    6
+   ],
+   [
+    "18.4px",
+    6
+   ],
+   [
+    "20px",
+    5
+   ],
+   [
+    "18px",
+    2
+   ]
+  ],
+  "colorTexto": [
+   [
+    "rgb(91, 101, 112)",
+    129
+   ],
+   [
+    "rgb(32, 37, 43)",
+    68
+   ],
+   [
+    "rgb(41, 79, 130)",
+    61
+   ],
+   [
+    "rgb(241, 244, 248)",
+    9
+   ],
+   [
+    "rgb(189, 200, 212)",
+    6
+   ],
+   [
+    "rgb(214, 222, 231)",
+    6
+   ],
+   [
+    "rgb(155, 191, 229)",
+    6
+   ],
+   [
+    "rgb(255, 255, 255)",
+    4
+   ]
+  ],
+  "fondos": [
+   [
+    "rgb(255, 255, 255)",
+    21
+   ],
+   [
+    "rgb(129, 144, 158)",
+    18
+   ],
+   [
+    "rgb(244, 246, 248)",
+    10
+   ],
+   [
+    "rgb(32, 41, 51)",
+    6
+   ],
+   [
+    "rgb(155, 191, 229)",
+    6
+   ],
+   [
+    "rgb(228, 236, 245)",
+    5
+   ],
+   [
+    "rgb(32, 37, 43)",
+    4
+   ],
+   [
+    "rgb(237, 242, 248)",
+    2
+   ],
+   [
+    "rgb(250, 251, 252)",
+    2
+   ],
+   [
+    "rgb(241, 245, 250)",
+    1
+   ]
+  ],
+  "radios": [
+   [
+    "5px",
+    27
+   ],
+   [
+    "3px",
+    27
+   ],
+   [
+    "50%",
+    18
+   ],
+   [
+    "4px",
+    17
+   ],
+   [
+    "2px",
+    5
+   ],
+   [
+    "10px",
+    3
+   ],
+   [
+    "6px",
+    1
+   ],
+   [
+    "16px",
+    1
+   ]
+  ],
+  "sombras": [
+   [
+    "rgba(32, 37, 43, 0.08) 0px 5px 20px 0px",
+    1
+   ]
+  ],
+  "gaps": [
+   [
+    "16px",
+    16
+   ],
+   [
+    "8px",
+    11
+   ],
+   [
+    "11.2px",
+    6
+   ],
+   [
+    "4px",
+    6
+   ],
+   [
+    "14.4px",
+    4
+   ],
+   [
+    "24px",
+    2
+   ],
+   [
+    "3.2px",
+    2
+   ],
+   [
+    "9.6px",
+    2
+   ],
+   [
+    "40px",
+    2
+   ],
+   [
+    "30.4px",
+    2
+   ]
+  ]
+ },
+ "escalaTipografica": {
+  "h1": {
+   "fuente": "-apple-system",
+   "tam": "67.2px",
+   "peso": "650",
+   "interlineado": "76.608px",
+   "tracking": "-2.352px",
+   "color": "rgb(32, 37, 43)",
+   "transform": "none",
+   "texto": "Find out howsoftware works."
+  },
+  "h2": {
+   "fuente": "-apple-system",
+   "tam": "20.8px",
+   "peso": "650",
+   "interlineado": "23.712px",
+   "tracking": "-0.416px",
+   "color": "rgb(32, 37, 43)",
+   "transform": "none",
+   "texto": "Set up REA"
+  },
+  "h3": {
+   "fuente": "-apple-system",
+   "tam": "16.8px",
+   "peso": "650",
+   "interlineado": "19.152px",
+   "tracking": "-0.336px",
+   "color": "rgb(32, 37, 43)",
+   "transform": "none",
+   "texto": "Ask about one feature"
+  },
+  "p": {
+   "fuente": "-apple-system",
+   "tam": "12px",
+   "peso": "600",
+   "interlineado": "19.8px",
+   "tracking": "normal",
+   "color": "rgb(91, 101, 112)",
+   "transform": "none",
+   "texto": "On this page"
+  },
+  "a": {
+   "fuente": "-apple-system",
+   "tam": "16px",
+   "peso": "400",
+   "interlineado": "26.4px",
+   "tracking": "normal",
+   "color": "rgb(255, 255, 255)",
+   "transform": "none",
+   "texto": "Skip to content"
+  },
+  "button": {
+   "fuente": "-apple-system",
+   "tam": "16px",
+   "peso": "400",
+   "interlineado": "26.4px",
+   "tracking": "normal",
+   "color": "rgb(91, 101, 112)",
+   "transform": "none",
+   "texto": ""
+  },
+  "nav a": {
+   "fuente": "-apple-system",
+   "tam": "14.4px",
+   "peso": "400",
+   "interlineado": "23.76px",
+   "tracking": "normal",
+   "color": "rgb(32, 37, 43)",
+   "transform": "none",
+   "texto": "Get started"
+  },
+  "li": {
+   "fuente": "-apple-system",
+   "tam": "16px",
+   "peso": "400",
+   "interlineado": "26.4px",
+   "tracking": "normal",
+   "color": "rgb(32, 37, 43)",
+   "transform": "none",
+   "texto": "Set up REA"
+  },
+  "small": null
+ },
+ "fuentesCargadas": [],
+ "variablesCss": {
+  "--ink": "#20252b",
+  "--muted": "#5b6570",
+  "--line": "#e0e5e9",
+  "--soft": "#f4f6f8",
+  "--accent": "#294f82",
+  "--page": "#ffffff",
+  "--font-latin": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Ar",
+  "--font-code": "\"SFMono-Regular\", Consolas, \"Liberation Mono\"",
+  "--font-sans": "var(--font-latin), sans-serif",
+  "--font-mono": "var(--font-code), monospace"
+ },
+ "keyframes": [
+  "terminal-blink"
+ ],
+ "hojasCss": {
+  "total": 1,
+  "inaccesibles": 0
+ },
+ "layout": {
+  "anchoMaxContenedor": [
+   [
+    "650px",
+    4
+   ],
+   [
+    "900px",
+    1
+   ],
+   [
+    "710px",
+    1
+   ],
+   [
+    "680px",
+    1
+   ]
+  ],
+  "scrollHeight": 4870,
+  "grid": 20,
+  "flex": 89,
+  "sticky": 0,
+  "scrollSnap": 0
+ },
+ "secciones": [
+  {
+   "tag": "section",
+   "id": "setup",
+   "clase": "container hero home-hero",
+   "alto": 694,
+   "fondo": "rgba(0, 0, 0, 0)",
+   "h": "Find out howsoftware works.",
+   "texto": "Reverse engineering, with your coding agent Find out howsoftware works"
+  },
+  {
+   "tag": "section",
+   "id": "what-is-re",
+   "clase": "section",
+   "alto": 465,
+   "fondo": "rgba(0, 0, 0, 0)",
+   "h": "How it works",
+   "texto": "How it works Reverse engineering means learning how software works by "
+  },
+  {
+   "tag": "section",
+   "id": "dinosaur",
+   "clase": "section",
+   "alto": 1067,
+   "fondo": "rgba(0, 0, 0, 0)",
+   "h": "Why does the dinosaur get faster?",
+   "texto": "Let’s try two examples: change a game’s speed, then rebuild Calculator"
+  },
+  {
+   "tag": "section",
+   "id": "calculator",
+   "clase": "section",
+   "alto": 919,
+   "fondo": "rgba(0, 0, 0, 0)",
+   "h": "Rebuild Calculator’s % button.",
+   "texto": "Example 02 · Windows Calculator Rebuild Calculator’s % button. The % b"
+  },
+  {
+   "tag": "section",
+   "id": "showcases",
+   "clase": "section",
+   "alto": 520,
+   "fondo": "rgba(0, 0, 0, 0)",
+   "h": "REA case studies.",
+   "texto": "REA case studies. Explore a feature in a released app or game, with co"
+  },
+  {
+   "tag": "section",
+   "id": "try-rea",
+   "clase": "section",
+   "alto": 227,
+   "fondo": "rgba(0, 0, 0, 0)",
+   "h": "Try REA on a small app.",
+   "texto": "Your first investigation Try REA on a small app. Download our Notes ex"
+  },
+  {
+   "tag": "section",
+   "id": "analyze",
+   "clase": "section",
+   "alto": 484,
+   "fondo": "rgba(0, 0, 0, 0)",
+   "h": "Choose your target.",
+   "texto": "Choose your target. These guides cover setup and a first investigation"
+  },
+  {
+   "tag": "section",
+   "id": "community",
+   "clase": "section",
+   "alto": 294,
+   "fondo": "rgba(0, 0, 0, 0)",
+   "h": "Any questions?",
+   "texto": "Any questions? Read the FAQ — setup and common questions. Join Discord"
+  }
+ ],
+ "movimiento": {
+  "librerias": [
+   "canvasWebGL"
+  ],
+  "animacionesWebAnimations": 6,
+  "elementosConTransition": 0,
+  "elementosConAnimation": 6,
+  "backdropFilter": 0,
+  "mixBlend": 0,
+  "prefersReducedMotion": true
+ },
+ "tecnologia": [
+  "módulos ES con bundle en /assets (Vite/TanStack, probable)",
+  "Tailwind (probable)"
+ ],
+ "scripts": {
+  "total": 5,
+  "externos": 5,
+  "inline": 0,
+  "lista": [
+   "https://rea.tools/assets/theme.js",
+   "https://rea.tools/assets/main.js",
+   "https://rea.tools/assets/home.js",
+   "https://rea.tools/assets/dino-demo.js",
+   "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920"
+  ]
+ },
+ "formularios": {
+  "forms": 0,
+  "inputs": 2,
+  "botones": [
+   "Copy",
+   "Copy",
+   "01 Decode branches",
+   "02 Trace calls",
+   "03 Recover the rule",
+   "Copy",
+   "Copy",
+   "Play",
+   "Jump ↑",
+   "Restart",
+   "Copy",
+   "200 + 10%",
+   "200 × 10%",
+   "%",
+   "=",
+   "Reset",
+   "Copy",
+   "Copy"
+  ]
+ },
+ "a11y": {
+  "h1": 1,
+  "enlacesSinTexto": 0,
+  "botonesSinNombre": 0,
+  "inputsSinEtiqueta": 0,
+  "landmarks": [
+   "header",
+   "nav",
+   "nav",
+   "nav",
+   "main",
+   "nav",
+   "aside",
+   "footer"
+  ]
+ },
+ "red": {
+  "total": 13,
+  "porTipo": {
+   "document": 1,
+   "stylesheet": 1,
+   "script": 7,
+   "image": 1,
+   "xhr": 1,
+   "other": 1,
+   "fetch": 1
+  },
+  "terceros": [
+   [
+    "static.cloudflareinsights.com",
+    1
+   ],
+   [
+    "api.github.com",
+    1
+   ]
+  ],
+  "kb": 1,
+  "consola": [],
+  "fallos": [],
+  "errores_http": []
+ },
+ "crudoVsRenderizado": {
+  "status": 200,
+  "bytes": 54349,
+  "title_crudo": "REA — Reverse Engineering for Your Coding Agent",
+  "h1_crudo": 1,
+  "h1_renderizado": 1,
+  "jsonld_crudo": 0,
+  "jsonld_renderizado": 0,
+  "texto_crudo": 10457,
+  "texto_renderizado": 5044,
+  "depende_de_js": false
+ },
+ "_meta": {
+  "sonda": "web_probe.py",
+  "fecha": "2026-10-15 22:21",
+  "anchos": [
+   1440,
+   390
+  ],
+  "scroll": true
+ }
+}

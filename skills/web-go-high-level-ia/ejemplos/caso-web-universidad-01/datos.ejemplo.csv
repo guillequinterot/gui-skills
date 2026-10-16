@@ -1,0 +1,3 @@
+id,nombre,zona,codigo_oficial,estado_codigo,cupos
+a,Elemento A,norte,1001,verificado en fuente oficial,20
+b,Elemento B,sur,1002,contradictorio entre fuentes,15-20
