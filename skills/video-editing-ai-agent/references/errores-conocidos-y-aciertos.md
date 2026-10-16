@@ -52,3 +52,20 @@ Errores y recetas medidas con 11 reels de Instagram (2026-10-16): `skills/video-
 
 ## 5. Dónde registrar lo aprendido (siempre al cerrar)
 `video-handoff.md` del proyecto (medido/visto/no verificado) → `scripts/save_approved.py add` (si el usuario aprobó, con su cita) → `scripts/log_update.py` (fallos y verificaciones) → entrada en el «Registro de trabajos» del `HANDOFF.md` (con `tools/log_job.py`; si el usuario usa Obsidian, también su nota del proyecto y el registro de skills) → si es una lección general nueva, **una línea aquí** con su evidencia.
+
+## 6. Rehacer una pieza rechazada por el usuario (caso-reel-02, 2026-10-16)
+Origen: video entregado a medias por otra IA; el usuario dijo «la verdad el video no me gusta nada». Auditoría y rehacer medidos.
+| Hacer | Evidencia |
+|---|---|
+| **Comparar voz y video antes de mirar el diseño**: `ffprobe` de la voz, `transcribe_words.py`, y cruzar con las escenas | La voz duraba 10.8 s en un video de 30 s: 18 s mudos, sin CTA hablado, y decía «verifica la plataforma» mientras se veía la escena 1 |
+| **Una hoja de contacto del estado heredado** (`snapshot --at`) | Escenas que solo se mostraban (`autoAlpha:1`) y nunca se ocultaban: texto encimado en 4 de 6 fotogramas; fotograma en blanco en 1.5 s |
+| **Cada escena entra Y sale** (`push()`) y **su contenido llega dentro de la página** (títulos revelándose desde −0.2 s del centro del push) | `cut_dip.py`: hueco 26 % en 16 fotogramas con títulos tardíos → ≤ 6 % al adelantarlos |
+| **Subtítulos de frase: ocultar la anterior antes de entrar la siguiente** (`min(fin+0.45, siguiente−0.30)`, salida 0.14 s) | Frases solapadas en la hoja a 17.9 s |
+| **Medir `motion_energy.py` tras mover tiempos**: adelantar entradas deja tramos quietos nuevos (191 → 244 fotogramas) | Solución: empuje de cámara 1.0→1.028 por escena + barrido lima en las pausas |
+| **Recortes locales de objetos neón**: fondo negro → alfa por luminancia (`color=rgb/alfa`); fondo gris → máscara de píldora con plumas; recolor de naranja a lima por HSV | Escudo+candado de stock con candado naranja quedó en la paleta de marca sin pagar recortes |
+| **Tipografía: la marca manda, no el UI kit viejo** — leer el paquete de logo vigente | El logo de la marca cambió (Montserrat); los diseños aprobados antiguos llevan el logo anterior y Poppins |
+| **Presentar el guion antes de gastar créditos de voz** y reutilizar la voz aprobada (ids y ajustes en el handoff del proyecto) | Voz completa 74 créditos; la muestra rechazada ya se había cobrado |
+| `.ln{overflow:hidden}` con `padding-bottom/margin-bottom` de 20 px | Con 8 px se recortaban los descendentes (`check`: `container_overflow`) |
+| Montserrat es más ancha que Poppins: bajar el nombre del producto de 150 a 128 px | Se salía del cuadro en la hoja de contacto |
+
+**Plantilla de marca reutilizable:** cuando una marca ya tiene una pieza aprobada, guarda en la carpeta de su proyecto una plantilla (HTML aprobado + `captions_from_transcript.py` + `render_and_verify.sh`) y una receta corta de la pieza; en la siguiente, imitar la pieza aprobada (p. ej. V002 de la biblioteca) antes que inventar un estilo. La ruta concreta va en la nota del proyecto, nunca aquí.

@@ -31,3 +31,45 @@
 **Archivos:** `<carpeta-del-proyecto>/hyperframes/index.html`; `<carpeta-del-proyecto>/hyperframes/renders/reel_v3_row0.mp4`; `<carpeta-del-proyecto>/hyperframes/renders/reel_v3_row1.mp4`; `<carpeta-del-proyecto>/storyboard/storyboard_board_v3.jpg`; `<carpeta-del-proyecto>/video-handoff.md`
 
 Etiquetas: reel, instagram, vertical, musica, fotos, sin-voz, gasolinera, hyperframes, cta, motion-graphics
+
+## V002 · Reel caso-reel-02 · qué verificar antes de activar un bot · 2026-10-16
+
+- **Pieza:** Reel de motion graphics (la pieza 1 de la semana 1), version 4 tras rehacer una pieza rechazada · 1080x1920 · 30.0 s · ruta `motion-graphics` · motor hyperframes · proyecto `<carpeta-del-proyecto>/caso-reel-02`
+- **Mensaje:** Tres verificaciones (plataforma, parametros, riesgo) antes de activar un bot; el producto del cliente como herramienta de reglas configurables; CTA a WhatsApp
+- **Aprobado por usuario:** «Apruebo el video v4. Haz el render final, verifica y déjalo en 07_REVISION sin subir a Drive todavía.»
+- **Aprobado explícitamente:** la version 4 del video, con render final verificado, dejada en la carpeta de revision sin subir a Drive todavia (2026-10-16)
+- **Sin decidir (no usar como preferencia):** No eligio entre alternativas de movimiento; no escucho/valido aun la sincronia palabra-voz por escrito; web del CTA (dos dominios candidatos del cliente) y WhatsApp sin confirmar; sonoridad ajustada a -15.7 LUFS por remux, no por mezcla en el proyecto
+- **Estructura:** Gancho 4.3 s -> 3 pasos con push al compas (verifica / entiende / define) -> capital en tu broker (foto) -> el producto del cliente + chips -> CTA 7.4 s con boton lima
+- **Receta:** Voz eleven_v3 con guion aprobado antes de gastar creditos (la voz aprobada, id en el handoff del proyecto), objetos neon de stock Magnific recortados en local, fondo prehorneado, push 0.6 s centrado en compas con contenido llegando dentro de la pagina, subtitulos palabra por palabra, deriva de camara 1.0->1.028 + barrido lima, remux loudnorm + alimiter
+- **Medido:** check 0 errores; contraste 62/62; cut_dip max 6.2%; casi inmoviles 54/899; LUFS -15.7; TP -1.8
+
+**Lo bueno (repetir)**
+- Linea grafica aprobada del cliente con su logo y Montserrat; check limpio 62/62; huecos de push <=6%; 54 de 899 fotogramas quietos; -15.7 LUFS pico -1.8 dBFS; 0 gasto en recortes
+
+**Lo malo (evitar)**
+- Fue la segunda version: el preview de otra IA fue rechazado (voz de 10.8 s en 30 s, escenas encimadas); push en 13.12 y 17.54 aun con hueco 4-6%
+
+**Archivos:** `<carpeta-del-proyecto>/07_REVISION/2026-10/pieza-1-semana-1-vertical-final.mp4`
+
+Etiquetas: caso-reel-02, neon, subtitulos, stock-magnific, voz, motion-graphics
+
+## V003 · Reel caso-reel-02 con una persona del cliente (cambio del cliente) · 2026-10-16
+
+- **Pieza:** La pieza 1 de la semana 1, version cliente-v1 · 1080x1920 · 30.0 s · ruta `motion-graphics` · motor hyperframes · proyecto `<carpeta-del-proyecto>/caso-reel-02`
+- **Mensaje:** Mismo video aprobado (V002) con la persona de la escena 5 sustituida por una persona del cliente (directivo), a pedido del cliente
+- **Aprobado por usuario:** «Apruebo la versión cliente-v1 con una persona del cliente. Dejá anotado que Codex la suba a Drive 02 - Revisión.»
+- **Aprobado explícitamente:** la version cliente-v1 con la persona del cliente en la escena 5 (2026-10-16)
+- **Sin decidir (no usar como preferencia):** Subida a Drive pendiente (Codex); autorizacion de uso de imagen de la persona dada por el cliente/usuario, no verificada por escrito
+- **Estructura:** Identica a V002; solo cambia la escena 'Tu capital sigue en tu broker' (persona recortada + halo + fichas reubicadas)
+- **Receta:** Recorte local de persona con cuadriculado horneado: make_person_cutout.py (flood fill + GrabCut); person.png unico archivo a reemplazar; persona left 290 top 560 width 790; fichas top 770/930; render_and_verify.sh
+- **Medido:** casi quietos 54/899; hueco push max 5.2%; -15.7 LUFS; TP -1.8 dBFS
+
+**Lo bueno (repetir)**
+- Cambio de persona sin tocar animacion; metricas identicas a V002; cero creditos
+
+**Lo malo (evitar)**
+- Dos iteraciones de layout hasta evitar que titular y fichas tapen el rostro
+
+**Archivos:** `<carpeta-del-proyecto>/07_REVISION/2026-10/pieza-1-semana-1-vertical-cliente-v1.mp4`
+
+Etiquetas: caso-reel-02, persona, cambio-cliente

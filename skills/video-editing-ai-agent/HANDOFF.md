@@ -125,6 +125,22 @@ Relación con otras skills:
 - **Regla candidata:** El contenido de captación comercial da **pistas, no evidencia**; varias piezas de una misma cuenta cuentan como **una** fuente; recalcular todo lo recalculable antes de tomar una idea.
 - **Herramientas:** yt-dlp 2026.08.19; faster-whisper 1.2.1 (`small`, CPU, `hotwords`); ffmpeg n8.1.2; Pillow; numpy.
 
+### 2026-10-16 · caso-reel-02 · guille
+
+- **Qué se hizo:** Rehacer un Reel de motion graphics vertical de 30 s (1080×1920) para un cliente, tras rechazar el usuario la versión entregada por otra IA (voz de 10.8 s en un video de 30 s, escenas encimadas). Se auditó voz y escenas, se rehizo en HyperFrames con voz aprobada, subtítulos palabra por palabra, objetos neón recortados en local y push al compás. Aprobada por el usuario en su versión 4 (V002 de la biblioteca de videos aprobados); la sección 6 de errores-conocidos-y-aciertos.md recoge la lección.
+- **Salió bien:** Línea gráfica aprobada del cliente respetada; check 62/62 sin errores; hueco de push máximo 6.2 %; 54 de 899 fotogramas casi inmóviles; −15.7 LUFS, pico −1.8 dBFS; recortes de objetos neón hechos en local con 0 gasto; guion presentado antes de gastar créditos de voz.
+- **Salió mal / incidencia:** Era la segunda versión: la anterior fue rechazada. Dos pushes seguían con hueco de 4–6 % tras el primer ajuste; la muestra de voz rechazada ya se había cobrado; los descendentes se recortaban con padding de 8 px. Incidencia: Escenas que solo se mostraban y nunca se ocultaban dejaron texto encimado en 4 de 6 fotogramas; adelantar entradas dejó tramos quietos nuevos (191 a 244 fotogramas), resueltos con empuje de cámara 1.0 a 1.028 y barrido en las pausas.
+- **Regla candidata:** Al rehacer una pieza rechazada, comparar primero la duración de la voz con la del video y revisar una hoja de contacto del estado heredado antes de tocar el diseño.
+- **Herramientas:** hyperframes; ffmpeg; transcribe_words.py; cut_dip.py; motion_energy.py; snapshot; stock Magnific (recortes locales)
+
+### 2026-10-16 · caso-reel-02 · guille
+
+- **Qué se hizo:** Variante a pedido del cliente del Reel aprobado (V002): se sustituyó la persona de la escena 5 por una persona del cliente, sin tocar la animación. Recorte local con make_person_cutout.py (flood fill y GrabCut sobre fondo cuadriculado), un único archivo person.png a reemplazar, y render_and_verify.sh. Aprobada por el usuario como cliente-v1 (V003 de la biblioteca).
+- **Salió bien:** Cambio de persona sin tocar la animación; métricas idénticas a V002 (54 de 899 fotogramas casi inmóviles, hueco de push máximo 5.2 %, −15.7 LUFS, pico −1.8 dBFS); cero créditos gastados.
+- **Salió mal / incidencia:** Dos iteraciones de layout hasta evitar que el titular y las fichas taparan el rostro.
+- **Regla candidata:** Dejar cada pieza con un único archivo sustituible para las variantes del cliente (p. ej. person.png) y un script de render y verificación que repita las mismas métricas.
+- **Herramientas:** make_person_cutout.py; render_and_verify.sh; hyperframes; ffmpeg; cut_dip.py; motion_energy.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -138,3 +154,5 @@ Relación con otras skills:
 | Palabras cortas (the/of/and) en pantalla 0.2–0.4 s parpadean: unirlas a la siguiente | caso-video-02 | candidata (pendiente de feedback del cliente) |
 | Filtro `typewriter` del subtítulo de Shotcut (requiere `qtext`) | — | sin probar |
 | Procesar 2 reels en paralelo no gana tiempo en 4 núcleos | caso-aprendizaje-reels-01 | sospecha, no medida |
+| Al rehacer una pieza rechazada, comparar primero la duración de la voz con la del video y revisar una hoja de contacto del estado heredado antes de tocar el diseño. | caso-reel-02 | candidata |
+| Dejar cada pieza con un único archivo sustituible para las variantes del cliente (p. ej. person.png) y un script de render y verificación que repita las mismas métricas. | caso-reel-02 | candidata |
