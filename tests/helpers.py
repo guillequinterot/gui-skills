@@ -103,7 +103,7 @@ class Sandbox(unittest.TestCase):
         skill.mkdir(parents=True)
         (skill / "SKILL.md").write_text("# demo\n\ntexto base\n", encoding="utf-8")
         handoff = (REPO_ROOT / "templates" / "HANDOFF.md").read_text(encoding="utf-8").replace("\r\n", "\n")
-        (skill / "HANDOFF.md").write_text(handoff, encoding="utf-8")
+        (skill / "HANDOFF.md").write_bytes(handoff.encode("utf-8"))  # LF, whatever the platform
         (seed / "README.md").write_text("# demo repo\n", encoding="utf-8")
         (seed / "shared").mkdir()
         (seed / "shared" / "nota.md").write_text("nota\n", encoding="utf-8")
