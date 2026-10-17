@@ -69,3 +69,14 @@ Origen: video entregado a medias por otra IA; el usuario dijo «la verdad el vid
 | Montserrat es más ancha que Poppins: bajar el nombre del producto de 150 a 128 px | Se salía del cuadro en la hoja de contacto |
 
 **Plantilla de marca reutilizable:** cuando una marca ya tiene una pieza aprobada, guarda en la carpeta de su proyecto una plantilla (HTML aprobado + `captions_from_transcript.py` + `render_and_verify.sh`) y una receta corta de la pieza; en la siguiente, imitar la pieza aprobada (p. ej. V002 de la biblioteca) antes que inventar un estilo. La ruta concreta va en la nota del proyecto, nunca aquí.
+
+## 7. Cliente pide cambio de guion tras aprobar + versión horizontal (OCT-W1-V01 de caso-reel-02, 2026-10-16)
+| Hacer | Evidencia |
+|---|---|
+| **Una frase nueva obliga a regenerar la voz de todas las versiones y a re-sincronizar** toda la composición (la voz nueva tuvo otro ritmo: «Primero» pasó de 3.42 s a 2.98 s y la pieza de 27.76 s a 28.0 s) | Hubo que mover los 6 pushes a otros golpes de compás y alargar el video de 30 a 32 s |
+| **Datos de subtítulos desde la transcripción** (`captions_from_transcript.py`) y anclajes por palabra (`W(frase, clave)`) en lugar de segundos escritos a mano | Horizontal de 98 s con 24 frases sin un solo tiempo a mano |
+| **No poner una URL en el texto hablado**: el TTS la leyó la URL deletreada con «guion»; recortar el audio antes y mostrar la web | Whisper transcribió la URL pegada durante 2 s; ahorró regenerar 264 créditos |
+| **El script de render debe detenerse si `check` falla** | La primera corrida del horizontal terminó en silencio con 3 errores de layout (`content_overlap` en textos que se relevan a propósito → `data-layout-allow-overlap`) |
+| **Ganancia de remux calculada** (`-15.5 − LUFS`, tope +3 dB) y limitador 0.78 después | Vertical v2: −17.4 → −15.6 LUFS, pico −2.0 dBFS; con +1.2 dB fijo habría quedado en −16.2 |
+| **Música para una pieza larga: bucle de N×48 compases con solape de 1 compás** | `beat_grid.py` sobre la salida: 157 golpes, puntaje 5.42 (igual que el original) |
+| **Pedidos del cliente con promesas de rentabilidad** («preset ganador, seis años de ganancias consecutivas»): no se escriben; se ofrece A (sin cifras) o B (con fuente pública verificable y aviso) y decide el usuario | El usuario eligió A |

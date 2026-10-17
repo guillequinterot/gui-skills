@@ -73,3 +73,45 @@ Etiquetas: caso-reel-02, neon, subtitulos, stock-magnific, voz, motion-graphics
 **Archivos:** `<carpeta-del-proyecto>/07_REVISION/2026-10/pieza-1-semana-1-vertical-cliente-v1.mp4`
 
 Etiquetas: caso-reel-02, persona, cambio-cliente
+
+## V004 · Reel caso-reel-02 v2 (frase del preset + persona del cliente) · 2026-10-16
+
+- **Pieza:** OCT-W1-V01-vertical-v2 · 1080x1920 · 32.0 s · ruta `motion-graphics` · motor hyperframes · proyecto `<carpeta-del-proyecto>`
+- **Mensaje:** Mismo reel aprobado, con la frase del preset (redaccion A sin cifras) por pedido del cliente y voz regenerada; persona del cliente en la escena 5
+- **Aprobado por usuario:** «Los videos aprobados»
+- **Aprobado explícitamente:** 2026-10-16
+- **Sin decidir (no usar como preferencia):** Sincronia palabra-voz solo medida (no escuchada por el asistente); subida a Drive pendiente (Codex); el cliente pidio el preset ganador con 6 anos de ganancias y se descarto por cumplimiento
+- **Estructura:** Igual que V002/V003, retemporizado a la voz nueva (28.0 s): push a B5,B9,B13,B18,B25,B38; video 32 s
+- **Receta:** Cambio de guion -> regenerar voz -> captions_from_transcript.py -> reajustar anclajes a compas -> render_and_verify.sh con ganancia de remux calculada
+- **Medido:** 75/959 quietos; -15.6 LUFS; TP -2.0; hueco push max 5.2%
+
+**Lo bueno (repetir)**
+- Check limpio 62/62; casi quietos 75/959; huecos de push <=5.2%; -15.6 LUFS TP -2.0; cumplimiento: sin promesas de rentabilidad
+
+**Lo malo (evitar)**
+- La voz nueva cambio de ritmo y obligo a mover todos los tiempos; remux de ganancia fija dejo -16.2 antes de calcularla
+
+**Archivos:** `<carpeta-del-proyecto>/08_ENTREGA/2026-10/OCT-W1-V01-vertical-FINAL.mp4`
+
+Etiquetas: caso-reel-02, producto-cliente, preset, cambio-cliente
+
+## V005 · Video YouTube horizontal caso-reel-02 (98 s) · 2026-10-16
+
+- **Pieza:** OCT-W1-V01-horizontal-v2 · 1920x1080 · 98.0 s · ruta `motion-graphics` · motor hyperframes · proyecto `<carpeta-del-proyecto>`
+- **Mensaje:** Explicacion de 90 s de las tres verificaciones (plataforma, parametros, riesgo) antes de activar un bot, el producto del cliente con preset ajustable y CTA
+- **Aprobado por usuario:** «Los videos aprobados»
+- **Aprobado explícitamente:** 2026-10-16
+- **Sin decidir (no usar como preferencia):** Voz recortada antes de la URL hablada (el TTS leia 'guion'); la web va en pantalla; sincronia no escuchada por el asistente; capitulos de YouTube y miniatura pendientes; subida pendiente
+- **Estructura:** Gancho -> hoja de ruta (3 tarjetas) -> paso 1 (lista con ticks) -> paso 2 (sliders vivos) -> paso 3 (medidor) -> capital en tu broker (persona del cliente) -> producto del cliente + preset -> recapitulacion -> CTA
+- **Receta:** index.horizontal.template.html + W(frase,clave) para anclar por palabra + musica en bucle de 48 compases (make_music_loop.sh) + movimiento sostenido (sliders que se reajustan, vaiven del medidor, pulsos de borde, paralaje) + render_and_verify.sh
+- **Medido:** 381/2939 quietos; -15.5 LUFS; TP -2.0; render 12.7 min a 1080p
+
+**Lo bueno (repetir)**
+- Check limpio 77/77; casi quietos bajaron de 38% (v1) a 13% (v2); -15.5 LUFS TP -2.0; cero creditos en musica/stock
+
+**Lo malo (evitar)**
+- La v1 tenia 1110 de 2939 fotogramas casi quietos y la primera corrida del script no se detuvo ante un check fallido
+
+**Archivos:** `<carpeta-del-proyecto>/08_ENTREGA/2026-10/OCT-W1-V01-horizontal-FINAL.mp4`
+
+Etiquetas: caso-reel-02, youtube, horizontal, largo
