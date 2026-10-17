@@ -115,3 +115,41 @@ Etiquetas: caso-reel-02, producto-cliente, preset, cambio-cliente
 **Archivos:** `<carpeta-del-proyecto>/08_ENTREGA/2026-10/OCT-W1-V01-horizontal-FINAL.mp4`
 
 Etiquetas: caso-reel-02, youtube, horizontal, largo
+
+## V006 · Video caso-reel-03 vertical (comparar herramientas) · 2026-10-17
+
+- **Pieza:** Reel vertical 9:16 de 61 s: cuatro criterios para comparar herramientas · 1080x1920 · 61.0 s · ruta `motion-graphics` · motor hyperframes · proyecto `caso-reel-03`
+- **Mensaje:** elegir una herramienta de automatizacion comparando activo, plataforma, riesgo y acompanamiento
+- **Aprobado por usuario:** «aprobadoooo!»
+- **Aprobado explícitamente:** estructura de cuatro criterios con rastreador de pasos; voz + subtitulos palabra por palabra + push al compas
+- **Sin decidir (no usar como preferencia):** el usuario aprobo ambos videos con una sola frase tras ver vista previa comprimida
+- **Estructura:** gancho > 4 criterios (activo, plataforma, riesgo, soporte) > ninguna es mejor para todos > CTA
+- **Receta:** receta del caso: B(n)=0.49+0.6315n; push 0.6 s; voz con offset 0.6 s; subtitulos desde transcripcion
+- **Medido:** -15.6 LUFS; pico -2.0; huecos <=5.2 %; 198/1829 casi quietos
+
+**Lo bueno (repetir)**
+- las frases con datos de producto se corrigieron empalmando solo 2 frases (~20 cr) en vez de regenerar la voz entera (~122 cr)
+
+**Lo malo (evitar)**
+- el guion se escribio con datos de la web desactualizada (producto 'proximamente', una sola plataforma); el usuario corrigio y costo regenerar voz y re-renderizar ~25 min
+
+Etiquetas: caso-reel-03, vertical, voz, comparacion, empalme-de-voz
+
+## V007 · Video caso-reel-03 horizontal (comparar herramientas) · 2026-10-17
+
+- **Pieza:** Video YouTube horizontal de 101 s: cuatro criterios para comparar herramientas · 1920x1080 · 101.0 s · ruta `motion-graphics` · motor hyperframes · proyecto `caso-reel-03`
+- **Mensaje:** elegir una herramienta de automatizacion comparando activo, plataforma, riesgo y acompanamiento
+- **Aprobado por usuario:** «aprobadoooo!»
+- **Aprobado explícitamente:** estructura de 9 escenas con recap de cuatro criterios
+- **Sin decidir (no usar como preferencia):** 6 tramos quietos de 0.5-1.8 s en la escena del activo (script dio REVISAR); el usuario aprobo sin pedir mas movimiento; hueco 11.5 % en el corte final sin resolver
+- **Estructura:** gancho > 4 criterios > activo > plataforma > riesgo > acompanamiento > recap > ninguna es mejor > CTA
+- **Receta:** igual que el vertical; empujes en B(13,25,60,82,112,128,137,147)
+- **Medido:** -15.5 LUFS; pico -2.1; 605/3029 casi quietos; script REVISAR
+
+**Lo bueno (repetir)**
+- empalme de 2 frases sobre la voz ya aprobada, sin regenerarla
+
+**Lo malo (evitar)**
+- mismo error de datos desactualizados que el vertical
+
+Etiquetas: caso-reel-03, horizontal, youtube, voz, comparacion

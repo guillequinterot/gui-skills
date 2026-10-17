@@ -141,6 +141,14 @@ Relación con otras skills:
 - **Regla candidata:** Dejar cada pieza con un único archivo sustituible para las variantes del cliente (p. ej. person.png) y un script de render y verificación que repita las mismas métricas.
 - **Herramientas:** make_person_cutout.py; render_and_verify.sh; hyperframes; ffmpeg; cut_dip.py; motion_energy.py
 
+### 2026-10-17 · caso-reel-03 · guille
+
+- **Qué se hizo:** Video explicativo vertical (61 s) y horizontal (101 s) de comparacion de herramientas, con voz TTS, subtitulos palabra por palabra y push al compas; correccion de hechos de producto empalmando 2 frases de voz por video en lugar de regenerar la voz
+- **Salió bien:** Empalme de frases sobre la voz ya aprobada (corte en los silencios, ganancia igualada, re-transcripcion y recalculo de subtitulos/empujes) cuesta ~58 cr frente a ~384 cr de regenerar todo; verificacion con vista previa comprimida para enviar al usuario
+- **Salió mal / incidencia:** El guion se escribio con datos de una web desactualizada (producto 'proximamente', una sola plataforma) y el usuario lo corrigio con la voz ya generada; el render horizontal tarda ~12 min y dio REVISAR (6 tramos quietos, hueco 11.5 % en el corte final) aprobado asi Incidencia: Los datos de producto de la web del cliente no eran fiables; preguntar o declarar el supuesto antes de gastar creditos de voz
+- **Regla candidata:** Antes de generar voz, confirmar con el usuario el estado de producto y plataformas; la web puede estar desactualizada
+- **Herramientas:** hyperframes 0.8.162, faster-whisper, ffmpeg, Magnific TTS
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -156,3 +164,4 @@ Relación con otras skills:
 | Procesar 2 reels en paralelo no gana tiempo en 4 núcleos | caso-aprendizaje-reels-01 | sospecha, no medida |
 | Al rehacer una pieza rechazada, comparar primero la duración de la voz con la del video y revisar una hoja de contacto del estado heredado antes de tocar el diseño. | caso-reel-02 | candidata |
 | Dejar cada pieza con un único archivo sustituible para las variantes del cliente (p. ej. person.png) y un script de render y verificación que repita las mismas métricas. | caso-reel-02 | candidata |
+| Antes de generar voz, confirmar con el usuario el estado de producto y plataformas; la web puede estar desactualizada | caso-reel-03 | candidata |
