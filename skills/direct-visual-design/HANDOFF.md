@@ -67,6 +67,15 @@ Contenido de la carpeta:
 - **Salió mal / incidencia:** El archivo Figma tenía fills duplicados con el mismo nombre (hubo que usar los styles que ya usaban los nodos); un style de gradiente se vio distinto al aplicarlo a nodos nuevos; los scripts de `use_figma` no son idempotentes y, si fallaban a medias, había que borrar lo creado antes de reintentar. Quedó sin decidir cuál fill duplicado es el canónico.
 - **Regla candidata:** Antes de crear un style en Figma, comprobar si ya existe uno equivalente (los archivos pueden tener duplicados) y preguntar cuál es el canónico.
 - **Herramientas:** MCP oficial de Figma (`use_figma`, `get_screenshot`, `upload_assets`), skill `figma:figma-use`
+
+### 2026-10-17 · caso-landing-planes-01 · guille
+
+- **Qué se hizo:** Página de venta de planes mensuales de contenido con IA para la marca personal del mantenedor, en HTML sin Figma (ruta UI/UX): hero con una parrilla simulada como visual del producto, diferenciador, 4 pasos, 3 planes con selector de moneda (local / USD, con parámetro de URL para la pauta), plan para agencias con tabla de descuento por volumen, sección 'sin letra pequeña', FAQ y cierre con muestra gratis. Marca tomada de la web anterior (Poppins, un solo acento verde, oscuro).
+- **Salió bien:** Aprobada en la primera versión. La parrilla simulada mostró el producto sin fotos ni imágenes de IA, coherente con la promesa de 'que no parezca hecho con IA'. El QA con Playwright + Chrome a 1440 y 390 px detectó y permitió corregir problemas antes de entregar; el selector de moneda y el parámetro ?moneda=usd quedaron probados.
+- **Salió mal / incidencia:** En móvil, la columna del hero desbordaba por un hijo de grid sin min-width: 0 (se corrigió con minmax(0,1fr)). Un caption de tabla con display inline-flex se renderizó debajo de la cabecera. La vista previa file:// del panel del navegador no cargaba assets relativos: hubo que servir la carpeta con un servidor local. Incidencia: Un <caption> con display:flex/inline-flex se desplaza fuera de su posición; usar un párrafo antes de la tabla.
+- **Regla candidata:** En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal.
+- **Herramientas:** Python 3 (-I), Playwright + Google Chrome, PIL, servidor http.server local, panel de navegador de Claude Code
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -76,6 +85,7 @@ Contenido de la carpeta:
 | El hero queda exento del 80/80 (hoy exento en `SKILL.md`, checklist y validador, marcado "por confirmar") | `caso-home-01`, `caso-landing-industrial-01` | Pendiente de confirmación del mantenedor |
 | Las imágenes de un bloque de UI que aporta el usuario son referencia visual, no entregable | `caso-landing-industrial-01` | Solo proyecto; promover si se repite |
 | Marcar como "solo web" en el handoff lo que Figma no representa sin trucos | `caso-home-01` | Candidata |
+| En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal. | caso-landing-planes-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 

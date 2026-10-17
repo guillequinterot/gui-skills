@@ -14,6 +14,7 @@ Histórico (2026-10-09): las memorias de marca del mantenedor vivían en su vaul
 | `caso-reel-01` | Señalización comercial / arquitectónica (reel) | Skill + vault privado del mantenedor | resumen en `references/personal-design-profile.md` |
 | `caso-migracion-01` | Marca tecnológica (migración de sitio) | Vault privado del mantenedor | sin resumen en el repo |
 | `caso-landing-industrial-01` | Landing de empresa industrial (HTML → Figma) | Skill | `caso-landing-industrial-01.md` (colores, estilo `Surface`, fills duplicados, decisiones de footer/referencias) |
+| `caso-landing-planes-01` | Página de venta de planes de contenido (marca personal de diseñador, HTML sin Figma) | Skill + vault privado del mantenedor | `caso-landing-planes-01.md` (paleta de un acento, Poppins, selector de moneda, parrilla como visual) |
 
 Notas de sistema heredadas (contexto, no marcas): el modelo de aprendizaje controlado, la lista de preferencias generales (copiada a `memoria/preferencias-generales-aprobadas.md` el 2026-10-09) y el inbox heredado (`memoria/inbox-aprendizajes.md`) están resumidos en `references/learning-and-memory.md`.
 
