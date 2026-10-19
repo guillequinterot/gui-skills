@@ -76,6 +76,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal.
 - **Herramientas:** Python 3 (-I), Playwright + Google Chrome, PIL, servidor http.server local, panel de navegador de Claude Code
 
+### 2026-10-19 · caso-web-salud-01 · julian
+
+- **Qué se hizo:** Home completa de un sitio de cirugía (13 secciones) diseñada en HTML a 1440 con contenido de 1200 (estándar de la agencia, en lugar de 1920/240), aprobada y pasada a Figma con use_figma: colección de variables de marca, 14 estilos de texto, 17 componentes y la página a 1440 × Hug con alturas de sección idénticas al HTML.
+- **Salió bien:** Los tokens CSS con nombres 1:1 con las variables de Figma y los line-height en px enteros hicieron que cada sección saliera con la misma altura que en el HTML. El validador estático dio 0 errores de múltiplos de 4. Un solo marcador de posición reutilizable para imágenes faltantes permitió entregar el diseño completo sin fotos.
+- **Salió mal / incidencia:** Tres tropiezos de herramienta: (1) findOne por nombre devolvió un frame homónimo en vez del texto y el script quedó a medias; (2) al sobrescribir el trazo de una instancia se perdió el enlace a la variable de color (se vio negro); (3) hijos con FILL vertical dentro de filas HUG dejaron alturas desiguales hasta alternar HUG y FILL. Material Symbols Outlined no existe en Figma: se usó Rounded Light.
+- **Regla candidata:** En use_figma, buscar nodos por nombre Y tipo (findOne(n => n.name===x && n.type==='TEXT')); para tarjetas de igual alto en una fila usar layoutSizingVertical='FILL' en cada hija (no layoutAlign); no sobrescribir trazos en instancias, usar un divisor propio.
+- **Herramientas:** MCP oficial de Figma (use_figma, upload_assets, get_screenshot), skills figma-use y figma-generate-design, validate_figma_ready.py, servidor local y panel de navegador
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -86,6 +94,7 @@ Contenido de la carpeta:
 | Las imágenes de un bloque de UI que aporta el usuario son referencia visual, no entregable | `caso-landing-industrial-01` | Solo proyecto; promover si se repite |
 | Marcar como "solo web" en el handoff lo que Figma no representa sin trucos | `caso-home-01` | Candidata |
 | En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal. | caso-landing-planes-01 | candidata |
+| En use_figma, buscar nodos por nombre Y tipo (findOne(n => n.name===x && n.type==='TEXT')); para tarjetas de igual alto en una fila usar layoutSizingVertical='FILL' en cada hija (no layoutAlign); no sobrescribir trazos en instancias, usar un divisor propio. | caso-web-salud-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
