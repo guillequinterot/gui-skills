@@ -76,6 +76,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal.
 - **Herramientas:** Python 3 (-I), Playwright + Google Chrome, PIL, servidor http.server local, panel de navegador de Claude Code
 
+### 2026-10-19 · caso-redes-01 · guille
+
+- **Qué se hizo:** Correccion de 3 piezas de redes tras feedback del cliente: carrusel con antes/despues confuso pasa a 'trabajo hecho' (una foto por lamina, se quita la lamina que repetia foto); historia de 3 laminas pasa a 1 sola con titular nuevo; antes/despues de canopy dividido en 2 laminas. Script reproducible, laminas viejas respaldadas, captions y copy sincronizados, pagina de revision en el navegador.
+- **Salió bien:** Se miraron las laminas renderizadas antes de aprobar; se detecto que la foto elegida contradecia el titular (panel apagado) y se cambio por otra con zoom; los respaldos evitaron borrar nada.
+- **Salió mal / incidencia:** El conector de Sheets perdio acceso a mitad de sesion (Document not found); la edicion del Sheet se delego a Codex por prompt.
+- **Regla candidata:** Si un antes/despues no se entiende (mismo encuadre o dos objetos distintos), usar una sola foto 'trabajo hecho'; validar que el titular no contradiga lo que muestra la foto.
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -86,6 +94,7 @@ Contenido de la carpeta:
 | Las imágenes de un bloque de UI que aporta el usuario son referencia visual, no entregable | `caso-landing-industrial-01` | Solo proyecto; promover si se repite |
 | Marcar como "solo web" en el handoff lo que Figma no representa sin trucos | `caso-home-01` | Candidata |
 | En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal. | caso-landing-planes-01 | candidata |
+| Si un antes/despues no se entiende (mismo encuadre o dos objetos distintos), usar una sola foto 'trabajo hecho'; validar que el titular no contradiga lo que muestra la foto. | caso-redes-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
