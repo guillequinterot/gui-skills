@@ -84,6 +84,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Si un antes/despues no se entiende (mismo encuadre o dos objetos distintos), usar una sola foto 'trabajo hecho'; validar que el titular no contradiga lo que muestra la foto.
 - **Herramientas:** no indicadas
 
+### 2026-10-20 · caso-web-universidad-02 · guille
+
+- **Qué se hizo:** Cuatro pÃ¡ginas web de una universidad (facultad interna, estudiantes y ajustes de la pÃ¡gina institucional) hechas primero en HTML 1920/240/80, aprobadas y montadas en Figma con auto-layout Fill/Hug, text/color styles y componentes del UI kit. Incluye filtro de programas, carrusel de docentes, acordeones, pestaÃ±as con sus estados como mini secciones, y dos rondas de cambios del cliente (mÃ³dulos mÃ¡s cortos con CTA, texto oficial, fotos de stock).
+- **Salió bien:** El flujo extractor DOMâ†’spec + constructor use_figma permitiÃ³ reconstruir solo las secciones cambiadas sin tocar los ajustes manuales del usuario (carrusel, componente de pestaÃ±as). Crear text styles nuevos con aprobaciÃ³n (etiqueta mayÃºsculas, lead, tÃ­tulo de card) mantuvo interlineado y tracking del HTML aprobado. Inspeccionar el Figma antes de actualizar evitÃ³ pisar su trabajo. Las pestaÃ±as se entregan como estados en mini secciones para que el usuario arme el componente.
+- **Salió mal / incidencia:** Al generar variantes de estado de las pestaÃ±as con una sustituciÃ³n de texto sobre el HTML se invirtiÃ³ tambiÃ©n el selector CSS y las pestaÃ±as salieron al revÃ©s (se detectÃ³ en la revisiÃ³n del spec). Las fotos de stock se subieron sin recortar y hubo que subirlas de nuevo ya recortadas, porque Figma no respeta object-position. Un lector de pÃ¡ginas con resumen no devuelve textos literales: hubo que descargar el HTML crudo. Incidencia: Un details cerrado con display:flex en su hijo se extrae como visible y genera una respuesta abierta de mÃ¡s en el spec. Un fondo de imagen con object-position debe recortarse a su caja (2x) antes de subirlo a Figma. La licencia Free de stock exige atribuciÃ³n antes de publicar.
+- **Regla candidata:** Antes de actualizar un Figma que el usuario ya editÃ³, leer su estructura y preservar sus componentes y variaciones; recortar las imÃ¡genes al encuadre exacto antes de subirlas; generar los estados de una interfaz con atributos, nunca con reemplazos globales de texto.
+- **Herramientas:** Figma Plugin API vÃ­a MCP, Playwright, Pillow, stock de Magnific
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -95,6 +103,7 @@ Contenido de la carpeta:
 | Marcar como "solo web" en el handoff lo que Figma no representa sin trucos | `caso-home-01` | Candidata |
 | En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal. | caso-landing-planes-01 | candidata |
 | Si un antes/despues no se entiende (mismo encuadre o dos objetos distintos), usar una sola foto 'trabajo hecho'; validar que el titular no contradiga lo que muestra la foto. | caso-redes-01 | candidata |
+| Antes de actualizar un Figma que el usuario ya editÃ³, leer su estructura y preservar sus componentes y variaciones; recortar las imÃ¡genes al encuadre exacto antes de subirlas; generar los estados de una interfaz con atributos, nunca con reemplazos globales de texto. | caso-web-universidad-02 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
