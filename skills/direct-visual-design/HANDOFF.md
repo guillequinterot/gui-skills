@@ -84,6 +84,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Si un antes/despues no se entiende (mismo encuadre o dos objetos distintos), usar una sola foto 'trabajo hecho'; validar que el titular no contradiga lo que muestra la foto.
 - **Herramientas:** no indicadas
 
+### 2026-10-20 · caso-web-salud-01 · julian
+
+- **Qué se hizo:** Sincronizacion HTML a Figma: componentes de tarjeta de enfoque, testimonio y telefono actualizados; secciones de testimonios, recuperacion y footer; pagina interna de contacto construida completa (1440, 3054 px) con mapas capturados como imagen y montaje de laptop.
+- **Salió bien:** Medir cajas del HTML con getBoundingClientRect por seccion y replicarlas en auto layout dio alturas identicas (home 8075 vs 8074, contacto 3054 = 3054). Insertar saltos de linea U+2028 copiados del navegador iguala el corte de texto cuando la fuente variable del navegador (opsz) es mas ancha que la de Figma.
+- **Salió mal / incidencia:** Un hijo FILL vertical dentro de una tarjeta HUG que a su vez es FILL en una fila HUG colapso las tarjetas a 1 px; se resolvio fijando la altura de la tarjeta. Los iframes de Google Maps no se pueden importar: hubo que capturarlos con una pagina temporal que los incrusta (el embed directo exige iframe).
+- **Regla candidata:** Al pasar a Figma una rejilla con tarjetas estiradas (grid stretch), fijar la altura de las tarjetas a la del HTML en vez de combinar FILL dentro de HUG.
+- **Herramientas:** use_figma, upload_assets con nodeIds, navegador interno para medir y capturar mapas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -95,6 +103,7 @@ Contenido de la carpeta:
 | Marcar como "solo web" en el handoff lo que Figma no representa sin trucos | `caso-home-01` | Candidata |
 | En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal. | caso-landing-planes-01 | candidata |
 | Si un antes/despues no se entiende (mismo encuadre o dos objetos distintos), usar una sola foto 'trabajo hecho'; validar que el titular no contradiga lo que muestra la foto. | caso-redes-01 | candidata |
+| Al pasar a Figma una rejilla con tarjetas estiradas (grid stretch), fijar la altura de las tarjetas a la del HTML en vez de combinar FILL dentro de HUG. | caso-web-salud-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
