@@ -117,7 +117,7 @@ Proponer varias rutas solo cuando la decisión conceptual siga abierta. Si el us
 Revisar en este orden:
 
 1. **Estratégico:** objetivo, audiencia, mensaje y diferenciación.
-2. **Contenido:** exactitud, ortografía, datos, CTA y orden.
+2. **Contenido:** exactitud, ortografía, datos, CTA y orden. Sin viudas siempre que sea posible (preferencia aprobada; técnica en `typography.md` § 4, detector `scripts/check_widows.js`).
 3. **Visual:** jerarquía, composición, legibilidad, color, imagen y consistencia.
 4. **Accesible/funcional:** contraste, uso de color, objetivos, estados, navegación y movimiento cuando aplique.
 5. **Técnico:** dimensiones, resolución efectiva, perfiles, sangrado, exportación, peso y funcionamiento.

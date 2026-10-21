@@ -54,6 +54,11 @@ Buscar contraste de función, no solo diferencia estética. Evaluar x-height, co
 - Usar tracking con moderación; evitar compactar cuerpo para “hacerlo caber”.
 - Ajustar leading según tamaño, ancho, x-height, idioma y densidad.
 - Controlar viudas, huérfanas, ríos, guiones, particiones y líneas muy cortas.
+- **Viudas en web (preferencia aprobada del usuario, 2026-10-21):** que ningún texto termine con una palabra sola en su última línea, siempre que sea posible.
+  1. CSS base del sitio: `p, li, dd, dt, blockquote, figcaption, address, summary { text-wrap: pretty; }` y `h1–h4 { text-wrap: balance; }`; los textos cortos centrados (notas bajo un título, cierres, banners) también con `balance`.
+  2. `pretty` no siempre resuelve párrafos de 2 líneas ni títulos de 3 palabras: para esos, espacio duro (`&nbsp;`) entre las dos últimas palabras («bone&nbsp;alignment.») o mover el `<br>` manual para repartir mejor («Years of <br>surgical experience», no «Years of surgical <br>experience»). No pegar palabras si juntas no caben en la columna (desbordaría); en palabras con guion, unir después del guion («over-the-counter&nbsp;medication» sigue pudiendo partir en los guiones).
+  3. Verificar en 1440, 1024, 768 y 390 con `scripts/check_widows.js` y confirmar que las alturas de las secciones no cambian.
+  4. Excepción aceptada: cuando la última palabra sola no cabe junto a la anterior en el ancho disponible (p. ej. un título de tarjeta que termina en una palabra larga). Se informa; no se fuerza.
 - Usar un solo espacio tras puntuación salvo convención editorial específica.
 - Alinear cifras y columnas numéricas con numerales adecuados.
 - Corregir comillas, apóstrofos, guiones y signos del idioma.

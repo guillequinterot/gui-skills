@@ -14,6 +14,7 @@ Usar este perfil como contexto personal aprobado por repetición (es el del mant
 - Corregir solo lo pedido y evitar cambios colaterales.
 - Diferenciar fotografía editorial realista de pieza gráfica terminada.
 - Trabajar habitualmente en español y producir copy en inglés cuando la marca/campaña lo requiera.
+- **Sin viudas, siempre que sea posible** (aprobado 2026-10-21, caso-web-salud-01): ningún párrafo, título, etiqueta o cita termina con una palabra sola en su última línea, en ningún ancho. Es buena práctica editorial por defecto, no un pedido puntual. Técnica web y excepciones en `typography.md` § 4.
 
 ## Método web aprobado (2026-10-09)
 
