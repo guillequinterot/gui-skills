@@ -1,5 +1,13 @@
 # CHANGELOG — direct-visual-design
 
+## 2026-10-21 — Subir a Figma: lo aprendido en caso-web-salud-01
+
+- `references/html-to-figma-method.md`: nueva §11 «Patrones probados al subir a Figma» (antes / construir / después: leer el frame destino y respetar los cambios manuales, `_legacy` en vez de borrar, componentes con propiedades y descripción, placeholders etiquetados, sin viudas, modales sobre copias editables, propuestas A/B, verificación por alturas, «solo web», bitácora del proyecto, `.md` único para el agente de Figma). En §2, el lienzo del proyecto manda si ya es otro.
+- `conocimiento/figma-use-lecciones-tecnicas.md`: lecciones 14–31 (tope de 48 000 bytes que descarta los cambios, U+2028 y U+00A0, `figma.mixed`, límites de las instancias, propiedades booleanas para partes opcionales, componentizar un bloque aprobado, frames de 100 px, `minHeight`, IDs que cambian, grillas que Auto Layout no expresa, modales en contexto, fuente de iconos sustituta).
+- `conocimiento/03-checklist-qa-listo-para-figma.md`: sección I «Al construir en Figma».
+- `SKILL.md`: una línea en el método (el lienzo del proyecto manda). Descripción del frontmatter sin cambios.
+- `proyectos/caso-web-salud-01.md` + fila en `INDICE.md`.
+
 ## 2026-10-09 (4) — Enlace con la sub-skill propia `canva-design`
 
 - `SKILL.md`: fila **«Cualquier trabajo en Canva → `canva-design`»** en la tabla (ii) y precondición en la regla 3 (obligatoria, proceso completo; manda sobre otras secundarias cuando se pide Canva). Descripción del frontmatter **sin cambios** (887 caracteres).

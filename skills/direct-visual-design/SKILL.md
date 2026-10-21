@@ -143,7 +143,7 @@ Registrar como aprendizaje aprobado únicamente una preferencia explícita o un 
 Método general **aprobado explícitamente por el usuario** (2026-10-09). Aplica a todo sitio/landing que se diseñe en HTML para construirse después en Figma. Detalle completo en [html-to-figma-method.md](references/html-to-figma-method.md).
 
 1. **Orden:** leer el Figma del proyecto (estilos, variables, componentes) → diseñar en HTML → **aprobación del usuario** → pasar a Figma. Nunca saltar la aprobación.
-2. **Lienzo:** 1920 px de ancho, alto Hug. Contenido dentro de los 1920 con **240 px de padding lateral** (ancho útil 1440).
+2. **Lienzo:** 1920 px de ancho, alto Hug. Contenido dentro de los 1920 con **240 px de padding lateral** (ancho útil 1440). Si el Figma del proyecto ya fija otro lienzo (p. ej. 1440/1200/120), manda el del proyecto.
 3. **Ritmo:** cada sección de contenido con **80 px de padding superior e inferior**; menú/header, hero y footer exentos del 80/80 (pero siempre en múltiplos de 4).
 4. **Espaciado:** todo padding, gap y margin en **múltiplos de 4**; escala habitual 8, 16, 24, 32, 40, 80, 120. Tipografía en px enteros.
 5. **Auto Layout:** cada sección pensada como frame **width Fill, height Hug**; usar `gap`/`padding` en lugar de `margin` (Figma no tiene margins).
