@@ -92,6 +92,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Antes de actualizar un Figma que el usuario ya editÃ³, leer su estructura y preservar sus componentes y variaciones; recortar las imÃ¡genes al encuadre exacto antes de subirlas; generar los estados de una interfaz con atributos, nunca con reemplazos globales de texto.
 - **Herramientas:** Figma Plugin API vÃ­a MCP, Playwright, Pillow, stock de Magnific
 
+### 2026-10-21 · caso-web-salud-01 · julian
+
+- **Qué se hizo:** Página interna 'About' de un sitio de salud: diseño en HTML con el copy del cliente (banner navy con recorte de foto apoyado en el borde inferior, historia con imagen de ejemplo fija, tarjeta de cifra, mosaico de credenciales, publicaciones con destacada navy, cierre) y paso a Figma como frame nuevo con estilos y variables del proyecto, sin tocar componentes maestros.
+- **Salió bien:** Reutilizar header/cierre/footer clonando un frame existente ahorró pasos; alturas de sección iguales al HTML (±4 px); mosaico de credenciales en dos niveles (columna con dos tarjetas + dos tarjetas altas + una a ancho completo) resolvió contenidos desiguales; recorte con transparencia que define su alto por el texto (80/80) y toca el borde inferior.
+- **Salió mal / incidencia:** Primera versión del banner: la foto definía el alto (829 px) y rompía el 80/80; se corrigió haciendo que el texto marque el alto. Una tarjeta del mosaico cortaba texto al repartir alto a partes iguales (se pasó a Hug + Fill). Las capturas grandes con node.screenshot() rompen la respuesta del MCP: usar get_screenshot con URL. Incidencia: use_figma: devolver una captura de un frame de ~5700 px desde el script corta el JSON de la respuesta; get_screenshot (URL + curl) funciona.
+- **Regla candidata:** En banners con recorte de persona, el texto (con el padding de sección) define el alto y la imagen se ajusta a ese alto apoyada en el borde inferior.
+- **Herramientas:** HTML/CSS, navegador integrado, Figma MCP (use_figma, upload_assets, get_screenshot), conector de Google Drive
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -104,6 +112,7 @@ Contenido de la carpeta:
 | En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal. | caso-landing-planes-01 | candidata |
 | Si un antes/despues no se entiende (mismo encuadre o dos objetos distintos), usar una sola foto 'trabajo hecho'; validar que el titular no contradiga lo que muestra la foto. | caso-redes-01 | candidata |
 | Antes de actualizar un Figma que el usuario ya editÃ³, leer su estructura y preservar sus componentes y variaciones; recortar las imÃ¡genes al encuadre exacto antes de subirlas; generar los estados de una interfaz con atributos, nunca con reemplazos globales de texto. | caso-web-universidad-02 | candidata |
+| En banners con recorte de persona, el texto (con el padding de sección) define el alto y la imagen se ajusta a ese alto apoyada en el borde inferior. | caso-web-salud-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
