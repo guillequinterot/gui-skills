@@ -14,6 +14,7 @@ Método **general y aprobado** por Guillermo Quintero (2026-10-09) para sitios y
 8. Paso a Figma
 9. Qué no hacer
 10. Relación con la memoria y la precedencia
+11. Patrones probados al subir a Figma (2026-10-21)
 
 ## 1. Orden obligatorio del trabajo
 
@@ -31,6 +32,7 @@ Si falta el archivo Figma o no hay acceso, decirlo y pedir el enlace o los estil
 - El contenido vive dentro de los 1920 con **240 px de padding lateral** → ancho útil **1440 px**.
 - En HTML: `body` sin márgenes; cada sección a ancho completo (`width:100%`) con `padding: 80px 240px` (o un wrapper interno equivalente cuyo borde izquierdo quede exactamente en x = 240 a 1920 px).
 - Fondos de sección a sangre (full-bleed) son válidos: el fondo ocupa los 1920 y el contenido respeta los 240.
+- **Si el Figma del proyecto ya fija otro lienzo** (p. ej. frames de 1440 con contenido de 1200 y márgenes de 120), manda el del proyecto: se usa en HTML y en Figma, y se anota en `proyectos/<caso>.md` como excepción del método. El resto de las reglas (80/80, múltiplos de 4, Fill × Hug) se mantiene.
 
 ## 3. Espaciado
 
@@ -109,3 +111,30 @@ Precedencia (de `learning-and-memory.md`): instrucción actual → brief/guía d
 Este método se registró como regla general porque el usuario lo **aprobó explícitamente** como su forma de trabajar. Correcciones puntuales de un proyecto (un color, una excepción de padding) quedan en `proyectos/` de la base de conocimiento o en la nota del proyecto en Obsidian, no aquí.
 
 Checklist operativo y validador: `conocimiento/03-checklist-qa-listo-para-figma.md` y `scripts/validate_figma_ready.py`.
+
+## 11. Patrones probados al subir a Figma (2026-10-21)
+
+Salieron de pasar un sitio completo por tandas (home, internas, blog, versión móvil y un flujo de formulario) en `caso-web-salud-01`. Son **forma de trabajar**; los valores de marca siguen en `proyectos/`. Las lecciones de herramienta (`use_figma`) están en `conocimiento/figma-use-lecciones-tecnicas.md` (puntos 14–31).
+
+### Antes de construir
+
+- **Solo bajo orden del usuario.** No preguntar «¿lo paso a Figma?»: el usuario lo pide cuando el HTML está aprobado.
+- **Leer el frame destino tal como está ahora:** el usuario pudo haberlo editado a mano (orden de secciones, overrides, componentes nuevos). Partir de su versión y no pisar sus cambios; si el HTML y el Figma difieren, preguntar cuál manda.
+- Si el archivo trae estilos/variables importados de un sitio anterior, **no borrarlos**: renombrarlos con prefijo `_legacy …` y ocultarlos de la publicación, y construir con una colección propia (`Brand`) con code syntax `var(--…)` y descripción de uso en cada variable y estilo.
+
+### Construir
+
+- **Una sección = un frame Fill × Hug** con el mismo nombre que la sección del HTML; medidas, paddings y alturas de texto copiadas del CSS a ese ancho.
+- **Componentes de la librería como instancias** (header, footer, cierre, botones, tarjetas). Página interna: instancia del header con el ítem activo por override; cierre y footer por instancia con sus propiedades (p. ej. «Show note»).
+- **Bloque que se repite o que el usuario pide como componente → componente con propiedades** (texto, booleanas para partes opcionales, instancias anidadas expuestas) y descripción de uso; en la página, reemplazar el frame suelto por la instancia. Los maestros existentes **solo se cambian con orden explícita**.
+- **Sin contenido inventado:** donde falta una foto o un GIF, instancia de un componente `Image placeholder` con la etiqueta «Reference image: …» u «Optional image: …»; las plantillas (blog, artículo) llevan solo textos de ejemplo cortos.
+- **Sin viudas también en Figma:** los mismos espacios duros y saltos manuales que el HTML.
+- **Modales y flujos:** sobre copias editables de la página de fondo con el backdrop del CSS; si hay que decidir entre formatos (pop-up / página completa), un frame por propuesta, uno junto al otro.
+
+### Después de construir
+
+- **Verificar alturas por sección** contra el HTML al mismo ancho y una captura por frame; anotar las diferencias que queden.
+- **Anotar «solo web»** lo que Figma muestra en estado inicial: sticky, hover, carruseles con avance automático, acordeones, pop-ups, scroll suave, versiones responsive que no se pidieron en Figma.
+- **Bitácora del proyecto:** cada subida se anota en la carpeta del proyecto (p. ej. `04_figma/figma.md`) con fecha, nombre e ID de los frames y componentes creados o cambiados, medidas finales y diferencias conocidas; y una línea en el README del proyecto (lo más reciente arriba). Es lo que permite retomar en otra sesión sin releer el archivo entero.
+- **Versión móvil en Figma solo si se pide**; si no, decirlo al entregar («las versiones móviles siguen solo en el HTML»).
+- Si otra persona seguirá el diseño dentro de Figma con su agente, empaquetar las reglas del proyecto en **un único `.md`** (el agente de Figma no acepta carpetas ni imágenes) con colores, tipografía, componentes, reglas móviles y un checklist.

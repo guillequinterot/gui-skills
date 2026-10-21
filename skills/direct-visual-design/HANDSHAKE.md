@@ -6,7 +6,7 @@
 | Campo | Valor |
 |---|---|
 | Versión | Sin versión numerada: estado del cierre 2026-10-09 + integración con las sub-skills hasta 2026-10-15 (ver `CHANGELOG.md`); migrada a gui-skills el 2026-10-16 |
-| Última actualización | 2026-10-16 por guille (migración al repo) |
+| Última actualización | 2026-10-21 por julian (patrones y lecciones de subida a Figma, `caso-web-salud-01`) |
 | Skill principal / padre | ninguna: es la skill principal y orquestadora de diseño |
 | Llama a | `canva-design`, `design-illustrator`, `web-go-high-level-ia`, `rea-reverse-engineer` (por porción) y las skills secundarias de su tabla de enrutamiento (`figma:*`, `impeccable`, `ui-ux-pro-max`, etc., solo las que existan en el equipo) |
 | La llaman | Todo trabajo de diseño la activa primero (regla del `CLAUDE.md` global del usuario); `seo-content-system` y `web-go-high-level-ia` la consultan para dirección visual |
@@ -39,6 +39,7 @@ Estados: `verificado` · `falla` · `sin probar` · `no aplica en Mac/Windows`.
 
 - Clasificar el encargo (gráfico / UI-UX / híbrido) y cargar solo las referencias pertinentes; QA estratégico → técnico, con el paso 7 "Listo para Figma" para sitios HTML→Figma.
 - Método HTML→Figma completo (1920 / 240 / 80, múltiplos de 4, Fill × Hug) con validador automático y checklist; pasar una landing aprobada a Figma con `use_figma` (caso `caso-landing-industrial-01`, 573 nodos).
+- Subir a Figma un sitio completo por tandas sobre una librería propia: componentes con propiedades, páginas con instancias, modales en contexto y propuestas A/B, con alturas verificadas contra el HTML (`caso-web-salud-01`; patrones en `references/html-to-figma-method.md` §11).
 - Enrutar a skills secundarias con precondiciones de herramienta (`figma:figma-use` antes de `use_figma`, `figma:figma-design-to-code` antes de `get_design_context`).
 
 ## Pendientes abiertos

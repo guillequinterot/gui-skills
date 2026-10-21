@@ -92,6 +92,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Antes de actualizar un Figma que el usuario ya editÃ³, leer su estructura y preservar sus componentes y variaciones; recortar las imÃ¡genes al encuadre exacto antes de subirlas; generar los estados de una interfaz con atributos, nunca con reemplazos globales de texto.
 - **Herramientas:** Figma Plugin API vÃ­a MCP, Playwright, Pillow, stock de Magnific
 
+### 2026-10-21 · caso-web-salud-01 · julian
+
+- **Qué se hizo:** Sitio de una consulta médica quirúrgica pasado de HTML aprobado a Figma por tandas: home de escritorio y móvil, internas (contacto, testimonios, sobre el médico con línea de tiempo), home del blog y plantilla de artículo, y dos propuestas del flujo de reserva (pop-up sobre la home y página completa). Librería propia: variables Brand con code syntax, estilos de texto de escritorio y móvil, ~35 componentes con propiedades (header, footer, cierre, tarjetas, Booking card, Form field, Progress bar). Lo aprendido pasó a la skill: §11 del método, lecciones 14-31 de use_figma y sección I del checklist.
+- **Salió bien:** Alturas de cada frame iguales al HTML (0-4 px de diferencia en páginas de 3000-8000 px). Convertir bloques aprobados en componentes con propiedades y reemplazar los frames sueltos por instancias dejó la librería lista para que otra persona siga el diseño. La bitácora del proyecto con IDs y medidas permitió retomar entre sesiones. El pop-up se mostró sobre copias editables de la home con el backdrop del CSS, no sobre una captura.
+- **Salió mal / incidencia:** Una respuesta de use_figma pasó de 48 000 bytes y los cambios de ese script no se guardaron. Los textos con salto manual U+2028 rompieron la respuesta del MCP y, pegados literales, el propio script. No se pudo añadir un campo dentro de una instancia: hubo que agregar al componente propiedades booleanas apagadas por defecto. Un frame vacío de auto layout nació con 100 px y un minHeight heredado bloqueó un resize. La línea de tiempo en zigzag no cabía en auto layout y se armó con posiciones medidas del HTML. Incidencia: figma.mixed es un símbolo: serializar una propiedad mezclada da 'cannot convert symbol to string'.
+- **Regla candidata:** Al subir a Figma, leer primero el frame destino y respetar los cambios manuales del usuario; convertir en componente con propiedades todo bloque que se repita y reemplazar los frames sueltos por instancias; verificar alturas por sección contra el HTML; llevar una bitácora del proyecto con IDs y medidas.
+- **Herramientas:** MCP oficial de Figma (use_figma, get_screenshot, upload_assets), skills figma:figma-use, figma-generate-design y figma-generate-library, panel de navegador, Chrome headless
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -104,6 +112,7 @@ Contenido de la carpeta:
 | En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal. | caso-landing-planes-01 | candidata |
 | Si un antes/despues no se entiende (mismo encuadre o dos objetos distintos), usar una sola foto 'trabajo hecho'; validar que el titular no contradiga lo que muestra la foto. | caso-redes-01 | candidata |
 | Antes de actualizar un Figma que el usuario ya editÃ³, leer su estructura y preservar sus componentes y variaciones; recortar las imÃ¡genes al encuadre exacto antes de subirlas; generar los estados de una interfaz con atributos, nunca con reemplazos globales de texto. | caso-web-universidad-02 | candidata |
+| Al subir a Figma, leer primero el frame destino y respetar los cambios manuales del usuario; convertir en componente con propiedades todo bloque que se repita y reemplazar los frames sueltos por instancias; verificar alturas por sección contra el HTML; llevar una bitácora del proyecto con IDs y medidas. | caso-web-salud-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 

@@ -55,6 +55,17 @@ Usar antes de pedir la aprobación del HTML y otra vez antes de construir en Fig
 - [ ] `prefers-reduced-motion` respetado.
 - [ ] Elementos clicables como `<a>` o `<button>`.
 
+## I. Al construir en Figma (2026-10-21)
+
+- [ ] Frame destino leído antes de editar; cambios manuales del usuario preservados.
+- [ ] Cada sección es un frame Fill × Hug nombrado como en el HTML; alturas iguales al HTML al mismo ancho (diferencia anotada si queda alguna).
+- [ ] Header, footer, cierre, botones y tarjetas como **instancias**; ningún frame suelto que duplique un componente.
+- [ ] Componentes nuevos con propiedades de texto/booleanas y descripción de uso; maestros existentes tocados solo con orden explícita.
+- [ ] Huecos de imagen como `Image placeholder` etiquetado; sin copy inventado.
+- [ ] Sin viudas: espacios duros y saltos manuales iguales al HTML.
+- [ ] Comportamientos «solo web» anotados; versión móvil hecha o declarada como pendiente.
+- [ ] Bitácora del proyecto actualizada con IDs, medidas y diferencias.
+
 ## Validación automática
 
 ```text
