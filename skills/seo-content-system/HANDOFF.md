@@ -150,6 +150,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** Un paquete empaquetado (`.skill`, `.zip`) no se versiona junto a sus fuentes: se genera al publicar.
 - **Herramientas:** Python 3.12, `tools/build_hosted.py`
 
+### 2026-10-22 · caso-local-rotulos-01 · guille
+
+- **Qué se hizo:** Reducción de pSEO local por filtro geográfico: 18 páginas de 12 ciudades fuera del radio de servicio (>140 mi de la base) redirigidas con 301 por snippet template_redirect (ciudad -> hub de ubicaciones, hija -> página de servicio equivalente), pasadas a borrador, 16 borradores sobrantes a papelera con respaldo, hub de ubicaciones depurado. Sitemap de páginas 70 -> 52.
+- **Salió bien:** Kit preparado semanas antes en modo dry con CSV de impresiones, enlaces entrantes y destino; verificación en vivo 18/18 301 antes de pasar a borrador; destinos comprobados 200; sitemap y llms.txt revisados después.
+- **Salió mal / incidencia:** El modo de papelera recalculó la lista tras el paso a borrador y envió también las 18 páginas recién retiradas; se restauró al minuto con su slug original. Incidencia: Kits con varios pasos que recalculan el estado vivo: un paso posterior puede reclasificar lo que cambió el anterior. Excluir siempre lo tocado por pasos previos (archivo de estado).
+- **Regla candidata:** En retiradas por 301 + borrador, la redirección debe ir por ruta (template_redirect) y no depender de que la página exista; verificar 301 en vivo antes de despublicar.
+- **Herramientas:** WordPress REST, Code Snippets REST, Yoast sitemap, curl
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -163,3 +171,4 @@ Relación con otras skills del repo:
 | Medir el texto exclusivo antes de publicar páginas locales en serie | caso-local-rotulos-01 | candidata: un sitio, SERP por proxy; revisar 2026-12-21 |
 | Tope de 100 KB por variante de imagen y un solo CSS mejoran el Lighthouse móvil en Astro; no inlinear todo el CSS | caso-home-01 | candidata: una sesión, un sitio; revisar 2026-11-02 |
 | Con la keyword ya en slug, title y H1 y aun así en posición 25-31, reescribir títulos no mueve la posición: el cuello de botella es profundidad y autoridad | caso-migracion-01, caso-local-rotulos-01 | candidata: coincide en dos sitios; sin medir resultado |
+| En retiradas por 301 + borrador, la redirección debe ir por ruta (template_redirect) y no depender de que la página exista; verificar 301 en vivo antes de despublicar. | caso-local-rotulos-01 | candidata |
