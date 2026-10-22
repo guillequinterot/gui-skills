@@ -166,6 +166,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** Tras editar _elementor_data por API, limpiar la caché con DELETE elementor/v1/cache antes de verificar el HTML público (sin ella el público sigue con la versión vieja).
 - **Herramientas:** no indicadas
 
+### 2026-10-22 · caso-local-rotulos-01 · guille
+
+- **Qué se hizo:** Enlazado interno hub-and-spoke: bloque de lectura relacionada (título + lista de enlaces) en 18 páginas de servicio/ciudad/home hacia 21 posts (42 enlaces, 2 páginas por post, anclas descriptivas) y enlace de vuelta a su servicio en los 6 posts que no lo tenían.
+- **Salió bien:** Medición previa del estado real (15 de 21 posts ya enlazaban) evitó duplicar enlaces; una página piloto con revisión visual antes de aplicar al resto; scripts idempotentes con respaldo; verificación en público 42/42 tras limpiar caché de Elementor por API.
+- **Salió mal / incidencia:** La primera comprobación pública usó un patrón de URL equivocado (los posts viven en /blog/) y dio 18 falsos fallos; se corrigió el chequeo, no las páginas.
+- **Regla candidata:** Al verificar enlaces nuevos, derivar el patrón de URL de los permalinks reales (posts bajo /blog/) y comprobar primero una página a mano antes de automatizar el chequeo.
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -181,3 +189,4 @@ Relación con otras skills del repo:
 | Con la keyword ya en slug, title y H1 y aun así en posición 25-31, reescribir títulos no mueve la posición: el cuello de botella es profundidad y autoridad | caso-migracion-01, caso-local-rotulos-01 | candidata: coincide en dos sitios; sin medir resultado |
 | En retiradas por 301 + borrador, la redirección debe ir por ruta (template_redirect) y no depender de que la página exista; verificar 301 en vivo antes de despublicar. | caso-local-rotulos-01 | candidata |
 | Tras editar _elementor_data por API, limpiar la caché con DELETE elementor/v1/cache antes de verificar el HTML público (sin ella el público sigue con la versión vieja). | caso-local-rotulos-01 | candidata |
+| Al verificar enlaces nuevos, derivar el patrón de URL de los permalinks reales (posts bajo /blog/) y comprobar primero una página a mano antes de automatizar el chequeo. | caso-local-rotulos-01 | candidata |
