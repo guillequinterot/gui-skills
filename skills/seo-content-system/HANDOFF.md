@@ -158,6 +158,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** En retiradas por 301 + borrador, la redirección debe ir por ruta (template_redirect) y no depender de que la página exista; verificar 301 en vivo antes de despublicar.
 - **Herramientas:** WordPress REST, Code Snippets REST, Yoast sitemap, curl
 
+### 2026-10-22 · caso-local-rotulos-01 · guille
+
+- **Qué se hizo:** Enlazado interno ciudad -> hijas ciudad x servicio: línea de enlaces con ancla descriptiva en el hero de 6 páginas de ciudad (8 enlaces de contenido), verificada en público; línea base de Search Console guardada para medir a 2/4/8 semanas.
+- **Salió bien:** Widget clonado del párrafo vecino para heredar estilo; script idempotente con respaldo y reversión; descubierto que el endpoint REST de caché de Elementor equivale a regenerar y permite verificar en público sin intervención.
+- **Salió mal / incidencia:** nada relevante
+- **Regla candidata:** Tras editar _elementor_data por API, limpiar la caché con DELETE elementor/v1/cache antes de verificar el HTML público (sin ella el público sigue con la versión vieja).
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -172,3 +180,4 @@ Relación con otras skills del repo:
 | Tope de 100 KB por variante de imagen y un solo CSS mejoran el Lighthouse móvil en Astro; no inlinear todo el CSS | caso-home-01 | candidata: una sesión, un sitio; revisar 2026-11-02 |
 | Con la keyword ya en slug, title y H1 y aun así en posición 25-31, reescribir títulos no mueve la posición: el cuello de botella es profundidad y autoridad | caso-migracion-01, caso-local-rotulos-01 | candidata: coincide en dos sitios; sin medir resultado |
 | En retiradas por 301 + borrador, la redirección debe ir por ruta (template_redirect) y no depender de que la página exista; verificar 301 en vivo antes de despublicar. | caso-local-rotulos-01 | candidata |
+| Tras editar _elementor_data por API, limpiar la caché con DELETE elementor/v1/cache antes de verificar el HTML público (sin ella el público sigue con la versión vieja). | caso-local-rotulos-01 | candidata |
