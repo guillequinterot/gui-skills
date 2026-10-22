@@ -100,6 +100,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En páginas con mucho contenido tabular, usar pestañas solo para contenido paralelo y dejar visible la comparativa; documentar en Figma los estados de pestañas en un frame aparte.
 - **Herramientas:** Figma MCP use_figma/upload_assets/get_screenshot, Playwright+Brave
 
+### 2026-10-22 · caso-marca-estudio-01 · guille
+
+- **Qué se hizo:** Sincronización Figma→HTML: el usuario corrigió a mano 5 páginas en Figma y se trasladaron al HTML (estructura, fondos, CTA clara dentro de la última sección, hero sin collage con marquee, chips con icono, formulario en el hero) con diff de textos para reportar cada cambio de copy.
+- **Salió bien:** Inventariar Figma por sección (fills, padding, hijos) y exportar todos los textos visibles permitió un diff exacto contra el HTML; un script de reemplazos anclados con respaldo y verificación de balance de etiquetas evitó romper el marcado; alturas finales a ±1–4 % de Figma.
+- **Salió mal / incidencia:** Un helper de corte encontraba el cierre dentro del propio ancla y se tragó una sección; hay que buscar el final después del inicio y validar con conteo de etiquetas.
+- **Regla candidata:** Cuando el usuario corrige a mano en Figma, tratar Figma como fuente: diff de textos visibles Figma↔HTML y reportar explícitamente los cambios de copy y de campos de formulario.
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -113,6 +121,7 @@ Contenido de la carpeta:
 | Si un antes/despues no se entiende (mismo encuadre o dos objetos distintos), usar una sola foto 'trabajo hecho'; validar que el titular no contradiga lo que muestra la foto. | caso-redes-01 | candidata |
 | Antes de actualizar un Figma que el usuario ya editÃ³, leer su estructura y preservar sus componentes y variaciones; recortar las imÃ¡genes al encuadre exacto antes de subirlas; generar los estados de una interfaz con atributos, nunca con reemplazos globales de texto. | caso-web-universidad-02 | candidata |
 | En páginas con mucho contenido tabular, usar pestañas solo para contenido paralelo y dejar visible la comparativa; documentar en Figma los estados de pestañas en un frame aparte. | caso-marca-estudio-01 | candidata |
+| Cuando el usuario corrige a mano en Figma, tratar Figma como fuente: diff de textos visibles Figma↔HTML y reportar explícitamente los cambios de copy y de campos de formulario. | caso-marca-estudio-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
