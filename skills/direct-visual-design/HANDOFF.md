@@ -92,6 +92,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Antes de actualizar un Figma que el usuario ya editÃ³, leer su estructura y preservar sus componentes y variaciones; recortar las imÃ¡genes al encuadre exacto antes de subirlas; generar los estados de una interfaz con atributos, nunca con reemplazos globales de texto.
 - **Herramientas:** Figma Plugin API vÃ­a MCP, Playwright, Pillow, stock de Magnific
 
+### 2026-10-22 · caso-marca-estudio-01 · guille
+
+- **Qué se hizo:** Rediseño de 3 páginas de servicio con mucho contenido tabular: pestañas solo donde el contenido es paralelo (caminos, categorías de precio, grupos de piezas), comparativa siempre visible, ritmo de fondos y cierre (FAQ + tarjeta CTA clara dentro de la última sección oscura) tomados de las correcciones manuales del usuario en Figma; HTML aprobado y luego montado en Figma con 3 componentes nuevos (Tab, Path Tab, CTA Card Light) y frames de estados de pestañas.
+- **Salió bien:** Leer primero las correcciones manuales del usuario en Figma (fills y estructura por sección) dio el ritmo exacto a replicar; clonar el frame v2 y reestructurar reutilizando nodos (checklists, FAQ, matriz, notas) conservó estilos e instancias; diff de palabras confirmó paridad de textos; documentar los paneles no activos en un frame 'Tab states' evita perder contenido en Figma.
+- **Salió mal / incidencia:** Usé el id del frame del kit en vez del del component set y el script se revirtió; al pasar una sección vertical a horizontal el frame queda en HUG y desborda: hay que volver a poner FILL; clonar check items de una tarjeta oscura arrastró el texto claro sobre fondo claro.
+- **Regla candidata:** En páginas con mucho contenido tabular, usar pestañas solo para contenido paralelo y dejar visible la comparativa; documentar en Figma los estados de pestañas en un frame aparte.
+- **Herramientas:** Figma MCP use_figma/upload_assets/get_screenshot, Playwright+Brave
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -104,6 +112,7 @@ Contenido de la carpeta:
 | En grids de 2 columnas que colapsan a 1 en móvil, declarar grid-template-columns: minmax(0,1fr) y min-width: 0 en los hijos para evitar desborde horizontal. | caso-landing-planes-01 | candidata |
 | Si un antes/despues no se entiende (mismo encuadre o dos objetos distintos), usar una sola foto 'trabajo hecho'; validar que el titular no contradiga lo que muestra la foto. | caso-redes-01 | candidata |
 | Antes de actualizar un Figma que el usuario ya editÃ³, leer su estructura y preservar sus componentes y variaciones; recortar las imÃ¡genes al encuadre exacto antes de subirlas; generar los estados de una interfaz con atributos, nunca con reemplazos globales de texto. | caso-web-universidad-02 | candidata |
+| En páginas con mucho contenido tabular, usar pestañas solo para contenido paralelo y dejar visible la comparativa; documentar en Figma los estados de pestañas en un frame aparte. | caso-marca-estudio-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
