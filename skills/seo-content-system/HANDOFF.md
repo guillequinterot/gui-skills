@@ -174,6 +174,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** Al verificar enlaces nuevos, derivar el patrón de URL de los permalinks reales (posts bajo /blog/) y comprobar primero una página a mano antes de automatizar el chequeo.
 - **Herramientas:** no indicadas
 
+### 2026-10-22 · caso-local-rotulos-01 · guille
+
+- **Qué se hizo:** Unificación de perfiles sociales (entidad de marca): corregidos en Elementor (bloques de datos estructurados LocalBusiness, iconos y plantillas) y en los ajustes del plugin SEO (sameAs de Organization) a las cuentas oficiales confirmadas por el cliente; verificado en 11 páginas públicas.
+- **Salió bien:** Escaneo previo de todo el contenido y del sameAs público para saber qué estaba mal y dónde; validación de JSON antes de escribir evitó guardar un bloque roto; verificación final por páginas.
+- **Salió mal / incidencia:** Al probar el endpoint de perfiles sociales del plugin SEO con solo la red a cambiar, se reinició el resto de redes; se restauró en segundos con la lista completa. Incidencia: El endpoint de configuración de perfiles sociales del plugin SEO reemplaza lo no enviado: enviar siempre la lista completa y comprobar el sameAs público antes y después.
+- **Regla candidata:** Antes de escribir ajustes globales del plugin SEO por API, tomar foto del sameAs público y enviar el conjunto completo, no solo el campo a corregir.
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -190,3 +198,4 @@ Relación con otras skills del repo:
 | En retiradas por 301 + borrador, la redirección debe ir por ruta (template_redirect) y no depender de que la página exista; verificar 301 en vivo antes de despublicar. | caso-local-rotulos-01 | candidata |
 | Tras editar _elementor_data por API, limpiar la caché con DELETE elementor/v1/cache antes de verificar el HTML público (sin ella el público sigue con la versión vieja). | caso-local-rotulos-01 | candidata |
 | Al verificar enlaces nuevos, derivar el patrón de URL de los permalinks reales (posts bajo /blog/) y comprobar primero una página a mano antes de automatizar el chequeo. | caso-local-rotulos-01 | candidata |
+| Antes de escribir ajustes globales del plugin SEO por API, tomar foto del sameAs público y enviar el conjunto completo, no solo el campo a corregir. | caso-local-rotulos-01 | candidata |
