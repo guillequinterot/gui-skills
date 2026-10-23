@@ -182,6 +182,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** Antes de escribir ajustes globales del plugin SEO por API, tomar foto del sameAs público y enviar el conjunto completo, no solo el campo a corregir.
 - **Herramientas:** no indicadas
 
+### 2026-10-23 · banco-pruebas-actualizacion-v1-5-0 · guille
+
+- **Qué se hizo:** Cierre y publicacion del borrador v1.5.0: segunda y tercera pasada de ClickUp/Obsidian/Drive/Sheets integradas, 5 referencias nuevas y 18 ampliadas con secciones [ClickUp 2]/[Sheets 2]/[Drive 2], 16 plantillas nuevas, hosted regenerada, y resueltas las decisiones pendientes de Guille (tope de imagen unificado a <=100KB en drive-deliverables-and-guidelines.md, rutas personales de HANDOFF/HANDSHAKE marcadas como excepcion con privacy-scan: ignore, rangos de title/meta confirmados sin conflicto).
+- **Salió bien:** privacy_scan, build_hosted --check y editorial_lint quedaron limpios antes de publicar; las decisiones ambiguas se resolvieron con Guille antes de tocar texto en vez de asumirlas.
+- **Salió mal / incidencia:** El trabajo quedo repartido en varias sesiones sin commit durante dias (1.3/1.4/1.5), lo que acumulo 92 archivos sin guardar y obligo a reconstruir el contexto de las decisiones pendientes desde el HANDOFF.
+- **Regla candidata:** Cuando una actualizacion de skill deja pendientes de decision explicitos en el HANDOFF, resolverlos y registrarlos en una entrada propia antes de log_job/publish_job, nunca asumirlos ni publicarlos en silencio.
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -199,3 +207,91 @@ Relación con otras skills del repo:
 | Tras editar _elementor_data por API, limpiar la caché con DELETE elementor/v1/cache antes de verificar el HTML público (sin ella el público sigue con la versión vieja). | caso-local-rotulos-01 | candidata |
 | Al verificar enlaces nuevos, derivar el patrón de URL de los permalinks reales (posts bajo /blog/) y comprobar primero una página a mano antes de automatizar el chequeo. | caso-local-rotulos-01 | candidata |
 | Antes de escribir ajustes globales del plugin SEO por API, tomar foto del sameAs público y enviar el conjunto completo, no solo el campo a corregir. | caso-local-rotulos-01 | candidata |
+| Cuando una actualizacion de skill deja pendientes de decision explicitos en el HANDOFF, resolverlos y registrarlos en una entrada propia antes de log_job/publish_job, nunca asumirlos ni publicarlos en silencio. | banco-pruebas-actualizacion-v1-5-0 | candidata |
+
+## 2026-10-23 · Actualización a 1.3.0
+- Se instala seo-content-system 1.3.0 (marcas [ClickUp], [Obsidian], [Sheets] y [Drive]): nuevas referencias, plantillas en assets/templates y docs/CAMBIOS.md + docs/INVESTIGACION-CLICKUP-SEO.md.
+- Respaldo de 1.2.0: D:\guille-diseno\skills\_respaldos\seo-content-system-v1.2.0-2026-10-23. <!-- privacy-scan: ignore -->
+- Plantillas de proyecto: D:\guille-diseno\skills\seo-plantillas-proyecto. <!-- privacy-scan: ignore -->
+
+
+## 2026-10-23 · Actualización a 1.4.0
+- Revisión externa de solo lectura de la skill completa; informe fuera del repo (carpeta de revisiones del usuario).
+- Aplicado: principios 18-20 (retiro de datos, roadmap como «próximamente», schema sin marcadores, sin `Offer` vacío, sin duplicar el grafo de Rank Math); paso 2 (investigar carpeta y sitio antes de preguntar); paso 8 (higiene de archivos en PowerShell, YMYL); editorial-quality-gates §8-10; schema-markup-for-ai-citation (productos sin precio, plugins SEO y ajustes globales); structured-data (validación); technical-audit-by-finding (riesgo y ámbito, entrega completa con brief por hallazgo); task-brief y audit-findings-matrix.csv con riesgo, ámbito, reversión, verificación y brief; notas en technical-seo-guidelines y drive-deliverables; manifest 1.4.0.
+- Pendiente de decisión de guille: rutas personales en la entrada 1.3.0 (bloquean privacy_scan), regenerar versión hosted (knowledge-map sin las plantillas nuevas), tope de imagen 100 KB frente a 150 KB, unificar rangos de title/meta y escalas de prioridad/estado, flag `--sin-chequeo-privacidad` de capture_learning.py, script nuevo de chequeo de entregables, fusiones y borrados propuestos. No se hizo commit.
+
+## 2026-10-23 · Limpieza de menciones de credenciales
+- Se retiraron de la documentación de la skill y del paquete de investigación las frases que describían dónde había credenciales en texto plano; se sustituyeron por un hallazgo genérico (usar gestor de contraseñas, nunca copiarlas a entregables). Re-escaneo sin valores. No se hizo commit.
+
+
+## 2026-10-23 · Segunda pasada ClickUp + Obsidian + Drive (versión 1.5.0, borrador sin commit)
+
+**Qué se hizo**
+- Sobre la 1.4.0 se hizo una segunda lectura de ClickUp con 6 agentes de solo lectura por bloques de listas (agencia propia, clientes recurrentes, B2B/logística, educación, contrato por fases y e-commerce, plantillas GDD y Docs). **Todos quedaron parciales:** el conector de ClickUp tiene un tope de 1.000 llamadas/día para todo el workspace y se agotó a mitad de la lectura (se reinicia unas 15 h después).
+- Se leyeron además 5 notas de Obsidian que habían quedado pendientes (modelo de priorización, checklist de publicación, flujo editorial, diagnóstico de caídas, prompt de auditoría con rastreador para WordPress + Elementor).
+- Se lanzaron 2 agentes de lectura de Drive/Sheets/Docs/Slides con los enlaces que dejaron los agentes de ClickUp. **No se sabe si terminaron** cuando se cortó la sesión: sus salidas esperadas son `drive-A.md` y `drive-B.md` (ver «Dónde está todo»). No están integradas.
+
+**Referencias nuevas (en `references/`)**: `contract-phases-and-scope-control.md`, `launch-checklist-new-site.md`, `ecommerce-seo-multicountry.md`, `education-program-seo.md`, `measurement-traps-and-diagnosis.md`.
+
+**Referencias ampliadas con una sección `[ClickUp 2]` al final**: `clickup-task-operating-model`, `agency-operating-methodology`, `deindexing-procedure`, `technical-audit-by-finding`, `migration-redirects-and-validation`, `on-page-metadata-and-urls`, `editorial-quality-gates` (§11), `image-seo-and-accessibility`, `analytics-search-console-and-decisions`, `keyword-research-cadence-and-triggers`, `programmatic-and-local-seo`, `internal-linking-and-conversion-paths`, `growth-driven-design-gdd`, `onboarding-and-initial-audit`, `technical-seo-and-indexability`, `editorial-pattern-long-form`, `entity-presence-and-knowledge-graph`, `wordpress-technical-audit-checklist` (trampas de Elementor).
+También: `SKILL.md` (versión 1.5.0, principios 21 y 22, índice), `hosted-src/knowledge-map.json` (5 fuentes nuevas) y, fuera del repo, `seo-plantillas-proyecto/AGENTS.md` (ruteo a v1.5.0 y reglas 5-7).
+
+**Lo que NO se hizo (siguiente sesión)**
+1. **Integrar Drive/Sheets:** leer `drive-A.md` y `drive-B.md` (si existen) y pasar lo nuevo a `sheets-workbook-templates.md`, `drive-deliverables-and-guidelines.md` y `assets/templates/` (sección E de cada digest trae las acciones «añadir X a Y»).
+2. **Cobertura de ClickUp pendiente:** ver `_revisiones/pendientes-clickup-segunda-pasada-2026-10-23.md` (IDs de lista y método). Repartir el cupo: no lanzar 6 agentes a la vez; ≈150 llamadas por lista.
+3. **Anexar a `docs/INVESTIGACION-CLICKUP-SEO.md` el §23** (resumen de esta pasada y sus límites) y la entrada 1.5.0 en `docs/CAMBIOS.md` (la entrada ya está redactada abajo en el HANDSHAKE; falta pasarla a CAMBIOS si no quedó).
+4. **Validar:** todos los enlaces `references/…` y `assets/…` de `SKILL.md` y de las referencias existen; `python scripts/editorial_lint.py --help`; JSON válidos (`system-manifest.json`, `knowledge-map.json`); búsqueda de privacidad (sin nombres de cliente, dominios, personas, correos, IDs ni credenciales) en los 5 archivos nuevos y en las secciones `[ClickUp 2]`.
+5. **Regenerar la versión hosted:** `python <repo>/tools/build_hosted.py` y luego `--check`.
+6. **Sincronizar copias:** el clon del repo es la fuente canónica y va por delante de `D:\guille-diseno\skills\seo-content-system-1.4.0` (esa carpeta es una copia de distribución). Pasar el clon a esa carpeta y renombrarla a 1.5.0 si Guille lo aprueba. <!-- privacy-scan: ignore -->
+7. **Decisión de Guille antes de publicar:** el clon tiene ~51 archivos sin commit (trabajo 1.3/1.4 sin revisar + esta pasada). No se hizo pull ni commit. Resolver los pendientes de revisión que ya figuraban en HANDSHAKE (rutas personales de la entrada 1.3.0 que bloquean `privacy_scan`, tope de imagen 100 KB frente a 150 KB, rangos de title/meta, etc.). Luego `log_job.py` y `publish_job.py`. <!-- privacy-scan: ignore -->
+8. **Registrar en Obsidian** (nota del proyecto y `Auditoría de skills y plugins.md`): el MCP de Obsidian expiró en esta sesión (CONNECT_TIMEOUT); si no responde, escribir directo en la bóveda `D:\guille-diseno\Obsidian`. <!-- privacy-scan: ignore -->
+
+**Dónde está todo**
+- Digests anonimizados de ClickUp (carpeta durable, fuera del repo): `D:\guille-diseno\skills\_revisiones\clickup-segunda-pasada\` (`clickup-G1..G6.md`, `clickup-G1..G6-links.txt` sin anonimizar, y `drive-A.md`/`drive-B.md` si llegaron a existir). La sección **H** de cada digest lista las acciones «añadir X a la referencia Y»; las ya aplicadas están en esta entrada; faltan las de menor valor (p. ej. plantillas `gdd-task-brief.md`, `client-content-review-checklist.md`, `pre-launch-audit-checklist.md`, sección de pauta + landing). <!-- privacy-scan: ignore -->
+- Pendientes de lectura con IDs: `D:\guille-diseno\skills\_revisiones\pendientes-clickup-segunda-pasada-2026-10-23.md`. <!-- privacy-scan: ignore -->
+
+**Lecciones del proceso**
+- La carga masiva de tareas (`task.get_many`) no devuelve descripción (`content` nulo), pero sí `content_size`, checklists, subtareas y adjuntos: sirve para filtrar qué tareas leer a fondo.
+- Seis agentes en paralelo agotan el cupo diario del conector antes de terminar; mejor 2-3 agentes con presupuesto explícito.
+- Evidencia parcial: lo derivado solo de títulos de tarea se marcó como tal en las referencias.
+- Hallazgo de seguridad genérico: nunca guardar credenciales en tareas, documentos ni hojas; usar un gestor de contraseñas, rotar ante cualquier exposición y nunca copiarlas a entregables. Una tarea de informe pide «exagerar» horas (no replicar).
+
+> Actualización de la misma entrada: los agentes de Drive/Sheets sí escribieron salidas (`drive-A.md`, `drive-A-p2.md`, `drive-A-p3.md`, `drive-B.md`, ya copiadas a `_revisiones/clickup-segunda-pasada/`). **No se revisó si están completas ni se integraron**: leer su sección E («NUEVO frente a lo ya cubierto») y su sección F («Límites») antes de aplicar.
+> Corrección: el agente de Drive B (`drive-B.md`) fue **detenido antes de terminar**; su digest puede estar incompleto (comprobar si tiene sus secciones E y F). Los de Drive A sí terminaron o dejaron salidas parciales (`drive-A*.md`). Los archivos de Google de los grupos G4-G6 que no se abrieron hay que repetirlos con `clickup-G4/G5/G6-links.txt`.
+> Segunda corrección: **los dos agentes de Drive (A y B) fueron detenidos antes de terminar.** Sus archivos (`drive-A.md`, `drive-A-p2.md`, `drive-A-p3.md`, `drive-B.md`, `drive-B-part2.md`, en `_revisiones/clickup-segunda-pasada/`) son **notas incrementales de estructura (sección B), sin las conclusiones E/F ni el cierre**. Úsalos como material en bruto: extraer de ellos lo nuevo frente a `sheets-workbook-templates.md` y `drive-deliverables-and-guidelines.md`, y reabrir con los conectores lo que falte según `clickup-G*-links.txt`.
+
+
+## 2026-10-23 · Tercera pasada: integración de Drive/Sheets y cierre del borrador 1.5.0
+
+**Qué se hizo**
+- **Drive/Sheets integrado.** Los cinco archivos de los agentes de Drive eran notas incrementales de estructura (sin las conclusiones E/F). Se pasó lo nuevo a `references/sheets-workbook-templates.md` §10 (diez bloques) y `references/drive-deliverables-and-guidelines.md` §12. Se retiraron las cifras de clientes (porcentajes de concentración, horas por talla): solo estructura y orden de magnitud.
+- **16 plantillas nuevas** en `assets/templates/`: `gdd-task-brief.md`, `client-content-review-checklist.md`, `pre-launch-audit-checklist.md`, `landing-technical-sheet.md` y los CSV `gdd-time-estimates`, `programmatic-landing-inventory`, `programmatic-input-matrix`, `program-approval-matrix`, `program-data-sheet`, `product-input-matrix`, `consolidation-canonical-redirect`, `internal-linking-matrix`, `competitor-matrix`, `client-intake-matrix`, `monthly-request-log`, `ad-copy-by-angle`. Listadas en `SKILL.md`.
+- **Sección H de los digests G1-G6:** casi todo estaba ya aplicado. Lo que faltaba se aplicó: las tres plantillas nombradas, `gdd-time-estimates.csv` y una sección «pauta y landing, SEO + CRO y cierre real de entregas» en `conversion-and-content-performance.md`. Las páginas de ranking ya estaban en `editorial-pattern-long-form.md`.
+- **Docs:** §23 anexado a `docs/INVESTIGACION-CLICKUP-SEO.md`; la entrada 1.5.0 de `docs/CAMBIOS.md` ya existía y se completó.
+- **Hosted:** el `knowledge-map.json` no clasificaba 11 plantillas Markdown (varias de la 1.3/1.4); se añadieron a `11-plantillas.md`. `build_hosted.py` regenerado y `--check` en AL DIA.
+- **Validación:** JSON válidos; `editorial_lint.py --help` responde; todos los enlaces `references/`, `assets/` y `scripts/` existen salvo dos que apuntan a skills externas por diseño (`06-seo-en-ghl-ai-studio.md` de `web-go-high-level-ia` y `web_probe.py` de `rea-reverse-engineer`); `privacy_scan` limpio en referencias, plantillas y hosted (solo quedan las rutas personales de HANDOFF/HANDSHAKE).
+- **Obsidian:** el MCP no respondió; se registró escribiendo directo en la bóveda (fila en la Auditoría de skills y entrada en la nota del proyecto).
+
+**Lo que NO se hizo**
+1. **ClickUp:** el conector seguía en `RATE_LIMIT_EXCEEDED` (1.000/1.000 llamadas, reinicio en unas 14 h), así que no se lanzaron agentes y las listas pendientes siguen igual (archivo de pendientes fuera del repo). Retomar con 2-3 agentes, ≈150 llamadas por lista, empezando por las de prioridad Alta, solo lectura.
+2. **Copia de distribución sincronizada** (aprobado por Guille): `robocopy /MIR` del clon a la carpeta antigua y renombrada a `seo-content-system-1.5.0`; diff sin diferencias.
+3. **Commit, `log_job` y `publish_job`:** no se ejecutaron. El clon tiene unos 60 archivos sin commit.
+4. Los enlaces de Google de los grupos G4-G6 que no se abrieron siguen sin abrir.
+
+**Decisiones de Guille que faltan** (heredadas de la 1.3/1.4): rutas personales de la entrada 1.3.0 y de este HANDOFF/HANDSHAKE que bloquean `privacy_scan`; tope de imagen 100 KB frente a 150 KB; rangos de title/meta y escalas de prioridad/estado; flag `--sin-chequeo-privacidad` de `capture_learning.py`; script de chequeo de entregables; fusiones y borrados propuestos; commit y publicación.
+
+**Lecciones del proceso**
+- Un digest cortado (sin secciones E/F) sirve como material en bruto, pero conviene verificar contra lo ya cubierto antes de aplicar: casi toda la sección H de ClickUp ya estaba en la 1.5.0.
+- Al clasificar plantillas nuevas hay que actualizar `knowledge-map.json` o `build_hosted.py` falla; hacerlo al crear cada plantilla.
+
+## 2026-10-23 · Correcciones de calidad v1.5.0
+- Descripción del frontmatter de `SKILL.md` recortada a ≤1024 caracteres sin quitar disparadores.
+- Referencias a archivos de otras skills reescritas indicando la skill externa (`web-go-high-level-ia`, `rea-reverse-engineer`); retirada la mención a un archivo inexistente en `keyword-research-ia-local-desktop.md`.
+- Hallazgos de seguridad reescritos en forma genérica (sin ubicaciones). Sin commit.
+
+## 2026-10-23 · Decisiones de Guille antes de publicar v1.5.0
+- **Tope de imagen:** confirmado ≤100 KB como regla única. `drive-deliverables-and-guidelines.md` todavía decía "hero 100–150 KB"; corregido a ≤100 KB para que no contradiga `technical-seo-lineamientos-generales.md`.
+- **Rutas personales en HANDOFF/HANDSHAKE** (8 hallazgos de `privacy_scan`, rutas de respaldo en el disco de Guille): se publican tal cual — son metadatos de la skill, no datos de cliente.
+- **Rangos de title/meta y escalas de prioridad/estado:** sin conflicto real (`on-page-metadata-and-urls.md` ya documenta que la regla del cliente manda sobre los valores por defecto); no requieren cambio.
+- **Pendientes de alcance nuevo (quedan para después, sin implementar en esta publicación):** flag `--sin-chequeo-privacidad` en `capture_learning.py`, script de chequeo de entregables, fusiones/borrados de referencias propuestos.
+- Con esto, los pendientes heredados de 1.3/1.4/1.5 quedan resueltos o diferidos explícitamente. Lista para `log_job` y `publish_job`.

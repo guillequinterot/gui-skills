@@ -127,3 +127,11 @@ Mantener visible y útil todo contenido descrito por datos estructurados. Ver [s
 - ¿La notabilidad está demostrada antes de intentar cualquier entrada enciclopédica?
 - ¿`sameAs` apunta a perfiles vivos y coherentes?
 - ¿Los autores son personas reales con perfil verificable?
+
+
+## Ampliación [ClickUp 2]: perfiles de equipo y cajas de autor
+
+- **Perfiles de equipo como páginas de autor:** una URL por persona con cargo, módulos de servicio o industria y enlaces a sus apariciones (conferencias, artículos). Es una señal de experiencia y autoría (E-E-A-T) y alimenta el grafo de entidades (`Person` con `sameAs`).
+- **Ficha o caja de autor en los artículos**, enlazada al perfil.
+- En sitios de educación, la misma lógica aplica a **docentes e investigadores**: página agrupadora + una interna por persona, solo con perfiles aprobados; ver [education-program-seo.md](education-program-seo.md).
+- Schema por tipo de entidad (programa, organización, persona) en la **plantilla**, una sola vez, y validado en lote; ver [schema-markup-for-ai-citation.md](schema-markup-for-ai-citation.md).

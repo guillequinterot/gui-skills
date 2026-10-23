@@ -12,7 +12,9 @@
         "references/keyword-research-cadence-and-triggers.md",
         "references/topical-map-and-content-architecture.md",
         "references/content-brief-and-architecture.md",
-        "references/internal-linking-and-conversion-paths.md"
+        "references/internal-linking-and-conversion-paths.md",
+        "references/onboarding-and-initial-audit.md",
+        "references/growth-driven-design-gdd.md"
       ]
     },
     {
@@ -49,7 +51,15 @@
       "sources": [
         "references/technical-seo-and-indexability.md",
         "references/technical-seo-lineamientos-generales.md",
-        "references/ai-crawler-access-and-llms-txt.md"
+        "references/ai-crawler-access-and-llms-txt.md",
+        "references/technical-audit-by-finding.md",
+        "references/wordpress-technical-audit-checklist.md",
+        "references/migration-redirects-and-validation.md",
+        "references/deindexing-procedure.md",
+        "references/launch-checklist-new-site.md",
+        "references/ecommerce-seo-multicountry.md",
+        "references/sheets-workbook-templates.md",
+        "references/drive-deliverables-and-guidelines.md"
       ]
     },
     {
@@ -72,6 +82,7 @@
       "layout": "sections",
       "sources": [
         "references/programmatic-and-local-seo.md",
+        "references/education-program-seo.md",
         "references/social-search-and-copywriting.md"
       ]
     },
@@ -82,6 +93,7 @@
       "layout": "sections",
       "sources": [
         "references/analytics-search-console-and-decisions.md",
+        "references/measurement-traps-and-diagnosis.md",
         "references/conversion-and-content-performance.md",
         "references/ai-assisted-search-console-workflow.md"
       ]
@@ -94,7 +106,10 @@
       "sources": [
         "references/source-verification-and-evidence.md",
         "references/official-source-register.md",
-        "references/update-governance-and-research.md"
+        "references/update-governance-and-research.md",
+        "references/agency-operating-methodology.md",
+        "references/contract-phases-and-scope-control.md",
+        "references/clickup-task-operating-model.md"
       ]
     },
     {
@@ -116,7 +131,21 @@
         "assets/templates/ai-citation-content-brief.md",
         "assets/templates/source-record.md",
         "assets/templates/decision-record.md",
-        "assets/templates/seo-page-package.md"
+        "assets/templates/seo-page-package.md",
+        "assets/templates/task-brief.md",
+        "assets/templates/seo-report.md",
+        "assets/templates/audit-understanding-matrix.md",
+        "assets/templates/audit-review-minutes.md",
+        "assets/templates/client-content-review-checklist.md",
+        "assets/templates/faq-optimization-proposal.md",
+        "assets/templates/gdd-task-brief.md",
+        "assets/templates/landing-technical-sheet.md",
+        "assets/templates/pre-launch-audit-checklist.md",
+        "assets/templates/seo-performance-report-deck.md",
+        "assets/templates/sme-interview-guide.md",
+        "assets/templates/sprint-meeting-memo.md",
+        "assets/templates/technical-proposal-deck.md",
+        "assets/templates/technical-seo-guidelines.md"
       ]
     }
   ],

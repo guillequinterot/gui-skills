@@ -137,6 +137,14 @@ En vez de dejar `Organization`, `Article` y `Person` como bloques sueltos, `@gra
 }
 ```
 
+## Productos y software sin precio público
+
+Sin precio público, marcar solo `SoftwareApplication` (o `WebApplication`/`MobileApplication`) con `name`, `description`, `applicationCategory`, `operatingSystem`, `url` y `publisher` apuntando al `@id` de la Organization. **Nunca** `offers` vacío, `Offer` sin precio, `price: 0` ni `"0.00"`: comunican «gratis» y es falso. Se renuncia al rich result de software si este exige `offers` o valoración (verificar la documentación vigente de Google): la exactitud manda. `aggregateRating` solo con reseñas reales y visibles. Productos del roadmap: sin schema de producto hasta que estén disponibles.
+
+## Plugins SEO que ya generan el grafo (Rank Math, Yoast)
+
+Rank Math emite un `@graph` con `#organization`, `#website` y `#webpage` (más breadcrumb, imagen principal y autor). No añadir bloques JSON-LD manuales con esas entidades: se duplican nodos con datos divergentes. Para completarlos: 1) usar los ajustes del plugin (Knowledge Graph o Local SEO, perfiles sociales → `sameAs`); 2) para propiedades que no ofrece, usar el filtro `rank_math/json_ld` en un mu-plugin, modificando el nodo existente por su `@id`. Ajustes y filtro son **globales** (afectan a todo el sitio): antes, guardar una foto del JSON-LD público de home, una página y un post; enviar el conjunto completo de campos, no solo el que se corrige; verificar después en las tres plantillas. Por eso un cambio así nunca se clasifica como riesgo Bajo (ver `technical-audit-by-finding.md`).
+
 ## Validación
 
 Antes de publicar: Rich Results Test de Google + validador oficial de Schema.org confirman sintaxis. Monitorear Search Console después del despliegue para detectar errores nuevos — revisión recurrente, no evento único. Ver también la sección "Validación" de `structured-data-and-search-features.md`, que ya cubre coincidencia con contenido visible, URLs absolutas y ausencia de datos inventados.
@@ -145,7 +153,9 @@ Antes de publicar: Rich Results Test de Google + validador oficial de Schema.org
 
 - Marcar `FAQPage` con preguntas que no están visibles en la página.
 - Presentar HowTo o FAQPage como si aún generaran un rich result visual en Google.
-- Dejar `Organization` solo en la home en vez de en todas las páginas.
+- Dejar `Organization` solo en la home en vez de en todas las páginas (si el plugin SEO ya la emite en todo el sitio, no duplicarla a mano).
+- Dejar marcadores (`[PENDIENTE]`, `TBD`, `XXX`) dentro de un campo de schema: si el dato no existe, se omite el campo y se anota fuera del JSON-LD.
+- Usar `Offer` vacío o `price` 0 para un producto sin precio público.
 - Usar un solo bloque `Service` genérico para varios servicios distintos.
 - Firmar artículos sin `Person` propio del autor, perdiendo la conexión autor → organización.
 - No actualizar `dateModified` al revisar contenido existente.

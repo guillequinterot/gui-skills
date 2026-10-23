@@ -1,9 +1,11 @@
 ---
 name: seo-content-system
-description: Investiga, planifica, redacta, optimiza, audita, mide y actualiza contenido para SEO, AEO, GEO, búsqueda social, SEO local y SEO programático. Usar cuando el agente deba trabajar con intención de búsqueda, customer journey, keywords, arquitectura de contenidos, briefs, artículos, landing pages, metatítulos, metadescripciones, slugs, imágenes, enlazado interno, schema, GA4, Search Console, Clarity, fuentes, contenido natural en español, medición posterior o novedades de buscadores. Usar también para visibilidad y citación ante inteligencia artificial (GEO, LLMs, ChatGPT, Copilot, Perplexity, Gemini), páginas agrupadoras, entidades y grafos de conocimiento (Wikidata, sameAs, tripletas semánticas), diversificación de canales, SEO en YouTube y presencia en comunidades como Reddit o Quora. Antes de producir cualquier salida lee la memoria de la skill (HANDSHAKE/HANDOFF del repo gui-skills y, si el usuario usa Obsidian, su bóveda) y registra aprendizajes de proyectos sin convertir observaciones no verificadas en reglas.
+description: Investiga, planifica, redacta, optimiza, audita, mide y actualiza contenido para SEO, AEO, GEO, búsqueda social, SEO local y SEO programático. Usar cuando el agente deba trabajar con intención de búsqueda, customer journey, keywords, arquitectura de contenidos, briefs, artículos, landing pages, metatítulos, metadescripciones, slugs, imágenes, enlazado interno, schema, GA4, Search Console, Clarity, fuentes, contenido natural en español, medición posterior o novedades de buscadores. Usar también para visibilidad y citación ante inteligencia artificial (GEO, LLMs, ChatGPT, Copilot, Perplexity, Gemini), páginas agrupadoras, entidades y grafos de conocimiento (Wikidata, sameAs, tripletas semánticas), diversificación de canales, SEO en YouTube y presencia en comunidades como Reddit o Quora. Antes de producir cualquier salida lee la memoria de la skill (HANDSHAKE/HANDOFF del repo gui-skills y, si el usuario usa Obsidian, su bóveda) y registra aprendizajes sin volver reglas lo no verificado.
 ---
 
 # SEO Content System
+
+> Versión 1.5.0 (sobre la 1.4.0: segunda pasada por ClickUp, Obsidian y Drive, marcada **[ClickUp 2]**: contrato por fases y control de alcance, lanzamiento de sitio nuevo, e-commerce multipaís, SEO de oferta académica, trampas de medición y diagnóstico de caídas, criterio de hecho por hallazgo; ver `docs/CAMBIOS.md`). En la 1.4.0: higiene de archivos, retiro de datos, schema con Rank Math y sin precio, riesgo de ajustes globales, matriz con brief por hallazgo, YMYL. En la 1.3.0, Las marcas **[ClickUp]**, **[Obsidian]**, **[Sheets]** y **[Drive]** señalan lo que se añadió sobre la 1.2.0, a partir de la metodología interna de la agencia (anonimizada), de la bóveda del usuario, de 18 libros de Google Sheets del equipo y de Docs, Slides y .xlsx de su Drive (solo estructura). Todo lo que no lleva marca sigue igual. Detalle en [`docs/CAMBIOS.md`](docs/CAMBIOS.md).
 
 ## Protocolo gui-skills (obligatorio)
 
@@ -59,8 +61,21 @@ Al cerrar el trabajo, devolver lo aprendido a la memoria según el "Paso final" 
 11. No aplicar ingeniería lingüística forzada dentro de un texto (densidades léxicas objetivo, sinónimos inyectados, anáforas nominales obligatorias, conectores puestos por cuota). La evidencia disponible indica que **penaliza** la citación en IA. Ver [ai-citation-and-geo-playbook.md](references/ai-citation-and-geo-playbook.md).
 12. Distinguir siempre **entrenamiento** (pesos del modelo, lento, umbral de corpus) de **recuperación** (RAG/búsqueda en vivo, inmediata). Casi todo el SEO accionable hoy opera sobre recuperación; no prometer efectos de entrenamiento.
 13. Optimizar la **entidad y su ecosistema** (agrupadores, presencia multiplataforma, grafo de conocimiento), no la página aislada. Ver [entity-presence-and-knowledge-graph.md](references/entity-presence-and-knowledge-graph.md).
+14. **[ClickUp]** No tocar el sitio en vivo (publicar, redirigir, cambiar robots, noindex, sitemap, plantillas o GBP) sin **aprobación escrita** del responsable o del cliente. Hasta tenerla, se entrega una propuesta.
+15. **[ClickUp]** Cada hallazgo es una unidad de trabajo con origen, prioridad, número de URLs afectadas, qué se espera, criterio de hecho y responsable (o "por definir"). Ver [technical-audit-by-finding.md](references/technical-audit-by-finding.md).
+16. **[ClickUp]** Priorizar las ganancias tempranas: primero lo que se corrige sin crear páginas nuevas, después lo que requiere desarrollo o contenido nuevo.
+17. **[ClickUp]** Los KPI son parámetros de gestión, no garantías. Toda solicitud se compara con el alcance acordado y, si no está cubierta, se marca *fuera de alcance* antes de ejecutarla.
+18. Cuando se retira un dato (precios, una plataforma, un producto, una sede, una cifra), buscarlo en **todos** los entregables y en el sitio: textos, titles y metas, schema, alt, FAQs, `llms.txt`, plantillas, CSV de seguimiento y briefs. El criterio de hecho incluye esa búsqueda con 0 resultados.
+19. Los productos o funciones del roadmap solo aparecen como «próximamente»: sin fecha (salvo aprobación escrita), sin precio, sin CTA de compra, sin schema de producto u oferta y sin FAQs que los den por disponibles.
+20. En schema, nunca marcadores (`[PENDIENTE]`, `TBD`, `XXX`) dentro de un campo: si el dato no existe, se omite el campo. Producto sin precio público: solo `SoftwareApplication`, nunca `Offer` vacío ni `price` 0. Si Rank Math (o Yoast) ya genera `#organization`/`#website`/`#webpage`, no duplicarlos con bloques manuales. Ver [schema-markup-for-ai-citation.md](references/schema-markup-for-ai-citation.md).
+21. **[ClickUp 2]** Medir, no estimar: en Search Console las dimensiones `page` y `query` no son comparables (calcular el % anonimizado), se mide la **distribución** del enlazado y no la media, y una caída de tráfico no se atribuye a una actualización sin descartar medición, estacionalidad y cambios propios. Ver [measurement-traps-and-diagnosis.md](references/measurement-traps-and-diagnosis.md).
+22. **[ClickUp 2]** Todo hallazgo y toda tarea llevan **criterio de hecho verificable** y se cierran con una re-medición o re-auditoría; el estado «en revisión» no equivale a hecho. Nunca inflar horas, cifras ni resultados en un informe: se reporta el tiempo real.
 
 ## Flujo maestro
+
+### 0. Situar la tarea en la fase del servicio [ClickUp]
+
+Fases: Fase inicial (onboarding, accesos, auditoría, KWR, competidores, OKR, roadmap) → Operación mensual (sprints, contenido, correcciones, informe) → Expansión o mercados → Dependencias del cliente → Control de alcance. Para sitios nuevos o rediseños por etapas, usar GDD (Estrategia → Launchpad de PAI → Mejoras continuas). Leer [agency-operating-methodology.md](references/agency-operating-methodology.md), [onboarding-and-initial-audit.md](references/onboarding-and-initial-audit.md) y [growth-driven-design-gdd.md](references/growth-driven-design-gdd.md).
 
 ### 1. Clasificar la tarea
 
@@ -81,6 +96,11 @@ Elegir uno o varios modos:
 - `measure`: analizar Search Console, GA4, Clarity y conversiones.
 - `update`: actualizar contenido o revisar novedades SEO.
 - `learn`: registrar un aprendizaje del trabajo para revisión posterior.
+- `onboarding` **[ClickUp]**: kickoff, auditoría inicial en 3 pasos, cuatro tipos de KWR, competidores en 7 pasos y OKR. Ver [onboarding-and-initial-audit.md](references/onboarding-and-initial-audit.md).
+- `audit` **[ClickUp]**: auditoría técnica por hallazgo, con matriz de entendimiento. Ver [technical-audit-by-finding.md](references/technical-audit-by-finding.md), [wordpress-technical-audit-checklist.md](references/wordpress-technical-audit-checklist.md) y la plantilla [audit-understanding-matrix.md](assets/templates/audit-understanding-matrix.md).
+- `migration` **[ClickUp]**: comparar desarrollo con producción, plan de redirecciones, reporte post-migración, mapa de 404 y validación de implementaciones. Ver [migration-redirects-and-validation.md](references/migration-redirects-and-validation.md).
+- `deindex` **[ClickUp]**: retirada controlada del índice con `X-Robots-Tag`. Ver [deindexing-procedure.md](references/deindexing-procedure.md).
+- `report` **[ClickUp]** (submodo de `measure`): informe mensual o trimestral antes/después. Plantilla: [seo-report.md](assets/templates/seo-report.md).
 
 ### 2. Establecer evidencia disponible
 
@@ -92,7 +112,7 @@ Declarar cuál escenario aplica:
 - Información aportada por el usuario.
 - Proyecto nuevo sin datos propios.
 
-Si falta información crítica, pedirla o avanzar con supuestos etiquetados.
+Antes de pedir datos al usuario, agotar lo disponible: la carpeta del proyecto completa (briefs, entregables previos, CSV, exportaciones, `AGENTS.md`/README, actas) y el sitio público (home, servicios, legales, footer, schema y `sameAs` actuales, sitemap, robots, `llms.txt`). Preguntar solo lo que no se encontró, en una sola lista y diciendo dónde se buscó; si aun así falta información crítica, avanzar con supuestos etiquetados.
 
 ### 3. Definir la unidad de trabajo
 
@@ -209,6 +229,8 @@ Comparar periodos equivalentes, estacionalidad, despliegues y actualizaciones co
 
 Leer [analytics-search-console-and-decisions.md](references/analytics-search-console-and-decisions.md) y [conversion-and-content-performance.md](references/conversion-and-content-performance.md).
 
+**[ClickUp]** Cada informe compara el antes y el después de cada implementación (con su fecha de despliegue) y cuenta cuántos artículos están publicados, cuántos en el sitemap y cuántos indexados. Hay que avisar de que la indexación puede tardar de 2 a 3 meses. El dashboard mínimo tiene tres secciones: adquisición e interacción (GA4), visibilidad (impresiones, posición, keywords en GSC) y salud del sitio (Core Web Vitals). Plantilla: [seo-report.md](assets/templates/seo-report.md).
+
 ### 8. Control de calidad
 
 Ejecutar cinco pasadas:
@@ -220,6 +242,22 @@ Ejecutar cinco pasadas:
 5. Pragmática y SEO.
 
 Usar `scripts/editorial_lint.py` como detector, no como sustituto del juicio editorial. Leer [editorial-quality-gates.md](references/editorial-quality-gates.md).
+
+Higiene de archivos (sección 8 de editorial-quality-gates): en PowerShell no escribir Markdown, HTML ni JSON con cadenas o here-strings de comillas dobles; usar Python o `[IO.File]::WriteAllText` con UTF-8 sin BOM, y validar que no haya bytes NUL antes de entregar.
+
+Temas YMYL (finanzas, trading, salud): no prometer ganancias ni resultados y poner avisos de riesgo visibles (sección 10 de editorial-quality-gates).
+
+**[ClickUp]** Revisión de compliance: quitar promesas que la marca no puede sostener (resultados, salarios, garantías) y términos rebuscados o en inglés que no aporten. Cada landing debe tener enlaces al home y a uno o dos servicios relacionados, y FAQs basadas en experiencia real o en consultas de GSC.
+
+### 9. Entregar como tarea [ClickUp]
+
+Toda acción que pase a otra persona se redacta con [task-brief.md](assets/templates/task-brief.md): Contexto/Origen · Qué se espera · Qué NO hacer · Criterio de hecho · Cómo entregar · Qué necesitamos del cliente · Esfuerzo/Impacto · Responsable. La estructura de tarea madre (entregable) con subtareas (trabajo, QA y "Ajustes · Ronda N"), los estados y los niveles de servicio están en [clickup-task-operating-model.md](references/clickup-task-operating-model.md). La skill redacta las tareas, pero **no las crea ni las mueve** en el gestor de proyectos sin una instrucción explícita.
+
+### Link building, local y programático [ClickUp]
+
+- **PR/backlinks:** a partir de cada nota de prensa sobre la marca, un artículo resumen de 600–800 palabras en estilo periodístico. Nombra el medio, explica por qué hablan de la marca y qué impacto tiene, y enlaza al home, a la nota original y a uno o dos servicios. Después, una versión de 400–500 palabras para el newsletter de LinkedIn y una actualización en GBP.
+- **Local:** ficha de GBP por país o sede (nombre correcto, fotos, ciudades de cobertura enlazadas a landings geolocalizadas) y publicaciones periódicas.
+- **Programático:** plantilla → contenido → diseño → despliegue → canonical → solicitud de indexación → medición. No se construye hasta que el cliente apruebe la visual.
 
 ## Aprendizaje y actualización
 
@@ -263,11 +301,11 @@ No cargar toda la memoria en cada tarea. Buscar por tema y leer solo notas perti
 
 ## Sub-skill: implementación web en el constructor de GoHighLevel
 
-`web-go-high-level-ia` es sub-skill propia de esta skill (y de `direct-visual-design`) para todo SEO que se **implementa dentro del constructor de IA de GoHighLevel** (AI Studio, TanStack Start): `head()` por ruta (title, description, canonical, og:*, schema JSON-LD), un solo `h1`, `noindex` mientras una página sea provisional, enlazado interno con `<Link>`, `alt` + `width/height` en imágenes (el CDN de Medios **renombra los archivos**: el nombre del archivo servido no aporta señal), `og:image` absoluta, medición por `data-track`. Esta skill decide **qué se escribe y se indexa**; `web-go-high-level-ia` decide **cómo se construye y transfiere** (ver su `references/06-seo-en-ghl-ai-studio.md`). Cuando el trabajo SEO vaya a vivir en una web de GHL AI Studio, cargar también esa skill. Vive en este mismo repo: `skills/web-go-high-level-ia/`.
+`web-go-high-level-ia` es sub-skill propia de esta skill (y de `direct-visual-design`) para todo SEO que se **implementa dentro del constructor de IA de GoHighLevel** (AI Studio, TanStack Start): `head()` por ruta (title, description, canonical, og:*, schema JSON-LD), un solo `h1`, `noindex` mientras una página sea provisional, enlazado interno con `<Link>`, `alt` + `width/height` en imágenes (el CDN de Medios **renombra los archivos**: el nombre del archivo servido no aporta señal), `og:image` absoluta, medición por `data-track`. Esta skill decide **qué se escribe y se indexa**; `web-go-high-level-ia` decide **cómo se construye y transfiere** (ver `references/06-seo-en-ghl-ai-studio.md` de la skill externa `web-go-high-level-ia`). Cuando el trabajo SEO vaya a vivir en una web de GHL AI Studio, cargar también esa skill. Vive en este mismo repo: `skills/web-go-high-level-ia/`.
 
 ## Sub-skill de apoyo: entender competidores y referencias
 
-`rea-reverse-engineer` es skill propia de **apoyo** (decisión del usuario, 2026-10-15) para **entender cómo está construida** una página de referencia o de un competidor: outline H1–H3, title/meta/canonical/hreflang, tipos de JSON-LD, enlaces, imágenes, **HTML crudo frente a renderizado** (qué entiende un rastreador sin JS), peso, terceros y tecnología. Se llama por porción (contrato en su `SKILL.md`), nivel N1 (`scripts/web_probe.py`, sin instalar nada) y devuelve una ficha con observado/inferido/desconocido. No sustituye a `screaming-frog-seo` (rastreo de sitio; skill opcional, no incluida en gui-skills) ni a las fuentes primarias, y **una correlación con una página no se convierte en regla**: los candidatos van a `memoria/aprendizaje/inbox/` (o `06_Aprendizaje/Inbox/` si usas Obsidian). Vive en este mismo repo: `skills/rea-reverse-engineer/`.
+`rea-reverse-engineer` es skill propia de **apoyo** (decisión del usuario, 2026-10-15) para **entender cómo está construida** una página de referencia o de un competidor: outline H1–H3, title/meta/canonical/hreflang, tipos de JSON-LD, enlaces, imágenes, **HTML crudo frente a renderizado** (qué entiende un rastreador sin JS), peso, terceros y tecnología. Se llama por porción (contrato en su `SKILL.md`), nivel N1 (`scripts/web_probe.py` de la skill externa `rea-reverse-engineer`, sin instalar nada) y devuelve una ficha con observado/inferido/desconocido. No sustituye a `screaming-frog-seo` (rastreo de sitio; skill opcional, no incluida en gui-skills) ni a las fuentes primarias, y **una correlación con una página no se convierte en regla**: los candidatos van a `memoria/aprendizaje/inbox/` (o `06_Aprendizaje/Inbox/` si usas Obsidian). Vive en este mismo repo: `skills/rea-reverse-engineer/`.
 
 ## Compatibilidad
 
@@ -288,7 +326,50 @@ El formato `SKILL.md` es común. La instalación en Claude Code la hace el insta
 - Evidencia: [source-verification-and-evidence.md](references/source-verification-and-evidence.md)
 - Registro oficial: [official-source-register.md](references/official-source-register.md)
 
-### GEO y visibilidad ante inteligencia artificial
+### Operación de agencia [ClickUp]
+
+- Metodología operativa (fases, cadencia, contenido, link building, roles, migración): [agency-operating-methodology.md](references/agency-operating-methodology.md)
+- Onboarding, auditoría inicial, KWR y competidores: [onboarding-and-initial-audit.md](references/onboarding-and-initial-audit.md)
+- Growth-Driven Design (PAI/PMI/PBI y dashboard): [growth-driven-design-gdd.md](references/growth-driven-design-gdd.md)
+- Modelo de tareas, estados, campos y alcance: [clickup-task-operating-model.md](references/clickup-task-operating-model.md)
+- Auditoría técnica por hallazgo: [technical-audit-by-finding.md](references/technical-audit-by-finding.md)
+- Checklist WordPress + servidor: [wordpress-technical-audit-checklist.md](references/wordpress-technical-audit-checklist.md)
+- Migración, redirecciones y validación: [migration-redirects-and-validation.md](references/migration-redirects-and-validation.md)
+- Desindexación controlada: [deindexing-procedure.md](references/deindexing-procedure.md)
+- **[ClickUp 2]** Contrato por fases, campos de alcance, bolsa, solicitudes y higiene de tareas: [contract-phases-and-scope-control.md](references/contract-phases-and-scope-control.md)
+- **[ClickUp 2]** Lanzamiento de un sitio nuevo (React/SPA, MVP estático, auditoría en stage, plan de medición): [launch-checklist-new-site.md](references/launch-checklist-new-site.md)
+- **[ClickUp 2]** E-commerce multipaís (hallazgos de Shopify, programático, FAQ de producto, plan de rendimiento): [ecommerce-seo-multicountry.md](references/ecommerce-seo-multicountry.md)
+- **[ClickUp 2]** Oferta académica (programa como unidad, ficha de acción, schema, QA, rediseño): [education-program-seo.md](references/education-program-seo.md)
+- **[ClickUp 2]** Trampas de medición, enlazado, diagnóstico de caídas, priorización y regla de bloqueo: [measurement-traps-and-diagnosis.md](references/measurement-traps-and-diagnosis.md)
+- Plantillas: [task-brief.md](assets/templates/task-brief.md), [seo-report.md](assets/templates/seo-report.md), [audit-understanding-matrix.md](assets/templates/audit-understanding-matrix.md)
+
+#### Plantillas de hoja de cálculo [Sheets]
+Reconstruidas de 18 libros reales del equipo (solo estructura). Detalle en `references/sheets-workbook-templates.md`.
+- Auditoría: `assets/templates/audit-findings-matrix.csv` (matriz maestra *Nombre del problema · Tipo · Prioridad · Área · Status · N.º URLs · % · Descripción · Cómo solucionar · Pestaña · Validación*) + `assets/templates/audit-finding-tab.csv` (una pestaña por hallazgo con propuesta, `=LEN()` e Implementado).
+- Vocabularios: Tipo `Problema/Aviso/Oportunidad`; Prioridad `Alta/Media/Baja`; Área `SEO/Front/Cliente/QA/UX`; Status `Pendiente → En implementación → Realizado` (`Cliente` = bloqueado por el cliente).
+- Migración: `assets/templates/migration-checklist.csv`, `assets/templates/redirect-map.csv`, `assets/templates/404-triage.csv`.
+- Contenido: `assets/templates/keyword-content-calendar.csv`, `assets/templates/keyword-research-terms.csv`, `assets/templates/content-architecture-map.csv`.
+- Gestión: `assets/templates/seo-work-plan.csv`, `assets/templates/pending-tracker.csv`, `assets/templates/implementation-tracker.csv`, `assets/templates/traffic-opportunity-model.csv`.
+- Regla: nunca escribir ni copiar credenciales en hojas de insumos; solo "acceso concedido sí/no".
+
+#### Entregables y lineamientos de Drive [Drive]
+Reconstruidos de Docs, Slides y .xlsx del equipo (solo estructura). Detalle en `references/drive-deliverables-and-guidelines.md`.
+- Informe mensual: `assets/templates/seo-performance-report-deck.md` (GSC + GA4 por propiedad, top 10 páginas, consultas de marca y sin marca, blog y conclusiones con titular-conclusión).
+- Reuniones: `assets/templates/audit-review-minutes.md`, `assets/templates/sprint-meeting-memo.md`.
+- Lineamientos para desarrollo: `assets/templates/technical-seo-guidelines.md`. FAQs: `assets/templates/faq-optimization-proposal.md`.
+- Propuesta técnica comercial: `assets/templates/technical-proposal-deck.md` (caso de desindexación de PDFs).
+- Contenido con experto: `assets/templates/sme-interview-guide.md` (5 salidas), `assets/templates/eeat-gameplan.csv`, `assets/templates/kwr-program-clusters.csv`.
+- Local: `assets/templates/gbp-audit.csv`.
+
+#### Plantillas de la segunda pasada [ClickUp 2] [Sheets 2]
+Solo estructura; detalle en `references/sheets-workbook-templates.md` §10 y `references/drive-deliverables-and-guidelines.md` §12.
+- GDD y lanzamiento: `assets/templates/gdd-task-brief.md`, `assets/templates/gdd-time-estimates.csv`, `assets/templates/client-content-review-checklist.md`, `assets/templates/pre-launch-audit-checklist.md`, `assets/templates/landing-technical-sheet.md`.
+- Programático: `assets/templates/programmatic-landing-inventory.csv`, `assets/templates/programmatic-input-matrix.csv`.
+- Oferta académica y producto: `assets/templates/program-approval-matrix.csv`, `assets/templates/program-data-sheet.csv`, `assets/templates/product-input-matrix.csv`, `assets/templates/consolidation-canonical-redirect.csv`.
+- Enlazado, competencia y operación: `assets/templates/internal-linking-matrix.csv`, `assets/templates/competitor-matrix.csv`, `assets/templates/client-intake-matrix.csv`, `assets/templates/monthly-request-log.csv`, `assets/templates/ad-copy-by-angle.csv`.
+
+
+## GEO y visibilidad ante inteligencia artificial
 
 - Citación en IA, agrupadores y lenguaje natural vs. optimizado (experimento Los Creativos, 90 días): [ai-citation-and-geo-playbook.md](references/ai-citation-and-geo-playbook.md)
 - Entidad, grafo de conocimiento, Wikidata y tripletas semánticas: [entity-presence-and-knowledge-graph.md](references/entity-presence-and-knowledge-graph.md)
@@ -299,6 +380,8 @@ El formato `SKILL.md` es común. La instalación en Claude Code la hace el insta
 - Búsqueda en comunidades (Reddit y Quora, enfoque LATAM): [community-search-reddit-quora.md](references/community-search-reddit-quora.md)
 - Patrón editorial de artículo largo con autoridad (modelo Los Creativos): [editorial-pattern-long-form.md](references/editorial-pattern-long-form.md)
 ## Obsidian (opcional)
+
+**[Obsidian]** En la bóveda del usuario, la carpeta de esta skill sigue la estructura `00_Inicio`, `01_Conocimiento`, `02_Investigacion`, `03_Estrategia` (modelo de priorización), `04_Produccion` (flujo editorial y checklist de publicación), `05_Medicion` (diagnóstico de caídas), `06_Aprendizaje`, `08_Fuentes` y `09_Proyectos`. Hay además una nota *Puente SEO contenido y diseño*: cuando el trabajo incluya landings, UI copy, imágenes, piezas sociales o conversión, se carga también `direct-visual-design`. Las fuentes guardadas en `08_Fuentes` llevan **jerarquía de evidencia** (dato editorial de agencia frente a hecho confirmado con fuente primaria); hay que respetarla al citar.
 
 Si el usuario tiene una bóveda de Obsidian configurada (`obsidian_vault` y, opcionalmente, `obsidian_projects_folder` y `obsidian_registry_note` en `~/.gui-skills/config.json`), usarla además de la memoria del repo antes, durante y después de escribir, planificar, auditar u optimizar contenido. Sin bóveda, nada de esto aplica y la skill funciona igual.
 

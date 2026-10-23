@@ -126,3 +126,12 @@ Cada clúster debe terminar con:
 - KPI.
 - Fecha de revisión.
 
+
+## Formato de hoja del equipo [Sheets]
+- Calendario editorial (una fila por pieza, con la aprobación del cliente en la misma fila): `assets/templates/keyword-content-calendar.csv`.
+- Términos por pieza (dificultad, volumen, CPC, CPS, objetivo SEO/IA): `assets/templates/keyword-research-terms.csv`.
+- Mapeo de keywords a la arquitectura (niveles 1–4, tipología, metadatos con caracteres restantes): `assets/templates/content-architecture-map.csv`.
+
+
+## KWR por programa y gameplan E-E-A-T [Drive]
+Usa una pestaña por programa con bloques *Keyword · VOL/M · Dificultad* y una pestaña Resumen (`assets/templates/kwr-program-clusters.csv`). El gameplan trimestral con preguntas al experto va en `assets/templates/eeat-gameplan.csv`. Ver `references/drive-deliverables-and-guidelines.md` §7–8.

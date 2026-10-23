@@ -92,3 +92,12 @@ No degradar la calidad esencial ni cargar imágenes críticas demasiado tarde.
 |---|---|---|---|---|---|
 | nombre.webp | Informativa | Texto contextual | Opcional | Omitir salvo necesidad | URL |
 
+
+
+## Ampliación [ClickUp 2]: reglas de archivo y flujo con diseño
+
+- **Imagen destacada de artículo:** `.webp`, **menos de 100 kB**, nombre en minúscula **sin tildes, `ñ`, símbolos ni espacios**, palabras separadas por guion medio y **nombre = nombre del artículo**. Se entrega con un enlace en una columna de la hoja para que SEO la implemente.
+- **Nombrar las imágenes con keywords de SEO desde el diseño** (prototipo): exportar por página y mantener un manual de medidas de imágenes. Para banners por programa o producto, nombrar el archivo con el nombre exacto del programa para que front lo exporte sin renombrar.
+- Antes de reemplazar una imagen de más de 100 kB, dejar el `alt` asociado en el mismo documento de trabajo.
+- Fotos de proyectos anteriores o de archivo: aclararlo en el pie de foto y en el `alt`.
+- Banners CTA genéricos en el blog para que el equipo de contenido no tenga que cambiarlos; el CTA aparece dos veces en el artículo (tras un H2 relevante y al final). Si una portada debe parecer del público objetivo, usar fotografía sin diseño superpuesto.

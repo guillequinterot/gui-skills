@@ -1,0 +1,12 @@
+Fase,Acción,Descripción,Insumos,Responsable,Validado,Estado,Fecha de entrega,Link de entregable / comentarios
+Planteamiento estratégico,Auditoría del sitio,Identificar oportunidades de mejora del activo digital,Libro de auditoría,SEO,FALSE,Pendiente,,
+Planteamiento estratégico,Análisis de competidores,Competidores orgánicos por producto/servicio,Matriz de competidores,SEO,FALSE,Pendiente,,
+Planteamiento estratégico,Keyword research,Palabras clave por categoría,Hoja KWR,SEO,FALSE,Pendiente,,
+Indexación y rastreabilidad,Solución de 404,Mapa de redirecciones de las URLs de la auditoría,404-triage,SEO - Técnico,FALSE,Pendiente,,
+Indexación y rastreabilidad,robots.txt,Revisar parámetros y evitar reglas duplicadas,,SEO - Técnico,FALSE,Pendiente,,
+Indexación y rastreabilidad,sitemap.xml,Actualizar y retirar directorios inexistentes,,SEO - Técnico,FALSE,Pendiente,,
+Indexación y rastreabilidad,Metadatos sitio actual,Optimizar metadatos,Arquitectura de contenido,SEO,FALSE,Pendiente,,
+Estrategia de contenidos,Temáticas evergreen,"Blog: categorías, autor, calendario",Calendario de contenidos,SEO,FALSE,Pendiente,,
+UX/UI,Menú y arquitectura,Implementar la arquitectura de información SEO,Arquitectura de contenido,SEO + UX,FALSE,Pendiente,,
+Contenido on-page,"H1, metadatos y plantillas",Corregir lógica H1/H2 en plantillas del CMS y redactar metadatos,,SEO,FALSE,Pendiente,,
+Migración,Check de migración,Ver migration-checklist,migration-checklist,SEO - Técnico,FALSE,Pendiente,,

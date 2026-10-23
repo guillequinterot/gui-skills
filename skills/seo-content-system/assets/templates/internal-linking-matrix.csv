@@ -1,0 +1,2 @@
+Categoría (el enlace se asigna dentro de la misma categoría),Dirección de origen (artículo),Anchor text,URL final (destino: programa / servicio / artículo),Listo (TRUE/FALSE),Documento de optimización (link),Código de respuesta,Sesiones GA4 (periodo),Vistas GA4 (periodo),Observación («sin match» si no hay pareja temática)
+{categoría},{url origen},{anchor descriptivo},{url destino},FALSE,{url doc},200,{n},{n},

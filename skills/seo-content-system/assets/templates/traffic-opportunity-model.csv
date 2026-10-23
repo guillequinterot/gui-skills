@@ -1,0 +1,4 @@
+Segmento (tipo de página/programa),N.º de URLs,Tráfico por segmento (clics GSC 12 meses),Leads @10%,Leads @7%,Leads @5%,Leads @3%
+,,,=C2*10%,=C2*7%,=C2*5%,=C2*3%
+Total,=SUM(B2:B2),=SUM(C2:C2),=SUM(D2:D2),=SUM(E2:E2),=SUM(F2:F2),=SUM(G2:G2)
+Costo por lead promedio,(dato del cliente),,=D3*$B$4,=E3*$B$4,=F3*$B$4,=G3*$B$4

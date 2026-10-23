@@ -1,4 +1,4 @@
-<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.2.0, huella a9679cd8226a). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
+<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella a9b95363b2c2). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
 
 # On-page, imágenes y datos estructurados
 
@@ -110,6 +110,18 @@ No redirigir muchas páginas diferentes a una home genérica.
 - La página puede indexarse si debe.
 - No existe duplicación evitable.
 
+
+
+## Ampliación [ClickUp 2]: reglas por cliente y sobre-optimización
+
+- **Longitudes: regla por cliente.** Los rangos de otros documentos (title ≈ 30-60, meta ≈ 120-160) son valores por defecto. Cuando el cliente fije los suyos, manda su regla: un caso real trabajó con **58 caracteres para el title y 140 para la meta description** («más que optimizar, ajustar a la extensión»). Registrar la regla del cliente en el HANDOFF del proyecto.
+- **Sobre-optimización.** Fijar un máximo de repeticiones de la keyword exacta por documento y tratar como alarma casos como una keyword repetida ~30 veces. Variar con naturalidad (ver principios 6, 7 y 11 de `SKILL.md`).
+- **H2 en páginas de programa o de servicio:** el valor para el usuario (qué aprenderá, resultados, convenios) va antes que «desde dónde estudiar» o «dónde estamos». Los H2 internos pueden ser más cortos que los H2 de SEO cuando los títulos largos se ven mal (compromiso SEO/UX).
+- No tocar el nombre oficial de un producto o programa; revisar la nomenclatura con el cliente. Un H1 duplicado se corrige **a nivel de plantilla**, no página a página.
+- **H2 en forma de pregunta** para landings de servicio, ciudad o industria (lista de 21 variantes usada como plantilla) más los módulos a añadir (instituciones, ciudades). «Humanizar» una landing: texto natural en el idioma de la audiencia, sin rebuscar, con enlaces, módulos y FAQs hiperpersonalizadas.
+- **Taxonomías y categorías del blog:** plantilla única de archivo administrable, tarjetas, paginación y mensaje de vacío estándar. Si se dejan indexables categorías vacías, marcarlo como **riesgo de contenido delgado** y documentar el motivo y la alternativa (`noindex` hasta tener entradas). Verificar en el código fuente, no en el inspector.
+- **SEO + CRO en on-page:** CTA claro por tipo de página, banners de conversión, página de gracias para medir y mapas de calor sobre las transaccionales prioritarias.
+
 ---
 
 ## Fuente original: `image-seo-and-accessibility.md`
@@ -203,6 +215,16 @@ No degradar la calidad esencial ni cargar imágenes críticas demasiado tarde.
 |---|---|---|---|---|---|
 | nombre.webp | Informativa | Texto contextual | Opcional | Omitir salvo necesidad | URL |
 
+
+
+## Ampliación [ClickUp 2]: reglas de archivo y flujo con diseño
+
+- **Imagen destacada de artículo:** `.webp`, **menos de 100 kB**, nombre en minúscula **sin tildes, `ñ`, símbolos ni espacios**, palabras separadas por guion medio y **nombre = nombre del artículo**. Se entrega con un enlace en una columna de la hoja para que SEO la implemente.
+- **Nombrar las imágenes con keywords de SEO desde el diseño** (prototipo): exportar por página y mantener un manual de medidas de imágenes. Para banners por programa o producto, nombrar el archivo con el nombre exacto del programa para que front lo exporte sin renombrar.
+- Antes de reemplazar una imagen de más de 100 kB, dejar el `alt` asociado en el mismo documento de trabajo.
+- Fotos de proyectos anteriores o de archivo: aclararlo en el pie de foto y en el `alt`.
+- Banners CTA genéricos en el blog para que el equipo de contenido no tenga que cambiarlos; el CTA aparece dos veces en el artículo (tras un H2 relevante y al final). Si una portada debe parecer del público objetivo, usar fotografía sin diseño superpuesto.
+
 ---
 
 ## Fuente original: `structured-data-and-search-features.md`
@@ -260,7 +282,9 @@ Comprobar:
 - URLs absolutas y canónicas.
 - Fechas y zonas horarias.
 - Identificadores consistentes.
-- Ausencia de reseñas, precios o disponibilidad inventados.
+- Ausencia de reseñas, precios o disponibilidad inventados (sin precio público: nada de `Offer` vacío ni `price` 0).
+- Ningún marcador (`[PENDIENTE]`, `TBD`, `XXX`) dentro de un valor: si falta el dato, se omite el campo.
+- Sin nodos duplicados con los que ya genera el plugin SEO (Rank Math: `#organization`, `#website`, `#webpage`); ver `schema-markup-for-ai-citation.md`.
 
 Usar validadores pertinentes y revisar Search Console después del despliegue.
 
@@ -425,6 +449,14 @@ En vez de dejar `Organization`, `Article` y `Person` como bloques sueltos, `@gra
 }
 ```
 
+## Productos y software sin precio público
+
+Sin precio público, marcar solo `SoftwareApplication` (o `WebApplication`/`MobileApplication`) con `name`, `description`, `applicationCategory`, `operatingSystem`, `url` y `publisher` apuntando al `@id` de la Organization. **Nunca** `offers` vacío, `Offer` sin precio, `price: 0` ni `"0.00"`: comunican «gratis» y es falso. Se renuncia al rich result de software si este exige `offers` o valoración (verificar la documentación vigente de Google): la exactitud manda. `aggregateRating` solo con reseñas reales y visibles. Productos del roadmap: sin schema de producto hasta que estén disponibles.
+
+## Plugins SEO que ya generan el grafo (Rank Math, Yoast)
+
+Rank Math emite un `@graph` con `#organization`, `#website` y `#webpage` (más breadcrumb, imagen principal y autor). No añadir bloques JSON-LD manuales con esas entidades: se duplican nodos con datos divergentes. Para completarlos: 1) usar los ajustes del plugin (Knowledge Graph o Local SEO, perfiles sociales → `sameAs`); 2) para propiedades que no ofrece, usar el filtro `rank_math/json_ld` en un mu-plugin, modificando el nodo existente por su `@id`. Ajustes y filtro son **globales** (afectan a todo el sitio): antes, guardar una foto del JSON-LD público de home, una página y un post; enviar el conjunto completo de campos, no solo el que se corrige; verificar después en las tres plantillas. Por eso un cambio así nunca se clasifica como riesgo Bajo (ver `technical-audit-by-finding.md`).
+
 ## Validación
 
 Antes de publicar: Rich Results Test de Google + validador oficial de Schema.org confirman sintaxis. Monitorear Search Console después del despliegue para detectar errores nuevos — revisión recurrente, no evento único. Ver también la sección "Validación" de `structured-data-and-search-features.md`, que ya cubre coincidencia con contenido visible, URLs absolutas y ausencia de datos inventados.
@@ -433,7 +465,9 @@ Antes de publicar: Rich Results Test de Google + validador oficial de Schema.org
 
 - Marcar `FAQPage` con preguntas que no están visibles en la página.
 - Presentar HowTo o FAQPage como si aún generaran un rich result visual en Google.
-- Dejar `Organization` solo en la home en vez de en todas las páginas.
+- Dejar `Organization` solo en la home en vez de en todas las páginas (si el plugin SEO ya la emite en todo el sitio, no duplicarla a mano).
+- Dejar marcadores (`[PENDIENTE]`, `TBD`, `XXX`) dentro de un campo de schema: si el dato no existe, se omite el campo y se anota fuera del JSON-LD.
+- Usar `Offer` vacío o `price` 0 para un producto sin precio público.
 - Usar un solo bloque `Service` genérico para varios servicios distintos.
 - Firmar artículos sin `Person` propio del autor, perdiendo la conexión autor → organización.
 - No actualizar `dateModified` al revisar contenido existente.

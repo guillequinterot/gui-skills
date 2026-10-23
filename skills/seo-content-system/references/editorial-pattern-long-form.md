@@ -133,3 +133,19 @@ Adaptar además la voz a la marca del proyecto: este patrón es el de una agenci
 - ¿La proporción de listas es baja y la prosa sostiene el argumento?
 - ¿El ritmo alterna frases largas y cortas, sin uniformidad mecánica?
 - ¿El CTA es consultivo y coherente con el tono?
+
+
+## Patrón E-E-A-T con experto [Drive]
+El H1 lleva una afirmación cuantificada, el H2 el sustento con estudio y cita textual, y los H3 los beneficios numerados. La entrevista al experto alimenta 5 salidas: `assets/templates/sme-interview-guide.md`. Ver `references/drive-deliverables-and-guidelines.md` §6–7.
+
+
+## Ampliación [ClickUp 2]: artículo-entrevista y páginas de ranking
+
+### Artículo-entrevista desde una conferencia o podcast
+Estructura observada: introducción con **enlaces a los perfiles** de las personas, ~300 palabras indirectas de contexto, **transcripción entrecomillada con subtítulos** (la cita textual funciona como señal de experiencia y autoridad), enlace a la presentación y formatos derivados (versión LinkedIn, PDF de recursos). Seleccionar la conferencia por su relevancia para el nicho. Pipeline completo por episodio en [education-program-seo.md](education-program-seo.md).
+
+### Páginas de ranking o «mejores X en <lugar>»
+Patrón: lista reducida a lo defendible, **criterios visibles**, tabla comparativa, reputación en Google Business Profile, autoridad o tráfico como dato y, si la marca propia aparece, **con transparencia** de que es el autor. Evitar el enlace *do-follow* pagado o de intercambio sin `rel` adecuado. Una pieza de este tipo comprada que no posiciona se puede reoptimizar con dos banners que enlacen al cliente.
+
+### Optimización semántica para modelos de lenguaje
+La receta observada: no agregar más texto, sino **encabezados en forma de pregunta, listas, tablas, checklist y fuentes citadas**, y evaluar el comportamiento tanto en Google como en asistentes de IA; reservar ≥ 2 h por artículo. Coherente con [ai-citation-and-geo-playbook.md](ai-citation-and-geo-playbook.md): sin ingeniería lingüística forzada.

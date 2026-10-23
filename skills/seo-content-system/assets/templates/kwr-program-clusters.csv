@@ -1,0 +1,4 @@
+Programa,Cluster,Keyword,VOL/M,Dificultad,Intención,URL destino
+{programa},Principal,{keyword},{n},{0-100},{…},{url}
+{programa},Variante 1,{keyword},{n},{0-100},{…},{url}
+RESUMEN,{programa},{kw principal},=SUMA(volúmenes),=PROMEDIO(dificultades),,

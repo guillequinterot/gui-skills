@@ -1,0 +1,2 @@
+URL,Valor actual,Longitud actual,Propuesta nueva,Longitud propuesta,Implementado,Nota
+,,=LEN(B2),,=LEN(D2),FALSE,

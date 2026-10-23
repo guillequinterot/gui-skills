@@ -1,0 +1,2 @@
+Nombre del problema,Tipo,Prioridad,Área responsable,Status,N.º URLs,% del total,Descripción,Cómo solucionar,Documento con hallazgos (pestaña),Insumo,Validación de optimización,Observaciones / Pendiente,Riesgo,Ámbito (URL/Plantilla/Ajuste global),Criterio de hecho,Reversión,Brief (link)
+"H1: Duplicado",Oportunidad,Media,SEO,Pendiente,=COUNTA('H1 Duplicado'!A2:A),=F2/Resumen!B6,"Páginas que comparten el mismo <h1>","Redactar un H1 único por URL según su keyword principal","➡ H1 Duplicado",,FALSE,,Bajo,Plantilla,,,

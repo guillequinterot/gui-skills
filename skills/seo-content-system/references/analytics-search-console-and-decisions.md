@@ -110,3 +110,19 @@ Separar:
 - Responsable.
 - Fecha de revisión.
 
+
+
+## Informe mensual [Drive]
+Estructura de deck y reglas de lectura (marca vs. sin marca, pp para tasas, impresiones de bajo valor, gigantes dormidos tras una migración): `assets/templates/seo-performance-report-deck.md` y `references/drive-deliverables-and-guidelines.md` §1.
+
+
+## Ampliación [ClickUp 2]: línea base, scorecard y dashboard
+
+Las trampas de medición (`page` frente a `query` en Search Console, rompecachés, distribución del enlazado, diagnóstico de caídas) están en [measurement-traps-and-diagnosis.md](measurement-traps-and-diagnosis.md).
+
+- **Línea base explícita** («marcar las métricas actuales») antes de cada ciclo de mejora y **scorecard** al cierre. En mejoras continuas: línea base de métricas → cinco tareas de implementación por rol → scorecard → reporte. Core Web Vitals forman parte del dashboard y de dos auditorías.
+- **Dashboard (Looker Studio), especificación observada:** tráfico orgánico global; clics; impresiones; crecimiento con **línea base = fecha de publicación** de lo optimizado; comportamiento por programa o página (posiciones en la SERP); rendimiento de keywords y mejores posiciones. Feedback del cliente que conviene prever: filtro de fechas libre (no solo trimestre), filtro por programa, fuentes de tráfico, páginas más visitadas, rebote y tiempo en página, usuarios del blog, sesiones por país conectadas al filtro de fecha. **Validación obligatoria:** «métricas muy altas para ser solo tráfico orgánico» indica un error de configuración.
+- **Fugas de impresiones y clics por URL** frente al **mismo mes del año anterior** (la comparación interanual evita la estacionalidad); y tráfico mes contra mes de lo optimizado, en una pestaña nueva de la matriz.
+- **Informe de acciones**, secciones fijas: mejoras en CTA · acciones de enlazado interno · backlinks comprados (tabla) · banners · otras tareas, y el comportamiento por carpeta o por programa. Borrador revisado antes de enviar, con tiempos reales.
+- **Informe de SEO + CRO**: mapas de calor, CTAs por tipo de página, medición de conversión con página de gracias.
+- **Plan de medición de un sitio nuevo** (tabla evento · disparador · parámetros · `dataLayer.push`, sin datos personales, UTM hasta el formulario): [launch-checklist-new-site.md](launch-checklist-new-site.md).
