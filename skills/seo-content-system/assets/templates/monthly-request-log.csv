@@ -1,0 +1,2 @@
+Nº,Descripción de la solicitud,Insumos (o «No aplica»),URL donde está el ajuste,Fecha de solicitud,Fecha de implementación,Estado (Realizado / Estancado),Por qué está estancado (bloqueo explícito),Responsable (persona o rol),Tiempo real de implementación (min / h),OK al implementar (TRUE/FALSE),Entra al informe mensual (TRUE/FALSE)
+1,{qué pidió el cliente},{link o «No aplica»},{url},{dd/mm/aaaa},{dd/mm/aaaa},Realizado,,{rol},{tiempo real medido; nunca estimado al alza},FALSE,TRUE

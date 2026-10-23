@@ -1,0 +1,2 @@
+Dominio,Nivel 1,Nivel 2,Nivel 3,Nivel 4,URL nueva,URL nativa del CMS,Tipología (Home/Agrupadora/Categoría/Producto/Informativa/Blog),Keyword principal,Metatítulo,Caracteres restantes,Meta description,Caracteres restantes,Nota
+,,,,,,,,,,=60-LEN(J2),,=155-LEN(L2),

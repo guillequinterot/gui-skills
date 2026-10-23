@@ -142,7 +142,7 @@ Integrar los esquemas globales de entidad de negocio (Organization) y funcionali
 ### 4.2. Protocolo para Optimización Multimedia (Peso, Formato y Rendimiento)
 
 - **Límites de Peso de Archivos:**
-  - Imágenes principales / Banners de cabecera (Hero Images): **< 100 KB – 150 KB**.
+  - Imágenes principales / Banners de cabecera (Hero Images): **≤ 100 KB** (tope unificado en la v1.3.0 con la auditoría por hallazgo y la decisión del HANDOFF; se pueden pasar de 100 KB solo con justificación visual documentada).
   - Imágenes de producto o contenido general: **< 70 KB – 100 KB**.
   - Miniaturas (Thumbnails) e iconos: **< 30 KB**.
 - **Formatos de Nueva Generación:** Servir imágenes obligatoriamente en formatos de alta compresión **WebP** o **AVIF**.
@@ -250,7 +250,11 @@ Integrar los esquemas globales de entidad de negocio (Organization) y funcionali
 | Meta Data y Contenido | Internacionalización (hreflang) | Anotaciones recíprocas configuradas para todos los idiomas/regiones con versión x-default. |
 | Meta Data y Contenido | OpenGraph & Twitter Cards | Etiquetas declaradas para la previsualización de enlaces en plataformas sociales. |
 | Seguimiento e Identificación | Herramientas de Analítica | Etiquetas de Google Search Console, Google Analytics 4 y Google Tag Manager instaladas sin conflictos. |
-| Rendimiento (Performance) | Optimización de Imágenes | Formato WebP/AVIF, peso <150KB, atributo alt presente y dimensiones físicas definidas en el código HTML. |
+| Rendimiento (Performance) | Optimización de Imágenes | Formato WebP/AVIF, peso ≤ 100 KB, atributo alt presente y dimensiones físicas definidas en el código HTML. |
 | Rendimiento (Performance) | Core Web Vitals & Cargas | Métricas en rango verde (LCP <2.5s, INP <200ms, CLS <0.1). Scripts con atributos defer/async y CDN activo. |
 | HTML5 y Semántica | Navegación y Encabezados | Uso de `<nav>` para menús, listas no ordenadas en footers y exactamente un H1 por URL. |
 | Datos Estructurados (Schema) | Validación de JSON-LD | Implementación de esquemas Organization, WebSite, Product, BreadcrumbList y FAQPage sin advertencias técnicas. |
+
+
+## Documento entregable [Drive]
+La versión que se entrega a desarrollo (7 bloques y checklist *Categoría · Ítem · Requisito aceptable*) está en `assets/templates/technical-seo-guidelines.md`. Ver `references/drive-deliverables-and-guidelines.md` §3.

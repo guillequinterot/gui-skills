@@ -1,0 +1,2 @@
+URL,Error,Respuesta,Decisión (Arreglada / Redirigir a URL / Desindexar / No se puede redireccionar),URL destino,Código aplicado (301/302/410),Implementado
+,404,Not Found,,,301,FALSE

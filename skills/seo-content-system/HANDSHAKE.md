@@ -5,8 +5,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.2.0 |
-| Última actualización | 2026-10-16 por guille |
+| Versión | 1.5.0 |
+| Última actualización | 2026-10-23 (1.5.0: segunda y tercera pasada ClickUp + Obsidian + Drive/Sheets integradas; hosted regenerada; decisiones pendientes de Guille resueltas; publicada. ClickUp sigue pendiente por el tope diario del conector) |
 | Skill principal / padre | ninguna (es skill de primera capa para todo contenido; `web-go-high-level-ia` y `rea-reverse-engineer` son sus sub-skills / apoyo) |
 | Llama a | `web-go-high-level-ia` (SEO dentro del constructor de GoHighLevel), `rea-reverse-engineer` (entender competidores), `screaming-frog-seo` (externa y opcional, no está en gui-skills) |
 | La llaman | `web-go-high-level-ia`, `direct-visual-design` (cuando el diseño implica textos, metadatos o schema) |
@@ -53,3 +53,24 @@ Estados: `verificado` · `falla` · `sin probar` · `no aplica en Mac/Windows`.
 - El recopilador de novedades solo recopila: el agente debe verificar la fuente completa antes de cambiar una recomendación.
 - Ninguna observación de un solo trabajo es regla; todo aprendizaje entra como `candidate`.
 - La versión hosted no incluye `keyword-research-ia-local-desktop.md` ni los scripts, y no puede leer ni escribir memoria por sí sola.
+
+## 2026-10-23 · Actualización a 1.3.0
+- Se instala seo-content-system 1.3.0 (marcas [ClickUp], [Obsidian], [Sheets] y [Drive]): nuevas referencias, plantillas en assets/templates y docs/CAMBIOS.md + docs/INVESTIGACION-CLICKUP-SEO.md.
+- Respaldo de 1.2.0: D:\guille-diseno\skills\_respaldos\seo-content-system-v1.2.0-2026-10-23. <!-- privacy-scan: ignore -->
+- Plantillas de proyecto: D:\guille-diseno\skills\seo-plantillas-proyecto. <!-- privacy-scan: ignore -->
+
+
+## 2026-10-23 · Actualización a 1.4.0
+- Revisión externa de solo lectura de la skill completa; informe fuera del repo (carpeta de revisiones del usuario).
+- Aplicado: principios 18-20 (retiro de datos, roadmap como «próximamente», schema sin marcadores, sin `Offer` vacío, sin duplicar el grafo de Rank Math); paso 2 (investigar carpeta y sitio antes de preguntar); paso 8 (higiene de archivos en PowerShell, YMYL); editorial-quality-gates §8-10; schema-markup-for-ai-citation (productos sin precio, plugins SEO y ajustes globales); structured-data (validación); technical-audit-by-finding (riesgo y ámbito, entrega completa con brief por hallazgo); task-brief y audit-findings-matrix.csv con riesgo, ámbito, reversión, verificación y brief; notas en technical-seo-guidelines y drive-deliverables; manifest 1.4.0.
+- Pendiente de decisión de guille: rutas personales en la entrada 1.3.0 (bloquean privacy_scan), regenerar versión hosted (knowledge-map sin las plantillas nuevas), tope de imagen 100 KB frente a 150 KB, unificar rangos de title/meta y escalas de prioridad/estado, flag `--sin-chequeo-privacidad` de capture_learning.py, script nuevo de chequeo de entregables, fusiones y borrados propuestos. No se hizo commit.
+
+
+## 2026-10-23 · Actualización a 1.5.0 (borrador, sin commit, sin publicar)
+- Segunda pasada por ClickUp (6 agentes de solo lectura, parcial por el tope de 1.000 llamadas/día del conector), Obsidian (5 notas) y, sin integrar todavía, Drive/Sheets. Cinco referencias nuevas, 18 ampliadas (sección `[ClickUp 2]`), principios 21-22 en `SKILL.md`, `knowledge-map.json` con 5 fuentes nuevas. Detalle y pendientes en `HANDOFF.md` (entrada 2026-10-23 · Segunda pasada).
+- **Herramienta ClickUp:** verificada para lectura. `task.get_many` no devuelve descripciones (solo `content_size`, checklists, subtareas, adjuntos); la descripción se lee con `clickup_get_task`. **Tope de 1.000 llamadas/día para todo el workspace**: planificar el cupo. No se escribió nada en ClickUp.
+- **MCP de Obsidian:** expiró (CONNECT_TIMEOUT) en esta sesión; se leyó la bóveda directo desde disco.
+- **Estado de integración de Drive/Sheets:** integrada desde las notas de estructura de los agentes (que se detuvieron antes de cerrar): `sheets-workbook-templates.md` §10, `drive-deliverables-and-guidelines.md` §12 y 16 plantillas. **Hosted:** regenerada, `build_hosted.py --check` = AL DIA. **Copia de distribución** `seo-content-system-1.4.0` desfasada respecto al clon (sincronizada y renombrada a 1.5.0 el 2026-10-23).
+- **Conector de ClickUp (2026-10-23, tarde):** sigue en `RATE_LIMIT_EXCEEDED` (1.000/1.000); reintentar tras el reinicio diario y con 2-3 agentes como máximo.
+- **`privacy_scan` sobre la skill:** 8 hallazgos, todos rutas personales ya existentes en HANDOFF y HANDSHAKE (decisión de Guille); referencias, plantillas y hosted limpias.
+- Pendiente de decisión de Guille: ver HANDOFF punto 7 (rutas personales que bloquean `privacy_scan`, 100 KB frente a 150 KB, rangos de title/meta, commit y publicación).

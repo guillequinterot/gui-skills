@@ -105,3 +105,14 @@ No redirigir muchas páginas diferentes a una home genérica.
 - La página puede indexarse si debe.
 - No existe duplicación evitable.
 
+
+
+## Ampliación [ClickUp 2]: reglas por cliente y sobre-optimización
+
+- **Longitudes: regla por cliente.** Los rangos de otros documentos (title ≈ 30-60, meta ≈ 120-160) son valores por defecto. Cuando el cliente fije los suyos, manda su regla: un caso real trabajó con **58 caracteres para el title y 140 para la meta description** («más que optimizar, ajustar a la extensión»). Registrar la regla del cliente en el HANDOFF del proyecto.
+- **Sobre-optimización.** Fijar un máximo de repeticiones de la keyword exacta por documento y tratar como alarma casos como una keyword repetida ~30 veces. Variar con naturalidad (ver principios 6, 7 y 11 de `SKILL.md`).
+- **H2 en páginas de programa o de servicio:** el valor para el usuario (qué aprenderá, resultados, convenios) va antes que «desde dónde estudiar» o «dónde estamos». Los H2 internos pueden ser más cortos que los H2 de SEO cuando los títulos largos se ven mal (compromiso SEO/UX).
+- No tocar el nombre oficial de un producto o programa; revisar la nomenclatura con el cliente. Un H1 duplicado se corrige **a nivel de plantilla**, no página a página.
+- **H2 en forma de pregunta** para landings de servicio, ciudad o industria (lista de 21 variantes usada como plantilla) más los módulos a añadir (instituciones, ciudades). «Humanizar» una landing: texto natural en el idioma de la audiencia, sin rebuscar, con enlaces, módulos y FAQs hiperpersonalizadas.
+- **Taxonomías y categorías del blog:** plantilla única de archivo administrable, tarjetas, paginación y mensaje de vacío estándar. Si se dejan indexables categorías vacías, marcarlo como **riesgo de contenido delgado** y documentar el motivo y la alternativa (`noindex` hasta tener entradas). Verificar en el código fuente, no en el inspector.
+- **SEO + CRO en on-page:** CTA claro por tipo de página, banners de conversión, página de gracias para medir y mapas de calor sobre las transaccionales prioritarias.

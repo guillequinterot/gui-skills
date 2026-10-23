@@ -1,0 +1,2 @@
+URL de la subpágina,Código de respuesta actual,Acción (Canonical / 301),URL de la página principal de destino,Motivo (200 con contenido propio → canonical; 403/404 → 301),Implementada (TRUE/FALSE),Verificada en vivo (fecha)
+{url},{200|403|404},{Canonical|301},{url},{texto},FALSE,

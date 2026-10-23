@@ -56,7 +56,9 @@ Comprobar:
 - URLs absolutas y canónicas.
 - Fechas y zonas horarias.
 - Identificadores consistentes.
-- Ausencia de reseñas, precios o disponibilidad inventados.
+- Ausencia de reseñas, precios o disponibilidad inventados (sin precio público: nada de `Offer` vacío ni `price` 0).
+- Ningún marcador (`[PENDIENTE]`, `TBD`, `XXX`) dentro de un valor: si falta el dato, se omite el campo.
+- Sin nodos duplicados con los que ya genera el plugin SEO (Rank Math: `#organization`, `#website`, `#webpage`); ver `schema-markup-for-ai-citation.md`.
 
 Usar validadores pertinentes y revisar Search Console después del despliegue.
 

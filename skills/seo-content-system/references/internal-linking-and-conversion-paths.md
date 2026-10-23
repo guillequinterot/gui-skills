@@ -104,3 +104,13 @@ Medir no solo clics, sino calidad del paso:
 - Venta.
 - Uso del recurso.
 
+
+
+## Ampliación [ClickUp 2]: módulos dinámicos y flujo de implementación
+
+- **Módulos dinámicos por carpeta** (se actualizan solos al añadir URLs), **artículos relacionados en cuatro grupos**, **menú replicado en el pie** y un **libro maestro de URLs por tipología** como insumo del enlazado.
+- Flujo de trabajo observado: categorizar los artículos del blog por temática (una pestaña por temática) → enlazar **artículo ↔ artículo** y **artículo → producto o programa** (empezando por el área prioritaria) → enlazado con **banners** → ajustes. Hoja de implementación: URL origen · texto ancla y dónde ubicarlo · casilla «implementado».
+- **Programas, productos o páginas con pocos enlaces:** con un rastreo, contar los entrantes por URL; añadir enlaces con ancla descriptiva desde la home, admisiones o categorías y 3-5 artículos con tráfico; medir antes y después (esfuerzo bajo, impacto alto). Requiere permisos de edición en las páginas de origen.
+- Un bloque de «relacionados» sin taxonomía ni orden concentra el enlazado en unas pocas URLs: ver [measurement-traps-and-diagnosis.md](measurement-traps-and-diagnosis.md).
+- **Sitio sin menú ni pie** (home por perfiles): compensar con páginas agrupadoras y enlaces en el cuerpo.
+- Páginas agrupadoras de entidades (docentes, investigadores): una URL agrupadora y una interna por persona, con un módulo «carreras donde imparte» que enlace hacia la oferta; publicar solo perfiles aprobados.

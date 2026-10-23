@@ -48,8 +48,8 @@ Agregar después de `### 3. Establecer la evidencia`:
 
 Antes de investigar keywords, comprobar capacidades reales de la sesión.
 
-- Si existe acceso autorizado al sistema de archivos, procesos locales, Obsidian, exportaciones locales o MCP local, leer [keyword-research-ia-local-desktop.md](references/keyword-research-ia-local-desktop.md).
-- Si la ejecución ocurre en ChatGPT.com, Claude.ai u otro entorno alojado sin acceso al equipo, leer [keyword-research-ia-web-hosted.md](references/keyword-research-ia-web-hosted.md).
+- Si existe acceso autorizado al sistema de archivos, procesos locales, Obsidian, exportaciones locales o MCP local, leer [keyword-research-ia-local-desktop.md](keyword-research-ia-local-desktop.md).
+- Si la ejecución ocurre en ChatGPT.com, Claude.ai u otro entorno alojado sin acceso al equipo, leer [keyword-research-ia-web-hosted.md](keyword-research-ia-web-hosted.md).
 - Si las capacidades son mixtas, usar la ruta local solo para recursos comprobados y aplicar la ruta web como fallback para lo demás.
 - No afirmar acceso a una herramienta, cuenta, archivo, API, CMS, Sheet, bóveda o rastreador hasta comprobarlo.
 ```
@@ -362,7 +362,7 @@ Actualizar consultas, posiciones, CTR, conversiones, canibalización y estado de
 
 ## Screaming Frog en esta ruta
 
-Usar Screaming Frog para inventario y SEO técnico, no como fuente principal de demanda. Si tienes la skill `screaming-frog-seo` (opcional; **no viene en gui-skills**) y el servidor MCP local de Screaming Frog está disponible en esta máquina (tools `sf_*`, puerto 11435), **invócala en vez de operar Screaming Frog a mano** — ella ya sabe qué `seo_element_name`, reporte o bulk export corresponde a cada pregunta y qué se configura en la app de escritorio (ver `references/desktop-configuration-and-scale.md` de esa skill). Esto aplica tanto al paso 2 (auditar inventario) como a cualquier necesidad de datos de crawl dentro de este flujo de keyword research, no solo a auditorías técnicas puntuales.
+Usar Screaming Frog para inventario y SEO técnico, no como fuente principal de demanda. Si tienes la skill `screaming-frog-seo` (opcional; **no viene en gui-skills**) y el servidor MCP local de Screaming Frog está disponible en esta máquina (tools `sf_*`, puerto 11435), **invócala en vez de operar Screaming Frog a mano** — ella ya sabe qué `seo_element_name`, reporte o bulk export corresponde a cada pregunta y qué se configura en la app de escritorio (ver la documentación de configuración de la skill externa `screaming-frog-seo`). Esto aplica tanto al paso 2 (auditar inventario) como a cualquier necesidad de datos de crawl dentro de este flujo de keyword research, no solo a auditorías técnicas puntuales.
 
 Recuperar cuando esté disponible:
 

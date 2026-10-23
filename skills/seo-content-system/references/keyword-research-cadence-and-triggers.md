@@ -114,3 +114,13 @@ Disparadores activados desde la última revisión:
 - ¿Se revisó si algún disparador de la lista ocurrió desde la última revisión?
 - ¿Quedó registrada la fecha de la última revisión y la próxima programada?
 - ¿Una anomalía puntual se atendió de forma focalizada, sin disparar una investigación fundacional innecesaria?
+
+
+## Ampliación [ClickUp 2]: patrones de entrega observados
+
+- **Release de keywords por convocatoria o temporada**: en tandas priorizadas, primero la matriz táctica (los programas o productos con prioridad comercial) y luego el resto.
+- **KWR de lo que ha caído** como disparador de optimización: tomar los programas, URLs o productos que perdieron tráfico o resultados y hacer su KWR antes de reescribir.
+- **KWR de prospecto «de lo general a lo específico»** por línea de negocio y un archivo por país; tipos pedidos: informativo / transaccional / mixto, cruzados con geolocalización / categoría / producto específico.
+- **KWR por país** con una herramienta de pago si existe, más extracción de las keywords de las URLs de los competidores (una pestaña por sitio). Ver [onboarding-and-initial-audit.md](onboarding-and-initial-audit.md) para los cuatro tipos de KWR.
+- **Depuración previa** de la lista de keywords cuando el contenido se genera a partir de un prompt acordado (p. ej. páginas de evento estacional).
+- El game plan de contenido se rebalancea por escuela o tipo de producto y por país según dónde está la captación; la columna de URL es la fuente de verdad para publicar.

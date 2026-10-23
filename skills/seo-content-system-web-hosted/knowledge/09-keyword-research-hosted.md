@@ -1,4 +1,4 @@
-<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.2.0, huella b0b6196c654f). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
+<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella 2ab4dfb6b928). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
 
 # Keyword research asistido por IA en entornos alojados
 
@@ -64,8 +64,8 @@ Agregar después de `### 3. Establecer la evidencia`:
 
 Antes de investigar keywords, comprobar capacidades reales de la sesión.
 
-- Si existe acceso autorizado al sistema de archivos, procesos locales, Obsidian, exportaciones locales o MCP local, leer [keyword-research-ia-local-desktop.md](references/keyword-research-ia-local-desktop.md).
-- Si la ejecución ocurre en ChatGPT.com, Claude.ai u otro entorno alojado sin acceso al equipo, leer [keyword-research-ia-web-hosted.md](references/keyword-research-ia-web-hosted.md).
+- Si existe acceso autorizado al sistema de archivos, procesos locales, Obsidian, exportaciones locales o MCP local, leer [keyword-research-ia-local-desktop.md](keyword-research-ia-local-desktop.md).
+- Si la ejecución ocurre en ChatGPT.com, Claude.ai u otro entorno alojado sin acceso al equipo, leer [keyword-research-ia-web-hosted.md](keyword-research-ia-web-hosted.md).
 - Si existen conectores remotos, verificar cada uno antes de usarlo.
 - No interpretar una aplicación de escritorio como acceso local cuando el conector se ejecuta desde la nube.
 - No afirmar acceso a una cuenta, archivo, Sheet, API, CMS, bóveda o rastreador hasta comprobarlo.
