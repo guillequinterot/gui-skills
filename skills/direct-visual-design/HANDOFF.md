@@ -108,6 +108,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Cuando el usuario corrige a mano en Figma, tratar Figma como fuente: diff de textos visibles Figma↔HTML y reportar explícitamente los cambios de copy y de campos de formulario.
 - **Herramientas:** no indicadas
 
+### 2026-10-24 · caso-carrusel-01 · guille
+
+- **Qué se hizo:** Dirección visual de un carrusel de comunicado de marca desde 5 referencias del usuario: gris muy claro con cuadrícula sutil, jerarquía Light + ExtraBold + serif cursiva, píldoras rojas, stickers pop-art B/N con trama de puntos y sombra dura de color, contador de láminas.
+- **Salió bien:** Reparto del texto por ideas (3 y 6 láminas) con una imagen distinta por lámina; versión de 6 con más aire; marcador visible para el texto cortado del cliente en lugar de inventar el final.
+- **Salió mal / incidencia:** nada relevante
+- **Regla candidata:** Preferencia del usuario: las imágenes no se repiten entre láminas de un mismo carrusel (confirmar con más casos antes de volverla regla).
+- **Herramientas:** OpenCV, PIL, stock Magnific
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -122,6 +130,7 @@ Contenido de la carpeta:
 | Antes de actualizar un Figma que el usuario ya editÃ³, leer su estructura y preservar sus componentes y variaciones; recortar las imÃ¡genes al encuadre exacto antes de subirlas; generar los estados de una interfaz con atributos, nunca con reemplazos globales de texto. | caso-web-universidad-02 | candidata |
 | En páginas con mucho contenido tabular, usar pestañas solo para contenido paralelo y dejar visible la comparativa; documentar en Figma los estados de pestañas en un frame aparte. | caso-marca-estudio-01 | candidata |
 | Cuando el usuario corrige a mano en Figma, tratar Figma como fuente: diff de textos visibles Figma↔HTML y reportar explícitamente los cambios de copy y de campos de formulario. | caso-marca-estudio-01 | candidata |
+| Preferencia del usuario: las imágenes no se repiten entre láminas de un mismo carrusel (confirmar con más casos antes de volverla regla). | caso-carrusel-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
