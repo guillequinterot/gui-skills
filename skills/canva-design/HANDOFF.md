@@ -87,6 +87,15 @@ Verificación por exportación: diferencia media HTML↔Canva de referencia 8–
 - **Salió mal / incidencia:** En layouts `split` el motor recortaba la foto para toda la página y el panel tapaba ~60 %, perdiendo al sujeto (se añadió `strip_fit`); un script de Python que lanzaba `bash` resolvió el de WSL y falló en silencio, de modo que se revisaron previews viejas; cada descarga de stock cuesta créditos y el stock genérico no sirve para escenas con gente local.
 - **Regla candidata:** Comprobar el código de salida y la fecha de las previews tras cada render; avisar del coste antes de descargar stock.
 - **Herramientas:** Magnific MCP (`stock_search`, `stock_download`), motor de diseño en Python, Git Bash, Chrome headless
+
+### 2026-10-24 · caso-carrusel-01 · guille
+
+- **Qué se hizo:** Carrusel de redes 1080x1350 en 2 versiones (3 y 6 láminas) con texto largo del cliente: HTML Canva-ready con generador en Python, estilo gris claro con cuadrícula, stickers de manos en B/N con trama de puntos (fotos de stock recortadas con OpenCV), importación por flujo B (marcadores grises + update_fill + crop_media), export y verificación (diferencia media 9-14).
+- **Salió bien:** El flujo B funcionó a la primera con 3 y 6 páginas; píldoras y tarjetas redondeadas como SVG inline se importan como imágenes y mantienen el texto editable encima; update_fill + crop_media sirve también para PNG que sobresalen de la página; hosting temporal borrado justo tras importar (404).
+- **Salió mal / incidencia:** Brote en mano de stock descartado por mal recorte (tierra oscura); una línea de texto con serif incrustada en una línea sans se partió en Canva. Incidencia: prepare_multipage_import.py exige tamaño inline en el div de página y left/top con unidad px (left:0 no se lee) o falla con TypeError; cajas de texto más anchas que la página hacen que Canva parta la línea: bajar el ancho a <= 960 con resize_element.
+- **Regla candidata:** Al generar el HTML para flujo B escribir siempre style=width/height en la página y left:0px/top:0px en los img; limitar el ancho de cada caja de texto a (1080 - margen) aunque el 1,15x la desborde.
+- **Herramientas:** Canva MCP (import-design-from-url, edit-design, export-design), Magnific stock, OpenCV, PIL, Chrome headless
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -104,6 +113,7 @@ Estas viven en `memoria/inbox-aprendizajes.md` (candidatas, sin promover); se pr
 | En layouts split, recortar la foto a la franja visible y mirar el render por formato | `caso-piezas-universidad-01` | Candidata |
 | Stock: avisar del costo en créditos; ofrecer recorte de persona antes de recurrir a IA generativa | `caso-piezas-universidad-01` | Candidata |
 | Comprobar código de salida y fecha de las previews tras cada render | `caso-piezas-universidad-01` | Candidata |
+| Al generar el HTML para flujo B escribir siempre style=width/height en la página y left:0px/top:0px en los img; limitar el ancho de cada caja de texto a (1080 - margen) aunque el 1,15x la desborde. | caso-carrusel-01 | candidata |
 
 ## 6. Anexos heredados
 
