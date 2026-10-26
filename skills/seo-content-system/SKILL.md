@@ -243,6 +243,8 @@ Ejecutar cinco pasadas:
 
 Usar `scripts/editorial_lint.py` como detector, no como sustituto del juicio editorial. Leer [editorial-quality-gates.md](references/editorial-quality-gates.md).
 
+**Puerta anti-slop (obligatoria antes de entregar o publicar contenido hecho o asistido con IA):** pasar la skill `contenido-sin-slop` (propósito para el lector, sustancia propia, procedencia y revisión humana, nada inventado; su detector `slop_lint.py` solo como ayuda). Si la pieza no pasa, se reescribe con sustancia o se descarta; no se rellena un calendario con contenido genérico.
+
 Higiene de archivos (sección 8 de editorial-quality-gates): en PowerShell no escribir Markdown, HTML ni JSON con cadenas o here-strings de comillas dobles; usar Python o `[IO.File]::WriteAllText` con UTF-8 sin BOM, y validar que no haya bytes NUL antes de entregar.
 
 Temas YMYL (finanzas, trading, salud): no prometer ganancias ni resultados y poner avisos de riesgo visibles (sección 10 de editorial-quality-gates).
