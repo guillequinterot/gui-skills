@@ -18,6 +18,7 @@ todos. Los datos de clientes nunca entran: ver [PRIVACY.md](PRIVACY.md).
 | `video-editing-ai-agent` | Edición de video con IA: cortes por transcripción, motion graphics, subtítulos, color, audio, exportación. | Única skill de video. Sus scripts viven en `video-editing-ai-agent/scripts/`. |
 | `video-aprender` | Aprender de un video, clase o reunión con evidencia (cita y marca de tiempo); propone un plan, no lo ejecuta solo. | Sub-skill de `video-editing-ai-agent`; sus scripts están en `video-editing-ai-agent/scripts/`, así que **se instalan juntas**. |
 | `rea-reverse-engineer` | Entender cómo está construido un sitio, app o paquete antes de hacer algo parecido (entiende, no copia). | Skill de apoyo: la llaman *por porción* `direct-visual-design`, `seo-content-system`, `video-editing-ai-agent` u otra tarea. |
+| `contenido-sin-slop` | Puerta de calidad contra el «slop» (contenido de baja calidad hecho con IA, en cantidad y sin revisión): propósito, sustancia, procedencia y revisión humana, con un detector de síntomas como ayuda. | La llaman `seo-content-system`, `direct-visual-design`, `video-editing-ai-agent` y `video-aprender` antes de entregar o publicar; obligatoria en flujos de publicación automática. |
 
 Cada skill tiene `SKILL.md` (qué hace y cómo), `HANDOFF.md` (instalación, decisiones y registro de
 trabajos) y `HANDSHAKE.md` (estado vivo: versión, herramientas verificadas, pendientes).
