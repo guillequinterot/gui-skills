@@ -5,11 +5,12 @@ Repositorio **privado** con las skills de Claude Code de Guille (diseñador) y d
 trabajo terminado deja un registro (qué se hizo, qué salió bien, qué salió mal) que mejora la skill para
 todos. Los datos de clientes nunca entran: ver [PRIVACY.md](PRIVACY.md).
 
-## Las 9 skills
+## Las skills
 
 | Skill | Para qué sirve | Relación |
 |---|---|---|
 | `direct-visual-design` | Dirige, crea, evalúa y corrige cualquier trabajo de diseño visual (gráfico, UI/UX o híbrido). | **Skill principal de diseño.** Llama a las tres siguientes según dónde viva el entregable. |
+| `design-system-ia` | Define, audita, documenta, verifica y deja legible para IA un sistema de diseño (contratos, tokens, vocabulario de props, Figma, medición) según el perfil del proyecto (`website`, `app`, `sistema compartido`). | Sub-skill de `direct-visual-design`. |
 | `canva-design` | Lleva un diseño HTML a Canva dejando todo editable (texto real, capas, verificación por exportación). | Sub-skill de `direct-visual-design`. |
 | `design-illustrator` | Lleva un diseño HTML a Adobe Illustrator como archivo limpio y editable (`.ai`, PDF editable). | Sub-skill de `direct-visual-design`. |
 | `web-go-high-level-ia` | Construye y mantiene un sitio dentro del constructor de IA de GoHighLevel (AI Studio). | Sub-skill de `direct-visual-design` **y** de `seo-content-system`. |

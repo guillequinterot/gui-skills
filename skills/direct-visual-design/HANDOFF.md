@@ -116,6 +116,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Preferencia del usuario: las imágenes no se repiten entre láminas de un mismo carrusel (confirmar con más casos antes de volverla regla).
 - **Herramientas:** OpenCV, PIL, stock Magnific
 
+### 2026-10-27 · caso-ds-01 · guille
+
+- **Qué se hizo:** Se anadio la fila de ruteo hacia design-system-ia y se aplico el flujo de direccion de diseno a la biblioteca de modulos de un sistema de diseno (menu lateral, logo del cliente, referente visual, QA accesible)
+- **Salió bien:** Clasificar el trabajo como UI/UX y tomar la marca del cliente (logo, acento, tipografia) hizo la pagina coherente con el sitio
+- **Salió mal / incidencia:** Nada relevante
+- **Regla candidata:** ninguna
+- **Herramientas:** Claude Code
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
