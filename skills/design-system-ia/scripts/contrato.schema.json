@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "contrato.schema.json",
+  "title": "Contrato de componente (design-system-ia)",
+  "description": "Esquema propio inspirado en el de Helix (MIT). Exige 7 campos y prohíbe campos desconocidos SOLO en la raíz (atrapa errores de escritura como «neverUse»); los objetos anidados admiten campos adicionales. Para añadir un campo nuevo a la raíz hay que declararlo aquí a propósito. kind y origin son propuestas propias sin probar; el bloque figma tiene forma propia. La política (lo que el proyecto exige además) se comprueba con validar_contrato.py --politica.",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "purpose",
+    "states",
+    "anatomy",
+    "props",
+    "tokenPolicy"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z0-9]*$",
+      "description": "PascalCase"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "x.y.z"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "beta",
+        "stable",
+        "deprecated"
+      ],
+      "description": "Lo calcula un script; deprecated es manual"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "component",
+        "base"
+      ],
+      "description": "Propuesta propia, sin probar"
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Una frase desde quien lo usa"
+    },
+    "import": {
+      "type": "string",
+      "description": "Generado del índice de exportaciones; no editar a mano"
+    },
+    "origin": {
+      "type": "object",
+      "description": "Propuesta propia, sin probar",
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "figma": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "rule": {
+          "type": "string"
+        }
+      }
+    },
+    "neverUseFor": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "governance": {
+      "type": "object",
+      "properties": {
+        "mayExtendLocally": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mustEscalateToDS": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "states": {
+      "type": "object",
+      "properties": {
+        "intrinsic": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authored": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "aria": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "anatomy": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "part",
+          "element",
+          "description"
+        ],
+        "properties": {
+          "part": {
+            "type": "string"
+          },
+          "element": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "optional": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "description"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "default": {},
+          "required": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "tokenPolicy": {
+      "type": "object",
+      "required": [
+        "allowed",
+        "forbidden"
+      ],
+      "properties": {
+        "allowed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbidden": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "a11y": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "keyboardNav": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "wcag": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "announces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "humanReview": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "date",
+              "by",
+              "with"
+            ],
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "by": {
+                "type": "string"
+              },
+              "with": {
+                "type": "string"
+              },
+              "result": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "applied": {},
+        "results": {}
+      }
+    },
+    "sizing": {
+      "type": "object"
+    },
+    "figma": {
+      "type": "object",
+      "description": "Forma propia (distinta a la de Helix). Se admiten claves adicionales por compatibilidad.",
+      "properties": {
+        "figmaOnlyProps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "approvedExceptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "what"
+            ],
+            "properties": {
+              "what": {
+                "type": "string"
+              },
+              "by": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "stateAxis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

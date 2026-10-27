@@ -1,0 +1,39 @@
+<!--
+PLANTILLA · indice-llms (se publica como /llms.txt, o en una subruta, y se escribe en Markdown aunque la extensión sea .txt)
+Para qué: la capa de DESCUBRIMIENTO: qué recursos hay y dónde están, para que un modelo los encuentre. La capa de INSTRUCCIÓN (cómo trabajar) es AGENTS.md (plantilla nota-para-agentes.md).
+Modo: documentar · Perfil: website (opcional en app y sistema compartido, que ya tienen consulta) · Referencia: references/06-listo-para-ia.md (sección 4)
+Estado del formato: llms.txt es una PROPUESTA, no un estándar. Lo único obligatorio es un H1 con el nombre. Después: una cita con el resumen, texto libre y secciones H2 con listas de «- [nombre](url): notas». Una sección llamada «Optional» marca lo que el agente puede saltarse.
+Reglas: usa enlaces Markdown de verdad (el llms.txt de Helix no los usa; adáptalo a la forma oficial si lo publicas) · el archivo es PÚBLICO: no pongas nada sensible, ni rutas internas, ni claves · si es la página de documentación, marca la página con noindex y no la bloquees en robots.txt · no listes lo que no existe.
+Antes de publicar: pregunta el destino (hosting, Drive o Figma). Borra este comentario.
+-->
+
+# <Nombre del sistema>
+
+> <Resumen en una o dos frases: qué es el sistema, para qué sirve y a quién.>
+
+<Texto libre opcional: cómo está organizado, qué necesita saber un modelo antes de leer los enlaces.>
+
+## Empezar aquí
+
+- [Nota para agentes](<url o ruta>/AGENTS.md): cómo debe trabajar un agente con este sistema; léela primero.
+- [Vocabulario](<url o ruta>): un nombre por concepto y los sinónimos prohibidos.
+
+## Componentes
+
+- [<Componente>](<url o ruta>): <propósito en una frase>.
+- [<Componente>](<url o ruta>): <propósito en una frase>.
+
+## Tokens y fundamentos
+
+- [Tokens semánticos](<url o ruta>): colores, tipografía y espaciado en claro y oscuro.
+- [<Otro fundamento>](<url o ruta>): <…>.
+
+## Reglas y gobierno
+
+- [Qué se adapta y qué se escala](<url o ruta>): límites de lo que puede cambiar cada proyecto.
+- [Accesibilidad](<url o ruta>): criterios y lista de control.
+
+## Optional
+
+- [Registro de cambios](<url o ruta>): versiones y avisos.
+- [<Recurso secundario>](<url o ruta>): <…>.

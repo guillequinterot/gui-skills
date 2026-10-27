@@ -1,0 +1,90 @@
+{
+  "$schema": "<ruta al esquema del contrato (JSON Schema 2020-12; scripts/contrato.schema.json)>",
+  "name": "<NombreEnPascalCase>",
+  "version": "0.1.0",
+  "status": "<GENERADO: lo calcula el script a partir de criterios; no editar a mano>",
+  "kind": "<component | base>",
+  "purpose": "<Una frase, desde quien lo usa.>",
+  "import": "<GENERADO: lo escribe el script a partir del índice de exportaciones; no editar a mano>",
+  "origin": {
+    "source": "<sistema propio | librería abierta (cuál) | tercero>",
+    "repository": "<ruta o repositorio>",
+    "figma": { "file": "<archivo de Figma>", "name": "<nombre exacto del componente o conjunto>" },
+    "rule": "<p. ej. usa este componente, no el equivalente de la librería base>"
+  },
+  "neverUseFor": [
+    "<Uso que no corresponde — usa <alternativa>>"
+  ],
+  "rationale": "<La decisión y su motivo; no solo la regla.>",
+  "governance": {
+    "mayExtendLocally": [
+      "<Adaptación permitida; cualquier componente propio lleva // [CUSTOM] motivo>"
+    ],
+    "mustEscalateToDS": [
+      "<Cambio que altera lo compartido>"
+    ]
+  },
+  "states": {
+    "intrinsic": ["hover", "focus"],
+    "authored": [
+      {
+        "name": "<estado gestionado por el componente, p. ej. loading>",
+        "description": "<qué significa y cómo se comporta>",
+        "aria": "<atributo ARIA que se activa, si lo hay>"
+      }
+    ]
+  },
+  "anatomy": [
+    {
+      "part": "<parte-raiz>",
+      "element": "<etiqueta HTML>",
+      "description": "<qué es>"
+    },
+    {
+      "part": "<parte-opcional>",
+      "element": "slot",
+      "description": "<hueco para otro componente>",
+      "optional": true
+    }
+  ],
+  "props": [
+    {
+      "name": "<nombre canónico (referencia 03)>",
+      "type": "<'a' | 'b' | 'c' | boolean | string>",
+      "default": "<valor por defecto; el mismo en código y en Figma>",
+      "required": false,
+      "description": "<qué hace>"
+    }
+  ],
+  "tokenPolicy": {
+    "allowed": ["<prefijo de token permitido, p. ej. color.fill>"],
+    "forbidden": ["<prefijo prohibido, p. ej. primitive.color>"]
+  },
+  "a11y": {
+    "role": "<rol ARIA o implícito del elemento nativo>",
+    "keyboardNav": ["<Tecla — qué hace>"],
+    "wcag": ["<1.4.3 Contrast (Minimum), AA>", "<2.1.1 Keyboard, A>"],
+    "announces": ["<rol que un lector de pantalla debe anunciar>"],
+    "humanReview": [
+      {
+        "date": "<AAAA-MM-DD>",
+        "by": "<persona>",
+        "with": "<lector de pantalla o tecnología usada>",
+        "result": "<qué se observó>"
+      }
+    ],
+    "applied": "<GENERADO: lo escribe el script; no editar a mano>",
+    "results": "<GENERADO: lo escribe el script; no editar a mano>"
+  },
+  "sizing": {
+    "height": { "mode": "<fixed | según filas>", "values": {}, "unit": "px", "note": "<…>" },
+    "width": { "default": "<hug | fill | fixed>", "note": "<…>" }
+  },
+  "figma": {
+    "figmaOnlyProps": ["<p. ej. state>"],
+    "approvedExceptions": [
+      { "what": "<excepción a la regla de conversión>", "by": "<persona>", "date": "<AAAA-MM-DD>" }
+    ],
+    "stateAxis": ["<estados que debe tener el eje state>"]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "titulo": "Sistema de diseño de <cliente>",
+    "titulo_pagina": "Biblioteca de módulos · <cliente>",
+    "rail_titulo": "Biblioteca de módulos",
+    "subtitulo": "<Una o dos frases: qué se documenta, de qué fecha y qué significa «propuesta».>",
+    "version": "v0.1",
+    "fecha": "<AAAA-MM-DD>",
+    "descripcion": "<Descripción corta de la página para el HTML>",
+    "noindex": true,
+    "home_url": "<https://dominio-del-cliente.test/>",
+    "home_etiqueta": "Volver al sitio",
+    "url_publica": "<https://dominio-del-cliente.test/design-system/>",
+    "base_preview": "*,*::before,*::after{box-sizing:border-box} :host{font-family:system-ui,sans-serif;font-size:16px;line-height:1.5;color:#1e1e1e} a{color:inherit;text-decoration:none} img{display:block;max-width:100%}",
+    "pie": "Documento interno con noindex."
+  },
+  "marca": {
+    "nombre": "<Nombre del cliente>",
+    "logo_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 40 40\"><rect width=\"40\" height=\"40\" rx=\"8\" fill=\"#1e1e1e\"/></svg>",
+    "logo_alto": 48,
+    "logo_alto_movil": 40,
+    "acento": "#2563EB",
+    "tinta": "#1E1E1E",
+    "fondo": "#F8FAFF",
+    "fuente_ui": "system-ui,-apple-system,\"Segoe UI\",Roboto,Arial,sans-serif",
+    "fuentes": []
+  },
+  "reglas_ia": [
+    "Usa SOLO las clases CSS y las variables --* que aparecen en este módulo; no inventes colores, medidas ni nombres de props.",
+    "Un nombre por concepto: sigue el vocabulario del sistema.",
+    "Conserva los estados que el módulo entrega (hover, foco visible) y el contraste AA."
+  ],
+  "grupos": [
+    { "etiqueta": "Componentes", "modulos": ["m1"] },
+    { "etiqueta": "Calidad", "modulos": ["m2"] }
+  ],
+  "resumen": {
+    "etiqueta": "Resumen",
+    "leyenda": true,
+    "kpis": [
+      { "valor": "0/0", "etiqueta": "<qué se mide>", "nota": "<cómo se obtuvo>", "tono": "info", "barra": null }
+    ]
+  },
+  "modulos": [
+    {
+      "id": "m1",
+      "n": "M1",
+      "titulo": "<Componente>",
+      "estado": "Propuesta",
+      "version": "v0.1",
+      "descripcion": "<Qué es y cuándo se usa.>",
+      "css": ".ejemplo { display: inline-flex; padding: 0 var(--espacio); border-radius: 999px; background: var(--color); color: #fff; }",
+      "tokens": { "--color": "#2563EB", "--espacio": "16px" },
+      "variantes": [
+        {
+          "id": "m1-base",
+          "nombre": "Base",
+          "uso": "<Dónde se usa>",
+          "tipo": "componente",
+          "tema": "Light",
+          "escenario": "tight",
+          "html": "<a class=\"ejemplo\" href=\"#\">Ejemplo</a>",
+          "json": { "name": "Ejemplo", "version": "0.1.0", "purpose": "<una frase>" },
+          "nota": "<Opcional: qué probar con el ratón o el teclado.>"
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "n": "M2",
+      "titulo": "<Calidad>",
+      "estado": "Hallazgo",
+      "descripcion": "<Hallazgos o medidas, siempre con referente visual.>",
+      "variantes": [
+        {
+          "id": "m2-base",
+          "nombre": "Ejemplo de bloque visual",
+          "uso": "<Qué muestra>",
+          "tipo": "doc",
+          "html": "<div class=\"b-chips\"><span class=\"b-chip mal\">nombre-viejo</span><span class=\"b-chip ok\">nombre-nuevo</span></div>",
+          "json": { "hallazgo": 1 }
+        }
+      ]
+    }
+  ]
+}
