@@ -95,6 +95,44 @@ aportes se fusionan solos), `obsidian_vault`, `obsidian_registry_note` y
   comando de arriba con `-ExecutionPolicy Bypass`.
 - **`403` o `Repository not found` al clonar:** es la credencial; ver la siguiente sección.
 
+## Instalar y actualizar con otra IA (Codex, Grokbot, Gemini, Cursor…)
+
+Cualquier IA con acceso a una terminal puede instalar y mantener estas skills sin ayuda. El archivo [`AGENTS.md`](AGENTS.md) de la raíz le dice
+qué hacer; esta sección es la versión larga. Las skills son carpetas con un `SKILL.md` (más `references/`, `scripts/`, `templates/`): una IA
+las "instala" cuando están (enlazadas o copiadas) en **su** carpeta de skills.
+
+| IA | Carpeta de skills | Cómo instalar |
+|---|---|---|
+| Claude Code | `~/.claude/skills` | `tools/install.ps1` (Windows) o `tools/install.sh` (Mac/Linux): además configuran el aviso de actualización |
+| Codex | `~/.codex/skills` (o `$CODEX_HOME/skills`) | `python tools/install_agente.py --agente codex` |
+| Grokbot, Gemini / Antigravity, Cursor, otras | la que use esa IA (consulta su documentación o su configuración) | `python tools/install_agente.py --destino <CARPETA_DE_SKILLS_DE_ESA_IA>` |
+
+**Pasos (los mismos para todas):**
+
+1. **Requisitos:** `git` y Python 3.9 o superior.
+2. **Credencial** (una sola vez): guarda el token del repo como indica la sección [Credenciales](#credenciales). En un equipo sin gestor de credenciales
+   (un servidor, un bot) usa `git config --global credential.helper store` antes de `git credential approve`; queda en `~/.git-credentials` en texto plano,
+   así que el equipo debe ser de confianza.
+3. **Clona** el repo: `git clone https://github.com/guillequinterot/gui-skills.git ~/gui-skills`.
+4. **Instala:** el comando de la tabla. Si la IA no admite enlaces o carpetas fuera de su carpeta, añade `--copiar`. Para ver qué haría sin cambiar nada: `--dry-run`.
+5. **Verifica:** `python ~/gui-skills/tools/install_agente.py --agente codex --check` (o con `--destino`). Código de salida 0 = todo en orden; 1 = falta algo o hay una copia desactualizada.
+6. **Alias y privacidad** (si va a aportar lo aprendido): corre una vez `tools/install.sh --alias <alias>` (o `install.ps1`) o crea `~/.gui-skills/config.json` con
+   `{"alias": "<alias>", "repo_path": "<ruta del clon>"}` y una lista `~/.gui-skills/private-terms.txt` con los nombres de **sus** clientes.
+
+**Actualizar (cada vez que la IA vaya a usar una skill, no solo al abrir la sesión):**
+
+```
+python ~/gui-skills/tools/check_update.py --quiet --pull
+```
+
+Primera palabra de la respuesta: `AL_DIA` (seguir) · `ACTUALIZADA n` (había cambios: se descargaron; **vuelve a leer el `SKILL.md`** de la skill antes de seguir) ·
+`CAMBIOS_LOCALES` (hay cambios sin subir: no actualizar y avisar a la persona) · `SIN_RED` / `SIN_CREDENCIAL` (seguir con la copia local y decirlo).
+Con enlaces no hace falta nada más. Con `--copiar`, vuelve a correr `install_agente.py` después de actualizar.
+
+**Reglas que toda IA debe cumplir:** leer `shared/protocolo-skill.md` y, de cada skill, su `HANDSHAKE.md` y las últimas entradas de su `HANDOFF.md`;
+no escribir nombres de clientes, dominios, rutas personales ni credenciales en el repo (solo códigos `caso-<tipo>-<NN>`); no subir nada a `main`
+(rama `aporte/<alias>/<tema>` y Pull Request con `tools/publish_job.py`); no mostrar ni guardar el token en ningún archivo.
+
 ## Credenciales
 
 El repo es privado. El mantenedor te comparte **por mensaje privado** un token de GitHub *fine-grained*
@@ -217,6 +255,7 @@ token de tu credencial de git (nunca se imprime ni se guarda) y, si tampoco, te 
 | `privacy_scan.py` | Escáner de privacidad; lo usan el hook `pre-commit`, GitHub Actions y `log_job.py`. |
 | `log_job.py` | Agrega al HANDOFF de una skill la entrada de un trabajo terminado, ya revisada por el escáner. |
 | `publish_job.py` | Publica lo que dejó un trabajo: rama `aporte/...`, commit, push y Pull Request (`--tema`, `--merge`, `--reintentar`, `--dry-run`). |
+| `install_agente.py` | Enlaza (o copia) las skills en la carpeta de skills de otra IA (Codex, Grokbot…) y verifica (`--agente`, `--destino`, `--copiar`, `--check`, `--dry-run`). |
 | `install.ps1` / `install.sh` | Instaladores para Windows / Mac. |
 | `settings_hook.py` | Agrega, actualiza o quita el hook `SessionStart` (`check_update.py --hook --pull`) en `~/.claude/settings.json` (lo usan los instaladores). |
 | `build_hosted.py` | Regenera `seo-content-system-web-hosted` desde `seo-content-system`. |
