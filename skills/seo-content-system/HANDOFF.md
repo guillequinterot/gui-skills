@@ -190,6 +190,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** Cuando una actualizacion de skill deja pendientes de decision explicitos en el HANDOFF, resolverlos y registrarlos en una entrada propia antes de log_job/publish_job, nunca asumirlos ni publicarlos en silencio.
 - **Herramientas:** no indicadas
 
+### 2026-10-28 · banco-pruebas-redaccion-blog · guille
+
+- **Qué se hizo:** Las 8 reglas de redaccion de articulos de blog (comillas rectas, titulo con numero real y ano, dato verificado con fuente, un solo JSON-LD con @graph, foco local, estructura escaneable, voces reales y citas de libros consultados de forma legitima) pasaron del cuerpo de SKILL.md a references/blog-article-writing-rules.md; SKILL.md conserva un resumen y el enlace; la version web alojada se regenero con ese archivo
+- **Salió bien:** Mover el bloque a una referencia hizo que llegue tambien a la version para ChatGPT (el mapa de conocimiento no leia el cuerpo de SKILL.md)
+- **Salió mal / incidencia:** El cambio original solo estaba en SKILL.md y la version alojada decia AL DIA sin contenerlo Incidencia: build_hosted.py --check no detecta reglas que viven solo en el cuerpo de SKILL.md
+- **Regla candidata:** Toda regla que deba llegar a la version alojada va en un archivo de references/ listado en hosted-src/knowledge-map.json, no solo en SKILL.md
+- **Herramientas:** Claude Code, tools/build_hosted.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -208,6 +216,7 @@ Relación con otras skills del repo:
 | Al verificar enlaces nuevos, derivar el patrón de URL de los permalinks reales (posts bajo /blog/) y comprobar primero una página a mano antes de automatizar el chequeo. | caso-local-rotulos-01 | candidata |
 | Antes de escribir ajustes globales del plugin SEO por API, tomar foto del sameAs público y enviar el conjunto completo, no solo el campo a corregir. | caso-local-rotulos-01 | candidata |
 | Cuando una actualizacion de skill deja pendientes de decision explicitos en el HANDOFF, resolverlos y registrarlos en una entrada propia antes de log_job/publish_job, nunca asumirlos ni publicarlos en silencio. | banco-pruebas-actualizacion-v1-5-0 | candidata |
+| Toda regla que deba llegar a la version alojada va en un archivo de references/ listado en hosted-src/knowledge-map.json, no solo en SKILL.md | banco-pruebas-redaccion-blog | candidata |
 
 ## 2026-10-23 · Actualización a 1.3.0
 - Se instala seo-content-system 1.3.0 (marcas [ClickUp], [Obsidian], [Sheets] y [Drive]): nuevas referencias, plantillas en assets/templates y docs/CAMBIOS.md + docs/INVESTIGACION-CLICKUP-SEO.md.

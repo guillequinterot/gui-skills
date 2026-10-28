@@ -245,6 +245,8 @@ Usar `scripts/editorial_lint.py` como detector, no como sustituto del juicio edi
 
 **Puerta anti-slop (obligatoria antes de entregar o publicar contenido hecho o asistido con IA):** pasar la skill `contenido-sin-slop` (propósito para el lector, sustancia propia, procedencia y revisión humana, nada inventado; su detector `slop_lint.py` solo como ayuda). Si la pieza no pasa, se reescribe con sustancia o se descarta; no se rellena un calendario con contenido genérico.
 
+**Reglas de redacción de artículos de blog (pedidas por el usuario el 2026-10-26):** leer [blog-article-writing-rules.md](references/blog-article-writing-rules.md) antes de escribir o mejorar un artículo. En corto: comillas rectas dobles; título con número real y año cuando el contenido es una lista; un dato verificado con fuente por cada consejo (nunca inventado); un solo bloque JSON-LD con `@graph` y `@id`; foco local con ciudades e industrias reales; estructura escaneable (tabla resumen y tabla de datos con fuente); voces reales citadas con nombre, cargo y enlace (solo con permiso y frase textual); y 2 o 3 citas cortas de libros consultados de forma legítima, con su fuente completa.
+
 Higiene de archivos (sección 8 de editorial-quality-gates): en PowerShell no escribir Markdown, HTML ni JSON con cadenas o here-strings de comillas dobles; usar Python o `[IO.File]::WriteAllText` con UTF-8 sin BOM, y validar que no haya bytes NUL antes de entregar.
 
 Temas YMYL (finanzas, trading, salud): no prometer ganancias ni resultados y poner avisos de riesgo visibles (sección 10 de editorial-quality-gates).
