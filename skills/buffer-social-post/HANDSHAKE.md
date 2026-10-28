@@ -5,7 +5,7 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 0.1.0 (borrador local, **sin publicar en GitHub**) |
+| Versión | 0.1.0 (publicada en GitHub el 2026-10-28, PR #24; probada con una cuenta real) |
 | Última actualización | 2026-10-28 por guille |
 | Skill principal / padre | ninguna (herramienta de publicación) |
 | Llama a | ninguna (cliente propio sin dependencias) |
@@ -42,4 +42,4 @@ Estados: `verificado` · `falla` · `sin probar` · `no aplica en Mac/Windows`.
 1. Probar, con publicaciones autorizadas por el dueño: documento PDF (carrusel de LinkedIn), video y programar para una hora futura (la imagen ya está probada).
 2. Implementar en el script los metadatos por red (`--primer-comentario` de LinkedIn, tipo de Instagram, opciones de YouTube): los tipos ya están confirmados.
 3. Decidir si el post de LinkedIn de cada artículo queda en borrador o se programa con orden permanente (decisión del dueño).
-4. Publicar la skill en GitHub (`publish_job.py`) cuando el usuario la apruebe.
+4. ~~Publicar la skill en GitHub~~ — hecho el 2026-10-28 (PR #24). Nota: el administrador de credenciales de Git del equipo del mantenedor rechazaba GitHub; se publicó con el token del repo pasado solo por variables de entorno (fallback documentado). Quien instale la skill necesita su propio token de gui-skills y su propia clave de Buffer.
