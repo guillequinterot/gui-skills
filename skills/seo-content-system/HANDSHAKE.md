@@ -23,6 +23,7 @@
 | `scripts/install.py` | verificado | 2026-10-16 | Crea enlaces en un HOME temporal (Windows); en macOS/Linux sin probar; `--force` no se probó con una copia real |
 | `scripts/editorial_lint.py` | verificado | 2026-10-16 | Solo `--help`; es un detector de patrones, no sustituye el juicio editorial |
 | `scripts/site_seo_gate.py` (estático y `--live`) | verificado | 2026-10-29 | 16 pruebas sin red externa (`test_site_seo_gate.py`); probado sobre el build real de un sitio de servicios y, en vivo, con las cuatro variantes del host. Los avisos son candidatos, no hallazgos; no mide similitud semántica (usa la frase raíz del título y los primeros 60 palabras), así que no sustituye la verificación con Search Console |
+| `scripts/disavow_desde_exportacion.py` | verificado | 2026-10-29 | Prueba con CSV falso (`test_disavow_desde_exportacion.py`); lee exportaciones de Ahrefs/Search Console, agrupa por dominio y separa confianza alta (archivo) de media (revisión). No sube nada: el archivo se sube a mano en Search Console |
 | `tools/build_hosted.py` | verificado | 2026-10-16 | Regenera `skills/seo-content-system-web-hosted/`; `--check` sale con 1 si está desfasado |
 | MCP de Obsidian | sin probar | — | Opcional. El mantenedor lo usó con su bóveda; si no responde, la skill sigue con `memoria/` |
 | Search Console / GA4 / Clarity / Bing | sin probar | — | Solo si el usuario los conecta; en entornos web, por exportación a Google Sheets |

@@ -1,4 +1,4 @@
-<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella d73a6d7a2421). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
+<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella e8b1207b9830). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
 # Memoria y continuidad sin acceso al repo ni a una bóveda de Obsidian
 
 Adaptación de `references/memory-integration.md` (versión con sistema de archivos) para el entorno alojado, donde no hay MCP de Obsidian ni acceso al clon del repo gui-skills. La memoria de largo plazo real vive en el `HANDOFF.md` y la carpeta `memoria/` de la skill (y, si el usuario la usa, en su bóveda de Obsidian). Este archivo define cómo trabajar sin acceso directo a ellas: **el usuario sube manualmente las notas relevantes cuando hacen falta**, sin sincronización automática.
