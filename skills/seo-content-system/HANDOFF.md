@@ -206,6 +206,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** Una frase raíz y una intención por URL; el host canónico se resuelve con 301 en el servidor y se verifica con las cuatro variantes (candidata: se valida cuando se repita en otro sitio).
 - **Herramientas:** site_seo_gate.py, build_hosted.py, privacy_scan.py
 
+### 2026-10-29 · caso-seo-sitio-servicios-01 · guille
+
+- **Qué se hizo:** Se completó el triage del spam de enlaces entrantes: se comprobó que la API de Search Console no expone enlaces, que la inspección de URL da solo una muestra (todas internas) y que Bing puede devolver 0 enlaces; se añadió un generador de archivo de desautorización por dominio con CSV de revisión.
+- **Salió bien:** El generador separa la granja evidente (extensión barata + nombre y texto de SEO/backlinks) de un sitio editorial; la referencia ahora dice de dónde sale la lista completa (exportación) y qué no sirve.
+- **Salió mal / incidencia:** No fue posible listar las URL de la granja sin una exportación de la herramienta de pago o del informe de enlaces de Search Console.
+- **Regla candidata:** ninguna
+- **Herramientas:** disavow_desde_exportacion.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)

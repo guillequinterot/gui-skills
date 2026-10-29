@@ -1,4 +1,4 @@
-<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella 725679a47d9c). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
+<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella 2836e7030151). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
 # Instalación de seo-content-system (versión web hosted)
 
 Esta carpeta es la versión de `seo-content-system` (v1.5.0) para **Claude.ai (Project)** y **ChatGPT.com (Custom GPT / Project)** — entornos sin acceso al sistema de archivos, sin MCP local y sin Obsidian.
@@ -55,7 +55,7 @@ No subas a un Project o GPT compartido nombres de clientes, datos de contacto, c
 
 ## Mantenimiento
 
-Esta carpeta es una instantánea **generada** por `tools/build_hosted.py` desde `skills/seo-content-system/` (versión 1.5.0, huella de la fuente `a60918240cae`). No se edita a mano:
+Esta carpeta es una instantánea **generada** por `tools/build_hosted.py` desde `skills/seo-content-system/` (versión 1.5.0, huella de la fuente `02871c22dccd`). No se edita a mano:
 
 - Para cambiar una regla, edita la skill (o `hosted-src/` para las partes escritas a mano) y corre `python tools/build_hosted.py`.
 - `python tools/build_hosted.py --check` sale con código 1 si lo guardado está desfasado de la skill.
