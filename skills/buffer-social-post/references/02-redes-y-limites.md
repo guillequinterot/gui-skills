@@ -28,7 +28,9 @@
 
 ## Metadatos por red (`metadata`, solo la red del canal)
 - Hilos (X, Bluesky, Threads, Mastodon); **primer comentario** (LinkedIn, Facebook, Instagram); tipo de post `post`/`story`/`reel` (Instagram); tablero (Pinterest); etiquetas de usuario por imagen (`image.metadata.userTags`, Instagram); tarjeta de enlace `linkAttachment` (Bluesky, Facebook, LinkedIn, Substack, Threads; no se combina con `assets`).
-- Opciones de YouTube (privacidad, título, categoría…) existen en `YoutubePostMetadata`; sus campos de entrada **no se han probado**.
+- **YouTube por Buffer = solo Shorts (verificado en vivo 2026-10-28):** un MP4 horizontal de 3:10 se rechazó con «Video must be no longer than 3 minutes for YouTube Shorts» y «Video must be vertical (portrait orientation) for YouTube Shorts»; la ayuda de Buffer confirma: solo Shorts (1 video, ≤ 3 min, 9:16 o 1:1) y no admite video largo. Un video horizontal se sube a mano en YouTube Studio (o con la API de YouTube y un token con `youtube.upload`, que esta cuenta no tiene).
+- **Miniatura propia: no.** `VideoAssetInput.thumbnailUrl` existe en el esquema, pero la API responde «Video thumbnailUrl is not supported: social networks do not accept custom video thumbnail images»; `thumbnailOffset` solo vale en Instagram, TikTok y Pinterest. La miniatura de YouTube se pone a mano.
+- Campos de YouTube implementados en el script (`--yt-titulo`, `--yt-privacidad` private por defecto, `--yt-categoria` 27, `--yt-ia`): el payload se valida con `--simular`; la publicación real de un Short **no se ha probado**.
 - Los tipos de entrada exactos (`PostInputMetaData` → `linkedin`, `instagram`, `youtube`…) existen en el esquema; la skill aún no los usa. Antes de implementarlos: introspección del tipo (`__type(name:"...")`), no suposición.
 
 ## Qué plataformas soporta Buffer por API
