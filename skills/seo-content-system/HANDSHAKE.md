@@ -5,8 +5,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.5.0 |
-| Última actualización | 2026-10-23 (1.5.0: segunda y tercera pasada ClickUp + Obsidian + Drive/Sheets integradas; hosted regenerada; decisiones pendientes de Guille resueltas; publicada. ClickUp sigue pendiente por el tope diario del conector) |
+| Versión | 1.6.0 |
+| Última actualización | 2026-10-29 (1.6.0: puerta SEO para sitios de servicios y páginas nuevas, derivada de una auditoría real; antes, 2026-10-23: 1.5.0: segunda y tercera pasada ClickUp + Obsidian + Drive/Sheets integradas; hosted regenerada; decisiones pendientes de Guille resueltas; publicada. ClickUp sigue pendiente por el tope diario del conector) |
 | Skill principal / padre | ninguna (es skill de primera capa para todo contenido; `web-go-high-level-ia` y `rea-reverse-engineer` son sus sub-skills / apoyo) |
 | Llama a | `web-go-high-level-ia` (SEO dentro del constructor de GoHighLevel), `rea-reverse-engineer` (entender competidores), `screaming-frog-seo` (externa y opcional, no está en gui-skills) |
 | La llaman | `web-go-high-level-ia`, `direct-visual-design` (cuando el diseño implica textos, metadatos o schema) |
@@ -22,6 +22,7 @@
 | `scripts/scheduler.py` (`show`) | verificado | 2026-10-16 | `install` (cron / launchd / schtasks) no se probó |
 | `scripts/install.py` | verificado | 2026-10-16 | Crea enlaces en un HOME temporal (Windows); en macOS/Linux sin probar; `--force` no se probó con una copia real |
 | `scripts/editorial_lint.py` | verificado | 2026-10-16 | Solo `--help`; es un detector de patrones, no sustituye el juicio editorial |
+| `scripts/site_seo_gate.py` (estático y `--live`) | verificado | 2026-10-29 | 16 pruebas sin red externa (`test_site_seo_gate.py`); probado sobre el build real de un sitio de servicios y, en vivo, con las cuatro variantes del host. Los avisos son candidatos, no hallazgos; no mide similitud semántica (usa la frase raíz del título y los primeros 60 palabras), así que no sustituye la verificación con Search Console |
 | `tools/build_hosted.py` | verificado | 2026-10-16 | Regenera `skills/seo-content-system-web-hosted/`; `--check` sale con 1 si está desfasado |
 | MCP de Obsidian | sin probar | — | Opcional. El mantenedor lo usó con su bóveda; si no responde, la skill sigue con `memoria/` |
 | Search Console / GA4 / Clarity / Bing | sin probar | — | Solo si el usuario los conecta; en entornos web, por exportación a Google Sheets |

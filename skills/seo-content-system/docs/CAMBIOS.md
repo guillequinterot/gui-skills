@@ -1,3 +1,12 @@
+# CAMBIOS v1.5.0 → v1.6.0 (2026-10-29)
+
+Origen: una auditoría real (`caso-seo-sitio-servicios-01`) de un sitio de servicios técnicamente sano (rendimiento 97 a 100, schema rico, 0 enlaces rotos) que no posicionaba. El linter del proyecto pasaba con 0 fallos y 0 avisos: la causa estaba en lo que ese linter **no** comprobaba.
+
+- **Nueva referencia `references/service-site-seo-gate.md`:** ocho causas raíz (nombre por jerga interna y no por búsqueda; varias páginas con la misma frase raíz; servicios delgados frente a artículos; falta de un caso del servicio que se vende; clusters de un solo artículo; host canónico sin 301 en `https://www`; `lang`/`hreflang` y `alt` mal tratados; medición y autoridad), triage del spam de enlaces entrantes, checklist de 10 puntos antes de publicar y lista de lo que no se hace (fusionar servicios o redirigir sin el dueño, reverificar volúmenes de pago, «arreglar» falsos positivos).
+- **Nuevo script `scripts/site_seo_gate.py`** (solo biblioteca estándar, solo lectura) y **`scripts/test_site_seo_gate.py`** (16 comprobaciones, sin red externa): candidatos a canibalización por frase raíz del título, aperturas casi iguales, servicios delgados y secciones que faltan, `lang`/`hreflang` inconsistentes, imágenes sin atributo `alt` (distingue `alt=""` correcto de un logo sin etiqueta), menú y pie sin listas, sitemap, y `--live` con las cuatro variantes del host. Probado contra el sitio de la auditoría: reproduce la canibalización del título entre servicios, el artículo frente al servicio y el `https://www` que responde 200.
+- **SKILL.md:** versión 1.6.0; principios 23 a 27 (nombrar por la búsqueda; una frase raíz y una intención por URL; estructura mínima y un caso propio por servicio; host canónico en el servidor; probar todas las rutas de acceso antes de decir «no hay datos», no inferir indexación con `site:`, y cambios de título con fecha y línea base); modo `gate`; la puerta se ejecuta en el control de calidad (paso 8) de los sitios de servicios.
+- **hosted-src/knowledge-map.json:** la referencia nueva entra en el documento técnico de la versión web (regenerada con `tools/build_hosted.py`).
+
 # Correcciones v1.5.0 (2026-10-23)
 
 - `SKILL.md`: descripción ≤1024 caracteres; rutas de skills externas explícitas.
