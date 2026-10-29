@@ -5,7 +5,7 @@ description: Investiga, planifica, redacta, optimiza, audita, mide y actualiza c
 
 # SEO Content System
 
-> Versión 1.5.0 (sobre la 1.4.0: segunda pasada por ClickUp, Obsidian y Drive, marcada **[ClickUp 2]**: contrato por fases y control de alcance, lanzamiento de sitio nuevo, e-commerce multipaís, SEO de oferta académica, trampas de medición y diagnóstico de caídas, criterio de hecho por hallazgo; ver `docs/CAMBIOS.md`). En la 1.4.0: higiene de archivos, retiro de datos, schema con Rank Math y sin precio, riesgo de ajustes globales, matriz con brief por hallazgo, YMYL. En la 1.3.0, Las marcas **[ClickUp]**, **[Obsidian]**, **[Sheets]** y **[Drive]** señalan lo que se añadió sobre la 1.2.0, a partir de la metodología interna de la agencia (anonimizada), de la bóveda del usuario, de 18 libros de Google Sheets del equipo y de Docs, Slides y .xlsx de su Drive (solo estructura). Todo lo que no lleva marca sigue igual. Detalle en [`docs/CAMBIOS.md`](docs/CAMBIOS.md).
+> Versión 1.6.0 (sobre la 1.5.0: **puerta SEO para sitios de servicios y páginas nuevas**, marcada **[Auditoría 2026-10]**, derivada de una auditoría real: principios 23 a 27, modo `gate`, referencia `service-site-seo-gate.md` y script `site_seo_gate.py`; ver `docs/CAMBIOS.md`). En la 1.5.0 (sobre la 1.4.0: segunda pasada por ClickUp, Obsidian y Drive, marcada **[ClickUp 2]**: contrato por fases y control de alcance, lanzamiento de sitio nuevo, e-commerce multipaís, SEO de oferta académica, trampas de medición y diagnóstico de caídas, criterio de hecho por hallazgo; ver `docs/CAMBIOS.md`). En la 1.4.0: higiene de archivos, retiro de datos, schema con Rank Math y sin precio, riesgo de ajustes globales, matriz con brief por hallazgo, YMYL. En la 1.3.0, Las marcas **[ClickUp]**, **[Obsidian]**, **[Sheets]** y **[Drive]** señalan lo que se añadió sobre la 1.2.0, a partir de la metodología interna de la agencia (anonimizada), de la bóveda del usuario, de 18 libros de Google Sheets del equipo y de Docs, Slides y .xlsx de su Drive (solo estructura). Todo lo que no lleva marca sigue igual. Detalle en [`docs/CAMBIOS.md`](docs/CAMBIOS.md).
 
 ## Protocolo gui-skills (obligatorio)
 
@@ -70,6 +70,11 @@ Al cerrar el trabajo, devolver lo aprendido a la memoria según el "Paso final" 
 20. En schema, nunca marcadores (`[PENDIENTE]`, `TBD`, `XXX`) dentro de un campo: si el dato no existe, se omite el campo. Producto sin precio público: solo `SoftwareApplication`, nunca `Offer` vacío ni `price` 0. Si Rank Math (o Yoast) ya genera `#organization`/`#website`/`#webpage`, no duplicarlos con bloques manuales. Ver [schema-markup-for-ai-citation.md](references/schema-markup-for-ai-citation.md).
 21. **[ClickUp 2]** Medir, no estimar: en Search Console las dimensiones `page` y `query` no son comparables (calcular el % anonimizado), se mide la **distribución** del enlazado y no la media, y una caída de tráfico no se atribuye a una actualización sin descartar medición, estacionalidad y cambios propios. Ver [measurement-traps-and-diagnosis.md](references/measurement-traps-and-diagnosis.md).
 22. **[ClickUp 2]** Todo hallazgo y toda tarea llevan **criterio de hecho verificable** y se cierran con una re-medición o re-auditoría; el estado «en revisión» no equivale a hecho. Nunca inflar horas, cifras ni resultados en un informe: se reporta el tiempo real.
+23. **[Auditoría 2026-10]** Se nombra cada página por **cómo se busca**, no por cómo la llama el negocio. El menú puede conservar la palabra de la oferta; el título SEO y el H1 siguen la búsqueda. Sin datos de demanda se escribe «sin datos»: no se inventa un volumen. Ver [service-site-seo-gate.md](references/service-site-seo-gate.md).
+24. **[Auditoría 2026-10]** Una **frase raíz** y una **intención** por URL. La unicidad de la keyword como cadena exacta **no detecta canibalización** (tres páginas con «diseño web» en el título pasan ese linter). Artículo y servicio no atacan la misma intención: el artículo toma la informativa y enlaza al servicio con anchor descriptivo en el primer tercio. Dos servicios casi iguales se fusionan o se diferencian: decisión del dueño.
+25. **[Auditoría 2026-10]** Un servicio no se publica sin su **estructura mínima** (problema, para quién y para quién no, qué incluye y qué no, proceso, plazos, precio o rango, objeciones) y sin **al menos un caso propio** de ese servicio. Una página de servicio más delgada que el artículo que la rodea pierde la búsqueda comercial. Nunca se rellena: lo que no se sabe se pide al dueño.
+26. **[Auditoría 2026-10]** El **host canónico se resuelve en el servidor**: las cuatro variantes (`http`/`https` × con/sin `www`) terminan en **un solo salto 301**, con ruta y consulta conservadas. La etiqueta `canonical` mitiga, no sustituye. Se verifica en vivo con `scripts/site_seo_gate.py --live`.
+27. **[Auditoría 2026-10]** Antes de escribir «no hay datos» se prueban **todas** las rutas de acceso disponibles (cuenta del dueño, cuenta de servicio, exportaciones). La indexación no se infiere con `site:` en un buscador que no es Google. Todo cambio de título en una URL indexada lleva fecha, línea base y medición a los 14 y 28 días.
 
 ## Flujo maestro
 
@@ -98,6 +103,7 @@ Elegir uno o varios modos:
 - `learn`: registrar un aprendizaje del trabajo para revisión posterior.
 - `onboarding` **[ClickUp]**: kickoff, auditoría inicial en 3 pasos, cuatro tipos de KWR, competidores en 7 pasos y OKR. Ver [onboarding-and-initial-audit.md](references/onboarding-and-initial-audit.md).
 - `audit` **[ClickUp]**: auditoría técnica por hallazgo, con matriz de entendimiento. Ver [technical-audit-by-finding.md](references/technical-audit-by-finding.md), [wordpress-technical-audit-checklist.md](references/wordpress-technical-audit-checklist.md) y la plantilla [audit-understanding-matrix.md](assets/templates/audit-understanding-matrix.md).
+- `gate` **[Auditoría 2026-10]**: puerta SEO para sitios de servicios y páginas nuevas (nombre por búsqueda, frase raíz e intención únicas, estructura mínima del servicio, caso propio, host canónico, lang/hreflang, alt, medición). Ver [service-site-seo-gate.md](references/service-site-seo-gate.md) y `scripts/site_seo_gate.py`.
 - `migration` **[ClickUp]**: comparar desarrollo con producción, plan de redirecciones, reporte post-migración, mapa de 404 y validación de implementaciones. Ver [migration-redirects-and-validation.md](references/migration-redirects-and-validation.md).
 - `deindex` **[ClickUp]**: retirada controlada del índice con `X-Robots-Tag`. Ver [deindexing-procedure.md](references/deindexing-procedure.md).
 - `report` **[ClickUp]** (submodo de `measure`): informe mensual o trimestral antes/después. Plantilla: [seo-report.md](assets/templates/seo-report.md).
@@ -241,7 +247,9 @@ Ejecutar cinco pasadas:
 4. Estilística.
 5. Pragmática y SEO.
 
-Usar `scripts/editorial_lint.py` como detector, no como sustituto del juicio editorial. Leer [editorial-quality-gates.md](references/editorial-quality-gates.md).
+Usar `scripts/editorial_lint.py` como detector, no como sustituto del juicio editorial.
+
+**[Auditoría 2026-10] Sitios de servicios y páginas nuevas:** antes de publicar, ejecutar `python scripts/site_seo_gate.py <build> --ignorar "<país>,<marca>"` (candidatos a canibalización por frase raíz, aperturas casi iguales, servicios delgados, `lang`/`hreflang`, `alt`, menú sin listas) y `python scripts/site_seo_gate.py --live https://<dominio> --ruta blog/` (las cuatro variantes del host). Los avisos son **candidatos** que se confirman con Search Console; los fallos bloquean. Checklist de 10 puntos en [service-site-seo-gate.md](references/service-site-seo-gate.md). Leer [editorial-quality-gates.md](references/editorial-quality-gates.md).
 
 **Puerta anti-slop (obligatoria antes de entregar o publicar contenido hecho o asistido con IA):** pasar la skill `contenido-sin-slop` (propósito para el lector, sustancia propia, procedencia y revisión humana, nada inventado; su detector `slop_lint.py` solo como ayuda). Si la pieza no pasa, se reescribe con sustancia o se descarta; no se rellena un calendario con contenido genérico.
 
@@ -337,6 +345,7 @@ El formato `SKILL.md` es común. La instalación en Claude Code la hace el insta
 - Growth-Driven Design (PAI/PMI/PBI y dashboard): [growth-driven-design-gdd.md](references/growth-driven-design-gdd.md)
 - Modelo de tareas, estados, campos y alcance: [clickup-task-operating-model.md](references/clickup-task-operating-model.md)
 - Auditoría técnica por hallazgo: [technical-audit-by-finding.md](references/technical-audit-by-finding.md)
+- **[Auditoría 2026-10]** Puerta SEO para sitios de servicios y páginas nuevas (ocho causas raíz, spam de enlaces, checklist de 10 puntos): [service-site-seo-gate.md](references/service-site-seo-gate.md); script `scripts/site_seo_gate.py` con sus pruebas `scripts/test_site_seo_gate.py`.
 - Checklist WordPress + servidor: [wordpress-technical-audit-checklist.md](references/wordpress-technical-audit-checklist.md)
 - Migración, redirecciones y validación: [migration-redirects-and-validation.md](references/migration-redirects-and-validation.md)
 - Desindexación controlada: [deindexing-procedure.md](references/deindexing-procedure.md)

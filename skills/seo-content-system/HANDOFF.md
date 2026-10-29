@@ -198,6 +198,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** Toda regla que deba llegar a la version alojada va en un archivo de references/ listado en hosted-src/knowledge-map.json, no solo en SKILL.md
 - **Herramientas:** Claude Code, tools/build_hosted.py
 
+### 2026-10-29 · caso-seo-sitio-servicios-01 · guille
+
+- **Qué se hizo:** A partir de una auditoría SEO técnica y de contenido de un sitio de servicios (75/100, técnicamente sano, sin tráfico por servicios) se derivaron las ocho causas raíz y se añadió una puerta: nueva referencia service-site-seo-gate.md, script site_seo_gate.py (estático y --live) con 16 pruebas, principios 23 a 27, modo gate y versión 1.6.0 (hosted regenerada). Las correcciones del propio sitio se prepararon aparte en una subida aislada.
+- **Salió bien:** El script reproduce sobre el build real los hallazgos que el linter del proyecto no veía: canibalización por frase raíz entre servicios, artículo frente a servicio y el host con www que responde 200 en vez de 301. Tras las correcciones, el grupo de canibalización entre servicios desaparece. Se distinguieron falsos positivos de alt (alt vacío correcto en avatar y póster con aria-label).
+- **Salió mal / incidencia:** La auditoría concluyó «sin datos» porque una cuenta no tenía acceso, mientras otra credencial del dueño sí leía Search Console y GA4; y un site: en otro buscador se leyó como baja indexación cuando la inspección de URL ya había mostrado todo indexado. El linter del proyecto exigía solo unicidad exacta de la keyword y pasaba con 0 avisos. La similitud de aperturas del script es léxica (no semántica) y queda como candidato. Incidencia: Git Bash convierte --ruta /blog/ en una ruta de Windows: el script acepta blog/ y la referencia lo documenta. La regla del .htaccess no se pudo probar en LiteSpeed desde la máquina local.
+- **Regla candidata:** Una frase raíz y una intención por URL; el host canónico se resuelve con 301 en el servidor y se verifica con las cuatro variantes (candidata: se valida cuando se repita en otro sitio).
+- **Herramientas:** site_seo_gate.py, build_hosted.py, privacy_scan.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -217,6 +225,7 @@ Relación con otras skills del repo:
 | Antes de escribir ajustes globales del plugin SEO por API, tomar foto del sameAs público y enviar el conjunto completo, no solo el campo a corregir. | caso-local-rotulos-01 | candidata |
 | Cuando una actualizacion de skill deja pendientes de decision explicitos en el HANDOFF, resolverlos y registrarlos en una entrada propia antes de log_job/publish_job, nunca asumirlos ni publicarlos en silencio. | banco-pruebas-actualizacion-v1-5-0 | candidata |
 | Toda regla que deba llegar a la version alojada va en un archivo de references/ listado en hosted-src/knowledge-map.json, no solo en SKILL.md | banco-pruebas-redaccion-blog | candidata |
+| Una frase raíz y una intención por URL; el host canónico se resuelve con 301 en el servidor y se verifica con las cuatro variantes (candidata: se valida cuando se repita en otro sitio). | caso-seo-sitio-servicios-01 | candidata |
 
 ## 2026-10-23 · Actualización a 1.3.0
 - Se instala seo-content-system 1.3.0 (marcas [ClickUp], [Obsidian], [Sheets] y [Drive]): nuevas referencias, plantillas en assets/templates y docs/CAMBIOS.md + docs/INVESTIGACION-CLICKUP-SEO.md.
