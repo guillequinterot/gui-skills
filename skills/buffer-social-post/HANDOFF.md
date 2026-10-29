@@ -48,6 +48,14 @@ Cliente seguro de la API GraphQL de Buffer para crear borradores, programar y pu
 - **Regla candidata:** Los medios alojados para publicar en redes se borran del hosting tras 'sent' (con comando que se niega antes de ese estado).
 - **Herramientas:** Python 3 estandar; API GraphQL de Buffer; SSH al hosting del usuario
 
+### 2026-10-29 · banco-pruebas-buffer-youtube-shorts · guille
+
+- **Qué se hizo:** Se añadió el soporte de YouTube al cliente (título, privacidad, categoría, contenido sintético) y se documentó con una prueba real que Buffer solo publica Shorts de YouTube (vertical o 1:1, hasta 3 minutos) y no acepta miniatura propia en videos. Se programaron después posts con video en LinkedIn, Instagram (reel) y YouTube (Short).
+- **Salió bien:** 28 pruebas sin red; el error de miniatura de video es claro; el rechazo de un video horizontal de 3:10 quedó documentado con el mensaje real de la API; la programación con confirmación explícita funcionó y se verificó con listar.
+- **Salió mal / incidencia:** El primer intento de publicar un video horizontal largo en YouTube por Buffer falló; hubo que subirlo a mano. El resultado real de video en LinkedIn, reel de Instagram y Short de YouTube se confirma cuando Buffer los envíe. Incidencia: Buffer no admite video largo ni miniatura propia en YouTube; el script lo avisa y rechaza la combinación.
+- **Regla candidata:** ninguna
+- **Herramientas:** buffer_api.py, test_buffer_api.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)

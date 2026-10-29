@@ -26,7 +26,7 @@
 | `buffer_api.py limpiar` (borrar medios del hosting tras `sent`) | **verificado** | 2026-10-28 | Prueba en vivo con una carpeta de prueba: con un post en borrador **se niega** (`NO_ENVIADO`, la carpeta sigue); con un post `sent` **borra** y la URL da 404. Solo borra `assets/social/<slug>/`; el slug se valida. Antes se había limpiado a mano `assets/social/` (5 archivos, ≈ 900 KB). Regla del dueño |
 | Comprobación de URL pública (HEAD) | verificado | 2026-10-28 | 200, `image/jpeg`, sin redirección, también con un User-Agent de robot |
 | `programar`, `cola` | **sin probar** | — | Documentados; solo con orden explícita del dueño |
-| Video, documento (PDF) | **sin probar** | — | Tipos de entrada confirmados por introspección (`VideoAssetInput`, `DocumentAssetInput`), no publicados |
+| Video, documento (PDF) | **video horizontal en YouTube: falla** · documento sin probar | 2026-10-28 | YouTube por Buffer admite solo Shorts (≤ 3 min, 9:16 o 1:1) y no acepta miniatura propia (ver `references/02`); video para LinkedIn/Instagram y PDF sin probar |
 | Metadatos de YouTube y `annotations`/`linkAttachment` de LinkedIn | **tipos confirmados, sin implementar** | 2026-10-28 | Por introspección: LinkedIn `annotations`, `linkAttachment`; YouTube `title`, `privacy` (`private`/`public`/`unlisted`), `categoryId`… |
 | Explorador web (`developers.buffer.com/explorer.html`) | **no usado** | 2026-10-28 | Pide teclear la clave en un formulario de la página; no se hace. El mismo esquema se obtiene por introspección con `buffer_api.py`/consulta directa |
 | Cuota | observado | 2026-10-28 | Cuenta con 3.000 solicitudes cada 30 días; las pruebas gastaron ~13 |

@@ -110,6 +110,8 @@ def assets_desde_args(a):
             sal({"error": "DOCUMENTO_INCOMPLETO", "ayuda": "Un documento (PDF) exige --miniatura y --titulo."}, 2)
         assets.append({"document": {"url": a.documento, "thumbnailUrl": a.miniatura, "title": a.titulo}})
     if a.video:
+        if a.miniatura and not a.documento:  # la API lo rechaza (verificado 2026-10-28): las redes no aceptan miniatura propia
+            sal({"error": "MINIATURA_VIDEO_NO_SOPORTADA", "ayuda": "Buffer rechaza thumbnailUrl en videos: ponla a mano en la red (p. ej. YouTube Studio)."}, 2)
         assets.append({"video": {"url": a.video}})
     for x in assets:
         for u in [v for sub in x.values() for v in ([sub.get("url"), sub.get("thumbnailUrl")] if isinstance(sub, dict) else [])]:
@@ -135,6 +137,17 @@ def metadatos_desde_args(a, servicio):
         meta["instagram"] = {"type": tipo, "shouldShareToFeed": True}
         if a.primer_comentario:
             meta["instagram"]["firstComment"] = a.primer_comentario
+    elif servicio == "youtube":
+        if not a.video:
+            sal({"error": "YOUTUBE_SIN_VIDEO", "ayuda": "YouTube exige --video (URL pública del MP4)."}, 2)
+        if not a.yt_titulo:
+            sal({"error": "YOUTUBE_SIN_TITULO", "ayuda": "YouTube exige --yt-titulo (máx. 100 caracteres)."}, 2)
+        if utf16(a.yt_titulo) > 100:
+            sal({"error": "YOUTUBE_TITULO_LARGO", "caracteres": utf16(a.yt_titulo), "limite": 100}, 2)
+        if a.primer_comentario or a.ig_tipo:
+            sal({"error": "METADATO_NO_SOPORTADO", "ayuda": "--primer-comentario y --ig-tipo no aplican a YouTube."}, 2)
+        meta["youtube"] = {"title": a.yt_titulo, "categoryId": a.yt_categoria, "privacy": a.yt_privacidad, "license": "youtube",
+                           "embeddable": True, "madeForKids": False, "notifySubscribers": True, "isAiGenerated": bool(a.yt_ia)}
     elif servicio == "linkedin" and a.primer_comentario:
         meta["linkedin"] = {"firstComment": a.primer_comentario}
     elif a.primer_comentario or a.ig_tipo:
@@ -284,6 +297,10 @@ def main():
         c.add_argument("--cuando"); c.add_argument("--confirmo", action="store_true")
         c.add_argument("--ig-tipo", choices=TIPOS_INSTAGRAM, help="Instagram: post (por defecto; varias imágenes = carrusel), reel o story")
         c.add_argument("--primer-comentario", help="LinkedIn o Instagram")
+        c.add_argument("--yt-titulo", help="YouTube: título (máx. 100); el texto del post es la descripción. OJO: Buffer solo publica YouTube Shorts (≤ 3 min, 9:16 o 1:1); un video horizontal largo se rechaza")
+        c.add_argument("--yt-privacidad", choices=("private", "unlisted", "public"), default="private", help="YouTube: por defecto private (seguro)")
+        c.add_argument("--yt-categoria", default="27", help="YouTube: categoryId (27 = Educación)")
+        c.add_argument("--yt-ia", action="store_true", help="YouTube: marca el video como contenido alterado o sintético (voz generada con IA)")
     e = s.add_parser("eliminar"); e.add_argument("--post", required=True); e.add_argument("--confirmo", action="store_true")
     lm = s.add_parser("limpiar", help="Tras 'sent': borra del hosting la carpeta de medios del post y comprueba el 404")
     lm.add_argument("--slug", required=True); lm.add_argument("--post", required=True); lm.add_argument("--org", required=True); lm.add_argument("--canal", required=True)
