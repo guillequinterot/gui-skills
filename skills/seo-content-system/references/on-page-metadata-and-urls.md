@@ -116,3 +116,7 @@ No redirigir muchas páginas diferentes a una home genérica.
 - **H2 en forma de pregunta** para landings de servicio, ciudad o industria (lista de 21 variantes usada como plantilla) más los módulos a añadir (instituciones, ciudades). «Humanizar» una landing: texto natural en el idioma de la audiencia, sin rebuscar, con enlaces, módulos y FAQs hiperpersonalizadas.
 - **Taxonomías y categorías del blog:** plantilla única de archivo administrable, tarjetas, paginación y mensaje de vacío estándar. Si se dejan indexables categorías vacías, marcarlo como **riesgo de contenido delgado** y documentar el motivo y la alternativa (`noindex` hasta tener entradas). Verificar en el código fuente, no en el inspector.
 - **SEO + CRO en on-page:** CTA claro por tipo de página, banners de conversión, página de gracias para medir y mapas de calor sobre las transaccionales prioritarias.
+
+
+## Procedimiento de redacción (SEO Skills, 2026-10-30)
+Para producir title y metadescripción de forma repetible (tres opciones, conteo de caracteres, reglas de puntuación, límites por tanda y salida estructurada), ver [title-and-description-generation.md](title-and-description-generation.md). Ojo con los rangos: uno es el de **auditoría** (title 30 a 60, descripción 70 a 160) y otro el de **redacción** (title 45 a 55, descripción 150 a 160, nunca más de 165). La regla del cliente manda sobre ambos.

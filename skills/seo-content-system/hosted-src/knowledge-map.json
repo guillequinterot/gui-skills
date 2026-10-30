@@ -40,6 +40,7 @@
       "sources": [
         "references/on-page-metadata-and-urls.md",
         "references/image-seo-and-accessibility.md",
+        "references/title-and-description-generation.md",
         "references/structured-data-and-search-features.md",
         "references/schema-markup-for-ai-citation.md"
       ]
@@ -53,6 +54,9 @@
         "references/technical-seo-and-indexability.md",
         "references/technical-seo-lineamientos-generales.md",
         "references/ai-crawler-access-and-llms-txt.md",
+        "references/robots-txt-audit-and-generation.md",
+        "references/rendered-html-crawl.md",
+        "references/audit-scoring-and-weights.md",
         "references/technical-audit-by-finding.md",
         "references/wordpress-technical-audit-checklist.md",
         "references/migration-redirects-and-validation.md",

@@ -5,7 +5,7 @@ description: Investiga, planifica, redacta, optimiza, audita, mide y actualiza c
 
 # SEO Content System
 
-> Versión 1.6.0 (sobre la 1.5.0: **puerta SEO para sitios de servicios y páginas nuevas**, marcada **[Auditoría 2026-10]**, derivada de una auditoría real: principios 23 a 27, modo `gate`, referencia `service-site-seo-gate.md` y script `site_seo_gate.py`; ver `docs/CAMBIOS.md`). En la 1.5.0 (sobre la 1.4.0: segunda pasada por ClickUp, Obsidian y Drive, marcada **[ClickUp 2]**: contrato por fases y control de alcance, lanzamiento de sitio nuevo, e-commerce multipaís, SEO de oferta académica, trampas de medición y diagnóstico de caídas, criterio de hecho por hallazgo; ver `docs/CAMBIOS.md`). En la 1.4.0: higiene de archivos, retiro de datos, schema con Rank Math y sin precio, riesgo de ajustes globales, matriz con brief por hallazgo, YMYL. En la 1.3.0, Las marcas **[ClickUp]**, **[Obsidian]**, **[Sheets]** y **[Drive]** señalan lo que se añadió sobre la 1.2.0, a partir de la metodología interna de la agencia (anonimizada), de la bóveda del usuario, de 18 libros de Google Sheets del equipo y de Docs, Slides y .xlsx de su Drive (solo estructura). Todo lo que no lleva marca sigue igual. Detalle en [`docs/CAMBIOS.md`](docs/CAMBIOS.md).
+> Versión 1.7.0 (sobre la 1.6.0: **metodología de SEO Skills integrada**, marcada **[SEO Skills 2026-10]**: auditoría con puntuación, robots.txt (RFC 9309 y 22 bots), HTML renderizado, procedimiento para title y metadescripción, umbrales de imágenes, auditoría del grafo de enlaces y mapa de clústeres frente al sitio; corrige además el ejemplo de `Allow: /` por bot de IA; ver `docs/CAMBIOS.md`). En la 1.6.0 (sobre la 1.5.0: **puerta SEO para sitios de servicios y páginas nuevas**, marcada **[Auditoría 2026-10]**, derivada de una auditoría real: principios 23 a 27, modo `gate`, referencia `service-site-seo-gate.md` y script `site_seo_gate.py`; ver `docs/CAMBIOS.md`). En la 1.5.0 (sobre la 1.4.0: segunda pasada por ClickUp, Obsidian y Drive, marcada **[ClickUp 2]**: contrato por fases y control de alcance, lanzamiento de sitio nuevo, e-commerce multipaís, SEO de oferta académica, trampas de medición y diagnóstico de caídas, criterio de hecho por hallazgo; ver `docs/CAMBIOS.md`). En la 1.4.0: higiene de archivos, retiro de datos, schema con Rank Math y sin precio, riesgo de ajustes globales, matriz con brief por hallazgo, YMYL. En la 1.3.0, Las marcas **[ClickUp]**, **[Obsidian]**, **[Sheets]** y **[Drive]** señalan lo que se añadió sobre la 1.2.0, a partir de la metodología interna de la agencia (anonimizada), de la bóveda del usuario, de 18 libros de Google Sheets del equipo y de Docs, Slides y .xlsx de su Drive (solo estructura). Todo lo que no lleva marca sigue igual. Detalle en [`docs/CAMBIOS.md`](docs/CAMBIOS.md).
 
 ## Protocolo gui-skills (obligatorio)
 
@@ -218,7 +218,7 @@ Cuando aplique, incluir:
 - Formatos complementarios previstos (video, audio, PDF) y su enlace de vuelta.
 - Estado de evidencia de cada afirmación: dato propio, fuente primaria, estudio de terceros o hipótesis.
 
-Leer [on-page-metadata-and-urls.md](references/on-page-metadata-and-urls.md), [image-seo-and-accessibility.md](references/image-seo-and-accessibility.md) y [structured-data-and-search-features.md](references/structured-data-and-search-features.md).
+Leer [on-page-metadata-and-urls.md](references/on-page-metadata-and-urls.md), [title-and-description-generation.md](references/title-and-description-generation.md) **[SEO Skills 2026-10]** (cómo producir title y metadescripción), [image-seo-and-accessibility.md](references/image-seo-and-accessibility.md) y [structured-data-and-search-features.md](references/structured-data-and-search-features.md).
 
 ### 7. Medir y decidir
 
@@ -345,6 +345,9 @@ El formato `SKILL.md` es común. La instalación en Claude Code la hace el insta
 - Growth-Driven Design (PAI/PMI/PBI y dashboard): [growth-driven-design-gdd.md](references/growth-driven-design-gdd.md)
 - Modelo de tareas, estados, campos y alcance: [clickup-task-operating-model.md](references/clickup-task-operating-model.md)
 - Auditoría técnica por hallazgo: [technical-audit-by-finding.md](references/technical-audit-by-finding.md)
+- **[SEO Skills 2026-10]** Auditoría general con categorías, pesos y puntuación: [audit-scoring-and-weights.md](references/audit-scoring-and-weights.md)
+- **[SEO Skills 2026-10]** robots.txt (auditar, validar, generar; RFC 9309; bots de referencia): [robots-txt-audit-and-generation.md](references/robots-txt-audit-and-generation.md)
+- **[SEO Skills 2026-10]** Rastreo con HTML renderizado para sitios con JavaScript: [rendered-html-crawl.md](references/rendered-html-crawl.md)
 - **[Auditoría 2026-10]** Puerta SEO para sitios de servicios y páginas nuevas (ocho causas raíz, spam de enlaces, checklist de 10 puntos): [service-site-seo-gate.md](references/service-site-seo-gate.md); script `scripts/site_seo_gate.py` con sus pruebas `scripts/test_site_seo_gate.py`.
 - Checklist WordPress + servidor: [wordpress-technical-audit-checklist.md](references/wordpress-technical-audit-checklist.md)
 - Migración, redirecciones y validación: [migration-redirects-and-validation.md](references/migration-redirects-and-validation.md)

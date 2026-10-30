@@ -320,7 +320,7 @@ def revisar_host(base, ruta, sin_tls=False, resolver=None):
     b = urlsplit(base)
     apex = b.hostname[4:] if b.hostname.startswith("www.") else b.hostname
     canon = f"https://{apex}{ruta}"
-    fallos, ok = [], []
+    fallos, ok, avisos = [], [], []
     variantes = [f"https://{apex}{ruta}", f"http://{apex}{ruta}", f"http://www.{apex}{ruta}", f"https://www.{apex}{ruta}"]
     for v in variantes:
         try:
@@ -333,12 +333,31 @@ def revisar_host(base, ruta, sin_tls=False, resolver=None):
         elif st in (301, 308) and loc.rstrip("/") == canon.rstrip("/"):
             ok.append(f"{v}: {st} -> {loc} (un solo salto)")
         elif st in (301, 308):
-            fallos.append(f"{v}: {st} -> {loc} (no llega a la canonica {canon} en un salto; puede ser una cadena)")
+            # cadena: se siguen hasta 3 saltos; si todos son 301 y termina en la canonica, es un AVISO (cadena), no un fallo
+            saltos, actual, fin = 1, loc, None
+            while saltos < 4:
+                try:
+                    st2, loc2 = pedir(actual, sin_tls, resolver)
+                except Exception:
+                    break
+                if st2 in (301, 308):
+                    saltos += 1
+                    actual = loc2
+                    if actual.rstrip("/") == canon.rstrip("/"):
+                        fin = True
+                        break
+                else:
+                    fin = st2 == 200 and actual.rstrip("/") == canon.rstrip("/")
+                    break
+            if fin:
+                avisos.append(f"{v}: {saltos} saltos 301 hasta la canonica (cadena; lo ideal es un solo salto)")
+            else:
+                fallos.append(f"{v}: {st} -> {loc} (no llega a la canonica {canon} en menos de 4 saltos)")
         elif st in (302, 303, 307):
             fallos.append(f"{v}: redireccion temporal {st} -> {loc} (debe ser 301)")
         else:
             fallos.append(f"{v}: responde {st} en lugar de redirigir con 301 a {canon}")
-    return {"canonica": canon, "ok": ok, "fallos": fallos}
+    return {"canonica": canon, "ok": ok, "avisos": avisos, "fallos": fallos}
 
 
 def main(argv=None):
@@ -382,6 +401,8 @@ def main(argv=None):
             print(f"\nHOST canonico {h['canonica']}")
             for x in h["ok"]:
                 print("  OK   ", x)
+            for x in h.get("avisos", []):
+                print("  AVISO", x)
             for x in h["fallos"]:
                 print("  FALLA", x)
         print("\nRESULTADO:", "SIN FALLOS" if nf == 0 else f"{nf} fallo(s)")

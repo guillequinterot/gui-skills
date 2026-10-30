@@ -114,3 +114,40 @@ Medir no solo clics, sino calidad del paso:
 - Un bloque de «relacionados» sin taxonomía ni orden concentra el enlazado en unas pocas URLs: ver [measurement-traps-and-diagnosis.md](measurement-traps-and-diagnosis.md).
 - **Sitio sin menú ni pie** (home por perfiles): compensar con páginas agrupadoras y enlaces en el cuerpo.
 - Páginas agrupadoras de entidades (docentes, investigadores): una URL agrupadora y una interna por persona, con un módulo «carreras donde imparte» que enlace hacia la oferta; publicar solo perfiles aprobados.
+
+
+
+## Auditoría del grafo de enlaces: orden de trabajo y mezcla de anchors (SEO Skills, 2026-10-30)
+
+Origen: skill `internal-linking` de `seo-skills.com` (Jorge Jaramillo), reformulada; el repositorio no declara licencia. Valores **iniciales**, no estándar.
+
+### Datos
+- Reutilizar el rastreo existente o extraer de un sitemap (unas 100 URLs). Con **menos de 20 páginas**, el resultado de huérfanas es solo indicativo.
+- Un sitemap ayuda a encontrar huérfanas que el rastreo no alcanza. Decir siempre la fuente de cada dato: rastreo, sitemap, analítica o inferencia.
+- Métricas útiles por página: enlaces entrantes (orígenes únicos), profundidad de clic desde la home, páginas enlazadas solo desde menú o pie, zona del enlace, anchors genéricos y destinos fuera del rastreo.
+
+### Seis frentes de análisis
+1. **Huérfanas:** la prioridad más alta. Decidir caso por caso: enlazar (si es relevante), redirigir o eliminar (si es obsoleta o delgada), y nombrar las páginas de origen.
+2. **Páginas de negocio con pocos enlaces:** comparar las que más enlaces reciben con las que deberían recibirlos.
+3. **Faltan enlaces contextuales:** los del menú o pie aportan poco contexto; leer páginas relacionadas y proponer puntos de inserción.
+4. **Clústeres:** pilar ↔ artículos en ambos sentidos, y artículos hermanos entre sí.
+5. **Anchors:** genéricos ("haz clic aquí"), sobreoptimizados (siempre la misma coincidencia exacta) o poco descriptivos. Mezcla de referencia: exacta 10 a 20 %, parcial 30 a 40 %, marca o natural 20 a 30 %, genérica 10 a 20 %.
+6. **Profundidad:** páginas importantes a más de 3 clics de la home.
+
+Cada recomendación de enlace lleva **origen, destino, anchor sugerido, dónde (sección o párrafo) y motivo**, en tabla (ver también `assets/templates/internal-linking-matrix.csv`).
+
+### Orden de prioridad
+1. Huérfanas con tráfico o posiciones (retorno más rápido).
+2. Páginas de negocio con pocos enlaces, enlazadas desde páginas con autoridad.
+3. Cerrar clústeres.
+4. Sustituir anchors genéricos en enlaces importantes.
+5. Enlaces contextuales en contenido que ya recibe tráfico.
+6. Ajustes de menú y pie (alcance en todo el sitio, poco valor por enlace).
+
+### Puntuación (valores iniciales)
+Parte de 100 y resta: 5 por cada 5 % de páginas huérfanas · 10 si más del 10 % de las páginas están a más de 3 clics · 10 si las páginas de negocio no tienen enlaces contextuales · 5 si más del 10 % de los anchors son genéricos · 10 si los enlaces internos llevan `nofollow` · 5 por cada destino interno roto. Mínimo 0.
+
+### Reglas
+- Nunca recomendar "añadir más enlaces internos" en abstracto: siempre origen → destino → anchor.
+- No recomendar enlazar a páginas con `noindex` ni con canonical hacia otra URL.
+- El canonical y el robots de una página se leen en los datos extraídos, no con un lector de texto.

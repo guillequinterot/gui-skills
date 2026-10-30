@@ -70,3 +70,7 @@ Hallazgos propios de una tienda en Shopify (errores de Liquid, sitemap raíz con
 
 ### Tarea de Page Speed (plantilla)
 Metas TTFB/LCP/FCP → diagnóstico **servidor primero** → plan de 8 pasos con minutos y **respaldo previo** → «qué NO tocar» → entrega antes/después por URL. Detalle del orden de ataque en [ecommerce-seo-multicountry.md](ecommerce-seo-multicountry.md#plan-de-rendimiento-y-seguridad-en-20-tareas).
+
+
+## Auditoría general con puntuación (SEO Skills, 2026-10-30)
+Este archivo gestiona cada hallazgo como tarea. Para **descubrir, puntuar y priorizar** hallazgos en una auditoría general (categorías con peso, deducción por gravedad y confianza, bandas, cuatro niveles de acción), ver [audit-scoring-and-weights.md](audit-scoring-and-weights.md). Para robots.txt y para el HTML renderizado: [robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md) y [rendered-html-crawl.md](rendered-html-crawl.md).

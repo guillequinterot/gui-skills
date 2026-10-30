@@ -1,4 +1,4 @@
-<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella 4c8ce5079279). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
+<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella bc4448ff7a22). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
 
 # Redacción, estilo y calidad editorial
 
@@ -655,6 +655,10 @@ Gate de QA completo para páginas de programa: [education-program-seo.md](educat
 **Contenido de recaudación y causas sociales (YMYL ligero):** no inventar cifras, testimonios ni beneficios tributarios; `[PENDIENTE]` solo en el borrador, nunca en producción; cifras oficiales «por validar»; pie de foto que aclare que son proyectos anteriores. Ver [launch-checklist-new-site.md](launch-checklist-new-site.md).
 
 **Seguridad en tareas y hojas:** no pegar credenciales ni direcciones IP de infraestructura del cliente en tareas, comentarios ni hojas; usar un gestor de contraseñas y registrar solo «acceso concedido sí/no».
+
+
+## Puntaje por bloque y excepciones SEO (2026-10-30)
+La skill `contenido-sin-slop` tiene una escala 1 a 100 por bloque y una lista de **excepciones SEO** (repetir la keyword en títulos, encabezados, introducción y preguntas frecuentes no es relleno; sí lo es el relleno de keywords dentro de una oración): `contenido-sin-slop/references/07-puntaje-por-bloque-y-excepciones-seo.md`.
 
 ---
 

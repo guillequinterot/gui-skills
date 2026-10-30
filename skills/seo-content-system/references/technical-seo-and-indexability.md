@@ -124,3 +124,9 @@ Antes y después:
 - **Seguridad e i18n:** cabeceras (CSP primero en Report-Only, HSTS, `X-Content-Type-Options`, `X-Frame-Options`), protección XSS/CSRF, librerías sin vulnerabilidades conocidas, `<html lang>` correcto por idioma y `hreflang` para evitar duplicados entre idiomas.
 - **Sitemap y robots** (tarea corta): solo páginas esenciales indexables, actualización automática, enviar a Search Console y revisar el informe de estado, robots que controle lo no relevante y declare el sitemap.
 - Trampas de medición y de WordPress con constructores visuales: [measurement-traps-and-diagnosis.md](measurement-traps-and-diagnosis.md) y [wordpress-technical-audit-checklist.md](wordpress-technical-audit-checklist.md).
+
+
+## Detalle por tema (SEO Skills, 2026-10-30)
+- Sintaxis, coincidencia de reglas, auditoría y generación de `robots.txt`: [robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md).
+- HTML renderizado para sitios con JavaScript y comparación con el HTML inicial: [rendered-html-crawl.md](rendered-html-crawl.md).
+- Auditoría general con categorías, pesos y puntuación: [audit-scoring-and-weights.md](audit-scoring-and-weights.md).

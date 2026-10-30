@@ -1,4 +1,4 @@
-<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella 67ce8ed9003e). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
+<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella 4f7d7193e9df). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
 
 # SEO técnico y acceso de bots de IA
 
@@ -129,6 +129,12 @@ Antes y después:
 - **Seguridad e i18n:** cabeceras (CSP primero en Report-Only, HSTS, `X-Content-Type-Options`, `X-Frame-Options`), protección XSS/CSRF, librerías sin vulnerabilidades conocidas, `<html lang>` correcto por idioma y `hreflang` para evitar duplicados entre idiomas.
 - **Sitemap y robots** (tarea corta): solo páginas esenciales indexables, actualización automática, enviar a Search Console y revisar el informe de estado, robots que controle lo no relevante y declare el sitemap.
 - Trampas de medición y de WordPress con constructores visuales: [measurement-traps-and-diagnosis.md](measurement-traps-and-diagnosis.md) y [wordpress-technical-audit-checklist.md](wordpress-technical-audit-checklist.md).
+
+
+## Detalle por tema (SEO Skills, 2026-10-30)
+- Sintaxis, coincidencia de reglas, auditoría y generación de `robots.txt`: [robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md).
+- HTML renderizado para sitios con JavaScript y comparación con el HTML inicial: [rendered-html-crawl.md](rendered-html-crawl.md).
+- Auditoría general con categorías, pesos y puntuación: [audit-scoring-and-weights.md](audit-scoring-and-weights.md).
 
 ---
 
@@ -434,6 +440,7 @@ Distinción operativa central, ya alineada con "entrenamiento vs. recuperación"
 - `OAI-SearchBot` (OpenAI)
 - `PerplexityBot` (Perplexity)
 - `ChatGPT-User` (agente de usuario cuando una persona pide a ChatGPT que visite una URL)
+- `Claude-SearchBot` y `Claude-User` (Anthropic: búsqueda y agente de usuario), `Perplexity-User`, `DuckAssistBot`: nombres tomados de la lista de `seo-skills.com` (2026-10-30), por verificar en la documentación de cada proveedor. Lista completa de 22 bots en [robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md).
 
 **Postura por tipo de negocio (criterio, no regla universal):** una empresa cuyo contenido *es* el producto (medio, proveedor de datos) puede considerar bloquear bots de entrenamiento mientras deja abiertos los de recuperación, protegiendo propiedad intelectual sin perder visibilidad conversacional. Una empresa que vende productos o servicios normalmente gana más dejando ambos grupos sin restricción, porque su objetivo es visibilidad máxima, no protección editorial.
 
@@ -445,26 +452,28 @@ Decisión de bloqueo/apertura: corresponde a marketing (qué bots importan para 
 
 **Paso 1 — Auditar la configuración actual.** Abrir `tudominio.com/robots.txt` y revisar línea por línea. Buscar directivas genéricas tipo `User-agent: *` seguidas de `Disallow: /` heredadas de plantillas o plugins de seguridad — bloquean todo tráfico automatizado sin distinguir bots de IA legítimos de scrapers maliciosos.
 
-**Paso 2 — Definir postura explícita por grupo de bots**, nunca dejarlo en una directiva genérica ambigua. Ejemplo para maximizar visibilidad (empresa que vende productos/servicios):
+**Paso 2 — Definir postura explícita por tipo de bot, sin escribir grupos para los bots permitidos.** `robots.txt` solo puede denegar: "permitir" no se escribe, se omite. Un bot sin regla propia cae bajo `User-agent: *` y puede rastrear todo lo que ese grupo no bloquee. **Cuidado con el error contrario:** un bot que tiene su **propio grupo ignora por completo el grupo `*`**. Por eso un bloque como `User-agent: GPTBot` + `Allow: /` no "abre la puerta" sino que deja a ese bot sin los `Disallow` de rutas sensibles del grupo `*` (panel, área de cliente). Ejemplo de política "visibilidad máxima" (empresa que vende productos o servicios):
+
+```text
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /area-cliente/
+
+Sitemap: https://tudominio.com/sitemap.xml
+```
+
+Si se decide **bloquear** el entrenamiento, se añaden grupos solo para esos bots (y si alguno necesita rutas sensibles bloqueadas, se repiten dentro de su grupo):
 
 ```text
 User-agent: GPTBot
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
 User-agent: Google-Extended
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
+Disallow: /
 ```
 
-**Paso 3 — Mantener rutas sensibles bloqueadas para todos los bots por igual** (paneles administrativos, áreas de cliente, contenido interno) — abrir la puerta a la IA no implica exponer lo que ninguna audiencia externa debería consultar.
+Sintaxis, reglas de coincidencia (gana el patrón más largo; en empate, `Allow`), lista de bots y puntuación en [robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md).
+
+**Paso 3 — Mantener rutas sensibles bloqueadas para todos los bots por igual** (paneles administrativos, áreas de cliente, contenido interno) — abrir la puerta a la IA no implica exponer lo que ninguna audiencia externa debería consultar. Ojo: robots.txt es público; la protección real de esas rutas va en el servidor.
 
 **Paso 4 — Referenciar el sitemap dentro del mismo archivo**: `Sitemap: https://tudominio.com/sitemap.xml`. Confirmar que esa URL responde 200, no 404.
 
@@ -493,6 +502,7 @@ Advertencia operativa: una configuración correcta hoy puede quedar obsoleta sin
 ## Errores frecuentes
 
 - Heredar `Disallow: /` genérico de una plantilla o plugin de seguridad sin revisarlo nunca.
+- Escribir un grupo `Allow: /` por cada bot de IA: cada grupo propio anula las reglas de `*` para ese bot.
 - Delegar la decisión de qué bots permitir exclusivamente a tecnología, sin criterio de negocio de marketing.
 - Bloquear bots de IA pensando que son scrapers maliciosos sin verificar el user-agent real.
 - Omitir la línea `Sitemap:` dentro de robots.txt.
@@ -512,6 +522,327 @@ Advertencia operativa: una configuración correcta hoy puede quedar obsoleta sin
 - ¿Existe un reporte compartido entre marketing y tecnología con la fecha de cada revisión?
 
 Fuente primaria: [Checklist técnico para que los motores de IA puedan rastrear tu sitio](https://loscreativos.co/blog/acciones-para-que-motores-ia-rastreen-sitio-web/) — Los Creativos, 19 de agosto de 2026. Autoría: Juan David Uribe Taquez, con citas de Fabio Araujo, David Martínez Mata y Esteban Ortiz.
+
+---
+
+## Fuente original: `robots-txt-audit-and-generation.md`
+
+# robots.txt: auditar, validar y generar
+
+## Índice
+
+- Tres modos
+- Estado de la evidencia
+- Datos que hay que reunir
+- Cómo se lee un robots.txt (RFC 9309 y comportamiento de Google)
+- Orden de análisis
+- Bots de referencia
+- Generar un robots.txt
+- Puntuación
+- Reglas
+- Errores frecuentes
+
+Este archivo es el detalle de sintaxis y evaluación. La **postura de negocio** sobre bots de IA (entrenamiento frente a recuperación) y el archivo `llms.txt` están en [ai-crawler-access-and-llms-txt.md](ai-crawler-access-and-llms-txt.md); el rastreo en general, en [technical-seo-and-indexability.md](technical-seo-and-indexability.md).
+
+## Tres modos
+
+- **Auditar** el archivo publicado.
+- **Validar** un borrador antes de subirlo.
+- **Generar** uno nuevo.
+
+Los tres terminan en un informe con el archivo actual, el propuesto y la evidencia de cada hallazgo. El archivo es pequeño: se lee completo, no hace falta un script.
+
+**Entradas:** el dominio o el texto pegado; para generar, la plataforma (WordPress, Shopify, Next…) y la **política de IA** (bloquear entrenamiento, bloquear todo, permitir todo). Si no se menciona una política de IA, no se añade ningún bloque de IA. Rutas concretas que el usuario quiera probar, opcional.
+
+## Estado de la evidencia
+
+Sintaxis y reglas de coincidencia: RFC 9309 y la documentación de Google sobre robots.txt (fuentes primarias; ver [official-source-register.md](official-source-register.md)). La **lista de bots** y el **sistema de puntuación** vienen de la skill `robots` de `seo-skills.com` (Jorge Jaramillo, consultada el 2026-10-30; el repositorio no declara licencia, por eso aquí está reformulado). La lista de user-agents **no se verificó** contra la documentación de cada proveedor: antes de bloquear un bot en un cliente real, confirmar su nombre y su función en la documentación del proveedor, porque los nombres cambian.
+
+## Datos que hay que reunir
+
+1. Descargar `robots.txt` y anotar **estado HTTP, tamaño y URL final** (puede haber redirección).
+2. Por cada línea `Sitemap:`, comprobar que responde y tomar una muestra de hasta unas 30 URLs.
+3. Si es un índice de sitemaps, repetir en uno o dos sitemaps hijos.
+4. Decir el tamaño de la muestra ("30 de 1.200 URLs probadas").
+
+## Cómo se lee un robots.txt (RFC 9309 y comportamiento de Google)
+
+**Sintaxis**
+
+- Directivas válidas: `User-agent`, `Allow`, `Disallow`, `Sitemap` y `Crawl-delay` (Google la ignora). Cualquier otra es un error.
+- Un **grupo** es una o más líneas `User-agent` seguidas de reglas. Una regla antes de cualquier `User-agent` es un error.
+- Los nombres de directiva no distinguen mayúsculas; las **rutas sí**.
+- `Disallow:` vacío permite todo. `Sitemap:` va fuera de los grupos y con URL absoluta.
+- Estado HTTP del archivo: **404** = todo permitido; **5xx** = Google deja de rastrear el sitio mientras dure; si pesa más de **500 KiB**, se trunca y lo que sobra se ignora.
+
+**Qué grupo se aplica a un bot**
+
+- Se usa el grupo cuyo `User-agent` coincide de la forma **más específica**.
+- Si el bot tiene grupo propio, **ignora por completo el grupo `*`**. Este es el origen de muchos errores: un bot con grupo propio no hereda los `Disallow` de `*`.
+- Google sí fusiona varios grupos que declaran el mismo user-agent.
+
+**Qué regla gana para una URL** (se compara contra ruta más parámetros)
+
+1. Se toman todas las reglas del grupo aplicable cuyo patrón coincide con el inicio de la ruta. `*` equivale a cualquier secuencia; `$` ancla al final.
+2. Gana el patrón **más largo** (por caracteres).
+3. Si empatan, gana `Allow`. Si nada coincide, la URL está permitida.
+
+## Orden de análisis
+
+1. **Indexación.** Aplicar las reglas de Googlebot a la muestra del sitemap y a las rutas del usuario. Una URL del sitemap bloqueada es de gravedad alta o crítica. Comprobar si se bloquea CSS o JavaScript necesario para renderizar.
+2. **Sitemaps.** Declarados, con URL absoluta, que responden 200 y contienen páginas que existen.
+3. **Presupuesto de rastreo.** En sitios grandes: búsqueda interna, filtros o facetas y parámetros de orden sin bloquear.
+4. **Bots de IA.** Por cada bot de referencia, decidir si está bloqueado (`Disallow`) o sin regla propia (cae bajo `*`). Error común: bloquear los bots de búsqueda al querer bloquear solo el entrenamiento.
+5. **Seguridad.** Rutas sensibles expuestas: el archivo es público y listar una ruta la anuncia. La protección real va en el servidor, no en robots.txt.
+6. **Malentendidos.** `Disallow` no es `noindex`: al bloquear una URL, Google no puede leer su canonical ni su `noindex`, y la URL aún puede aparecer indexada sin descripción.
+
+## Bots de referencia
+
+Solo sirve para decidir qué bloquear. No se escribe un grupo por cada bot.
+
+| Tipo | Bots |
+|---|---|
+| Entrenamiento (13) | GPTBot, ClaudeBot, anthropic-ai, Google-Extended, Applebot-Extended, CCBot, Bytespider, Meta-ExternalAgent, FacebookBot, Amazonbot, cohere-training-data-crawler, Diffbot, AI2Bot |
+| Búsqueda y agente de usuario de IA (7) | OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User, DuckAssistBot |
+| Buscadores (2) | Googlebot, Bingbot |
+
+Recordatorio de la distinción de fondo (detalle en [ai-crawler-access-and-llms-txt.md](ai-crawler-access-and-llms-txt.md)): bloquear un bot de **entrenamiento** tiene efecto diferido; bloquear uno de **búsqueda o de agente de usuario** corta la visibilidad conversacional de inmediato.
+
+## Generar un robots.txt
+
+- **Solo `Disallow`**, y solo para rutas **confirmadas** en el sitio (sitemap, navegación o el usuario). Nunca rutas inventadas.
+- Escribir `User-agent: *` y **grupos solo para los bots que se quiere bloquear**. Nada de grupos para bots permitidos y nada de `Allow: /` para Googlebot: no hace falta, y un grupo propio vuelve a ese bot ciego a las reglas de `*`.
+- Si por algún motivo un bot permitido necesita grupo propio, **repetir en ese grupo los `Disallow` de rutas sensibles** del grupo `*`.
+- Orden: grupo `*`, grupos de bots bloqueados (entrenamiento o búsqueda, según la política), líneas `Sitemap:` al final.
+- Sin comentarios ni cabeceras decorativas.
+- Antes de entregar: pasar la revisión de sintaxis, probar la muestra del sitemap y confirmar que **nada indexable queda bloqueado**.
+
+## Puntuación
+
+Parte de 100 y resta:
+
+| Causa | Puntos |
+|---|---|
+| Todo el sitio bloqueado, o URLs importantes del sitemap bloqueadas | −40 |
+| Respuesta 5xx del archivo | −25 |
+| CSS o JavaScript necesario para renderizar bloqueado | −15 |
+| Sin sitemap declarado, o roto | −10 |
+| Cada error de sintaxis | −5 |
+| Política de IA inconsistente | −5 |
+
+Mínimo 0. Si se integra en una auditoría general, esta nota alimenta la categoría "Rastreo e indexación" de [audit-scoring-and-weights.md](audit-scoring-and-weights.md).
+
+## Reglas
+
+- **Nunca se modifica el robots.txt en vivo.** Se entrega la versión propuesta lista para copiar y la actual para comparar.
+- Al probar URLs, mostrar la **regla ganadora** de cada una: es la evidencia del hallazgo.
+- Si la muestra es pequeña, decirlo.
+
+## Errores frecuentes
+
+- Escribir `Allow: /` explícito para cada bot de IA y creer que así solo se "abre la puerta": cada grupo propio anula las reglas de `*` para ese bot.
+- Confundir `Disallow` con `noindex`.
+- Rutas sensibles protegidas solo con robots.txt.
+- Archivo que devuelve 5xx durante un despliegue y deja de rastrearse el sitio.
+- Sitemap declarado con URL relativa o que redirige.
+
+Fuente: SEO Skills, skill `robots` (Jorge Jaramillo), https://seo-skills.com/robots, consultada el 2026-10-30; sintaxis según RFC 9309 y la documentación de Google.
+
+---
+
+## Fuente original: `rendered-html-crawl.md`
+
+# Rastreo con HTML renderizado
+
+## Índice
+
+- Cuándo hace falta
+- Estado de la evidencia
+- Entradas y reglas
+- Dos formas de rastrear
+- Qué se mide
+- Qué se analiza
+- Límites
+
+Complementa [technical-seo-and-indexability.md](technical-seo-and-indexability.md) (sección "Renderizado") con un procedimiento concreto para obtener el HTML **después** de ejecutar JavaScript. Las herramientas de rastreo ya instaladas (Screaming Frog con renderizado, o `web_probe.py` de la skill `rea-reverse-engineer`) cubren el mismo propósito; este archivo describe la alternativa con Cloudflare Browser Rendering.
+
+## Cuándo hace falta
+
+| Sitio | Qué usar |
+|---|---|
+| Con mucho JavaScript (SPA, Angular, Next.js sin renderizado en servidor) | **Obligatorio** el HTML renderizado antes de auditar |
+| Estático o WordPress | Basta la extracción por HTTP |
+| Hay duda de si el contenido depende de JavaScript | Extraer **las dos versiones** y comparar `title`, H1 y enlaces entre HTML inicial y renderizado |
+
+Si el H1, el contenido o los enlaces solo existen en el HTML renderizado, el riesgo es de renderizado: Google puede tardar en ver ese contenido o no verlo, y otros rastreadores (muchos bots de IA no ejecutan JavaScript) no lo verán.
+
+## Estado de la evidencia
+
+Procedimiento tomado de la skill `crawler` de `seo-skills.com` (Jorge Jaramillo, consultada el 2026-10-30; repositorio sin licencia declarada, por eso está reformulado). **No se ha probado en este entorno** (ver `HANDSHAKE.md`). Las rutas de la API de Cloudflare y los permisos del token cambian: antes de usarlo, leer la documentación vigente de Cloudflare Browser Rendering.
+
+## Entradas y reglas
+
+**Entradas:** URL de partida; una sola URL o varias (con límite de páginas, por defecto 10, y fuente de descubrimiento: `sitemaps`, `links` o `all`); credenciales de cuenta y token de Cloudflare con permiso de edición sobre Browser Rendering.
+
+**Reglas**
+
+- **El token nunca aparece** en un comando, un archivo, un informe ni el chat. Se carga solo desde un archivo `.env` fuera del repositorio.
+- Se guarda **HTML, no Markdown**: el HTML es la fuente de verdad.
+- Se respeta robots.txt y las protecciones anti-bot. Si el sitio bloquea el rastreador, se informa; no se intenta evadir.
+- Revisar los límites del plan gratuito antes de un rastreo grande.
+- Los resultados de un rastreo masivo permanecen en Cloudflare unos 14 días: si el trabajo terminó, la descarga se puede repetir con el mismo identificador de trabajo.
+
+## Dos formas de rastrear
+
+**Una URL o unas pocas:** una llamada por URL que devuelve el HTML ya renderizado. Conviene rechazar imágenes, vídeo, fuentes y hojas de estilo (más rápido), esperar a que la red se calme y poner un tiempo máximo (unos 30 segundos). Si la respuesta es un error, anotarlo y seguir. Mantener un manifiesto con URL, estado y archivo.
+
+**Varias URLs:** trabajo asíncrono.
+
+1. **Iniciar** con un límite, la fuente de descubrimiento, formato HTML y renderizado activado (con renderizado desactivado es más rápido y sirve para sitios estáticos).
+2. **Esperar** consultando el estado cada unos 10 segundos hasta que deje de estar "en curso". Estados finales: completado, con error, cancelado por límites, cancelado por tiempo.
+3. **Descargar** por páginas con cursor (necesario por encima de unos 10 MB), separar un `.html` por URL, armar el manifiesto y contar por estado.
+
+Después, extraer las métricas del directorio de salida con el mismo extractor que usan las demás auditorías, para que alimente la auditoría general ([audit-scoring-and-weights.md](audit-scoring-and-weights.md)), el enlazado ([internal-linking-and-conversion-paths.md](internal-linking-and-conversion-paths.md)) y las imágenes ([image-seo-and-accessibility.md](image-seo-and-accessibility.md)).
+
+## Qué se mide
+
+| Indicador | Cómo se lee |
+|---|---|
+| Páginas descargadas | Cobertura del rastreo |
+| Errores 4xx y 5xx | Hallazgos de estado |
+| URLs no descargadas (omitidas, bloqueadas, canceladas) | Cruzar con robots.txt ([robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md)) |
+| Promedio de palabras | Contexto |
+| Contenido delgado (menos de 300 palabras) | Estado según el porcentaje de páginas afectadas |
+| Páginas sin H1 tras renderizar | Pista: si no está en el HTML renderizado, tampoco lo ve Google |
+
+Estados para contenido delgado y H1 ausente: **bueno** si ninguna página está afectada, **aviso** si menos del 30 % de las páginas, **malo** en cualquier otro caso.
+
+También sirve una tabla de páginas rastreadas (URL, estado, título, palabras, enlaces internos) ordenada por número de palabras.
+
+## Qué se analiza
+
+- Páginas con error o vacías tras renderizar (sin título o sin H1): contenido que depende de JavaScript y falla.
+- Contenido que **solo aparece al renderizar**, al comparar con la extracción por HTTP.
+- Secciones del sitio que no aparecen en el rastreo (bloqueadas, sin enlazar o fuera del sitemap).
+- URLs bloqueadas por robots.txt.
+
+## Límites
+
+Esta herramienta mide **cobertura**, no calidad: por eso **no asigna puntuación**. Una cobertura completa no dice que el contenido sea bueno, y una cobertura baja puede deberse al plan, al límite o a un bloqueo del sitio. Documentar siempre cuál fue la causa antes de sacar conclusiones.
+
+Fuente: SEO Skills, skill `crawler` (Jorge Jaramillo), https://seo-skills.com/crawler, consultada el 2026-10-30.
+
+---
+
+## Fuente original: `audit-scoring-and-weights.md`
+
+# Auditoría SEO con puntuación: categorías, pesos y hallazgos
+
+## Índice
+
+- Para qué sirve y cuándo se usa
+- Estado de la evidencia
+- Flujo de una auditoría general
+- Categorías y pesos
+- Cómo se puntúa
+- Cómo se escribe un hallazgo
+- Acciones: cuatro niveles
+- Reglas que no se saltan
+- Lista de revisión
+
+## Para qué sirve y cuándo se usa
+
+Una auditoría general de dominio o de un grupo de páginas ("auditoría SEO", "por qué no posiciono", "chequeo de salud") necesita dos cosas que [technical-audit-by-finding.md](technical-audit-by-finding.md) no define: **una puntuación comparable entre auditorías** y **un orden de prioridades**. Este archivo aporta ese modelo. Diagnostica y prioriza; no implementa cambios salvo que se pida (entonces se pasa a modo prescriptivo: pasos concretos, no consejos generales).
+
+La puntuación es una herramienta de comunicación, no un resultado de Google. Un 82 no significa que Google puntúe 82: significa "en las categorías que revisamos, con esta evidencia, perdimos 18 puntos por estos hallazgos".
+
+## Estado de la evidencia
+
+Modelo tomado de la skill `basic-audit` de SEO Skills (Jorge Jaramillo, `github.com/jorgejaramillo/seoskills`) y de las páginas de `seo-skills.com`, consultadas el 2026-10-30. El repositorio no declara licencia: aquí **se reformula la metodología con palabras propias** y no se copian sus textos. Los pesos y las deducciones son criterio de su autor, no un estándar de la industria: tratarlos como **valores iniciales** y ajustarlos con casos reales. La regla del cliente manda sobre estos valores.
+
+## Flujo de una auditoría general
+
+1. **Datos.** Sitio con mucho JavaScript → HTML renderizado (ver [rendered-html-crawl.md](rendered-html-crawl.md)). Sitio estático o WordPress → extracción por HTTP. Muestra: la home más 3 a 5 páginas por plantilla (categoría, producto, artículo, servicio). Si la muestra es pequeña, decirlo ("30 de 1.200 URLs").
+2. **Métricas con script o con herramienta de rastreo** (títulos, descripciones, H1, canonical, noindex, enlaces, imágenes). robots.txt y sitemap se revisan con [robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md).
+3. **Análisis humano de lo que ningún script juzga:** intención de búsqueda, calidad del contenido, E-E-A-T, coherencia entre title, H1 y contenido.
+4. **Core Web Vitals:** solo si hay datos (PageSpeed Insights o datos de campo) o el sitio es lento; si no, marcar "no evaluado".
+5. **Títulos fuera de rango o duplicados, descripciones ausentes, cortas, largas o repetidas:** se reescriben con el procedimiento de [title-and-description-generation.md](title-and-description-generation.md), no a mano y a ojo.
+6. **Informe completo:** sumar enlazado interno ([internal-linking-and-conversion-paths.md](internal-linking-and-conversion-paths.md)) e imágenes ([image-seo-and-accessibility.md](image-seo-and-accessibility.md)) sobre los mismos datos.
+
+**Regla de herramienta:** un lector de páginas que convierte HTML a texto o Markdown pierde `title`, `meta`, `canonical`, Open Graph, `hreflang`, `alt`, `loading` y `srcset`. Para auditar el `<head>` y los atributos se usa el HTML real (extractor, rastreador o "ver código fuente"), nunca un resumen de la página.
+
+## Categorías y pesos
+
+| Categoría | Peso | Qué mira |
+|---|---|---|
+| Rastreo e indexación | 30 % | robots.txt, sitemap, canonicals que apuntan a sí mismas, noindex, cadenas de redirección, profundidad de clic |
+| Técnico | 25 % | HTTPS, viewport, `lang`, TTFB, Core Web Vitals (si hay datos), JSON-LD válido, HTML inicial frente a HTML renderizado |
+| On-page | 20 % | title único (30 a 60 caracteres como rango de auditoría), descripción (70 a 160), un solo H1, jerarquía H2/H3, Open Graph, `alt`, enlaces internos |
+| Contenido y E-E-A-T | 15 % | contenido delgado (menos de 300 palabras en páginas clave), intención, credenciales del autor (crítico en YMYL), páginas "quiénes somos" y contacto, fechas |
+| Autoridad | 10 % | solo con datos de Search Console, Ahrefs o Semrush; sin ellos, fuera de alcance |
+
+Los rangos de title y descripción de esta tabla son **rangos de auditoría** (para detectar lo que está claramente mal). Los rangos de **redacción** son otros y están en [title-and-description-generation.md](title-and-description-generation.md).
+
+Si una categoría queda fuera de alcance (por ejemplo, Autoridad sin datos), se **redistribuye su peso proporcionalmente** entre las demás y se dice en el resumen.
+
+## Cómo se puntúa
+
+1. Cada categoría empieza en 100 y pierde puntos por hallazgo según su gravedad:
+
+| Gravedad | Deducción |
+|---|---|
+| Crítica | 15 a 30 |
+| Alta | 8 a 12 |
+| Media | 4 a 6 |
+| Baja | 1 a 3 |
+
+2. La deducción se **multiplica por la confianza** en el hallazgo: alta ×1, media ×0,5, baja ×0,25. Un hallazgo que se sospecha pero no se pudo comprobar pesa poco; uno medido en todas las URLs pesa completo.
+3. La puntuación global es la suma ponderada de las categorías.
+4. **Un puntaje alto con un hallazgo crítico abierto no es válido:** el crítico se menciona siempre en el resumen, aunque la nota sea 90.
+5. Bandas: 90 o más, excelente · 75 a 89, buena · 60 a 74, mejorable · 40 a 59, deficiente · menos de 40, crítica.
+
+Cuando una auditoría se repite, comparar siempre con la misma tabla de pesos; si se cambian, dejar escrito qué se cambió y por qué.
+
+## Cómo se escribe un hallazgo
+
+Cada hallazgo lleva cinco cosas:
+
+1. **Gravedad** (crítica, alta, media, baja).
+2. **Título de una frase.**
+3. **Evidencia concreta:** URL más el dato observado ("`/servicios/x` devuelve 302 a `/servicios/x/`", no "hay redirecciones raras").
+4. **Por qué importa.**
+5. **Recomendación** accionable ("quitar el `noindex` de la plantilla del blog"), no vaga ("mejorar el SEO").
+
+No se declara que falta un elemento (title, canonical, alt…) sin haberlo verificado en los datos extraídos. No se inventan métricas de tráfico, posiciones ni Core Web Vitals: si no hay dato, se escribe "no evaluado".
+
+## Acciones: cuatro niveles
+
+| Nivel | Qué entra |
+|---|---|
+| Bloqueos críticos | Lo que impide rastrear, indexar o que la página funcione |
+| Alto impacto | Cambios que mueven la puntuación o el tráfico con esfuerzo razonable |
+| Ganancias rápidas | Impacto medio con esfuerzo bajo (plantillas, metadatos, alt) |
+| Largo plazo | Contenido nuevo, arquitectura, autoridad |
+
+Cada acción lleva **impacto** y **esfuerzo** (alto, medio o bajo). Para convertirlas en tareas con criterio de hecho y responsable, usar [technical-audit-by-finding.md](technical-audit-by-finding.md); aquel archivo trata la gestión de cada hallazgo, este trata cómo se descubre, se puntúa y se prioriza.
+
+## Reglas que no se saltan
+
+- Verificar antes de afirmar que algo falta.
+- Sin datos no hay métrica: "no evaluado" es una respuesta válida.
+- Si el usuario pide implementar, cambiar a pasos concretos ("corregir X en Y"), no a recomendaciones generales.
+- La regla del cliente (longitudes, escalas de prioridad) manda sobre los valores por defecto.
+
+## Lista de revisión
+
+- ¿La muestra incluye todas las plantillas y se dijo su tamaño?
+- ¿Cada hallazgo tiene URL, dato observado, motivo y recomendación?
+- ¿Las deducciones llevan el multiplicador de confianza?
+- ¿Se redistribuyó el peso de las categorías sin datos y se avisó?
+- ¿Algún crítico abierto quedó fuera del resumen?
+- ¿Las acciones están en los cuatro niveles con impacto y esfuerzo?
+
+Fuente: SEO Skills, skill `basic-audit` (Jorge Jaramillo), https://github.com/jorgejaramillo/seoskills, consultada el 2026-10-30.
 
 ---
 
@@ -589,6 +920,10 @@ Hallazgos propios de una tienda en Shopify (errores de Liquid, sitemap raíz con
 
 ### Tarea de Page Speed (plantilla)
 Metas TTFB/LCP/FCP → diagnóstico **servidor primero** → plan de 8 pasos con minutos y **respaldo previo** → «qué NO tocar» → entrega antes/después por URL. Detalle del orden de ataque en [ecommerce-seo-multicountry.md](ecommerce-seo-multicountry.md#plan-de-rendimiento-y-seguridad-en-20-tareas).
+
+
+## Auditoría general con puntuación (SEO Skills, 2026-10-30)
+Este archivo gestiona cada hallazgo como tarea. Para **descubrir, puntuar y priorizar** hallazgos en una auditoría general (categorías con peso, deducción por gravedad y confianza, bandas, cuatro niveles de acción), ver [audit-scoring-and-weights.md](audit-scoring-and-weights.md). Para robots.txt y para el HTML renderizado: [robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md) y [rendered-html-crawl.md](rendered-html-crawl.md).
 
 ---
 

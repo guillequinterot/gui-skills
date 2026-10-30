@@ -129,6 +129,16 @@ Qué **no** hace el semáforo: no dice si lo escribió una IA (un párrafo human
 longitudes ni cuotas de palabras, y no sustituye a la puerta: el propósito, la procedencia, la promesa cumplida y la
 verdad de los hechos se evalúan a mano. Los umbrales son iniciales y se ajustan con casos reales.
 
+## Puntaje por bloque y excepciones SEO
+
+Cuando hace falta **comparar bloques, priorizar qué reescribir o dejar una salida para hoja o script**, se puede puntuar cada
+bloque de 1 a 100 (1 a 20 limpio · 21 a 40 aceptable · 41 a 60 sospechoso · 61 a 80 slop · 81 a 100 slop puro) y el artículo
+en cinco dimensiones. Se usa junto al semáforo, no en su lugar. Incluye una lista de **excepciones SEO** que no se penalizan
+(repetir la keyword en títulos, encabezados, introducción y preguntas frecuentes; encabezados en forma de pregunta; nombrar la entidad
+completa) y de lo que sí (relleno de keywords, oraciones que solo la colocan, redundancia). Rúbrica y salida estructurada en
+[`references/07-puntaje-por-bloque-y-excepciones-seo.md`](references/07-puntaje-por-bloque-y-excepciones-seo.md).
+Los puntos de corte son iniciales y la detección automática de las familias nuevas está pendiente.
+
 ## Reglas por formato
 
 | Formato | Regla clave | Detalle |
@@ -163,4 +173,5 @@ verdad de los hechos se evalúan a mano. Los umbrales son iniciales y se ajustan
 - [`references/04-integracion.md`](references/04-integracion.md): cómo conectarla con las demás skills y con un flujo de publicación.
 - [`references/05-fuentes.md`](references/05-fuentes.md): fuentes con fecha de verificación y nivel de evidencia.
 - [`references/06-semaforo-por-parrafo.md`](references/06-semaforo-por-parrafo.md): rúbrica del semáforo por párrafo (cinco preguntas, tipos de párrafo, reglas, informe).
+- [`references/07-puntaje-por-bloque-y-excepciones-seo.md`](references/07-puntaje-por-bloque-y-excepciones-seo.md): puntaje 1 a 100 por bloque, excepciones SEO, dieciséis familias de señales, cinco dimensiones y salida JSON.
 - `scripts/slop_lint.py`: detector de síntomas (ayuda, no juez; con `--semaforo`, luz provisional por párrafo) y `scripts/test_slop_lint.py`: sus pruebas.
