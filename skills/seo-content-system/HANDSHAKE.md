@@ -5,8 +5,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.6.0 |
-| Última actualización | 2026-10-29 (1.6.0: puerta SEO para sitios de servicios y páginas nuevas, derivada de una auditoría real; antes, 2026-10-23: 1.5.0: segunda y tercera pasada ClickUp + Obsidian + Drive/Sheets integradas; hosted regenerada; decisiones pendientes de Guille resueltas; publicada. ClickUp sigue pendiente por el tope diario del conector) |
+| Versión | 1.7.0 |
+| Última actualización | 2026-10-30 (1.7.0: metodología de SEO Skills integrada: auditoría con puntuación, robots.txt, HTML renderizado, title y metadescripción, imágenes, enlazado y clústeres; antes, 2026-10-29: 1.6.0: puerta SEO para sitios de servicios y páginas nuevas, derivada de una auditoría real; antes, 2026-10-23: 1.5.0: segunda y tercera pasada ClickUp + Obsidian + Drive/Sheets integradas; hosted regenerada; decisiones pendientes de Guille resueltas; publicada. ClickUp sigue pendiente por el tope diario del conector) |
 | Skill principal / padre | ninguna (es skill de primera capa para todo contenido; `web-go-high-level-ia` y `rea-reverse-engineer` son sus sub-skills / apoyo) |
 | Llama a | `web-go-high-level-ia` (SEO dentro del constructor de GoHighLevel), `rea-reverse-engineer` (entender competidores), `screaming-frog-seo` (externa y opcional, no está en gui-skills) |
 | La llaman | `web-go-high-level-ia`, `direct-visual-design` (cuando el diseño implica textos, metadatos o schema) |
@@ -24,6 +24,9 @@
 | `scripts/editorial_lint.py` | verificado | 2026-10-16 | Solo `--help`; es un detector de patrones, no sustituye el juicio editorial |
 | `scripts/site_seo_gate.py` (estático y `--live`) | verificado | 2026-10-29 | 16 pruebas sin red externa (`test_site_seo_gate.py`); probado sobre el build real de un sitio de servicios y, en vivo, con las cuatro variantes del host. Los avisos son candidatos, no hallazgos; no mide similitud semántica (usa la frase raíz del título y los primeros 60 palabras), así que no sustituye la verificación con Search Console |
 | `scripts/disavow_desde_exportacion.py` | verificado | 2026-10-29 | Prueba con CSV falso (`test_disavow_desde_exportacion.py`); lee exportaciones de Ahrefs/Search Console, agrupa por dominio y separa confianza alta (archivo) de media (revisión). No sube nada: el archivo se sube a mano en Search Console |
+| Referencias de SEO Skills (`audit-scoring-and-weights`, `robots-txt-audit-and-generation`, `title-and-description-generation`, `rendered-html-crawl`) | metodología, sin script | 2026-10-30 | Reformuladas de nueve fuentes de un tercero sin licencia declarada. Los umbrales son valores iniciales de su autor. Ningún script de la fuente se copió ni se probó aquí |
+| Rastreo con Cloudflare Browser Rendering (`rendered-html-crawl.md`) | sin probar | — | Requiere cuenta, token con permiso de edición sobre Browser Rendering y `.env` fuera del repo; las rutas de la API pueden haber cambiado |
+| Lista de 22 user-agents de IA (`robots-txt-audit-and-generation.md`) | sin verificar | 2026-10-30 | Tomada de `seo-skills.com`; confirmar nombre y función de cada bot en la documentación de su proveedor antes de bloquearlo en un cliente |
 | `tools/build_hosted.py` | verificado | 2026-10-16 | Regenera `skills/seo-content-system-web-hosted/`; `--check` sale con 1 si está desfasado |
 | MCP de Obsidian | sin probar | — | Opcional. El mantenedor lo usó con su bóveda; si no responde, la skill sigue con `memoria/` |
 | Search Console / GA4 / Clarity / Bing | sin probar | — | Solo si el usuario los conecta; en entornos web, por exportación a Google Sheets |
@@ -45,6 +48,9 @@ Estados: `verificado` · `falla` · `sin probar` · `no aplica en Mac/Windows`.
 - [ ] Probar `research_update.py` contra las fuentes oficiales reales y `scheduler.py install` en macOS/Linux/Windows.
 - [ ] Revisión del 2026-11-25: contrastar el experimento de lenguaje natural frente a optimizado cuando se publiquen las fases con Claude, ChatGPT, Perplexity y Deepseek, y revisar la volatilidad de las cifras de citación de terceros.
 - [ ] Revisión del 2026-11-26 de la versión hosted (o antes si se contrata una herramienta de pago con MCP, o si Claude.ai / ChatGPT lanzan conector nativo de Search Console/GA4).
+- [ ] (1.7.0) Decidir si se implementan como scripts propios (solo biblioteca estándar, con pruebas) las piezas que la fuente resolvía con código: extractor de metadatos con peso real de imágenes, grafo de enlaces (huérfanas, profundidad, anchors) y agrupador léxico de keywords. Hoy son solo metodología.
+- [ ] (1.7.0) Ajustar con casos reales los pesos de `audit-scoring-and-weights.md` (30/25/20/15/10), las deducciones y los rangos 45 a 55 / 150 a 160, y probar `rendered-html-crawl.md` con una cuenta de Cloudflare.
+- [ ] (1.7.0) Verificar los nombres de los bots de IA nuevos contra la documentación de cada proveedor y registrarlos en `official-source-register.md`.
 - [ ] Validar o descartar las reglas candidatas de `HANDOFF.md` §5 cuando se repitan en otros casos.
 - [ ] Decidir si los aprendizajes candidatos que viven en la bóveda privada del mantenedor se migran a `memoria/aprendizaje/inbox/` (con códigos de caso) o se quedan solo resumidos en el HANDOFF.
 

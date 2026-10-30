@@ -1,3 +1,16 @@
+# CAMBIOS v1.6.0 → v1.7.0 (2026-10-30)
+
+Origen: nueve fuentes de SEO Skills (Jorge Jaramillo): las skills `images` y `basic-audit` del repositorio `jorgejaramillo/seoskills` y las páginas `internal-linking`, `robots`, `crawler`, `no-slop`, `title-generator`, `description-generator` y `keyword-cluster` de `seo-skills.com`. El sitio y el repositorio no declaran licencia: **se reformuló la metodología, no se copiaron textos**, y se cita la fuente en cada archivo. Los umbrales son criterio de su autor y quedan como valores iniciales.
+
+- **Nuevas referencias:** `audit-scoring-and-weights.md` (cinco categorías con peso, deducción por gravedad × confianza, bandas, cuatro niveles de acción), `robots-txt-audit-and-generation.md` (RFC 9309, regla del grupo propio, 22 bots de referencia, generación solo con `Disallow`, puntuación), `rendered-html-crawl.md` (HTML renderizado con Cloudflare Browser Rendering; sin probar), `title-and-description-generation.md` (tres opciones, 45 a 55 y 150 a 160 caracteres, límites por tanda, salida JSON).
+- **Ampliadas:** `image-seo-and-accessibility.md` (revisión en ocho puntos, umbrales, puntuación), `internal-linking-and-conversion-paths.md` (seis frentes, mezcla de anchors, orden de prioridad, puntuación), `keyword-research-and-query-mapping.md` (mapa de clústeres frente al sitio, estados cubierto/parcial/hueco/canibalización, puntuación).
+- **Corregido:** `ai-crawler-access-and-llms-txt.md` recomendaba un bloque `Allow: /` por cada bot de IA. Un bot con grupo propio **ignora el grupo `*`**, así que ese ejemplo lo dejaba sin los `Disallow` de rutas sensibles. Ahora se omiten los bots permitidos y se repiten las rutas sensibles en cualquier grupo propio. Añadidos Claude-SearchBot, Claude-User, Perplexity-User y DuckAssistBot (por verificar).
+- **Punteros:** `on-page-metadata-and-urls.md`, `technical-seo-and-indexability.md`, `technical-audit-by-finding.md`, `editorial-quality-gates.md` y `official-source-register.md` (sección "Terceros").
+- **Conflictos resueltos:** peso de imagen (la fuente admite hero hasta 200 KB; sigue vigente la decisión de Guille de ≤100 KB) y rangos de title/metadescripción (se distingue rango de **auditoría** de rango de **redacción**; manda la regla del cliente).
+- **No incluido por diseño:** los scripts de la fuente (`onpage_metrics.py`, `image_metrics.py`, `cluster_keywords.py`, `seo_extract.py`) no se copiaron; la metodología sí. Candidatos a implementar si se repite su uso (ver `HANDSHAKE.md`).
+- **Otro cambio incluido en el mismo aporte:** `scripts/site_seo_gate.py` ya traía cambios sin subir de una sesión anterior (una cadena de redirecciones 301 que termina en la canónica se informa como AVISO y no como FALLO); sus 16 pruebas pasan.
+- **SKILL.md:** versión 1.7.0. **hosted-src/knowledge-map.json:** las cuatro referencias nuevas entran en los documentos 03 y 04 de la versión web (regenerada con `tools/build_hosted.py`).
+
 # CAMBIOS v1.5.0 → v1.6.0 (2026-10-29)
 
 Origen: una auditoría real (`caso-seo-sitio-servicios-01`) de un sitio de servicios técnicamente sano (rendimiento 97 a 100, schema rico, 0 enlaces rotos) que no posicionaba. El linter del proyecto pasaba con 0 fallos y 0 avisos: la causa estaba en lo que ese linter **no** comprobaba.

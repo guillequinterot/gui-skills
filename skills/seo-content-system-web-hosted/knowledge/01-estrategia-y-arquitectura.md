@@ -1,4 +1,4 @@
-<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella 5e7d791ddcf9). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
+<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella 1492219443a2). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
 
 # Estrategia, arquitectura y keyword research
 
@@ -241,6 +241,55 @@ Cada clúster debe terminar con:
 
 ## KWR por programa y gameplan E-E-A-T [Drive]
 Usa una pestaña por programa con bloques *Keyword · VOL/M · Dificultad* y una pestaña Resumen (`assets/templates/kwr-program-clusters.csv`). El gameplan trimestral con preguntas al experto va en `assets/templates/eeat-gameplan.csv`. Ver `references/drive-deliverables-and-guidelines.md` §7–8.
+
+
+
+## Mapa de clústeres frente al sitio: cobertura y acción por clúster (SEO Skills, 2026-10-30)
+
+Origen: skill `keyword-cluster` de `seo-skills.com` (Jorge Jaramillo), reformulada; el repositorio no declara licencia. Cruza una lista de keywords con las páginas existentes y deja una acción por clúster. No sirve para optimizar el title de una sola página ([title-and-description-generation.md](title-and-description-generation.md)) ni para una auditoría completa ([audit-scoring-and-weights.md](audit-scoring-and-weights.md)).
+
+### Qué fuente de keywords hay
+- **Lista del usuario** (Search Console, Semrush, Ahrefs, Keyword Planner o manual): lo ideal, porque trae volumen y dificultad.
+- **Sin lista:** construirla con términos de títulos y H1 del sitio y con ideas de un modelo de lenguaje (sinónimos, preguntas, comparaciones, términos transaccionales, variantes por público o uso).
+- **Regla:** las keywords generadas por un modelo **no tienen volumen ni dificultad**. Rotularlas "generadas por IA, sin volumen", no inventar cifras y sugerir validarlas con Keyword Planner o Search Console.
+- **Sin sitio o sin la keyword en el sitio** no es un error: todos los clústeres salen como "hueco" y el entregable es la arquitectura de páginas por crear.
+
+### Agrupar y corregir
+Un agrupamiento léxico automático (normalizar minúsculas, tildes, palabras vacías y plurales; fusionar por tokens contenidos o por similitud de Jaccard, umbral inicial 0,5; pilar = la keyword de mayor volumen) **no entiende significado**. La persona corrige:
+
+1. Fusionar sinónimos y variantes que se separaron.
+2. Separar falsos amigos y clústeres con **intenciones mezcladas**: una consulta transaccional y una informativa no comparten página.
+3. Confirmar la intención de cada clúster (informacional, comercial, transaccional, navegacional). Los clústeres "genéricos" son términos amplios: decidir con el contexto del negocio.
+4. Pilar y apoyo: el término más amplio y de mayor volumen es el pilar; el resto son subtemas o secciones. **Una página por intención, no por keyword.**
+5. Si hay duda entre fusionar y separar, **separar** y anotarlo.
+6. Si el usuario aporta los 10 primeros resultados por keyword, fusionar los clústeres que comparten 3 o 4 URLs o más. Sin esos datos, no simularlos.
+
+### Acción por clúster
+| Estado | Significado | Acción |
+|---|---|---|
+| Cubierto | Hay una página adecuada | Optimizar la existente (title, H1, secciones para términos de apoyo) |
+| Parcial | Hay algo cercano | Ampliar el contenido o rehacer la página más próxima |
+| Hueco | No hay página | Crear (tipo: categoría, producto, guía, comparación o landing; slug propuesto) |
+| Canibalización | Varias páginas compiten por el pilar | Elegir una canónica, consolidar o diferenciar por intención (ver "Canibalización" arriba) |
+
+Orden de acciones: **crear, consolidar, optimizar**, según volumen × intención × esfuerzo.
+
+### Prioridad, solo con datos reales
+Alto volumen + baja dificultad + intención alineada + posición actual entre 8 y 20 (ganancia rápida). Sin volumen ni dificultad, ordenar por intención y cobertura y decirlo.
+
+### Puntuación (solo si hay cruce con el sitio y volumen; si no, sin nota)
+| Criterio | Peso | Medida |
+|---|---|---|
+| Cobertura | 50 % | Parte del volumen total en clústeres cubiertos (parcial cuenta 0,5) |
+| Canibalización | 25 % | 100 menos 25 por clúster con páginas que compiten (mínimo 0), ponderado por volumen |
+| Alineación de intención | 25 % | Parte del volumen cuya página existente coincide con la intención del clúster (revisión manual) |
+
+Hallazgos típicos: clúster de alto volumen sin página; página transaccional que atiende una consulta informativa; dos URLs que compiten por un pilar; clústeres de una sola keyword sin potencial (descartar o fusionar).
+
+### Entregable y límites
+- Tabla del mapa: clúster (pilar), intención, acción, URL actual o propuesta, keywords de apoyo.
+- Tope de unos **50 clústeres**; el resto, "cola larga" con una nota.
+- Al volver a ejecutar el agrupamiento con otros parámetros se **regeneran** los clústeres: copiar antes las correcciones manuales a la tabla del mapa.
 
 ---
 
@@ -707,6 +756,43 @@ Medir no solo clics, sino calidad del paso:
 - Un bloque de «relacionados» sin taxonomía ni orden concentra el enlazado en unas pocas URLs: ver [measurement-traps-and-diagnosis.md](measurement-traps-and-diagnosis.md).
 - **Sitio sin menú ni pie** (home por perfiles): compensar con páginas agrupadoras y enlaces en el cuerpo.
 - Páginas agrupadoras de entidades (docentes, investigadores): una URL agrupadora y una interna por persona, con un módulo «carreras donde imparte» que enlace hacia la oferta; publicar solo perfiles aprobados.
+
+
+
+## Auditoría del grafo de enlaces: orden de trabajo y mezcla de anchors (SEO Skills, 2026-10-30)
+
+Origen: skill `internal-linking` de `seo-skills.com` (Jorge Jaramillo), reformulada; el repositorio no declara licencia. Valores **iniciales**, no estándar.
+
+### Datos
+- Reutilizar el rastreo existente o extraer de un sitemap (unas 100 URLs). Con **menos de 20 páginas**, el resultado de huérfanas es solo indicativo.
+- Un sitemap ayuda a encontrar huérfanas que el rastreo no alcanza. Decir siempre la fuente de cada dato: rastreo, sitemap, analítica o inferencia.
+- Métricas útiles por página: enlaces entrantes (orígenes únicos), profundidad de clic desde la home, páginas enlazadas solo desde menú o pie, zona del enlace, anchors genéricos y destinos fuera del rastreo.
+
+### Seis frentes de análisis
+1. **Huérfanas:** la prioridad más alta. Decidir caso por caso: enlazar (si es relevante), redirigir o eliminar (si es obsoleta o delgada), y nombrar las páginas de origen.
+2. **Páginas de negocio con pocos enlaces:** comparar las que más enlaces reciben con las que deberían recibirlos.
+3. **Faltan enlaces contextuales:** los del menú o pie aportan poco contexto; leer páginas relacionadas y proponer puntos de inserción.
+4. **Clústeres:** pilar ↔ artículos en ambos sentidos, y artículos hermanos entre sí.
+5. **Anchors:** genéricos ("haz clic aquí"), sobreoptimizados (siempre la misma coincidencia exacta) o poco descriptivos. Mezcla de referencia: exacta 10 a 20 %, parcial 30 a 40 %, marca o natural 20 a 30 %, genérica 10 a 20 %.
+6. **Profundidad:** páginas importantes a más de 3 clics de la home.
+
+Cada recomendación de enlace lleva **origen, destino, anchor sugerido, dónde (sección o párrafo) y motivo**, en tabla (ver también `assets/templates/internal-linking-matrix.csv`).
+
+### Orden de prioridad
+1. Huérfanas con tráfico o posiciones (retorno más rápido).
+2. Páginas de negocio con pocos enlaces, enlazadas desde páginas con autoridad.
+3. Cerrar clústeres.
+4. Sustituir anchors genéricos en enlaces importantes.
+5. Enlaces contextuales en contenido que ya recibe tráfico.
+6. Ajustes de menú y pie (alcance en todo el sitio, poco valor por enlace).
+
+### Puntuación (valores iniciales)
+Parte de 100 y resta: 5 por cada 5 % de páginas huérfanas · 10 si más del 10 % de las páginas están a más de 3 clics · 10 si las páginas de negocio no tienen enlaces contextuales · 5 si más del 10 % de los anchors son genéricos · 10 si los enlaces internos llevan `nofollow` · 5 por cada destino interno roto. Mínimo 0.
+
+### Reglas
+- Nunca recomendar "añadir más enlaces internos" en abstracto: siempre origen → destino → anchor.
+- No recomendar enlazar a páginas con `noindex` ni con canonical hacia otra URL.
+- El canonical y el robots de una página se leen en los datos extraídos, no con un lector de texto.
 
 ---
 

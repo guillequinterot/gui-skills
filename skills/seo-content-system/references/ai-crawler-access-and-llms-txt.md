@@ -45,6 +45,7 @@ Distinción operativa central, ya alineada con "entrenamiento vs. recuperación"
 - `OAI-SearchBot` (OpenAI)
 - `PerplexityBot` (Perplexity)
 - `ChatGPT-User` (agente de usuario cuando una persona pide a ChatGPT que visite una URL)
+- `Claude-SearchBot` y `Claude-User` (Anthropic: búsqueda y agente de usuario), `Perplexity-User`, `DuckAssistBot`: nombres tomados de la lista de `seo-skills.com` (2026-10-30), por verificar en la documentación de cada proveedor. Lista completa de 22 bots en [robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md).
 
 **Postura por tipo de negocio (criterio, no regla universal):** una empresa cuyo contenido *es* el producto (medio, proveedor de datos) puede considerar bloquear bots de entrenamiento mientras deja abiertos los de recuperación, protegiendo propiedad intelectual sin perder visibilidad conversacional. Una empresa que vende productos o servicios normalmente gana más dejando ambos grupos sin restricción, porque su objetivo es visibilidad máxima, no protección editorial.
 
@@ -56,26 +57,28 @@ Decisión de bloqueo/apertura: corresponde a marketing (qué bots importan para 
 
 **Paso 1 — Auditar la configuración actual.** Abrir `tudominio.com/robots.txt` y revisar línea por línea. Buscar directivas genéricas tipo `User-agent: *` seguidas de `Disallow: /` heredadas de plantillas o plugins de seguridad — bloquean todo tráfico automatizado sin distinguir bots de IA legítimos de scrapers maliciosos.
 
-**Paso 2 — Definir postura explícita por grupo de bots**, nunca dejarlo en una directiva genérica ambigua. Ejemplo para maximizar visibilidad (empresa que vende productos/servicios):
+**Paso 2 — Definir postura explícita por tipo de bot, sin escribir grupos para los bots permitidos.** `robots.txt` solo puede denegar: "permitir" no se escribe, se omite. Un bot sin regla propia cae bajo `User-agent: *` y puede rastrear todo lo que ese grupo no bloquee. **Cuidado con el error contrario:** un bot que tiene su **propio grupo ignora por completo el grupo `*`**. Por eso un bloque como `User-agent: GPTBot` + `Allow: /` no "abre la puerta" sino que deja a ese bot sin los `Disallow` de rutas sensibles del grupo `*` (panel, área de cliente). Ejemplo de política "visibilidad máxima" (empresa que vende productos o servicios):
+
+```text
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /area-cliente/
+
+Sitemap: https://tudominio.com/sitemap.xml
+```
+
+Si se decide **bloquear** el entrenamiento, se añaden grupos solo para esos bots (y si alguno necesita rutas sensibles bloqueadas, se repiten dentro de su grupo):
 
 ```text
 User-agent: GPTBot
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
 User-agent: Google-Extended
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
+Disallow: /
 ```
 
-**Paso 3 — Mantener rutas sensibles bloqueadas para todos los bots por igual** (paneles administrativos, áreas de cliente, contenido interno) — abrir la puerta a la IA no implica exponer lo que ninguna audiencia externa debería consultar.
+Sintaxis, reglas de coincidencia (gana el patrón más largo; en empate, `Allow`), lista de bots y puntuación en [robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md).
+
+**Paso 3 — Mantener rutas sensibles bloqueadas para todos los bots por igual** (paneles administrativos, áreas de cliente, contenido interno) — abrir la puerta a la IA no implica exponer lo que ninguna audiencia externa debería consultar. Ojo: robots.txt es público; la protección real de esas rutas va en el servidor.
 
 **Paso 4 — Referenciar el sitemap dentro del mismo archivo**: `Sitemap: https://tudominio.com/sitemap.xml`. Confirmar que esa URL responde 200, no 404.
 
@@ -104,6 +107,7 @@ Advertencia operativa: una configuración correcta hoy puede quedar obsoleta sin
 ## Errores frecuentes
 
 - Heredar `Disallow: /` genérico de una plantilla o plugin de seguridad sin revisarlo nunca.
+- Escribir un grupo `Allow: /` por cada bot de IA: cada grupo propio anula las reglas de `*` para ese bot.
 - Delegar la decisión de qué bots permitir exclusivamente a tecnología, sin criterio de negocio de marketing.
 - Bloquear bots de IA pensando que son scrapers maliciosos sin verificar el user-agent real.
 - Omitir la línea `Sitemap:` dentro de robots.txt.

@@ -214,6 +214,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** ninguna
 - **Herramientas:** disavow_desde_exportacion.py
 
+### 2026-10-30 · banco-pruebas-seo-skills-terceros · guille
+
+- **Qué se hizo:** Integradas nueve fuentes de SEO Skills (auditoria con puntuacion, robots.txt, HTML renderizado, title y metadescripcion, imagenes, enlazado, clusteres) como cuatro referencias nuevas y tres ampliadas, version 1.7.0; corregido el ejemplo de Allow por bot de IA en ai-crawler-access
+- **Salió bien:** Metodologia reformulada con fuente y fecha en cada archivo, conflictos de umbrales resueltos (100 KB de Guille, regla del cliente), hosted regenerada, enlaces y privacidad sin hallazgos
+- **Salió mal / incidencia:** Los umbrales y la lista de 22 bots son criterio de un tercero sin licencia declarada y no se verificaron; el rastreo con Cloudflare no se probo; ningun script de la fuente se implemento
+- **Regla candidata:** Un bot con grupo propio en robots.txt ignora el grupo *: no escribir Allow por bot, repetir las rutas sensibles si hay grupo propio
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -234,6 +242,7 @@ Relación con otras skills del repo:
 | Cuando una actualizacion de skill deja pendientes de decision explicitos en el HANDOFF, resolverlos y registrarlos en una entrada propia antes de log_job/publish_job, nunca asumirlos ni publicarlos en silencio. | banco-pruebas-actualizacion-v1-5-0 | candidata |
 | Toda regla que deba llegar a la version alojada va en un archivo de references/ listado en hosted-src/knowledge-map.json, no solo en SKILL.md | banco-pruebas-redaccion-blog | candidata |
 | Una frase raíz y una intención por URL; el host canónico se resuelve con 301 en el servidor y se verifica con las cuatro variantes (candidata: se valida cuando se repita en otro sitio). | caso-seo-sitio-servicios-01 | candidata |
+| Un bot con grupo propio en robots.txt ignora el grupo *: no escribir Allow por bot, repetir las rutas sensibles si hay grupo propio | banco-pruebas-seo-skills-terceros | candidata |
 
 ## 2026-10-23 · Actualización a 1.3.0
 - Se instala seo-content-system 1.3.0 (marcas [ClickUp], [Obsidian], [Sheets] y [Drive]): nuevas referencias, plantillas en assets/templates y docs/CAMBIOS.md + docs/INVESTIGACION-CLICKUP-SEO.md.

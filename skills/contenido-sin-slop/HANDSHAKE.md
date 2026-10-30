@@ -5,8 +5,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.1.0 |
-| Última actualización | 2026-10-26 por guille |
+| Versión | 1.2.0 |
+| Última actualización | 2026-10-30 por guille (1.2.0: puntaje 1 a 100 por bloque y excepciones SEO) |
 | Skill principal / padre | ninguna (skill de calidad transversal) |
 | Llama a | ninguna (el detector es un script propio sin dependencias) |
 | La llaman | `seo-content-system`, `direct-visual-design`, `canva-design`, `video-editing-ai-agent`, `video-aprender` y cualquier flujo de publicación automática |
@@ -30,6 +30,9 @@ Estados: `verificado` · `falla` · `sin probar` · `no aplica en Mac/Windows`.
 - Modo revisión **semáforo por párrafo** (`references/06-semaforo-por-parrafo.md`): cinco preguntas (novedad, especificidad, respaldo, lo propio, función), exigencias por tipo de párrafo, reglas de rojo/amarillo/verde y plantilla de informe. Criterios sacados de ocho fuentes (siete páginas y un video).
 
 ## Pendientes abiertos
+
+- [ ] (1.2.0) Probar el puntaje 1 a 100 (`references/07-puntaje-por-bloque-y-excepciones-seo.md`) en un artículo real y anotar si discrepa del semáforo; hasta entonces la equivalencia entre ambos es una propuesta.
+- [ ] (1.2.0) `slop_lint.py` aún no busca las familias nuevas (adverbios de relleno, falsa agencia, narrador distante, absolutos, preguntas retóricas de relleno, consejo de salud genérico) ni respeta las excepciones SEO: decidir si se añaden como candidatas con pruebas.
 
 - [ ] Afinar los umbrales del semáforo (60 palabras sin anclajes → amarillo, un cuarto de amarillos, un tercio de rojos) con casos reales de Guille: hoy son iniciales.
 - [ ] Probar el semáforo en un contenido propio completo (con revisión humana comparando la luz provisional con la final) y anotar las diferencias.

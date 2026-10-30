@@ -39,3 +39,10 @@ Ninguna de las ocho es una fuente primaria sobre texto: son blogs y glosarios, c
 **Límites de esta investigación:** no hay una fuente de la calidad de la guía de Wikipedia para los síntomas en
 **español**; esos síntomas son candidatos. Las cifras de Ahrefs son de una empresa con producto propio. Los estudios de
 confianza son pequeños. Revisar esta lista cada 3 a 6 meses: las políticas y los hábitos de los modelos cambian.
+
+
+## Añadidas el 2026-10-30
+
+| Tema | Fuente | Nivel | Qué se tomó |
+|---|---|---|---|
+| Puntaje por bloque y excepciones SEO | SEO Skills, skill `no-slop` (Jorge Jaramillo): https://seo-skills.com/no-slop , consultada el 2026-10-30. Adapta `stop-slop` de Hardik Pandya (MIT) según la propia página | secundaria / criterio editorial de un autor (sin licencia declarada: reformulado) | Escala 1 a 100 por bloque, excepciones SEO (la keyword repetida en títulos, FAQ e introducción no es relleno; el relleno de keywords sí), dieciséis familias de señales, cinco dimensiones del artículo, regla 35/50 y salida JSON. Detalle en `07-puntaje-por-bloque-y-excepciones-seo.md`; los puntos de corte son valores iniciales |

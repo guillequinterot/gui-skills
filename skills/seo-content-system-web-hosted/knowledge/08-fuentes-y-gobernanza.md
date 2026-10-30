@@ -1,4 +1,4 @@
-<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella 4a445df6cfd7). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
+<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella fdd48375d5ea). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
 
 # Fuentes, evidencia y gobernanza de actualizaciones
 
@@ -132,6 +132,9 @@ Un contenido antiguo no es automáticamente incorrecto; una fuente reciente no e
 - Codex skills: https://developers.openai.com/codex/build-skills
 - Claude Code skills: https://code.claude.com/docs/en/skills
 - Antigravity skills: https://codelabs.developers.google.com/antigravity/how-to-create-agent-skills-for-antigravity-cli
+
+## Terceros (metodología, no documentación oficial)
+- SEO Skills, de Jorge Jaramillo: https://seo-skills.com (skills `internal-linking`, `robots`, `crawler`, `no-slop`, `title-generator`, `description-generator`, `keyword-cluster`) y https://github.com/jorgejaramillo/seoskills (`images`, `basic-audit`). Consultadas el 2026-10-30. Sin licencia declarada: se reformula, no se copia. Los umbrales son criterio de su autor (valores iniciales) y no deben presentarse como regla de Google. Dónde se usan: [audit-scoring-and-weights.md](audit-scoring-and-weights.md), [robots-txt-audit-and-generation.md](robots-txt-audit-and-generation.md), [rendered-html-crawl.md](rendered-html-crawl.md), [title-and-description-generation.md](title-and-description-generation.md) y las secciones marcadas "SEO Skills, 2026-10-30" de las referencias de imágenes, enlazado y keywords.
 
 ## Política de uso
 

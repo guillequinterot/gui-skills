@@ -41,6 +41,14 @@ publicación automática. Es transversal: la llaman `seo-content-system`, `direc
 - **Regla candidata:** Frases entre comillas no cuentan como síntomas (mención vs uso); umbral de 60 palabras sin anclajes = amarillo
 - **Herramientas:** slop_lint.py --semaforo, WebFetch, yt-dlp (subtítulos)
 
+### 2026-10-30 · banco-pruebas-seo-skills-terceros · guille
+
+- **Qué se hizo:** Anadida la referencia 07: puntaje 1 a 100 por bloque, excepciones SEO, dieciseis familias de senales, cinco dimensiones y salida JSON, desde la skill no-slop de seo-skills.com
+- **Salió bien:** Complementa el semaforo sin sustituirlo; resuelve que repetir la keyword en titulos, FAQ e introduccion no es relleno; las 38 pruebas existentes siguen en verde
+- **Salió mal / incidencia:** La equivalencia puntaje-semaforo y los puntos de corte son propuestas sin probar; slop_lint.py no detecta aun las familias nuevas
+- **Regla candidata:** Repetir la keyword en titulos, encabezados, introduccion y FAQ no es slop; el relleno de keywords dentro de una oracion si
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -49,3 +57,4 @@ publicación automática. Es transversal: la llaman `seo-content-system`, `direc
 |---|---|---|
 | Los síntomas de lenguaje en español de `references/02-…` (marcados «candidato») solo pasan a «fuente» cuando haya una fuente verificable o se repitan en varios casos | — | candidata |
 | Frases entre comillas no cuentan como síntomas (mención vs uso); umbral de 60 palabras sin anclajes = amarillo | banco-pruebas-semaforo-parrafo | candidata |
+| Repetir la keyword en titulos, encabezados, introduccion y FAQ no es slop; el relleno de keywords dentro de una oracion si | banco-pruebas-seo-skills-terceros | candidata |
