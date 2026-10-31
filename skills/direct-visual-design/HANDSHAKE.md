@@ -8,7 +8,7 @@
 | Versión | Sin versión numerada: estado del cierre 2026-10-09 + integración con las sub-skills hasta 2026-10-15 (ver `CHANGELOG.md`); migrada a gui-skills el 2026-10-16 |
 | Última actualización | 2026-10-16 por guille (migración al repo) |
 | Skill principal / padre | ninguna: es la skill principal y orquestadora de diseño |
-| Llama a | `canva-design`, `design-illustrator`, `web-go-high-level-ia`, `rea-reverse-engineer` (por porción) y las skills secundarias de su tabla de enrutamiento (`figma:*`, `impeccable`, `ui-ux-pro-max`, etc., solo las que existan en el equipo) |
+| Llama a | `canva-design`, `design-illustrator`, `design-logo-vector`, `web-go-high-level-ia`, `rea-reverse-engineer` (por porción) y las skills secundarias de su tabla de enrutamiento (`figma:*`, `impeccable`, `ui-ux-pro-max`, etc., solo las que existan en el equipo) |
 | La llaman | Todo trabajo de diseño la activa primero (regla del `CLAUDE.md` global del usuario); `seo-content-system` y `web-go-high-level-ia` la consultan para dirección visual |
 
 ## Siguiente paso recomendado
