@@ -13,6 +13,7 @@ todos. Los datos de clientes nunca entran: ver [PRIVACY.md](PRIVACY.md).
 | `design-system-ia` | Define, audita, documenta, verifica y deja legible para IA un sistema de diseño (contratos, tokens, vocabulario de props, Figma, medición) según el perfil del proyecto (`website`, `app`, `sistema compartido`). | Sub-skill de `direct-visual-design`. |
 | `canva-design` | Lleva un diseño HTML a Canva dejando todo editable (texto real, capas, verificación por exportación). | Sub-skill de `direct-visual-design`. |
 | `design-illustrator` | Lleva un diseño HTML a Adobe Illustrator como archivo limpio y editable (`.ai`, PDF editable). | Sub-skill de `direct-visual-design`. |
+| `design-logo-vector` | Crea, rediseña, critica y entrega logos, y vectoriza logos raster a SVG limpio y suave (brief → conceptos → checkpoint → kit; escalera de complejidad y verificación con semáforo). | Sub-skill de `direct-visual-design`. |
 | `web-go-high-level-ia` | Construye y mantiene un sitio dentro del constructor de IA de GoHighLevel (AI Studio). | Sub-skill de `direct-visual-design` **y** de `seo-content-system`. |
 | `seo-content-system` | Investiga, planifica, redacta, audita y mide contenido para SEO, AEO y GEO. | Llama a `web-go-high-level-ia` cuando el sitio vive en GoHighLevel. |
 | `seo-content-system-web-hosted` | Versión de `seo-content-system` para entornos sin archivos (proyectos de Claude.ai, GPT personalizados de ChatGPT). | **Generada**: se produce con `tools/build_hosted.py`; **no se edita a mano**. |

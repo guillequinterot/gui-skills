@@ -124,6 +124,14 @@ Contenido de la carpeta:
 - **Regla candidata:** ninguna
 - **Herramientas:** Claude Code
 
+### 2026-10-31 · banco-pruebas-logo-vector · guille
+
+- **Qué se hizo:** Tabla de enrutamiento: nueva fila y regla obligatoria para design-logo-vector (logos y vectorizado); ckm:design queda solo para conceptos visuales.
+- **Salió bien:** Integración sin tocar el método HTML→Figma.
+- **Salió mal / incidencia:** nada relevante
+- **Regla candidata:** ninguna
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)

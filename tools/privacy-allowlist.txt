@@ -16,3 +16,6 @@ git@github\.com
 
 # Rutas de ejemplo con carpeta de datos del sistema (no personales)
 [A-Za-z]:[\\/]+(?:Windows|Program Files|Program Files \(x86\)|ProgramData)[\\/]
+
+# Telefono de relleno de la tarjeta de ejemplo en scripts vendor (design-logo-vector)
+\+00 000 000 000
