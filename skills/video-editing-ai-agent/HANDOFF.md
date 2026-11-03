@@ -149,6 +149,14 @@ Relación con otras skills:
 - **Regla candidata:** Antes de generar voz, confirmar con el usuario el estado de producto y plataformas; la web puede estar desactualizada
 - **Herramientas:** hyperframes 0.8.162, faster-whisper, ffmpeg, Magnific TTS
 
+### 2026-11-02 · caso-video-blog-01 · guille
+
+- **Qué se hizo:** Video horizontal de YouTube de 4:20 (31 pantallas, diseno v2: degradados, vidrio, titulares ligeros, objeto 3D) con la voz y los subtitulos ya generados; render, normalizacion de audio y paquete de entrega (titulo, descripcion con capitulos y fuentes, miniatura)
+- **Salió bien:** Pantallas cortas ancladas a frases; fondo global sin desenfoque (sin fotogramas negros); aprobado por el usuario a la primera tras ver capturas y el video
+- **Salió mal / incidencia:** Render de 21 min 44 s por version; 34 % de fotogramas con movimiento solo suave; el trabajo previo se corto por el limite de gasto mensual de la organizacion Incidencia: composition_heavy_overlay_count_high (121 elementos): se paso el fondo a una capa global y se quito backdrop-filter; ids repetidos de seguidores corregidos
+- **Regla candidata:** Con mas de ~40 elementos con degradado o desenfoque en una composicion, usar fondo global y vidrio sin backdrop-filter
+- **Herramientas:** hyperframes 0.8.162, ffmpeg, motion_energy.py, self_eval.py, save_approved.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -165,3 +173,4 @@ Relación con otras skills:
 | Al rehacer una pieza rechazada, comparar primero la duración de la voz con la del video y revisar una hoja de contacto del estado heredado antes de tocar el diseño. | caso-reel-02 | candidata |
 | Dejar cada pieza con un único archivo sustituible para las variantes del cliente (p. ej. person.png) y un script de render y verificación que repita las mismas métricas. | caso-reel-02 | candidata |
 | Antes de generar voz, confirmar con el usuario el estado de producto y plataformas; la web puede estar desactualizada | caso-reel-03 | candidata |
+| Con mas de ~40 elementos con degradado o desenfoque en una composicion, usar fondo global y vidrio sin backdrop-filter | caso-video-blog-01 | candidata |

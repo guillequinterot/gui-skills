@@ -132,6 +132,14 @@ Contenido de la carpeta:
 - **Regla candidata:** ninguna
 - **Herramientas:** no indicadas
 
+### 2026-11-02 · caso-video-blog-01 · guille
+
+- **Qué se hizo:** Lenguaje visual v2 (degradados, vidrio, recortes, titulares ligeros con la palabra clave en color, sin subrayado) a partir de 7 referencias del usuario, aplicado a 2 carruseles de redes (16 laminas) y a un video de 31 pantallas; portada 3D en vez de una persona con gesto negativo
+- **Salió bien:** El usuario eligio la v2 y aprobo el video; analisis de referencias con mantener/adaptar/evitar; contraste resuelto (acento lima solo sobre oscuro)
+- **Salió mal / incidencia:** La primera portada del viernes usaba una persona con gesto de preocupacion: el usuario la rechazo (pidio objeto 3D); el recorte de una foto con pantalla blanca salio translucido y se uso un recorte en recuadro
+- **Regla candidata:** Sin personas con gesto negativo en piezas de marca: objeto 3D, ilustracion o gesto neutro o positivo
+- **Herramientas:** HTML+Playwright, rembg, generacion de imagen con IA, hyperframes
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -147,6 +155,7 @@ Contenido de la carpeta:
 | En páginas con mucho contenido tabular, usar pestañas solo para contenido paralelo y dejar visible la comparativa; documentar en Figma los estados de pestañas en un frame aparte. | caso-marca-estudio-01 | candidata |
 | Cuando el usuario corrige a mano en Figma, tratar Figma como fuente: diff de textos visibles Figma↔HTML y reportar explícitamente los cambios de copy y de campos de formulario. | caso-marca-estudio-01 | candidata |
 | Preferencia del usuario: las imágenes no se repiten entre láminas de un mismo carrusel (confirmar con más casos antes de volverla regla). | caso-carrusel-01 | candidata |
+| Sin personas con gesto negativo en piezas de marca: objeto 3D, ilustracion o gesto neutro o positivo | caso-video-blog-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 

@@ -60,3 +60,15 @@ Antes estaban como candidatos en `inbox-aprendizajes.md`; el usuario los aprobó
 ## Límites
 
 Una guía de marca o una instrucción actual distinta prevalece. Valores concretos de marca → `../proyectos/`.
+
+## Nueva — lenguaje visual v2 para redes y video (aprobado explícitamente por el usuario, 2026-11-02)
+
+Evidencia: el usuario mandó 7 referencias y dijo qué quería («en vez de círculos que sea más bien degradados», «prefiero imágenes cortadas», «las formas glass me gustan», «la tipografía y el cambio de color para resaltar pero no le hagas la línea por debajo», «nada de personas negativas») y después eligió la versión v2 («esta es la versión que más me gusta») y aprobó el video («Aprobado»). Aplica a piezas de redes y video; los límites de paleta y tipografía de cada marca siguen mandando.
+
+- Degradados vivos (un brillo de color que sale de una esquina, con grano fino) en vez de color plano con círculos; los degradados van entre los mismos colores de la marca.
+- Formas de vidrio (borde fino, brillo) para tarjetas, números y chips.
+- Fotos recortadas sin fondo, o recorte apretado; sin marcos redondeados.
+- Titulares ligeros (peso 300) con la palabra clave en otro color y con más peso; sin subrayado ni línea debajo.
+- Sin personas con gesto negativo o de preocupación: usar un objeto 3D, una ilustración o una persona con gesto neutro o positivo.
+- Alternar fondos oscuro, de acento y claro; el color de acento no se usa como texto sobre fondos claros (contraste): ahí la palabra clave va en negro y más gruesa.
+
