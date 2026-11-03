@@ -157,6 +157,14 @@ Relación con otras skills:
 - **Regla candidata:** Con mas de ~40 elementos con degradado o desenfoque en una composicion, usar fondo global y vidrio sin backdrop-filter
 - **Herramientas:** hyperframes 0.8.162, ffmpeg, motion_energy.py, self_eval.py, save_approved.py
 
+### 2026-11-03 · caso-video-blog-01 · guille
+
+- **Qué se hizo:** Reel vertical de 49 s (Instagram + Short) rehecho en el diseno v2 de HyperFrames reutilizando la voz del reel v1: 11 pantallas, fondo global sin backdrop-filter, barridos alternos, subtitulos fuera de las zonas de interfaz de Instagram, sin personas con expresion negativa. Aprobado por el usuario (V009).
+- **Salió bien:** Reutilizar la voz costo 0 creditos; el generador Python anclado a frases de la voz permitio 3 renders rapidos; linter 0 errores, 12 fotogramas reales revisados, 10 % de fotogramas casi inmoviles; audio -15.0 LUFS con pico -1.4 dBFS
+- **Salió mal / incidencia:** Solapes detectados solo en el render (sello girado contra aviso de voz IA) obligaron a un tercer render; pico inicial -0.9 dBFS; el dato de movil del reel (58,26 %) difiere del articulo (69,34 %) Incidencia: SVG circle: pathLength no es fiable, usar dasharray con la circunferencia explicita; un degradado (background-image) pisa el color de fondo: animar con backgroundImage:'none'; contadores sobre un overlay fallan el contraste del linter: animar el elemento base
+- **Regla candidata:** Para reels derivados de un video horizontal ya aprobado, reutilizar la voz y el guion y reconstruir solo el visual (candidata: falta una segunda pieza que lo confirme)
+- **Herramientas:** hyperframes 0.8.162, ffmpeg, self_eval.py, motion_energy.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -174,3 +182,4 @@ Relación con otras skills:
 | Dejar cada pieza con un único archivo sustituible para las variantes del cliente (p. ej. person.png) y un script de render y verificación que repita las mismas métricas. | caso-reel-02 | candidata |
 | Antes de generar voz, confirmar con el usuario el estado de producto y plataformas; la web puede estar desactualizada | caso-reel-03 | candidata |
 | Con mas de ~40 elementos con degradado o desenfoque en una composicion, usar fondo global y vidrio sin backdrop-filter | caso-video-blog-01 | candidata |
+| Para reels derivados de un video horizontal ya aprobado, reutilizar la voz y el guion y reconstruir solo el visual (candidata: falta una segunda pieza que lo confirme) | caso-video-blog-01 | candidata |

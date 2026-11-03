@@ -176,3 +176,24 @@ Etiquetas: caso-reel-03, horizontal, youtube, voz, comparacion
 - El trabajo anterior se corto por el limite de gasto mensual de la organizacion y dejo el video sin renderizar ni empaquetar
 
 Etiquetas: horizontal, youtube, voz, motion-graphics, diseno-v2, 3d, vidrio
+
+## V009 · Reel vertical caso-video-blog-01 (v2, 49 s) · 2026-11-03
+
+- **Pieza:** Reel de Instagram y Short de YouTube (mismo MP4) que resume un articulo de blog de servicios de diseno web, voz generada con IA · 1080x1920, 49.2 s · 49.2 s · ruta `motion-graphics` · motor hyperframes · proyecto `caso-video-blog-01`
+- **Mensaje:** Que una web se vea vieja no es razon para rediseñarla: redisenala solo si se cumplen cinco senales, y hay una guia gratis
+- **Aprobado por Guille:** «Apruebo el reel»
+- **Aprobado explícitamente:** Redisenado en el diseno v2 (degradados, vidrio, titulares ligeros con palabra clave en color sin subrayado, recortes, objeto 3D); sin personas con expresion negativa; misma voz del reel v1 (0 creditos); 11 pantallas con movimiento propio
+- **Sin decidir (no usar como preferencia):** Sincronia fina de cada animacion con la palabra exacta: solo medida; apariencia dentro de la interfaz de Instagram: no probada; hora de publicacion del viernes (choca con el carrusel) y enlace del articulo aun sin publicar
+- **Estructura:** gancho con objeto 3D > si/no > 5 senales numeradas (grafica, celular con candado, dona 58,26 %, parches, competencia) > si no se cumple, ajustar > guia gratis en 3D > cierre con foto sonriendo del autor
+- **Receta:** Composicion HyperFrames 1080x1920 a 30 fps generada con script Python, todo anclado a frases de la voz (voz_palabras.json, inicio de escena = palabra - 0.30 s); fondo global con colores por escena y sin backdrop-filter; barridos lima+negro alternando horizontal/vertical; subtitulos en pastilla oscura a 1330 px (fuera de las zonas de interfaz de Instagram); render --workers 4; audio por remux con volume +1.5 dB y alimiter 0.84 (a -15.0 LUFS, pico -1.4); 3 renders en total
+- **Medido:** 49.2 s; 1080x1920 30 fps; -15.0 LUFS, pico -1.4 dBFS; hyperframes check 0 errores; fotogramas casi inmoviles 10 %; render final 21.3 MB
+
+**Lo bueno (repetir)**
+- Misma voz reutilizada: cero creditos; boceto recortado a la pantalla en vez de la persona; solo 10 % de fotogramas casi inmoviles y ninguna pausa de 0.5 s o mas; capturas y hoja de 12 fotogramas reales antes de dar por bueno
+
+**Lo malo (evitar)**
+- Hizo falta un tercer render por solapes (sello girado contra el aviso de voz IA); pico de -0.9 dBFS corregido tras self_eval; el dato de movil 58,26 % no coincide con el 69,34 % del articulo
+
+**Archivos:** `00_Ideas/cuando-redisenar-2026-11-02/reel-vertical-v2/salida/cuando-redisenar_reel-vertical_v2.mp4`
+
+Etiquetas: vertical, reel, short, voz, motion-graphics, diseno-v2, 3d, vidrio
