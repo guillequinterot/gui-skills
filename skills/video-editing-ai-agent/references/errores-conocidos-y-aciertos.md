@@ -80,3 +80,15 @@ Origen: video entregado a medias por otra IA; el usuario dijo «la verdad el vid
 | **Ganancia de remux calculada** (`-15.5 − LUFS`, tope +3 dB) y limitador 0.78 después | Vertical v2: −17.4 → −15.6 LUFS, pico −2.0 dBFS; con +1.2 dB fijo habría quedado en −16.2 |
 | **Música para una pieza larga: bucle de N×48 compases con solape de 1 compás** | `beat_grid.py` sobre la salida: 157 golpes, puntaje 5.42 (igual que el original) |
 | **Pedidos del cliente con promesas de rentabilidad** («preset ganador, seis años de ganancias consecutivas»): no se escriben; se ofrece A (sin cifras) o B (con fuente pública verificable y aviso) y decide el usuario | El usuario eligió A |
+
+## 8. Pieza larga con muchas pantallas y un diseño con degradados y vidrio (V008 de caso-video-blog-01, 2026-11-02)
+| Hacer | Evidencia |
+|---|---|
+| **Fondo GLOBAL**: una capa de color y dos degradados radiales que derivan, cambiados con `tl.set` bajo el barrido de cada corte, en vez de un fondo por escena | `hyperframes lint` avisó `composition_heavy_overlay_count_high` (121 elementos con degradado, desenfoque o recorte; con ~40 se ha visto el render negro la primera mitad). Con fondo global y sin `backdrop-filter` el aviso desapareció y los fotogramas reales coincidieron con las capturas |
+| **Tarjetas de vidrio sin `backdrop-filter`** (degradado translúcido + borde + brillo que cruza) | Sobre un fondo liso el desenfoque no se nota y cuesta elementos pesados y tiempo de render |
+| **Grano SVG fino** (`feTurbulence`, ~13 %, `mix-blend-mode: overlay`) sobre todo | Evita las bandas del degradado sobre oscuro en H.264 |
+| Ids únicos por pantalla en los seguidores de pasos (`tk<pantalla>_<n>`) y `immediateRender: false` en el segundo `fromTo` del mismo elemento | Ids repetidos hacían que el JS animara solo el primero; el lint avisó 7 `fromTo` sin base |
+| Partir un tema largo en pantallas cortas ancladas a frases (`T("frase")`), nunca segundos a mano | 14 → 31 pantallas sin tocar la voz; una pantalla de 3 s se lee si su visual está completo desde el primer segundo |
+| Un render de 4 min 20 s a 1080p cuesta ~22 min (4 trabajadores): **aprobar el diseño con capturas (`snapshot`) antes** y renderizar una sola vez | `snapshot` de 31 pantallas: 1 min; render: 21 min 44 s |
+| Un trabajo por subagentes puede cortarse por el **límite de gasto mensual** (429): revisar el estado real (archivos, renders) antes de dar algo por hecho | El horizontal anterior quedó diseñado y sin renderizar |
+

@@ -153,3 +153,26 @@ Etiquetas: caso-reel-03, vertical, voz, comparacion, empalme-de-voz
 - mismo error de datos desactualizados que el vertical
 
 Etiquetas: caso-reel-03, horizontal, youtube, voz, comparacion
+
+## V008 · Video horizontal caso-video-blog-01 (explicativo de un articulo, 4:20) · 2026-11-02
+
+- **Pieza:** Video YouTube 16:9 explicativo de un articulo de blog de servicios de diseno web (voz generada con IA) · 1920x1080 · 259.7 s · ruta `motion-graphics` · motor hyperframes · proyecto `caso-video-blog-01`
+- **Mensaje:** Que una web se vea vieja no es razon para rediseñarla: cinco senales para rediseñar, cinco casos para no tocarla y que proteger si se rediseña
+- **Aprobado por usuario:** «Aprobado»
+- **Aprobado explícitamente:** 31 pantallas cortas en vez de 14 largas: cada tema largo se partio en pantallas con visual propio; diseno v2: degradados, vidrio, titulares ligeros con la palabra clave en otro color y mas peso (sin subrayado), grano fino, objeto 3D en vez de personas con gesto negativo
+- **Sin decidir (no usar como preferencia):** mas movimiento en los tramos de animacion suave (34 % de fotogramas casi inmoviles): no lo pidio ni lo descarto; sincronia fina de cada animacion con la voz: solo se midio, no la evaluo el usuario en detalle
+- **Estructura:** gancho con objeto 3D > si/no > resumen de 3 partes > regla de la fuente > medir (5 cosas + linea base) > 5 senales (1 a 5; la 2 en 3 pantallas) > 5 casos (uno por pantalla) > 3 caminos > 2 casos propios > proteger (5 pasos, uno por pantalla) > guia gratis > cierre con la foto del autor
+- **Receta:** Composicion HyperFrames 1920x1080 a 30 fps generada con un script Python y todo anclado a frases de la voz (T/E sobre timing.json); fondo GLOBAL (una capa de color + 2 degradados radiales que derivan, cambiados con tl.set bajo el barrido) en vez de uno por escena y sin backdrop-filter, porque el lint avisaba de 121 elementos pesados (riesgo de fotogramas negros); tarjetas de vidrio sin desenfoque con brillo que las cruza; titulares Poppins Light con enfasis ExtraBold; grano SVG fino contra las bandas; transiciones por barrido lima+negro de 0.5 s; render --workers 4 en 21 min 44 s; audio por remux con volume +2.8 dB y alimiter 0.84 (de -17.8 a -15.1 LUFS)
+- **Medido:** 259.7 s; 1920x1080 30 fps; -15.1 LUFS, pico -1.3 dBFS; hyperframes check 0 errores y 80/80 contraste; fotogramas casi inmoviles 2678 de 7790; render 21 min 44 s; 94 MB
+
+**Lo bueno (repetir)**
+- Pantallas cortas con visual propio en vez de pocas largas
+- Fondo global y sin desenfoque: ningun fotograma negro en el render, los fotogramas reales coinciden con las capturas de diseno
+- Objeto 3D generado con IA en la paleta de la marca reemplazo la foto de una persona preocupada sin gastar stock
+
+**Lo malo (evitar)**
+- Una version de render cuesta 21 min 44 s: no se puede iterar; pedir la aprobacion del diseno con capturas antes del render
+- 34 % de fotogramas con movimiento solo suave (tramos largos al final de los casos propios y en el cierre)
+- El trabajo anterior se corto por el limite de gasto mensual de la organizacion y dejo el video sin renderizar ni empaquetar
+
+Etiquetas: horizontal, youtube, voz, motion-graphics, diseno-v2, 3d, vidrio
