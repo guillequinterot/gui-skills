@@ -148,6 +148,14 @@ Contenido de la carpeta:
 - **Regla candidata:** ninguna
 - **Herramientas:** no indicadas
 
+### 2026-11-03 · caso-web-sobre-mi-01 · guille
+
+- **Qué se hizo:** Galería de 25 certificados y diplomas en la página Sobre mí de un sitio Astro: miniatura + ficha agrupadas por tema (UX/UI y web, marketing, branding, IA, comunicación visual, eventos), ampliación en dialog nativo con cierre por Esc, tarjetas compactas en móvil. Imágenes preparadas con un script (PDF a imagen a 130 dpi, WebP 1600 px + miniatura) y publicación por olas con SHA-256 verificado y QA con la CSP real.
+- **Salió bien:** Antes de publicar se revisaron uno por uno los certificados y se tapó el número de documento de identidad en 4 imágenes (relleno con el color del fondo, caja comprobada en recorte); los datos de cada ficha (fecha, horas, vigencia) se copiaron del propio certificado y las certificaciones vencidas se muestran con su vigencia real; los estilos viajaron en un CSS aparte para no arrastrar cambios ajenos del CSS global.
+- **Salió mal / incidencia:** La miniatura salía muy alta porque el atributo height de la imagen anulaba el aspect-ratio del CSS (se corrigió con height:auto); el script de subida tardó más de 10 min por abrir 4 conexiones SSH por archivo y hubo que reescribirlo para omitir lo ya subido. Incidencia: El texto de los PDF escaneados está vacío (son imágenes): una búsqueda por texto no encuentra el número de documento; hay que mirar cada certificado.
+- **Regla candidata:** Antes de publicar certificados o diplomas escaneados, revisar visualmente cada uno y tapar en la imagen cualquier número de documento de identidad; no confiar en la extracción de texto del PDF.
+- **Herramientas:** PyMuPDF, Pillow, Astro, Playwright
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -164,6 +172,7 @@ Contenido de la carpeta:
 | Cuando el usuario corrige a mano en Figma, tratar Figma como fuente: diff de textos visibles Figma↔HTML y reportar explícitamente los cambios de copy y de campos de formulario. | caso-marca-estudio-01 | candidata |
 | Preferencia del usuario: las imágenes no se repiten entre láminas de un mismo carrusel (confirmar con más casos antes de volverla regla). | caso-carrusel-01 | candidata |
 | Sin personas con gesto negativo en piezas de marca: objeto 3D, ilustracion o gesto neutro o positivo | caso-video-blog-01 | candidata |
+| Antes de publicar certificados o diplomas escaneados, revisar visualmente cada uno y tapar en la imagen cualquier número de documento de identidad; no confiar en la extracción de texto del PDF. | caso-web-sobre-mi-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
