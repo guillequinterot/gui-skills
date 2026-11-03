@@ -140,6 +140,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Sin personas con gesto negativo en piezas de marca: objeto 3D, ilustracion o gesto neutro o positivo
 - **Herramientas:** HTML+Playwright, rembg, generacion de imagen con IA, hyperframes
 
+### 2026-11-03 · caso-video-blog-01 · guille
+
+- **Qué se hizo:** Diseno v2 aplicado al formato vertical 1080x1920: degradados con paleta negro/lima/blanco, tarjetas de vidrio, titulares Poppins Light con palabra clave en ExtraBold de color sin subrayado, recortes y objeto 3D; subtitulos en pastilla fuera de las zonas de interfaz de Instagram. Aprobado por el usuario.
+- **Salió bien:** El mismo sistema visual del video horizontal funciono en vertical con ajustes de tamano (titulo 106 px, ancho 600 px); sin personas con expresion negativa, con boceto recortado y objeto 3D
+- **Salió mal / incidencia:** Las composiciones verticales con muchas capas necesitaron varias pasadas de posicion para evitar solapes (objeto 3D sobre el titulo, sellos contra avisos) Incidencia: nada relevante
+- **Regla candidata:** ninguna
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
