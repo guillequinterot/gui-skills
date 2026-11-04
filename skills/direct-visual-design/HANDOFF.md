@@ -156,6 +156,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Antes de publicar certificados o diplomas escaneados, revisar visualmente cada uno y tapar en la imagen cualquier número de documento de identidad; no confiar en la extracción de texto del PDF.
 - **Herramientas:** PyMuPDF, Pillow, Astro, Playwright
 
+### 2026-11-04 · caso-web-salud-01 · julian
+
+- **Qué se hizo:** Sincronización con el staging del sitio tras dos semanas en que el equipo siguió sin el diseñador. HTML de diseño reemplazado por una copia fiel de staging (script que descarga páginas y recursos y reescribe rutas a relativas), con respaldo previo; páginas nuevas incluidas y lo que no existe en staging intacto. En Figma se compararon todos los frames con staging (capturas lado a lado y textos) y solo se trajo lo más nuevo: footer con enlace legal, portada del video, franja de aliados, copy nuevo de una sección, un cuarto centro con su mapa, un número de paso corregido y una página legal nueva construida con texto editable y estilos de la librería.
+- **Salió bien:** La copia fiel midió lo mismo que staging en todas las páginas a 1440 y 375 px (solo cambia el suavizado de las letras). Comparar Figma contra staging antes de editar mostró que el Figma ya estaba casi al día y que en varios puntos iba por delante; preguntar qué mandaba evitó retroceder trabajo del equipo. La página legal nueva quedó con la misma altura de contenido que staging. Se detectó y corrigió un mapa duplicado por error en el Figma.
+- **Salió mal / incidencia:** La primera versión del script de copia reescribía cualquier barra precedida de espacio como ruta de página y habría roto CSS como 'grid-row: 1 / 3'; se limitó a valores entre comillas. Una captura reducida hizo creer que había palabras en azul en un texto: al ampliarla no existían y hubo que retirar ese punto de la lista. El embed de Google Maps no se puede capturar abierto directamente ('must be used in an iframe'): hubo que envolverlo en una página local. Incidencia: Las capturas reducidas para comparar a simple vista pueden inventar detalles de color; verificar en el recorte a tamaño real antes de reportarlos.
+- **Regla candidata:** Cuando desarrollo ya publicó un staging, compararlo sección por sección con el Figma antes de tocar nada y preguntar qué manda donde el Figma va por delante; traer a Figma solo lo que staging tiene más nuevo y listar sus inconsistencias para desarrollo en vez de corregirlas sin aprobación.
+- **Herramientas:** Chrome headless por CDP (Node), Python (urllib, Pillow), MCP oficial de Figma (use_figma, get_screenshot, upload_assets), skills figma-use y figma-generate-design
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -173,6 +181,7 @@ Contenido de la carpeta:
 | Preferencia del usuario: las imágenes no se repiten entre láminas de un mismo carrusel (confirmar con más casos antes de volverla regla). | caso-carrusel-01 | candidata |
 | Sin personas con gesto negativo en piezas de marca: objeto 3D, ilustracion o gesto neutro o positivo | caso-video-blog-01 | candidata |
 | Antes de publicar certificados o diplomas escaneados, revisar visualmente cada uno y tapar en la imagen cualquier número de documento de identidad; no confiar en la extracción de texto del PDF. | caso-web-sobre-mi-01 | candidata |
+| Cuando desarrollo ya publicó un staging, compararlo sección por sección con el Figma antes de tocar nada y preguntar qué manda donde el Figma va por delante; traer a Figma solo lo que staging tiene más nuevo y listar sus inconsistencias para desarrollo en vez de corregirlas sin aprobación. | caso-web-salud-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
