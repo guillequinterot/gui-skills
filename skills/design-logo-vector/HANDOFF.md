@@ -51,6 +51,14 @@ Skill **propia** del mantenedor, **sub-skill de `direct-visual-design`** (la pri
 - **Regla candidata:** ninguna
 - **Herramientas:** Python 3.12, Pillow, numpy, Chrome headless
 
+### 2026-11-05 · caso-landing-inversion-01 · guille
+
+- **Qué se hizo:** Logo tipográfico en bloque (dos líneas + filete + descriptor) rehecho de serif a sans-serif (Jost, OFL) con contornos reales, filete en negrita y variantes sobre claro y sobre oscuro, símbolo, PNG y favicon.
+- **Salió bien:** Reutilizar la librería de contornos de fuente (kerning de GPOS, sin <text> ni trazos) dio el SVG a la primera; el filete a ~0,17 de la altura de mayúscula lee como negrita junto a letras de ~0,12 de tallo.
+- **Salió mal / incidencia:** No hay .ai de la nueva versión, no se probó a 16 px ni en una tinta; la fuente no estaba instalada y hubo que bajarla del repositorio de Google Fonts. Incidencia: Interpretación de «el guion en bold» como el filete del logo, sin confirmar con el cliente.
+- **Regla candidata:** ninguna
+- **Herramientas:** Python, fontTools, Playwright
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
