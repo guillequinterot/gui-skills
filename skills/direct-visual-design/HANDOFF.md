@@ -180,6 +180,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Al acomodar un Figma existente al método, comprobar también el ancho de los rellenos full-bleed (imagen y overlay): deben ir a 1920 aunque el contenido respete el padding de 240. Un solo caso: sigue como candidata.
 - **Herramientas:** Figma MCP (use_figma, get_metadata, get_screenshot) con figma-use y figma-generate-design
 
+### 2026-11-05 · caso-web-hotel-01 · guille
+
+- **Qué se hizo:** QA de la home de escritorio ya montada en Figma contra el checklist listo-para-Figma: auditoría de solo lectura de 347 nodos (retícula, espaciado x4 y 80/80, Auto Layout, clip, estilos, imágenes, contraste AA) más captura de cada sección. Arreglos aplicados con OK del usuario: imagen y overlay de las cards de experiencias con constraint Stretch (378 -> ancho de la card); mapa a Fill; alineación de precio y botón en una fila de 3 cards dejando la más alta en Hug; gaps de 2 -> 4; clip solo en las 9 cards (de 141 frames a 9); estilo de color nuevo para texto cobre oscuro (4,64:1 sobre el fondo más oscuro, 0 fallos en 155 textos medidos); banda de vídeo a 80/80 con alto Hug (640 -> 543), fondo ajustado.
+- **Salió bien:** Diagnosticar antes de tocar y medir después de cada cambio detectó dos fallos que una captura no mostraba bien. Se compararon estilos existentes antes de crear uno: el cobre ya existente daba 4,41:1 sobre el fondo oscuro (a 0,09 de AA) y se creó uno propio sin pisar el de los botones.
+- **Salió mal / incidencia:** El primer intento de alinear los botones de las cards falló: con las 3 cards en Fill la fila no toma la altura de la más alta (quedó en 507 y el botón de la card 2 sobresalía 12 px). Lo destapó la medición de distancia al borde inferior, no la captura; hizo falta un segundo intento. Quedan sin medir los 21 textos sobre imagen y sin crear componentes (0 instancias, 15 botones y 9 cards sueltos). Incidencia: Los rectángulos de fondo con posición absoluta y constraint MIN no siguen a su contenedor al cambiar el padding: dejaron una franja vacía en las cards de experiencias y el texto se salía de la imagen.
+- **Regla candidata:** En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso.
+- **Herramientas:** Figma MCP (use_figma, get_screenshot) con figma-use y figma-generate-design
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -200,6 +208,7 @@ Contenido de la carpeta:
 | Los naranjas de marca brillantes rara vez pasan AA con texto blanco en botones (~2.5:1). Para CTA con texto usar una variante mas profunda/terracota (reposo >=4.5:1) y reservar el naranja brillante a acentos sin texto; validar con contraste computado, no a ojo. | caso-landing-evento-01 | candidata |
 | Cuando el cliente pide copiar los colores de otra web suya, mirar la referencia renderizada y reproducir su proporción de fondo/acento (no solo los hex); confirmar con una captura antes de publicar. | caso-landing-inversion-01 | candidata |
 | Al acomodar un Figma existente al método, comprobar también el ancho de los rellenos full-bleed (imagen y overlay): deben ir a 1920 aunque el contenido respete el padding de 240. Un solo caso: sigue como candidata. | caso-web-hotel-01 | candidata |
+| En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso. | caso-web-hotel-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
