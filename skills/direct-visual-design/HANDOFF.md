@@ -156,6 +156,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Antes de publicar certificados o diplomas escaneados, revisar visualmente cada uno y tapar en la imagen cualquier número de documento de identidad; no confiar en la extracción de texto del PDF.
 - **Herramientas:** PyMuPDF, Pillow, Astro, Playwright
 
+### 2026-11-05 · caso-landing-evento-01 · guille
+
+- **Qué se hizo:** Re-skin de una landing de evento del sistema azul corporativo de la constructora a la identidad calida del proyecto (verde naturaleza, naranja sol, dorado, crema), conservando estructura, textos y clases para no romper el handoff a WordPress. Hero con resplandor de sol, badge dorado, eyebrows, elevacion en cards. QA: sin desbordes 360-1440, responsive, contrastes verificados. Entrega en ZIP solo con archivos referenciados.
+- **Salió bien:** Mapear roles del sistema a los colores reales del proyecto (no los de la marca madre) le dio coherencia inmediata. Verificar contraste con JS computado detecto el problema del CTA antes de entregar. Excluir del ZIP los assets no referenciados dejo una entrega limpia (12 archivos, 680 KB).
+- **Salió mal / incidencia:** El panel de vista previa cacheaba styles.css: hubo que forzar el reemplazo del <link> con un parametro de version para ver cada cambio; los getComputedStyle leidos justo tras el swap salian stale una iteracion.
+- **Regla candidata:** Los naranjas de marca brillantes rara vez pasan AA con texto blanco en botones (~2.5:1). Para CTA con texto usar una variante mas profunda/terracota (reposo >=4.5:1) y reservar el naranja brillante a acentos sin texto; validar con contraste computado, no a ojo.
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -173,6 +181,7 @@ Contenido de la carpeta:
 | Preferencia del usuario: las imágenes no se repiten entre láminas de un mismo carrusel (confirmar con más casos antes de volverla regla). | caso-carrusel-01 | candidata |
 | Sin personas con gesto negativo en piezas de marca: objeto 3D, ilustracion o gesto neutro o positivo | caso-video-blog-01 | candidata |
 | Antes de publicar certificados o diplomas escaneados, revisar visualmente cada uno y tapar en la imagen cualquier número de documento de identidad; no confiar en la extracción de texto del PDF. | caso-web-sobre-mi-01 | candidata |
+| Los naranjas de marca brillantes rara vez pasan AA con texto blanco en botones (~2.5:1). Para CTA con texto usar una variante mas profunda/terracota (reposo >=4.5:1) y reservar el naranja brillante a acentos sin texto; validar con contraste computado, no a ojo. | caso-landing-evento-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
