@@ -164,6 +164,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Los naranjas de marca brillantes rara vez pasan AA con texto blanco en botones (~2.5:1). Para CTA con texto usar una variante mas profunda/terracota (reposo >=4.5:1) y reservar el naranja brillante a acentos sin texto; validar con contraste computado, no a ojo.
 - **Herramientas:** no indicadas
 
+### 2026-11-05 · caso-landing-inversion-01 · guille
+
+- **Qué se hizo:** Rediseño de una landing HTML a la paleta de una marca hermana (marino, acero, blancos y grises), todo en una sola sans-serif, logo rehecho en esa sans con el filete más grueso y fotos en blanco y negro; publicada con URLs de imagen versionadas.
+- **Salió bien:** Estructura copiada de la referencia (página blanca, sección en niebla, bloque de contacto en marino) y gris de texto con contraste AA calculado; verificación en escritorio y móvil, md5 local vs servidor.
+- **Salió mal / incidencia:** La primera lectura de «que tenga los colores de la otra web» fue un fondo marino oscuro y se publicó así; el cliente quería la proporción de blancos y grises de la referencia y hubo que republicar el mismo día. Incidencia: Se publicó antes de confirmar que la referencia era la proporción de blanco/gris y no solo los colores de marca.
+- **Regla candidata:** Cuando el cliente pide copiar los colores de otra web suya, mirar la referencia renderizada y reproducir su proporción de fondo/acento (no solo los hex); confirmar con una captura antes de publicar.
+- **Herramientas:** Python, PIL, fontTools, Playwright, navegador del panel
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -182,6 +190,7 @@ Contenido de la carpeta:
 | Sin personas con gesto negativo en piezas de marca: objeto 3D, ilustracion o gesto neutro o positivo | caso-video-blog-01 | candidata |
 | Antes de publicar certificados o diplomas escaneados, revisar visualmente cada uno y tapar en la imagen cualquier número de documento de identidad; no confiar en la extracción de texto del PDF. | caso-web-sobre-mi-01 | candidata |
 | Los naranjas de marca brillantes rara vez pasan AA con texto blanco en botones (~2.5:1). Para CTA con texto usar una variante mas profunda/terracota (reposo >=4.5:1) y reservar el naranja brillante a acentos sin texto; validar con contraste computado, no a ojo. | caso-landing-evento-01 | candidata |
+| Cuando el cliente pide copiar los colores de otra web suya, mirar la referencia renderizada y reproducir su proporción de fondo/acento (no solo los hex); confirmar con una captura antes de publicar. | caso-landing-inversion-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
