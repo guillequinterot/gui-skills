@@ -172,6 +172,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Cuando el cliente pide copiar los colores de otra web suya, mirar la referencia renderizada y reproducir su proporción de fondo/acento (no solo los hex); confirmar con una captura antes de publicar.
 - **Herramientas:** Python, PIL, fontTools, Playwright, navegador del panel
 
+### 2026-11-05 · caso-web-hotel-01 · guille
+
+- **Qué se hizo:** Home de escritorio ya montada en Figma (Auto Layout vertical, 1920 fijo y alto Hug, 11 secciones Fill, ritmo 80/80, header/hero/footer exentos) acomodada al método HTML->Figma: padding lateral 120 -> 240 en las 11 secciones (ancho útil 1440). Después, a petición del usuario, las dos bandas full-bleed (hero y banda de vídeo) llevadas de 1440 a 1920 (imagen y overlay), conservando el degradado del hero anclado a la izquierda.
+- **Salió bien:** Diagnóstico de solo lectura antes de tocar: el frame ya cumplía casi todo el método, así que bastó un cambio de un valor. Como cards y filas eran Fill, el contenido reflowó solo a 1440 sin desbordes. Verificado con capturas antes y después.
+- **Salió mal / incidencia:** Un defecto preexistente (imágenes full-bleed a 1440 en un lienzo de 1920) solo se vio en la captura posterior al cambio de padding, no en el diagnóstico por metadatos, porque el ancho de las imágenes no formaba parte de lo que se consultó. Incidencia: Con padding 240 las imágenes de fondo a 1440 dejaban una franja vacía a la derecha y la barra de reservas / las cifras flotaban sobre el fondo de página.
+- **Regla candidata:** Al acomodar un Figma existente al método, comprobar también el ancho de los rellenos full-bleed (imagen y overlay): deben ir a 1920 aunque el contenido respete el padding de 240. Un solo caso: sigue como candidata.
+- **Herramientas:** Figma MCP (use_figma, get_metadata, get_screenshot) con figma-use y figma-generate-design
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -191,6 +199,7 @@ Contenido de la carpeta:
 | Antes de publicar certificados o diplomas escaneados, revisar visualmente cada uno y tapar en la imagen cualquier número de documento de identidad; no confiar en la extracción de texto del PDF. | caso-web-sobre-mi-01 | candidata |
 | Los naranjas de marca brillantes rara vez pasan AA con texto blanco en botones (~2.5:1). Para CTA con texto usar una variante mas profunda/terracota (reposo >=4.5:1) y reservar el naranja brillante a acentos sin texto; validar con contraste computado, no a ojo. | caso-landing-evento-01 | candidata |
 | Cuando el cliente pide copiar los colores de otra web suya, mirar la referencia renderizada y reproducir su proporción de fondo/acento (no solo los hex); confirmar con una captura antes de publicar. | caso-landing-inversion-01 | candidata |
+| Al acomodar un Figma existente al método, comprobar también el ancho de los rellenos full-bleed (imagen y overlay): deben ir a 1920 aunque el contenido respete el padding de 240. Un solo caso: sigue como candidata. | caso-web-hotel-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
