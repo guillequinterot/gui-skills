@@ -44,6 +44,8 @@ Reparto: `direct-visual-design` clasifica, analiza referencias, fija dirección 
 6. **Idéntico al original:** verificado píxel a píxel y letra a letra contra el render del HTML (`verify_fidelity.py`) y con `ai_audit.ps1`.
 7. Una mesa de trabajo por lámina, nombrada (`p01`…), tamaño exacto en pt (1 px = 1 pt).
 
+> **¿El documento ya está abierto en Illustrator y viene de un PDF (sin HTML que regenerar)?** Salta el flujo de abajo y sigue [07](references/07-pdf-importado-ya-montado.md): copia de seguridad → «Guardar como» versión nueva → `ai_fix_pdf_import.ps1` → decidir con el usuario el texto que se sale de la página → «Tamaño automático» → verificar texto y render. La regla de oro y el criterio de aceptación valen igual.
+
 ## Flujo obligatorio (detalle en [01-pipeline](references/01-pipeline-html-a-illustrator.md))
 
 0. **Preflight:** `python -I scripts/handshake.py` (Windows + COM, Illustrator, fuente disponible en Illustrator, librerías, estado del MCP). Leer la nota del proyecto (en el vault de Obsidian, si el usuario lo usa) y `proyectos/`.
@@ -88,6 +90,7 @@ Reparto: `direct-visual-design` clasifica, analiza referencias, fija dirección 
 | COM, ExtendScript, MCP de Illustrator (registro en Claude/Codex), trucos y límites | [04-control-de-illustrator-com-y-mcp.md](references/04-control-de-illustrator-com-y-mcp.md) |
 | QA y verificación | [05-qa-verificacion.md](references/05-qa-verificacion.md) |
 | Caso modelo (`caso-manual-marca-01`: manual de marca, 46 láminas) | [06-caso-manual-marca-01.md](references/06-caso-manual-marca-01.md) |
+| **PDF que ya está abierto y montado** (planos, láminas, CAD; sin HTML): textos partidos, recortes anidados, texto cortado por la página | [07-pdf-importado-ya-montado.md](references/07-pdf-importado-ya-montado.md) |
 
 | Script | Para qué |
 |---|---|
@@ -102,6 +105,8 @@ Reparto: `direct-visual-design` clasifica, analiza referencias, fija dirección 
 | `scripts/ai_repair_page.ps1` | Rehace y vuelve a pegar UNA lámina |
 | `scripts/ai_merge_open.ps1` | Une párrafos dentro de un documento ya abierto |
 | `scripts/verify_fidelity.py` | Original vs maestro: píxeles y caracteres |
+| `scripts/ai_fix_pdf_import.ps1` | **PDF ya abierto en Illustrator:** une textos partidos EN SITIO, limpia recortes anidados (límite visible efectivo; lo oculto va a una capa) e infiere párrafos de área verificados (`-Dry` solo cuenta) |
+| `scripts/ai_fix_text_inplace.jsx`, `ai_clean_deep.jsx`, `ai_merge_paragraphs_infer.jsx` | Bibliotecas de lo anterior (`aiFixTextInPlace`, `aiCleanDeep`, `aiMergeParagraphsInfer`) |
 | `scripts/install.py` | Instalar por copia / verificar el núcleo (en gui-skills lo instala el instalador del repo con un enlace; este script detecta el enlace y no copia) |
 
 ## Base de conocimiento de la skill

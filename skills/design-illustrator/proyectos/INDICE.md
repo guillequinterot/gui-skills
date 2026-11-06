@@ -5,6 +5,7 @@ Leer esta ficha ANTES de trabajar para una marca en Illustrator. Una fila por ca
 | Caso | Ficha | Estado | Último trabajo |
 |---|---|---|---|
 | `caso-manual-marca-01` | [caso-manual-marca-01.md](caso-manual-marca-01.md) | Activo | Manual de marca 46 láminas → `.ai` de 46 mesas de trabajo — 2026-10-11 |
+| `caso-planos-01` | [caso-planos-01.md](caso-planos-01.md) | Activo | Planos de rotulación: PDF abierto → 8 mesas limpias (textos unidos, 318 → 21 recortes) — 2026-11-06 |
 
 ## Cómo añadir un caso
 1. Copiar `caso-manual-marca-01.md` a `<caso-código>.md` y rellenar: carpeta del proyecto (descrita, sin rutas personales), tamaño de lámina, fuente(s) y de dónde vienen (instalada / Adobe Fonts), nombres de los entregables, decisiones aprobadas, pendientes.

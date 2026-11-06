@@ -1,5 +1,12 @@
 # CHANGELOG — design-illustrator
 
+## 2026-11-06 — Ruta «PDF ya abierto y montado» (caso `caso-planos-01`)
+
+- Nuevo `references/07-pdf-importado-ya-montado.md`: arreglo EN SITIO de un PDF de planos/láminas/CAD ya abierto en Illustrator (sin HTML ni DOM): copia de seguridad → versión nueva → texto → recortes → párrafos → texto que se sale de la página (decisión con el usuario) → «Tamaño automático» → verificación de texto contra el PDF y de render.
+- Nuevos scripts: `ai_fix_pdf_import.ps1` (runner con `-Dry`), `ai_fix_text_inplace.jsx` (une trozos sin sacarlos de su grupo; valida el ancho; fuente/color por trozo), `ai_clean_deep.jsx` (recortes anidados por límite visible efectivo; lo oculto a la capa `_fuera-de-mesa (oculto)`), `ai_merge_paragraphs_infer.jsx` (párrafos de área inferidos y verificados).
+- `references/02`: filas 24–31 (defectos del flujo en sitio). `SKILL.md`: aviso al principio del flujo y filas en las tablas de enrutamiento y scripts. `proyectos/`: ficha `caso-planos-01`.
+- Resultado en el caso: 1 939 → 534 textos, 318 → 21 recortes (solo fotos), 0 caracteres perdidos.
+
 ## 2026-10-16 — Migración al repo gui-skills (anonimizada)
 
 - Fuente del mantenedor y copia instalada reconciliadas: **idénticas** en los 20 archivos del núcleo (`SKILL.md`, `references/`, `scripts/`); la fuente aportaba además `HANDOFF.md`, `HANDSHAKE.md`, `CHANGELOG.md`, `conocimiento/`, `memoria/`, `proyectos/` y `ejemplos/`.

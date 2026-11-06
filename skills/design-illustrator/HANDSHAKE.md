@@ -6,7 +6,7 @@
 | Campo | Valor |
 |---|---|
 | Versión | 1.0.0 (2026-10-11) |
-| Última actualización | 2026-10-16 por guille (migración al repo) |
+| Última actualización | 2026-11-06 por guille (ruta «PDF ya montado», `caso-planos-01`) |
 | Skill principal / padre | `direct-visual-design` |
 | Llama a | Principios de `direct-visual-design`; consulta `adobe-suite` solo como referencia de API (ExtendScript / Illustrator MCP) |
 | La llaman | `direct-visual-design` (tabla de enrutamiento, fila "Cualquier trabajo en Illustrator"); `canva-design` es su hermana |
@@ -34,6 +34,11 @@
 | Scripts generalizados (`-Root`, `-Master`, `-OutDir`) | verificado | 2026-10-11 | Prueba con 3 láminas del manual |
 | Registro del MCP en Claude (`claude mcp add … --scope user`) | verificado | 2026-10-11 | Quedó registrado; el servidor no responde |
 | Instalación en Claude Code | verificado | 2026-10-11 | Hoy por enlace desde el repo |
+| `ai_fix_text_inplace.jsx` (une trozos de texto EN SITIO, mismo grupo y apilado, validado por ancho) | verificado | 2026-11-06 | Illustrator 31.1, español; 1 939 → 534 textos, 0 caracteres perdidos frente al PDF |
+| `ai_clean_deep.jsx` (recortes anidados por límite visible efectivo; lo oculto a la capa `_fuera-de-mesa (oculto)`) | verificado | 2026-11-06 | 318 → 21 recortes (todos de foto); render idéntico salvo el texto reflujado |
+| `ai_merge_paragraphs_infer.jsx` (párrafos de área inferidos y verificados, sin DOM) | verificado | 2026-11-06 | 18 párrafos unidos, 0 rechazados; solo texto alineado a la izquierda |
+| `ai_fix_pdf_import.ps1` (runner de los tres; `-Dry`) | verificado | 2026-11-06 | Idempotente al repetirlo; el «Tamaño automático» se corre aparte |
+| Reflujo del texto que se sale de la página (`ai_reflow_legal.jsx`, a medida del caso) | verificado en el caso, no genérico | 2026-11-06 | Decisión de diseño: avisar al usuario |
 | Illustrator 2025/2026 estables, interfaz en inglés, otra escala de pantalla | sin probar | — | Los clics del cuadro son proporcionales; el título se busca por «Area Type Options» |
 | macOS, Codex / Antigravity / VS Code | sin probar | — | Los scripts dependen de COM (solo Windows) |
 
@@ -42,10 +47,12 @@ Estados: `verificado` · `falla` · `sin probar` · `no aplica en Mac/Windows`.
 ## Capacidades confirmadas
 
 - Skill verificada de principio a fin con el caso `caso-manual-marca-01` (46 láminas): texto en líneas y párrafos, maestro, limpieza de recortes, Tamaño automático, auditoría y fidelidad.
-- Esta skill como tal aún **no se ha invocado en una sesión nueva**.
+- Esta skill ya se invocó en una sesión nueva (2026-11-06) para un caso distinto: un PDF de planos **ya abierto** en Illustrator (sin HTML). Se añadió la ruta «en sitio» (`references/07`).
 
 ## Pendientes abiertos
 
+- [ ] Ruta «PDF ya montado» (`references/07`): probar con texto **centrado/justificado** (hoy solo alineado a la izquierda), con texto rotado y con un PDF de CAD/AutoCAD; generalizar `ai_reflow_legal.jsx` si el caso se repite.
+- [ ] `caso-planos-01`: confirmar con el usuario el bloque legal reflujado (19,6 → 17,2 pt) y decidir qué hacer con los 8 recortes de 8 pt de la imagen de cabecera y con la firma («Guiermo»).
 - [ ] Pasar por el proceso las **piezas** del caso (`export/piezas/*.pdf`: flyers A5, plantillas de redes) y regenerar los PDF del maestro desde el `.ai` limpio.
 - [ ] Probar el **MCP** cuando responda (¿expone «Tamaño automático» y limpieza?) y documentar sus herramientas.
 - [ ] Probar en Illustrator **2025/2026 estables** (solo se ha probado la Beta 31), con la **interfaz en inglés** y otra escala de pantalla.
