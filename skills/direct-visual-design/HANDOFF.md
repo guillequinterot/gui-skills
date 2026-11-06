@@ -188,6 +188,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso.
 - **Herramientas:** Figma MCP (use_figma, get_screenshot) con figma-use y figma-generate-design
 
+### 2026-11-06 · caso-web-salud-01 · julian
+
+- **Qué se hizo:** Reorganización del Figma del proyecto: el archivo único (biblioteca + diseños) se separó en Library, sitio principal, micrositio, journey de reserva y assets, sin tocar los archivos viejos de la carpeta. Respaldo con versión nombrada, duplicados del archivo (los nodos conservan sus IDs), recorte por archivo, reconexión de instancias, estilos de texto y variables a la biblioteca publicada, borrado de copias locales y portada 1920x1080 por archivo como miniatura (textos en inglés).
+- **Salió bien:** Verificación por firma (capas, texto y tamaño) antes y después de cada lote y cruce de IDs antes de borrar nada de la Library: 0 diferencias de contenido y 0 instancias sin componente. Diferencia de render frente al original: 0,02 % (antialiasing).
+- **Salió mal / incidencia:** La biblioteca tenía 22 componentes sin publicar o desactualizados; al reconectar antes de publicar, cuatro marcos tomaron la versión vieja y perdieron contenido. Se restauró la copia desde su historial de versiones y se rehízo tras publicar. Un componente no se podía publicar por una propiedad booleana huérfana. La API de plugins no permite guardar versiones ni fijar miniaturas: se hizo desde la interfaz, y el menú contextual del navegador respondía a destiempo. La primera portada se pidió en español y luego se corrigió a inglés. Incidencia: Las variables de una colección oculta para publicar (legacy) no se pueden reconectar: quedan locales en los archivos que las usan.
+- **Regla candidata:** Antes de separar un Figma en archivos conectados a una biblioteca: (1) versión nombrada de respaldo; (2) comprobar que la biblioteca no tenga cambios sin publicar, comparando componente local con publicado, y publicar primero; (3) duplicar en vez de copiar capas (se conservan los IDs); (4) reconectar con firma antes/después y cruzar IDs antes de borrar; (5) portadas de archivo en el idioma que pida el usuario.
+- **Herramientas:** Figma (use_figma, get_screenshot), navegador de la app para duplicar, renombrar, publicar, restaurar versión y fijar miniatura; PIL para comparar renders
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -209,6 +217,7 @@ Contenido de la carpeta:
 | Cuando el cliente pide copiar los colores de otra web suya, mirar la referencia renderizada y reproducir su proporción de fondo/acento (no solo los hex); confirmar con una captura antes de publicar. | caso-landing-inversion-01 | candidata |
 | Al acomodar un Figma existente al método, comprobar también el ancho de los rellenos full-bleed (imagen y overlay): deben ir a 1920 aunque el contenido respete el padding de 240. Un solo caso: sigue como candidata. | caso-web-hotel-01 | candidata |
 | En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso. | caso-web-hotel-01 | candidata |
+| Antes de separar un Figma en archivos conectados a una biblioteca: (1) versión nombrada de respaldo; (2) comprobar que la biblioteca no tenga cambios sin publicar, comparando componente local con publicado, y publicar primero; (3) duplicar en vez de copiar capas (se conservan los IDs); (4) reconectar con firma antes/después y cruzar IDs antes de borrar; (5) portadas de archivo en el idioma que pida el usuario. | caso-web-salud-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
