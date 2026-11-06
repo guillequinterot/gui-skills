@@ -188,6 +188,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso.
 - **Herramientas:** Figma MCP (use_figma, get_screenshot) con figma-use y figma-generate-design
 
+### 2026-11-06 · caso-migracion-01 · guille
+
+- **Qué se hizo:** Tarjeta de marca Open Graph de 1200 por 630 para una marca tecnológica de trading: logo oficial sin retocar, tipografía de marca, verde del logo, ilustración ya publicada recortada sin su banda negra y degradado de lectura. Texto solo descriptivo (qué es y plataformas), sin cifras ni promesas por ser YMYL. Se mostró al usuario y se subió tras su aprobación.
+- **Salió bien:** Dos iteraciones guiadas por mirar la imagen: reducir el logo y el titular, y alejar la ilustración, abrieron un margen de más de 20 px entre texto y dispositivo. Se comprobó contraste (18:1, 13:1 y 10:1) y legibilidad a 500 y 300 px.
+- **Salió mal / incidencia:** La primera versión dejaba el último carácter del titular pegado al arte y el logo tocando el dispositivo. La carpeta de tipografías con acento no se abría por la normalización del nombre en el sistema de archivos: se resolvió listando el directorio. Incidencia: nada relevante
+- **Regla candidata:** Ninguna
+- **Herramientas:** Python con Pillow (supermuestreo 2x), Montserrat estática, lectura visual de la imagen
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -209,6 +217,7 @@ Contenido de la carpeta:
 | Cuando el cliente pide copiar los colores de otra web suya, mirar la referencia renderizada y reproducir su proporción de fondo/acento (no solo los hex); confirmar con una captura antes de publicar. | caso-landing-inversion-01 | candidata |
 | Al acomodar un Figma existente al método, comprobar también el ancho de los rellenos full-bleed (imagen y overlay): deben ir a 1920 aunque el contenido respete el padding de 240. Un solo caso: sigue como candidata. | caso-web-hotel-01 | candidata |
 | En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso. | caso-web-hotel-01 | candidata |
+| Ninguna | caso-migracion-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 

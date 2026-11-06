@@ -49,6 +49,14 @@ publicación automática. Es transversal: la llaman `seo-content-system`, `direc
 - **Regla candidata:** Repetir la keyword en titulos, encabezados, introduccion y FAQ no es slop; el relleno de keywords dentro de una oracion si
 - **Herramientas:** no indicadas
 
+### 2026-11-06 · caso-migracion-01 · guille
+
+- **Qué se hizo:** Revisión del contenido publicado de un sitio YMYL de trading: detector con semáforo sobre las 35 entradas y lectura humana de una muestra con las cinco preguntas, cruzada con repeticiones literales de párrafos entre artículos y con las fuentes externas enlazadas.
+- **Salió bien:** El cruce entre piezas encontró lo que el detector no ve: 8 artículos con el mismo aviso final y 8 con la misma referencia, y una fuente oficial enlazada en 25 sitios que ya daba 404.
+- **Salió mal / incidencia:** El detector dio 34 de 35 documentos en verde (0 párrafos rojos) para una serie de artículos que falla en novedad y en lo propio: sus ejemplos son ficticios y no nombran a la marca. Un semáforo en verde no equivale a pasar la puerta. Incidencia: nada relevante
+- **Regla candidata:** El detector solo ve síntomas dentro de un texto: añadir al informe un chequeo de párrafos repetidos entre piezas, de menciones de la marca y de enlaces externos rotos antes de dar un verde.
+- **Herramientas:** slop_lint.py --semaforo, Python (comparación de fragmentos de 8 palabras)
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -58,3 +66,4 @@ publicación automática. Es transversal: la llaman `seo-content-system`, `direc
 | Los síntomas de lenguaje en español de `references/02-…` (marcados «candidato») solo pasan a «fuente» cuando haya una fuente verificable o se repitan en varios casos | — | candidata |
 | Frases entre comillas no cuentan como síntomas (mención vs uso); umbral de 60 palabras sin anclajes = amarillo | banco-pruebas-semaforo-parrafo | candidata |
 | Repetir la keyword en titulos, encabezados, introduccion y FAQ no es slop; el relleno de keywords dentro de una oracion si | banco-pruebas-seo-skills-terceros | candidata |
+| El detector solo ve síntomas dentro de un texto: añadir al informe un chequeo de párrafos repetidos entre piezas, de menciones de la marca y de enlaces externos rotos antes de dar un verde. | caso-migracion-01 | candidata |
