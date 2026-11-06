@@ -188,6 +188,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso.
 - **Herramientas:** Figma MCP (use_figma, get_screenshot) con figma-use y figma-generate-design
 
+### 2026-11-05 · caso-web-salud-01 · julian
+
+- **Qué se hizo:** Imágenes para compartir (Open Graph, 1200x630) del sitio principal y del micrositio del multisite, montadas en Figma con piezas del propio archivo (fondo del hero con variable, patrón de marca, foto aprobada, eyebrow y H1 del hero) y exportadas en JPG (~60 KB) y PNG, con README de etiquetas og:/twitter: con URL absolutas y herramientas para refrescar la caché.
+- **Salió bien:** Cero copy nuevo: todo salió de los heros aprobados. Zona segura para recortes cuadrados. Aprobadas a la primera por el usuario.
+- **Salió mal / incidencia:** El H1 clonado traía un salto de línea forzado y dejó viudas en 1200 px; se quitó el salto y se unieron las últimas palabras con espacios duros. Un regex con separador de línea literal rompió use_figma; se resolvió con String.fromCharCode(8232). Un texto clonado heredó alineación centrada y hubo que pasarlo a izquierda.
+- **Regla candidata:** Al crear imágenes Open Graph, reutilizar el hero aprobado (fondo, foto, eyebrow, H1) en 1200x630, revisar viudas de nuevo al cambiar el ancho y entregar JPG ligero + etiquetas con URL absolutas.
+- **Herramientas:** Figma (use_figma), exportación de nodos, PIL
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -209,6 +217,7 @@ Contenido de la carpeta:
 | Cuando el cliente pide copiar los colores de otra web suya, mirar la referencia renderizada y reproducir su proporción de fondo/acento (no solo los hex); confirmar con una captura antes de publicar. | caso-landing-inversion-01 | candidata |
 | Al acomodar un Figma existente al método, comprobar también el ancho de los rellenos full-bleed (imagen y overlay): deben ir a 1920 aunque el contenido respete el padding de 240. Un solo caso: sigue como candidata. | caso-web-hotel-01 | candidata |
 | En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso. | caso-web-hotel-01 | candidata |
+| Al crear imágenes Open Graph, reutilizar el hero aprobado (fondo, foto, eyebrow, H1) en 1200x630, revisar viudas de nuevo al cambiar el ancho y entregar JPG ligero + etiquetas con URL absolutas. | caso-web-salud-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
