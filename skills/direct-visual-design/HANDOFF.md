@@ -188,6 +188,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso.
 - **Herramientas:** Figma MCP (use_figma, get_screenshot) con figma-use y figma-generate-design
 
+### 2026-11-06 · caso-web-salud-02 · julian
+
+- **Qué se hizo:** Pagina interna de contacto y ubicaciones (hero, consultas con mapa y telesalud, 4 centros quirurgicos con mapas embebidos) y header nuevo en dos lineas para todo el sitio; HTML aprobado por la clienta, pasado a Figma (solo escritorio, sin componentes) y entregado a desarrollo como DOS entregas separadas (header global + pagina) con demo, capturas 1440/375 y equivalencia de tokens con las variables del sitio.
+- **Salió bien:** Estandar 1440/1200/80 reutilizado de caso-web-salud-01; datos verificados uno a uno contra el sitio en vivo; carpeta de entrega dividida por alcance (global vs. pagina) para que desarrollo no mezcle cambios; captura movil fiable usando un iframe de 375 px dentro de Chrome headless.
+- **Salió mal / incidencia:** Referencia de estructura equivocada al inicio (se corrigio a la pagina del cirujano); Chrome headless no baja de ~500 px de ancho y recorta la captura movil; los mapas con loading=lazy no cargan dentro del iframe de captura. Incidencia: Figma acepta subir WebP pero no lo decodifica: convertir a PNG antes de upload_assets. Para capturas moviles headless: envolver la pagina en un iframe del ancho exacto y forzar loading=eager.
+- **Regla candidata:** Cuando una entrega incluye un componente global (header/footer) junto a una pagina, separarla en subcarpetas de codigo por alcance y declararlo arriba del README.
+- **Herramientas:** Figma MCP (use_figma, upload_assets), Chrome headless, PIL
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -209,6 +217,7 @@ Contenido de la carpeta:
 | Cuando el cliente pide copiar los colores de otra web suya, mirar la referencia renderizada y reproducir su proporción de fondo/acento (no solo los hex); confirmar con una captura antes de publicar. | caso-landing-inversion-01 | candidata |
 | Al acomodar un Figma existente al método, comprobar también el ancho de los rellenos full-bleed (imagen y overlay): deben ir a 1920 aunque el contenido respete el padding de 240. Un solo caso: sigue como candidata. | caso-web-hotel-01 | candidata |
 | En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso. | caso-web-hotel-01 | candidata |
+| Cuando una entrega incluye un componente global (header/footer) junto a una pagina, separarla en subcarpetas de codigo por alcance y declararlo arriba del README. | caso-web-salud-02 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
