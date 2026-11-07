@@ -65,6 +65,14 @@ publicación automática. Es transversal: la llaman `seo-content-system`, `direc
 - **Regla candidata:** Si la pagina de la fuente bloquea robots, verificar titulo, autores, ano y resumen en registros publicos (Crossref, Europe PMC) antes de atribuir contenido a un estudio.
 - **Herramientas:** no indicadas
 
+### 2026-11-07 · caso-migracion-01 · guille
+
+- **Qué se hizo:** Semaforo formal (detector --semaforo + revision manual) a tres piezas antes de publicar en un sitio YMYL de trading automatizado: una entrada enriquecida con material propio y dos pilares nuevos que fusionan cinco articulos genericos. Resultado verde en las tres; se publicaron.
+- **Salió bien:** Las fuentes se verificaron una por una contra el texto (documentacion del fabricante, marcos NIST y OWASP, una regla federal y un articulo academico) y cinco frases que iban mas alla de la fuente se corrigieron antes de publicar. Se uso solo material propio verificable, se descarto una cifra de rentabilidad de un informe interno y no se citaron cifras de rentabilidad de cuentas publicas.
+- **Salió mal / incidencia:** El detector marco amarillos en parrafos largos sin cifra aunque eran marco atribuido o datos propios: sirve de pista, no de juez. Una de las piezas quedo con reserva de sustancia por no haber un caso real de registro. Las respuestas del dueno llegaron incompletas y el texto tuvo que dejar preguntas abiertas en vez de respuestas.
+- **Regla candidata:** En piezas que describen un proceso de la propia marca, escribir solo lo que el dueno confirmo por escrito y dejar como pregunta para el lector lo que falte; no rellenar con suposiciones plausibles.
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -76,3 +84,4 @@ publicación automática. Es transversal: la llaman `seo-content-system`, `direc
 | Repetir la keyword en titulos, encabezados, introduccion y FAQ no es slop; el relleno de keywords dentro de una oracion si | banco-pruebas-seo-skills-terceros | candidata |
 | El detector solo ve síntomas dentro de un texto: añadir al informe un chequeo de párrafos repetidos entre piezas, de menciones de la marca y de enlaces externos rotos antes de dar un verde. | caso-migracion-01 | candidata |
 | Si la pagina de la fuente bloquea robots, verificar titulo, autores, ano y resumen en registros publicos (Crossref, Europe PMC) antes de atribuir contenido a un estudio. | caso-migracion-01 | candidata |
+| En piezas que describen un proceso de la propia marca, escribir solo lo que el dueno confirmo por escrito y dejar como pregunta para el lector lo que falte; no rellenar con suposiciones plausibles. | caso-migracion-01 | candidata |
