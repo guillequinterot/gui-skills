@@ -57,6 +57,14 @@ publicación automática. Es transversal: la llaman `seo-content-system`, `direc
 - **Regla candidata:** El detector solo ve síntomas dentro de un texto: añadir al informe un chequeo de párrafos repetidos entre piezas, de menciones de la marca y de enlaces externos rotos antes de dar un verde.
 - **Herramientas:** slop_lint.py --semaforo, Python (comparación de fragmentos de 8 palabras)
 
+### 2026-11-06 · caso-migracion-01 · guille
+
+- **Qué se hizo:** Semaforo formal (detector --semaforo + revision manual de las 5 preguntas y de los hechos contra el resumen del estudio) a un parrafo nuevo de 165 palabras antes de publicarlo en un pilar de contenido YMYL de trading automatizado. Resultado verde; se publico.
+- **Salió bien:** El detector dio verde provisional y la revision manual coincidio; verificar la fuente en Crossref y Europe PMC (la pagina del editor bloquea robots) permitio comprobar cada afirmacion contra el resumen, sin describir el estudio de memoria. Se anoto que lo propio es el criterio y no un caso real, con la via para mejorarlo.
+- **Salió mal / incidencia:** El detector solo ve pistas: no evalua novedad ni verdad, y la unica pista fue una nota de legibilidad por mas de 120 palabras. Un parrafo suelto dentro de un articulo largo no encaja del todo con la puerta pensada para piezas completas.
+- **Regla candidata:** Si la pagina de la fuente bloquea robots, verificar titulo, autores, ano y resumen en registros publicos (Crossref, Europe PMC) antes de atribuir contenido a un estudio.
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -67,3 +75,4 @@ publicación automática. Es transversal: la llaman `seo-content-system`, `direc
 | Frases entre comillas no cuentan como síntomas (mención vs uso); umbral de 60 palabras sin anclajes = amarillo | banco-pruebas-semaforo-parrafo | candidata |
 | Repetir la keyword en titulos, encabezados, introduccion y FAQ no es slop; el relleno de keywords dentro de una oracion si | banco-pruebas-seo-skills-terceros | candidata |
 | El detector solo ve síntomas dentro de un texto: añadir al informe un chequeo de párrafos repetidos entre piezas, de menciones de la marca y de enlaces externos rotos antes de dar un verde. | caso-migracion-01 | candidata |
+| Si la pagina de la fuente bloquea robots, verificar titulo, autores, ano y resumen en registros publicos (Crossref, Europe PMC) antes de atribuir contenido a un estudio. | caso-migracion-01 | candidata |
