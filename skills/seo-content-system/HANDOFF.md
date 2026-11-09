@@ -230,6 +230,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** (a) Si el sitemap de Rank Math queda congelado, los botones del panel no lo regeneran: hay que borrar, con copia, los XML de la carpeta uploads/rank-math. (b) Antes de contar imágenes sin alt, distinguir alt vacío de atributo ausente en el HTML real; el rastreador no lo separa. (c) Con caché de página activa, el TTL debe ser menor que la vida del nonce de los formularios. (d) Un bloque de artículos relacionados por grupos fijos deja islas: comprobar los enlaces entrantes tras añadir artículos.
 - **Herramientas:** WordPress REST, Rank Math (smm), Screaming Frog CLI, Ahrefs, Search Console, WP-CLI por SSH, LiteSpeed Cache
 
+### 2026-11-08 · caso-migracion-01 · guille
+
+- **Qué se hizo:** Se añadió la línea de producción de artículos de blog (references/blog-production-line.md: parámetros por proyecto, esqueleto, componentes, puertas, flujo y derivados), el kit assets/blog-kit (constructor del bloque único de schema y fragmento de fusión con el plugin de SEO) y la puerta scripts/check_schema_single_block.py con 10 pruebas. SKILL.md 1.8.0 con el bloque OBLIGATORIO de schema en un solo bloque y de usar la misma línea de producción cuando se pidan blogs; la regla 4 de redacción pasó a puerta que bloquea; versión alojada regenerada.
+- **Salió bien:** El verificador falla como debe contra una página real con 3 bloques JSON-LD y pasa con un grafo conectado; el constructor es idempotente; los 16 lotes locales del caso pasaron de 2 bloques sueltos a 1 en el cuerpo y el QA del proyecto ahora lo exige.
+- **Salió mal / incidencia:** La fusión con el plugin de SEO está escrita pero NO instalada ni probada en un WordPress vivo: las 16 páginas publicadas siguen con 3 bloques JSON-LD hasta que el dueño apruebe instalarla. Con python -I la consola de Windows rompía la salida del verificador (se arregló reconfigurando stdout). Incidencia: La regla de un solo bloque ya estaba en las reglas de redacción desde 2026-10-26, pero el caso de origen emitía FAQPage y VideoObject sueltos y ninguna puerta lo detectaba.
+- **Regla candidata:** En cada auditoría de schema, contar los scripts JSON-LD del HTML servido y no solo validar cada uno por separado.
+- **Herramientas:** check_schema_single_block.py, assets/blog-kit, build_hosted.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -252,6 +260,7 @@ Relación con otras skills del repo:
 | Una frase raíz y una intención por URL; el host canónico se resuelve con 301 en el servidor y se verifica con las cuatro variantes (candidata: se valida cuando se repita en otro sitio). | caso-seo-sitio-servicios-01 | candidata |
 | Un bot con grupo propio en robots.txt ignora el grupo *: no escribir Allow por bot, repetir las rutas sensibles si hay grupo propio | banco-pruebas-seo-skills-terceros | candidata |
 | (a) Si el sitemap de Rank Math queda congelado, los botones del panel no lo regeneran: hay que borrar, con copia, los XML de la carpeta uploads/rank-math. (b) Antes de contar imágenes sin alt, distinguir alt vacío de atributo ausente en el HTML real; el rastreador no lo separa. (c) Con caché de página activa, el TTL debe ser menor que la vida del nonce de los formularios. (d) Un bloque de artículos relacionados por grupos fijos deja islas: comprobar los enlaces entrantes tras añadir artículos. | caso-migracion-01 | candidata |
+| En cada auditoría de schema, contar los scripts JSON-LD del HTML servido y no solo validar cada uno por separado. | caso-migracion-01 | candidata |
 
 ## 2026-10-23 · Actualización a 1.3.0
 - Se instala seo-content-system 1.3.0 (marcas [ClickUp], [Obsidian], [Sheets] y [Drive]): nuevas referencias, plantillas en assets/templates y docs/CAMBIOS.md + docs/INVESTIGACION-CLICKUP-SEO.md.

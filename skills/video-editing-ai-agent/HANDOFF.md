@@ -165,6 +165,14 @@ Relación con otras skills:
 - **Regla candidata:** Para reels derivados de un video horizontal ya aprobado, reutilizar la voz y el guion y reconstruir solo el visual (candidata: falta una segunda pieza que lo confirme)
 - **Herramientas:** hyperframes 0.8.162, ffmpeg, self_eval.py, motion_energy.py
 
+### 2026-11-08 · caso-migracion-01 · guille
+
+- **Qué se hizo:** Se documentó en errores-conocidos la sección 9: versión vertical 1080x1920 recompuesta de un video de blog (zona segura, reglas de reordenado, ajuste de ancho, contraste, normalización a -15,5 LUFS, costo cero de créditos).
+- **Salió bien:** El render vertical de 39 s quedó con 1 solo tramo quieto (el fundido final), -15,5 LUFS y pico -1,5 dBFS, y se publicó en cuatro canales.
+- **Salió mal / incidencia:** El primer render salió a -18 LUFS y hubo que normalizarlo; un titular de 971 px se salía de su contenedor de 960 y un tilde inactivo tenía contraste 2,07:1; ambos detectados por hyperframes check y corregidos.
+- **Regla candidata:** ninguna
+- **Herramientas:** HyperFrames 0.8.162, ffmpeg loudnorm
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)

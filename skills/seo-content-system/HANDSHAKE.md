@@ -5,8 +5,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.7.0 |
-| Última actualización | 2026-10-30 (1.7.0: metodología de SEO Skills integrada: auditoría con puntuación, robots.txt, HTML renderizado, title y metadescripción, imágenes, enlazado y clústeres; antes, 2026-10-29: 1.6.0: puerta SEO para sitios de servicios y páginas nuevas, derivada de una auditoría real; antes, 2026-10-23: 1.5.0: segunda y tercera pasada ClickUp + Obsidian + Drive/Sheets integradas; hosted regenerada; decisiones pendientes de Guille resueltas; publicada. ClickUp sigue pendiente por el tope diario del conector) |
+| Versión | 1.8.0 |
+| Última actualización | 2026-11-08 (1.8.0: línea de producción de artículos de blog y schema en un solo bloque @graph OBLIGATORIO, con kit y puerta; antes, 2026-10-30: 1.7.0: metodología de SEO Skills integrada: auditoría con puntuación, robots.txt, HTML renderizado, title y metadescripción, imágenes, enlazado y clústeres; antes, 2026-10-29: 1.6.0: puerta SEO para sitios de servicios y páginas nuevas, derivada de una auditoría real; antes, 2026-10-23: 1.5.0: segunda y tercera pasada ClickUp + Obsidian + Drive/Sheets integradas; hosted regenerada; decisiones pendientes de Guille resueltas; publicada. ClickUp sigue pendiente por el tope diario del conector) |
 | Skill principal / padre | ninguna (es skill de primera capa para todo contenido; `web-go-high-level-ia` y `rea-reverse-engineer` son sus sub-skills / apoyo) |
 | Llama a | `web-go-high-level-ia` (SEO dentro del constructor de GoHighLevel), `rea-reverse-engineer` (entender competidores), `screaming-frog-seo` (externa y opcional, no está en gui-skills) |
 | La llaman | `web-go-high-level-ia`, `direct-visual-design` (cuando el diseño implica textos, metadatos o schema) |
@@ -17,6 +17,10 @@
 |---|---|---|---|
 | `scripts/capture_learning.py` sin bóveda | verificado | 2026-10-16 | Escribe en `memoria/aprendizaje/inbox/`; se niega (salida 2) si el texto trae términos privados, correos, rutas personales o un `--project` que no sea código de caso |
 | `scripts/capture_learning.py` con bóveda de Obsidian | verificado | 2026-10-16 | Probado con una bóveda de prueba y con la configuración heredada `vault`; escribe en `06_Aprendizaje/Inbox/` |
+| `scripts/check_schema_single_block.py` (+ `test_check_schema_single_block.py`) | verificado | 2026-11-08 | 10 pruebas sin red pasan; probado contra una página real con 3 bloques JSON-LD (falla como debe: «hay 3 bloques»). Solo biblioteca estándar; imprime en UTF-8 aun con `python -I`. `--cuerpo` acepta como externas las referencias a `#webpage`, `#organization`… |
+| `assets/blog-kit/schema_unico.py` | verificado | 2026-11-08 | Constructor del bloque único (FAQPage desde las preguntas visibles + VideoObject desde el video); idempotente; probado junto con el verificador. Implementación de referencia usada en el caso de origen |
+| `assets/blog-kit/wordpress-schema-unico.php` | **sin instalar en ningún sitio real** | 2026-11-08 | Fusiona los nodos del cuerpo en el `@graph` de Rank Math (`rank_math/json_ld`) y quita el bloque del cuerpo. Escrito, no probado en un WordPress vivo: instalarlo es un cambio en vivo (aprobación del dueño) y después hay que correr el verificador sobre una entrada y la prueba de resultados enriquecidos de Google |
+| `references/blog-production-line.md` | nuevo, probado en 16 artículos de un caso | 2026-11-08 | Parámetros por proyecto, esqueleto, componentes, puertas, flujo y derivados (PDF, carrusel, video horizontal y vertical, redes). Los umbrales son los del caso de origen y se ajustan por proyecto |
 | `scripts/research_update.py` | verificado sin red | 2026-10-16 | Probado con una fuente local; no se probó contra las fuentes oficiales reales en esta migración |
 | `scripts/validate_vault.py` | verificado | 2026-10-16 | Sin bóveda valida `memoria/`; con bóveda avisa de carpetas sugeridas que falten y falla solo por frontmatter sin cerrar |
 | `scripts/scheduler.py` (`show`) | verificado | 2026-10-16 | `install` (cron / launchd / schtasks) no se probó |
@@ -43,6 +47,7 @@ Estados: `verificado` · `falla` · `sin probar` · `no aplica en Mac/Windows`.
 - Evidencia que respalda las reglas de GEO (lenguaje natural frente a optimizado, agrupadores): experimento de 90 días de la agencia del mantenedor, publicado en su blog; es evidencia direccional.
 
 ## Pendientes abiertos
+- [ ] **(2026-11-08) Probar la fusión de schema en un WordPress vivo:** `assets/blog-kit/wordpress-schema-unico.php` está escrito pero no instalado en ningún sitio real. En el caso de origen, los 16 artículos publicados siguen con 3 bloques JSON-LD (el del plugin de SEO, FAQPage y VideoObject) hasta que el dueño apruebe instalarlo; el verificador lo dice («hay 3 bloques»). Al instalarlo: correr `check_schema_single_block.py` sobre una entrada, validar FAQPage y VideoObject en la prueba de resultados enriquecidos de Google y anotar aquí el resultado.
 
 - [ ] Invocar la skill en una sesión nueva tras la migración al repo y confirmar que el Paso 0 lee HANDOFF/HANDSHAKE y `memoria/` — nunca se ha corrido así.
 - [ ] Probar `research_update.py` contra las fuentes oficiales reales y `scheduler.py install` en macOS/Linux/Windows.

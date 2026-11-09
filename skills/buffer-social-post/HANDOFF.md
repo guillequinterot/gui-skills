@@ -56,6 +56,14 @@ Cliente seguro de la API GraphQL de Buffer para crear borradores, programar y pu
 - **Regla candidata:** ninguna
 - **Herramientas:** buffer_api.py, test_buffer_api.py
 
+### 2026-11-08 · caso-migracion-01 · guille
+
+- **Qué se hizo:** El cliente ahora soporta Facebook (metadata type reel, exigido para video), TikTok, la marca de IA (--ia) y el comando limites; 9 pruebas nuevas; HANDSHAKE 0.2.0. Se publicó un video vertical de unos 40 s en YouTube Short, TikTok, Instagram reel y Facebook reel.
+- **Salió bien:** Los cuatro canales llegaron a sent en menos de un minuto; el MP4 temporal alojado en la biblioteca de medios del CMS se borró tras sent con 404 comprobado; limites leyó el plan real (5.000 posts programados, no 10).
+- **Salió mal / incidencia:** La publicación de texto o imagen en Facebook con este cliente sigue sin probar (solo se verificó video); durante el trabajo se usó primero un envoltorio propio del proyecto y después se llevaron los metadatos al cliente. Incidencia: Se asumía un tope de 10 posts programados (plan gratuito); la cuenta de pago tenía 5.000.
+- **Regla candidata:** ninguna
+- **Herramientas:** buffer_api.py, test_buffer_api.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)

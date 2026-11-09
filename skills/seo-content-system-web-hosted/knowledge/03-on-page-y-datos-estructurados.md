@@ -1,4 +1,4 @@
-<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella dd19e06bf59f). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
+<!-- GENERADO por tools/build_hosted.py desde skills/seo-content-system (v1.5.0, huella bbc01a902865). NO EDITAR A MANO: cambia la skill o hosted-src/ y regenera con `python tools/build_hosted.py`. -->
 
 # On-page, imágenes y datos estructurados
 
@@ -613,6 +613,15 @@ Tres reglas de implementación:
 1. Dividir el proceso en pasos genuinos e independientes — nunca un paso gigante que mezcla varias acciones.
 2. Cada paso con nombre corto y texto explicativo autocontenido.
 3. El orden del código debe coincidir exactamente con el orden visible; una discrepancia confunde al sistema que interpreta la secuencia.
+
+## Un solo bloque por página (OBLIGATORIO)
+
+Regla de la skill desde el 2026-11-08: **cada página tiene exactamente un `<script type="application/ld+json">` con `@graph`**. Un sitio con plugin de SEO suele tener ya su bloque (Organization, WebSite, WebPage, BreadcrumbList, Person, Article) y el contenido le añade otros sueltos (FAQPage, VideoObject): eso son 2 o 3 scripts y **incumple la regla**.
+
+- **Cómo cumplirla:** los nodos del contenido se generan desde lo visible (`assets/blog-kit/schema_unico.py`), con `@id` propio y `isPartOf` hacia el `#webpage` del plugin; el sitio los funde en el `@graph` del plugin y quita el bloque del cuerpo (`assets/blog-kit/wordpress-schema-unico.php`, filtro `rank_math/json_ld`). Si no hay plugin de SEO, un único bloque propio con todas las entidades.
+- **Cómo se comprueba:** `python scripts/check_schema_single_block.py <URL o archivo>` (1 bloque, `@graph`, `@id` únicos, referencias resueltas, sin Organization/WebPage repetidos); `--cuerpo` para la fuente antes de fundirse. En una auditoría, contar los scripts JSON-LD del HTML servido, no solo validar cada uno.
+- **No se declara cumplido** mientras la página en vivo siga teniendo más de un bloque. Instalar la fusión es un cambio en el sitio: aprobación escrita, respaldo y reversión anotados.
+- Después de fundir, validar que FAQPage y VideoObject se siguen detectando en la prueba de resultados enriquecidos de Google.
 
 ## `@graph`: conectar las entidades en un solo grafo
 

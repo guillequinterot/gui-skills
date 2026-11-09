@@ -92,3 +92,16 @@ Origen: video entregado a medias por otra IA; el usuario dijo «la verdad el vid
 | Un render de 4 min 20 s a 1080p cuesta ~22 min (4 trabajadores): **aprobar el diseño con capturas (`snapshot`) antes** y renderizar una sola vez | `snapshot` de 31 pantallas: 1 min; render: 21 min 44 s |
 | Un trabajo por subagentes puede cortarse por el **límite de gasto mensual** (429): revisar el estado real (archivos, renders) antes de dar algo por hecho | El horizontal anterior quedó diseñado y sin renderizar |
 
+## 9. Versión vertical (1080×1920) de un video de blog para Shorts, Reels y TikTok (caso-migracion-01, 2026-11-08)
+| Hacer | Evidencia |
+|---|---|
+| **Recomponer, no recortar ni encajar el 16:9 en un lienzo vertical.** Misma voz, misma música y mismo guion; escenas redistribuidas para 1080 de ancho | Encajar el horizontal reduce el texto al 56 %: titulares de ~100 px quedan en ~56 px y los subtítulos en ~26 px, ilegibles en un teléfono. YouTube Short (vía Buffer) exige vertical o 1:1 y ≤ 3 min |
+| **Plantilla vertical con zona segura:** contenido entre y=250 y y=1300, subtítulos centrados en y=1330–1480 (≤ 8 palabras por frase), nada importante debajo de y=1500 (la interfaz de la red lo tapa) y logo/etiqueta por debajo de y=120 | Verificado en una hoja de contacto de 8 cuadros del render |
+| **Reglas de reordenado:** titulares en hasta 2 líneas; nodos de una secuencia en **columna** con la etiqueta a la derecha; tarjetas **apiladas** a todo el ancho; listas de comprobación a todo el ancho con el emblema debajo solo si cabe; chips apilados y centrados | Hasta 5 nodos, 4 tarjetas, 7 filas y 2 chips en los 15 videos del caso |
+| **Medir el ancho del texto con la misma fuente antes de renderizar** y dar margen: un titular de 971 px en un contenedor de 960 se cortaba por los lados; el ajuste de tamaño usa 900 como máximo | `hyperframes check` avisó el desborde; ya no sale |
+| **Contraste de los elementos inactivos** (≥ 3:1): el tilde gris del paso pendiente daba 2,07:1 y el verificador lo marcó; con `#94A191` pasa | Corregido en la plantilla |
+| **El render sale ~2,5 dB bajo (−18 LUFS) con la mezcla de la plantilla horizontal:** normalizar en dos pasadas con `loudnorm` (I=−15,5, TP=−1,5, con los valores medidos y `linear=true`), copiando el video sin recodificar | Resultado medido: −15,5 LUFS, pico −1,5 dBFS; video idéntico |
+| **Un render vertical de 39 s a 1080×1920 tarda ≈ 4 a 5 min** con 2 trabajadores; ver `snapshot --at` de cada escena y el cierre antes de renderizar | `snapshot` de 8 instantes: ~1 min |
+| El único tramo quieto que marca el detector de congelados es el **fundido a negro final**: es intencional | `freezedetect` dio 1 tramo (37,4 s al final) |
+| Costo: la voz y la música ya existen, así que la versión vertical **no gasta créditos**; solo cuesta tiempo de render | 0 créditos |
+| Publicar con `buffer-social-post` (`--ia`: hay voz sintética; un video por día; sin solapar la cola) y borrar el MP4 temporal tras `sent` | Cuatro canales `sent` en < 1 min |
