@@ -88,6 +88,8 @@ Las dos versiones de banco-pruebas-video usaron empuje de cámara continuo (esca
 ### Decisión parcial tras el video desde cero (2026-10-16)
 Para **música y marketing** (pieza al compás): empuje sutil (≤ 8 %) sobre fotos **sí** (sin él el gancho queda congelado: movimiento 0.00–0.03 durante 2 s) y las pausas se llenan con **señales ancladas al compás** (subrayados que barren, derivas lentas, pulsos de escala ≤ 1.04), nunca con respiración en bucle. Para explainers narrados sigue mandando la quietud. La preferencia estética entre con y sin empuje es de Guille y sigue sin decidir (hay dos renders comparables en la carpeta `hyperframes/renders/` del proyecto de caso-reel-01). Detalle y números en `production-workflow.md` §10.
 
+**Evidencia nueva (v1.5, 2026-11-08; sin resolver):** varias fuentes MIT chocan o matizan lo anterior en dos puntos (movimiento ocioso con intención frente a «prohibido en bucle», y deriva de cámara «solo atmósfera, nunca en un explainer»). Tabla de conflictos y qué hacer por ahora: `motion-recetas-y-camara.md` §9. Tabla de acciones de cámara con duraciones y calendario de ritmo: mismo archivo §1–§2.
+
 ## 10. Vocabulario de primitivas (nombre → receta GSAP; de `motion-vocabulary`)
 Usa el nombre en el plan y la receta al construir; "suits" indica el carácter. *Antes de escribir una a mano, busca un bloque equivalente en el catálogo* (`npx hyperframes catalog --query ...`).
 | Tipo | Primitiva | Receta (hacia el estado final en CSS) | Carácter |

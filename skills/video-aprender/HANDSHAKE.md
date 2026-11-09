@@ -5,8 +5,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.4 (sigue la versión de los scripts de `video-editing-ai-agent` 1.4.0) |
-| Última actualización | 2026-10-16 por guille (migración al repo gui-skills) |
+| Versión | 1.5 (sigue la versión de los scripts de `video-editing-ai-agent` 1.5.0) |
+| Última actualización | 2026-11-08 por guille (v1.5: modo estilo para recrear un movimiento; sesión de Claude) |
 | Skill principal / padre | `video-editing-ai-agent` (sus scripts viven en `../video-editing-ai-agent/scripts/`) |
 | Llama a | `video-editing-ai-agent` (scripts, plantillas `assets/*-template.md`, glosarios `assets/glosarios/`) |
 | La llaman | `video-editing-ai-agent` (flujo de comprensión y cierre); cualquier pedido de «aprende de este video / analiza esta reunión» |
@@ -36,6 +36,8 @@ informa en el bloque `video_aprender` qué scripts, glosarios y PyMuPDF hay en t
 - Alineación palabra por palabra de lo dicho con cada estado de la pantalla (`contenido.md`) y propuesta conservadora de diapositivas desde un PDF.
 
 ## Pendientes abiertos
+
+- [ ] **v1.5:** probar el modo `estilo` para **recrear** el movimiento de una referencia real (desglose de 5 líneas + `frame_compare.py`; `procedimiento.md` §11 es candidato y solo se probó la comparación con material sintético).
 
 - [ ] Una **reunión real** con varias personas (sin diarización: no se sabe quién habla).
 - [ ] Grabaciones de pantalla reales (solo sintéticas), videos de **más de 1 h**, **TikTok**, cookies.

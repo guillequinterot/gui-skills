@@ -197,3 +197,41 @@ Etiquetas: horizontal, youtube, voz, motion-graphics, diseno-v2, 3d, vidrio
 **Archivos:** `00_Ideas/cuando-redisenar-2026-11-02/reel-vertical-v2/salida/cuando-redisenar_reel-vertical_v2.mp4`
 
 Etiquetas: vertical, reel, short, voz, motion-graphics, diseno-v2, 3d, vidrio
+
+## V010 · Explainer horizontal: qué es un bot de trading (post 1014) · 2026-11-07
+
+- **Pieza:** NOV-BLOG-01-H · horizontal 16:9 · 79.0 s · ruta `explainer de blog, motion graphics` · motor HyperFrames + ffmpeg · proyecto `caso-migracion-01`
+- **Mensaje:** Explica qué es un bot, cinco etapas, cuatro capas de costo y siete controles; sin promesas, aviso de riesgo, CTA a la web
+- **Aprobado por Guille:** «quedo brutal entonces ya lo puedo subir?»
+- **Aprobado explícitamente:** 2026-11-07
+- **Sin decidir (no usar como preferencia):** nada
+- **Estructura:** gancho con escudo 3D; cinco etapas en nodos; cuatro tarjetas de costo; siete controles en lista con anillo; alerta de garantías; cierre con CTA y aviso legal
+- **Receta:** voz eleven_v3 Nicolás Arrieta 0.65/0.92; subtítulos palabra por palabra; transiciones con fundido cruzado sin huecos; deriva continua de cada escena; +1.4 dB con alimiter level=disabled
+- **Medido:** -15.5 LUFS, pico -0.9 dBFS, huecos hasta 4.2 por ciento
+
+**Lo bueno (repetir)**
+- transiciones sin huecos, 8 por ciento de fotogramas casi quietos, subtítulos desde el guion
+
+**Lo malo (evitar)**
+- la voz leyó el guion del dominio como la palabra guion: no escribir el dominio con guion en el texto hablado
+
+Etiquetas: blog, explainer, trading
+
+## V011 · Comparativa horizontal: bot A vs bot B (post 1018) · 2026-11-07
+
+- **Pieza:** NOV-1018-H · horizontal 16:9 · 59.0 s · ruta `explainer de blog, fábrica de videos` · motor HyperFrames + ffmpeg · proyecto `caso-migracion-01`
+- **Mensaje:** Compara dos bots por mercado y controles con cuatro preguntas; sin promesas; CTA a la web
+- **Aprobado por Guille:** «Sí, aprobado»
+- **Aprobado explícitamente:** 2026-11-07
+- **Sin decidir (no usar como preferencia):** nada
+- **Estructura:** balanza que se dibuja; dos nodos de mercado; cuatro tarjetas de preguntas; controles con anillos y check; alerta sin garantías; cierre
+- **Receta:** video_fabrica.py desde video-spec.json con emblemas SVG que se dibujan; voz eleven_v3 Nicolás Arrieta; subtítulos corregidos con el guion
+- **Medido:** -16.3 LUFS, pico -1.0 dBFS, huecos 0 por ciento
+
+**Lo bueno (repetir)**
+- elementos nuevos distintos al video anterior; cero créditos en gráficos; 107 de 1769 fotogramas casi quietos
+
+**Lo malo (evitar)**
+- volumen -16.3 LUFS, ligeramente bajo
+
+Etiquetas: blog, comparativa, trading
