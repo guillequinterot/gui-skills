@@ -235,3 +235,22 @@ Etiquetas: blog, explainer, trading
 - volumen -16.3 LUFS, ligeramente bajo
 
 Etiquetas: blog, comparativa, trading
+
+## V012 · Video de fondo para hero web (bucle sin audio) · 2026-11-09
+
+- **Pieza:** HERO-BG-V04 · horizontal 16:9 · 12.0 s · ruta `fondo web en bucle` · motor ffmpeg · proyecto `caso-web-salud-01`
+- **Mensaje:** Especialista de pie: el doctor con un modelo de pie, examen, radiografía, paciente sonriendo, pasos libres
+- **Aprobado por Julián:** «Aprobado!»
+- **Aprobado explícitamente:** (no se detalló: aprobación general de la pieza)
+- **Sin decidir (no usar como preferencia):** imagen fija de celular (doctor o pasos): se usa la del doctor salvo que Julián diga otra cosa
+- **Estructura:** 5 planos de 3 s con fundidos de 0.6 s: doctor mira un modelo de pie; manos examinan un pie (stock); radiografía de pie (stock); paciente sonríe junto a una ventana; pies descalzos a contraluz (stock); bucle cerrado repitiendo el plano 1
+- **Receta:** render_hero.py: recorte, escalado 4K con lanczos, cámara lenta 0.6-0.75x con framerate, zoompan 4.5 %, desaturar, normalize, lutrgb duotono (sombras #15254D, luces #8E9BBB, curva 1.35-2.0 por plano), grano alls=3; MP4 crf 24 + WebM VP9 + póster; móvil con imagen fija
+- **Medido:** 2.74 MB MP4, 1.12 MB WebM, 12 s, 25 fps, sin audio
+
+**Lo bueno (repetir)**
+- duotono igual a la referencia del Figma; bucle sin salto (costura 4.2, dentro de la variación normal entre fotogramas); 2.7 MB; cero texto
+
+**Lo malo (evitar)**
+- v01 con el doctor hablando a cámara (sin audio se ve raro); una radiografía de stock traía rótulos con un nombre de paciente (corregido recortando); el material del cliente casi no tenía b-roll
+
+Etiquetas: fondo web, hero, bucle, duotono, salud

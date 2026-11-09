@@ -193,6 +193,14 @@ Relación con otras skills:
 - **Regla candidata:** Una voz generada por IA se valida re-transcribiendola con Whisper y comparando con el guion (matchRate), y se escribe como suena toda palabra en otro idioma (candidata: falta una segunda pieza)
 - **Herramientas:** no indicadas
 
+### 2026-11-09 · caso-web-salud-01 · julian
+
+- **Qué se hizo:** Video de fondo en bucle para el hero de una web de salud (V012): stack instalado en un equipo nuevo (Shotcut 26.8.1 + shotcut-mcp, FFmpeg, Python 3.12, faster-whisper, PyMuPDF, yt-dlp; selftest 45/45). Se revisó el material del cliente (11 videos del sitio + 34 del canal, este último con storyboards sb1 de YouTube de 160x90 sin bajar video), se completó con stock de Pexels sin caras, duotono navy medido contra la referencia de Figma, render reproducible por script de ffmpeg, 4 versiones hasta la aprobación
+- **Salió bien:** Las miniaturas sb1 de YouTube (yt-dlp -f sb1) permiten revisar decenas de videos en minutos sin bajarlos. Bucle cerrado repitiendo el plano 1 y recortando [XF, XF+L): costura dentro de la variación normal entre fotogramas. Duotono con lutrgb y curva por plano. qa-video detectó rótulos en una placa de stock
+- **Salió mal / incidencia:** El material del cliente era casi todo cabeza parlante; sin audio, una persona hablando a cámara se ve rara (v01). PowerShell 5.1 rompe el JSON de 'claude mcp add-json' si no se escapan las comillas. El CLI claude no estaba en el PATH (handshake no detecta el MCP). yt-dlp no une el audio si ffmpeg no está en el PATH. Edge headless no baja de ~500 px de ancho (capturas móviles en un iframe). faster-whisper no se probó en Python 3.15: se instaló 3.12 Incidencia: install-shotcut-stack.ps1 falla si 'claude' no está en el PATH y con el JSON en PS 5.1
+- **Regla candidata:** En fondos web sin audio, evitar planos de personas hablando a cámara; preferir miradas fuera de cámara, manos o sonrisas
+- **Herramientas:** ffmpeg, yt-dlp, Pexels, Edge headless, qa-video
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -217,3 +225,4 @@ Relación con otras skills:
 | Una sincronía alta entre sonido y imagen con música densa no demuestra nada: compararla siempre con el azar (`sync_audit.py`) | earshot | candidata (verificada solo con audio sintético) |
 | Antes de renderizar una pieza por codigo, validar el plan en tabla con storyboard_lint.py: un defecto visto en el plan cuesta un segundo, no 4-20 minutos (candidata: falta una pieza real) | caso-fuentes-motion-01 | candidata |
 | Una voz generada por IA se valida re-transcribiendola con Whisper y comparando con el guion (matchRate), y se escribe como suena toda palabra en otro idioma (candidata: falta una segunda pieza) | caso-fuentes-motion-01 | candidata |
+| En fondos web sin audio, evitar planos de personas hablando a cámara; preferir miradas fuera de cámara, manos o sonrisas | caso-web-salud-01 | candidata |
