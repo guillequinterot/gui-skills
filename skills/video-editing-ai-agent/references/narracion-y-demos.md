@@ -1,7 +1,7 @@
 # Narración con tiempos por palabra, guion alineado y demos de producto (v1.5)
 
 **Origen:** explainroo, argo, take-one, huashu-motion (`om voice`), video-director (todas MIT; ver `analisis-fuentes/14-motion-graphics-nov-2026.md`).
-**Estado:** `scripts/align_script.py` verificado con datos sintéticos; **ninguna herramienta externa instalada** (ni Kokoro, ni Argo). Lo de §3 y §4 es
+**Estado:** `scripts/align_script.py` (con lectura de cifras en español) y `scripts/voz_local.py` verificados (datos sintéticos y voz real de Kokoro re-transcrita por Whisper); **Kokoro instalado el 2026-11-09 con la aprobación de Guille**; Argo y las demás herramientas **no** se instalaron. Lo de §3 y §5 es
 guía de diseño, no un flujo probado. Complementa `captions-subtitles.md`, `story-design.md` §9 (guion) y `production-workflow.md`.
 
 ## 1. El orden: la voz primero
@@ -27,9 +27,16 @@ python scripts/align_script.py guion.txt words.json --key voz.wav -o guion-words
 - **Sobre la mezcla final** (voz + música): vuelve a reconocer el habla y compara con el guion; un acierto que cae < 0.8 por escena (o < 0.85 global) significa que **la música tapa la voz** (`sound-design.md` §5).
 - Si la voz es de una herramienta TTS: se vio en una pieza real que **un dominio con guion se leyó como la palabra «guion»**: no escribas direcciones web en el texto hablado; usa `{mostrado|hablado}` con la forma hablada.
 
-## 4. Voz local (candidato; requiere aprobación de Guille)
-**explainroo y argo usan Kokoro (82 M, ONNX, CPU, ~400 MB de modelos)** con Whisper local por frase. Alternativa a ElevenLabs sin créditos ni salida de datos. **No está instalado ni probado.** Antes de proponerlo: instalarlo cuesta ~400 MB y `npm install`; las voces en español son solo 3 (`ef_dora`, `em_alex`, `em_santa`), dependen de espeak-ng y **no se escucharon**; Kokoro no es seguro para llamadas concurrentes (generar en serie). Es una decisión de Guille (voz de la marca ≠ voz del sistema); no se instala sin su sí.
-Si algún día se adopta, el patrón útil es: **trocear en frases** (silencio entre frases 0.3 s, entre párrafos 0.55 s), recortar el silencio de cada trozo, **re-transcribir cada trozo en el mismo equipo** y alinear contra el guion como arriba.
+## 4. Voz local con Kokoro (instalada el 2026-11-09; verificada con Whisper, NO escuchada)
+**Qué es:** Kokoro 82 M (ONNX, CPU) por `kokoro-onnx` 0.6.1 (MIT), sin créditos ni salida de datos; para **borradores, pruebas de tiempo, versiones derivadas y piezas internas**. La voz de marca sigue siendo decisión de una persona que escucha (hoy, ElevenLabs).
+**Instalación (en este PC; entorno propio FUERA del repo):** `~/.gui-skills/kokoro/venv` (Python 3.12, `kokoro-onnx==0.6.1`, `soundfile`; trae `espeakng-loader`, no hace falta instalar espeak-ng) y modelos en `~/.gui-skills/kokoro/models/`: `kokoro-v1.0.onnx` (310 MB, sha256 `7d5df8ec…36a6c5`) y `voices-v1.0.bin` (26 MB, sha256 `bca610b8…fbf7d`), de la release oficial `model-files-v1.0` de `thewh1teagle/kokoro-onnx`. La licencia del **modelo** se anuncia Apache-2.0 en su tarjeta (**no se pudo confirmar aquí**: Hugging Face no respondió); la del paquete (MIT) sí se leyó. Para reinstalar en otro equipo: crear el venv, `pip install kokoro-onnx==0.6.1 soundfile`, bajar esos dos archivos y `voz_local.py --doctor`.
+**Uso:**
+```
+~/.gui-skills/kokoro/venv/Scripts/python scripts/voz_local.py guion.txt -o salida/ [--voice ef_dora|em_alex|em_santa] [--speed 0.95] [--align]
+```
+Trocea el guion en frases (misma sintaxis de §2; usa la forma **hablada** de `{mostrado|hablado}`), sintetiza cada frase (silencio entre frases 0.3 s, entre párrafos 0.55 s, `[pause s]` se suma), recorta el silencio de cada trozo, une en `voz.wav` (24 kHz mono) y guarda `voz-chunks.json`. **Caché por hash** (frase, voz, velocidad, idioma, tamaño del modelo): la segunda corrida con el mismo guion no regenera nada. Con `--align` re-transcribe con Whisper local y alinea con `align_script.py` → `guion-words.json` (tiempos por palabra) y `guion.srt`.
+**Medido aquí (Ryzen 7 3700U, CPU):** ~1× el tiempo del audio (6 s de voz en ~6 s; la primera llamada de la sesión carga el modelo); `matchRate` de Whisper sobre la propia voz: 0.94–0.96 con `em_alex` y `ef_dora` en frases de prueba (lo que falla son palabras en inglés como «bot», que Whisper entendió «voto»: **escríbelas como suenan o con `{bot|bót}`**). Voces en español: `ef_dora` (femenina), `em_alex` y `em_santa` (masculinas); solo 3. **NO se pudo oír**: `matchRate` alto significa inteligible, no agradable; Whisper no mide naturalidad, acento ni entonación. Antes de usarla en una pieza de cliente, que Guille escuche una muestra (`--voice` y `--speed` son los controles).
+**Límites:** Kokoro no es seguro para llamadas concurrentes (el script genera en serie); la primera frase de la sesión es más lenta; no clona voces; la calidad en español no está comparada con ElevenLabs. `selftest.py --voz` repite la prueba real (~30 s).
 
 ## 5. Demos de producto desde un recorrido (patrón de argo; sin instalar nada)
 Para una pieza que muestra una **web o app que Guille controla** (no un producto ajeno):

@@ -75,6 +75,7 @@ def main():
     ap.add_argument("--speech", action="store_true"); ap.add_argument("--whisper", action="store_true")
     ap.add_argument("--network", action="store_true"); ap.add_argument("--hyperframes", action="store_true")
     ap.add_argument("--keep", action="store_true")
+    ap.add_argument("--voz", action="store_true", help="prueba la voz local (Kokoro, ~30 s; requiere la instalacion de references/narracion-y-demos.md)")
     a = ap.parse_args()
     tmp = tempfile.mkdtemp(prefix="vea_selftest_")
     print(f"Selftest video-editing-ai-agent  |  carpeta temporal: {tmp}\n")
@@ -425,12 +426,48 @@ def main():
         return ok, f"matchRate {res['matchRate']}; marcador 'fin' en {res['marks'].get('fin')} s; '20' dice 'veinte' y NO se traga la palabra oida de mas ('eh'); guion ajeno: matchRate {neg['matchRate']} (< 0.5)"
     check("align_script: une el guion con los tiempos de Whisper, corrige mal oidos y detecta un guion ajeno", align_ok)
 
+    def numeros_ok():
+        al = importlib.import_module("align_script")
+        a = al.num_es(35), al.num_es(2026), al.num_es(100), al.num_es(1250), al.expand_digits("5%"), al.expand_digits("1.250")
+        heard = [{"s": 0.0, "e": 0.3, "w": "Cuesta"}, {"s": 0.3, "e": 0.9, "w": "35"}, {"s": 0.9, "e": 1.4, "w": "euros"}]
+        res = al.build("Cuesta 35 euros", heard)
+        ok = (a[0] == ["treinta", "y", "cinco"] and a[1] == ["dos", "mil", "veintiseis"] and a[2] == ["cien"] and a[3] == ["mil", "doscientos", "cincuenta"]
+              and a[4] == ["cinco", "por", "ciento"] and a[5] == a[3] and res["matchRate"] == 1.0)
+        return ok, f"35 = {' '.join(a[0])}; 2026 = {' '.join(a[1])}; Whisper oye '35' y el guion dice '35': matchRate {res['matchRate']}"
+    check("align_script: lee las cifras en espanol (el guion y lo que oyo Whisper)", numeros_ok)
+
+    def glitch_ok():
+        flash = os.path.join(tmp, "g_flash.mp4")
+        clean = os.path.join(tmp, "g_clean.mp4")
+        black = os.path.join(tmp, "g_black.mp4")
+        ff(["-f", "lavfi", "-i", "testsrc2=s=320x240:r=25:d=3,drawbox=x=0:y=0:w=iw:h=ih:color=white:t=fill:enable='eq(n,45)'", "-pix_fmt", "yuv420p", flash])
+        ff(["-f", "lavfi", "-i", "testsrc2=s=320x240:r=25:d=3", "-pix_fmt", "yuv420p", clean])
+        ff(["-f", "lavfi", "-i", "color=c=black:s=320x240:r=25:d=2", "-pix_fmt", "yuv420p", black])
+        jf, jc, jb = (os.path.join(tmp, n) for n in ("gf.json", "gc.json", "gb.json"))
+        rf = run([os.path.join(HERE, "glitch_scan.py"), flash, "--json", jf], timeout=60)
+        rc = run([os.path.join(HERE, "glitch_scan.py"), clean, "--json", jc], timeout=60)
+        rb = run([os.path.join(HERE, "glitch_scan.py"), black, "--json", jb], timeout=60)
+        f, c, b = json.load(open(jf)), json.load(open(jc)), json.load(open(jb))
+        ok = (rf.returncode == 1 and len(f["flashes"]) == 1 and abs(f["flashes"][0]["t"] - 1.8) < 0.05 and rc.returncode == 0 and not c["flashes"]
+              and rb.returncode == 1 and b["fotograma0"]["plano_o_negro"])
+        return ok, f"flash de 1 fotograma en {f['flashes'][0]['t'] if f['flashes'] else None} s (real 1.8); video limpio sin flashes; negro = fotograma 0 plano"
+    check("glitch_scan: encuentra un flash de un fotograma y un fotograma 0 negro, sin falsos positivos", glitch_ok)
+
+    def voz_texto_ok():
+        vl = importlib.import_module("voz_local")
+        ch = vl.spoken_text("> nota\nHola, mundo. [#clave] Segunda frase con {20|veinte} cosas.\n[pause 0.5]\n\nOtro parrafo.\n")
+        textos = [c[0] for c in ch]
+        gaps = [round(c[1], 2) for c in ch]
+        ok = (textos == ["Hola, mundo.", "Segunda frase con veinte cosas.", "Otro parrafo."] and gaps == [0.0, 0.3, 1.05])
+        return ok, f"frases {textos}; pausas {gaps} (usa la forma hablada, sin marcadores ni notas)"
+    check("voz_local: el guion se trocea en frases con la forma hablada, sin marcadores ni notas", voz_texto_ok)
+
     def hs_prod():
         r = run([os.path.join(HERE, "handshake.py"), "--json"])
         d = json.loads(r.stdout)
         pr = d.get("production", {})
         hf = d.get("engines", {}).get("hyperframes", {})
-        ok = all(pr.get("scripts", {}).get(n) for n in ("beat_grid.py", "motion_energy.py", "save_approved.py", "storyboard_lint.py", "frame_compare.py", "sync_audit.py", "align_script.py")) and pr.get("preflight") and "status" in hf and "env_block_git_bash" in hf
+        ok = all(pr.get("scripts", {}).get(n) for n in ("beat_grid.py", "motion_energy.py", "save_approved.py", "storyboard_lint.py", "frame_compare.py", "sync_audit.py", "align_script.py", "glitch_scan.py", "voz_local.py")) and pr.get("preflight") and "status" in hf and "env_block_git_bash" in hf
         return ok, f"production.scripts ok, preflight={pr.get('preflight')}, hyperframes.status={hf.get('status')}, videos aprobados={pr.get('approved_videos', {}).get('count')}"
     check("handshake v1.5: bloque production, scripts nuevos y HyperFrames con variables de entorno", hs_prod)
 
@@ -488,6 +525,18 @@ def main():
     check("handshake: capacidades y version = SKILL.md", hs)
 
     # ---------------- opcionales
+    if a.voz:
+        kpy = os.path.join(os.path.expanduser("~"), ".gui-skills", "kokoro", "venv", "Scripts", "python.exe")
+        def voz_real():
+            if not os.path.exists(kpy):
+                return False, "Kokoro no instalado (ver references/narracion-y-demos.md sec. 4)"
+            g = os.path.join(tmp, "guion_voz.txt")
+            open(g, "w", encoding="utf-8").write("Hola, esto es una prueba de voz local. El bot opera con cinco controles de riesgo.\n")
+            r = subprocess.run([kpy, os.path.join(HERE, "voz_local.py"), g, "-o", os.path.join(tmp, "voz_out"), "--voice", "em_alex", "--align"], capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=600)
+            m = re.search(r"matchRate ([\d.]+)", r.stdout)
+            rate = float(m.group(1)) if m else 0.0
+            return rate >= 0.75 and os.path.exists(os.path.join(tmp, "voz_out", "voz.wav")), f"matchRate {rate} (Whisper entiende la voz local; >= 0.75); no se puede oir desde aqui"
+        check("voz_local (Kokoro): genera la voz y Whisper la entiende", voz_real)
     if a.speech or a.whisper:
         wav = os.path.join(tmp, "habla.wav")
         ps1 = os.path.join(tmp, "tts.ps1")

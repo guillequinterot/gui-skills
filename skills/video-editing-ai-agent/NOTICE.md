@@ -53,3 +53,8 @@ nuevos (`storyboard_lint.py`, `frame_compare.py`, `sync_audit.py`, `align_script
 - awesomeclaude.ai/claude-motion-graphics — **sin licencia clara** (el pie dice MIT; el LICENSE real del repo `webfuse-com/awesome-claude` es CC0 y no contiene esas páginas): solo ideas, nada literal.
 Detalle por fuente: `references/analisis-fuentes/14-motion-graphics-nov-2026.md`.
 
+## Ampliación 2026-11-09 (v1.5.1)
+- **kokoro-onnx** 0.6.1 (`thewh1teagle/kokoro-onnx`) — MIT (Copyright (c) 2025 github.com/thewh1teagle). Se usa como paquete instalado en un entorno propio fuera del repo (`~/.gui-skills/kokoro`); **no se redistribuye**. Modelo **Kokoro-82M** (`kokoro-v1.0.onnx`, `voices-v1.0.bin`, release `model-files-v1.0`): se anuncia Apache-2.0 en su tarjeta (**no confirmado aquí**); no se redistribuye. `scripts/voz_local.py` es de implementación propia.
+- **Barty-Bart/motion-graphics — biblioteca de efectos** (`assets/sfx-cc0/`, 109 archivos, copiados con aviso): código y manifest MIT (Copyright (c) 2026 Bart); sonidos CC0 1.0 de Kenney y Freesound (autores y enlaces en `assets/sfx-cc0/LICENSES-barty-bart.md` y `manifest.json`). No se copió el sonido de Mixkit.
+- **lemomo-ai/lemo-opuscar** — MIT, con CC BY 4.0 declarado en el README para películas y fotogramas demo (no se usa nada de eso). **Vincentwei1021/mg-styles-15** — MIT. Solo ideas, reescritas.
+
