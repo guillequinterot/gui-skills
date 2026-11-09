@@ -345,14 +345,94 @@ def main():
         return r.returncode == 0 and "tramos quietos" in r.stdout and "movimiento medio" in r.stdout, "reporta movimiento por segundo y tramos quietos (el video sintetico tiene dos colores fijos)"
     check("motion_energy: mide movimiento por segundo y tramos quietos", motion_ok)
 
+    # ---------------- v1.5: plan, sincronia, comparacion con referencia, guion alineado (de las fuentes de motion graphics, 2026-11)
+    def sync_ok():
+        import wave
+        import numpy as np
+        sr = 16000
+        x = np.zeros(sr * 6)
+        rng = np.random.default_rng(1)
+        for tt in (1.0, 2.03, 3.0, 4.5):  # golpes de ruido de 30 ms; el 2.o llega 30 ms tarde respecto al cue de 2.0
+            n = int(0.03 * sr); i = int(tt * sr)
+            x[i:i + n] += rng.standard_normal(n) * np.exp(-np.arange(n) / (0.006 * sr)) * 0.6
+        x += rng.standard_normal(len(x)) * 0.003
+        wav = os.path.join(tmp, "golpes.wav")
+        w = wave.open(wav, "wb"); w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr)
+        w.writeframes((np.clip(x, -1, 1) * 32767).astype("<i2").tobytes()); w.close()
+        cues = os.path.join(tmp, "cues.json")
+        json.dump([1.0, 2.0, 3.2], open(cues, "w"))
+        out = os.path.join(tmp, "sync.json")
+        r = run([os.path.join(HERE, "sync_audit.py"), wav, "--cues", cues, "--json", out], timeout=120)
+        d = json.load(open(out)) if os.path.exists(out) else {}
+        det = {c["id"]: c for c in d.get("detalle", [])}
+        c1 = det.get("c1", {}).get("offset_ms")
+        ok = (r.returncode == 0 and 3 <= d.get("golpes_detectados", 0) <= 6 and det.get("c0", {}).get("estado") == "ok"
+              and c1 is not None and abs(c1 - 30) <= 12 and det.get("c1", {}).get("estado") == "ok" and det.get("c2", {}).get("estado") != "ok")
+        return ok, f"{d.get('golpes_detectados')} golpes (4 reales); offset del cue 2 = {c1} ms (30 reales); cue sin golpe cerca = {det.get('c2', {}).get('estado')}"
+    check("sync_audit: mide el offset de cada golpe y no da por buena una sincronia falsa", sync_ok)
+
+    def compare_ok():
+        def mk(name, st):
+            p = os.path.join(tmp, name)
+            ff(["-f", "lavfi", "-i", f"color=c=white:s=320x240:r=25:d=4,fade=t=in:st={st}:d=1", "-pix_fmt", "yuv420p", p])
+            return p
+        ref, late, same = mk("cmp_ref.mp4", 1.0), mk("cmp_late.mp4", 1.2), mk("cmp_same.mp4", 1.0)
+        j1, j2 = os.path.join(tmp, "cmp1.json"), os.path.join(tmp, "cmp2.json")
+        r1 = run([os.path.join(HERE, "frame_compare.py"), "compare", ref, late, "--json", j1], timeout=120)
+        r2 = run([os.path.join(HERE, "frame_compare.py"), "compare", ref, same, "--json", j2], timeout=120)
+        a, b = json.load(open(j1)), json.load(open(j2))
+        ok = (r1.returncode == 1 and abs(a["error_tiempo_s"]["inicio"] - 0.2) <= 0.05 and a["desfase_optimo_fotogramas"] == 5 and a["veredicto"] == "NO COINCIDE"
+              and r2.returncode == 0 and b["veredicto"] == "COINCIDE")
+        return ok, f"clon 0.2 s tarde: error de inicio {a['error_tiempo_s']['inicio']} s, desfase optimo {a['desfase_optimo_fotogramas']} fot.; clon identico: {b['veredicto']}"
+    check("frame_compare: detecta un clon que arranca tarde y acepta uno identico", compare_ok)
+
+    def loop_ok():
+        quiet = os.path.join(tmp, "loop_quiet.mp4")
+        ff(["-f", "lavfi", "-i", "color=c=gray:s=320x240:r=20:d=2", "-pix_fmt", "yuv420p", quiet])
+        j = os.path.join(tmp, "loop.json")
+        r = run([os.path.join(HERE, "frame_compare.py"), "loop", quiet, "--json", j], timeout=60)
+        d = json.load(open(j))
+        r2 = run([os.path.join(HERE, "frame_compare.py"), "loop", base, "--fps", "20"], timeout=60)
+        return d["costura"] <= 0.3 and d["excursion"] < 0.7 and r.returncode == 0 and r2.returncode == 1, f"quieto: costura {d['costura']}, excursion {d['excursion']}; base con cortes: sale con codigo 1 (costura alta)"
+    check("frame_compare loop: distingue un bucle cerrado/quieto de uno con salto", loop_ok)
+
+    def lint_ok():
+        bad = os.path.join(tmp, "plan_malo.md")
+        good = os.path.join(tmp, "plan_bueno.md")
+        open(bad, "w", encoding="utf-8").write("| tiempo | objeto | acción | cámara | texto |\n|---|---|---|---|---|\n"
+                                              "| 0-3 | título | aparece | empuje | una frase demasiado larga para leerse en pantalla |\n"
+                                              "| 3-6 | tarjeta | muestra | empuje | |\n| 6-9 | fondo | entra | empuje | |\n")
+        open(good, "w", encoding="utf-8").write("| tiempo | objeto | acción | cámara | texto |\n|---|---|---|---|---|\n"
+                                               "| 0-3 | una mano | rasga la bolsa | parada | pan con moho |\n"
+                                               "| 3-6 | una rebanada | se llena de motas verdes | empuje lento | |\n"
+                                               "| 6-9 | un frasco | se cierra con tapa | paneo | |\n"
+                                               "| 9-12 | el congelador | recibe la bolsa | parada | guárdalo frío |\n")
+        rb = run([os.path.join(HERE, "storyboard_lint.py"), bad], timeout=30)
+        rg = run([os.path.join(HERE, "storyboard_lint.py"), good], timeout=30)
+        ok = rb.returncode == 1 and "ROJO" in rb.stdout and "maquetaci" in rb.stdout and rg.returncode == 0 and "VERDE" in rg.stdout
+        return ok, f"plan malo: exit {rb.returncode} (esperado 1); plan bueno: exit {rg.returncode} (esperado 0)"
+    check("storyboard_lint: marca planos sin objeto/accion/texto largo y deja pasar un plan sano", lint_ok)
+
+    def align_ok():
+        al = importlib.import_module("align_script")
+        heard = [{"s": 0.1, "e": 0.4, "w": "Hola"}, {"s": 0.5, "e": 0.8, "w": "esto"}, {"s": 0.8, "e": 0.9, "w": "es"}, {"s": 0.9, "e": 1.1, "w": "una"},
+                 {"s": 1.1, "e": 1.6, "w": "pruebda"}, {"s": 1.7, "e": 1.8, "w": "de"}, {"s": 1.8, "e": 2.3, "w": "veinte"}, {"s": 2.3, "e": 2.4, "w": "eh"},
+                 {"s": 2.6, "e": 3.0, "w": "palabras"}, {"s": 3.1, "e": 3.2, "w": "de"}, {"s": 3.2, "e": 3.6, "w": "sonido"}]
+        res = al.build("Hola, esto es una prueba de {20|veinte} palabras [#fin] de sonido.", heard)
+        w20 = [w for w in res["words"] if w["text"] == "20"][0]
+        neg = al.build("Mañana lloverá en toda la costa del Caribe durante la tarde", heard)
+        ok = (res["matchRate"] == 1.0 and abs(res["marks"].get("fin", 0) - 3.1) < 1e-6 and abs(w20["e"] - 2.3) < 1e-6 and neg["matchRate"] < 0.5)
+        return ok, f"matchRate {res['matchRate']}; marcador 'fin' en {res['marks'].get('fin')} s; '20' dice 'veinte' y NO se traga la palabra oida de mas ('eh'); guion ajeno: matchRate {neg['matchRate']} (< 0.5)"
+    check("align_script: une el guion con los tiempos de Whisper, corrige mal oidos y detecta un guion ajeno", align_ok)
+
     def hs_prod():
         r = run([os.path.join(HERE, "handshake.py"), "--json"])
         d = json.loads(r.stdout)
         pr = d.get("production", {})
         hf = d.get("engines", {}).get("hyperframes", {})
-        ok = all(pr.get("scripts", {}).get(n) for n in ("beat_grid.py", "motion_energy.py", "save_approved.py")) and pr.get("preflight") and "status" in hf and "env_block_git_bash" in hf
+        ok = all(pr.get("scripts", {}).get(n) for n in ("beat_grid.py", "motion_energy.py", "save_approved.py", "storyboard_lint.py", "frame_compare.py", "sync_audit.py", "align_script.py")) and pr.get("preflight") and "status" in hf and "env_block_git_bash" in hf
         return ok, f"production.scripts ok, preflight={pr.get('preflight')}, hyperframes.status={hf.get('status')}, videos aprobados={pr.get('approved_videos', {}).get('count')}"
-    check("handshake v1.4: bloque production y HyperFrames con variables de entorno", hs_prod)
+    check("handshake v1.5: bloque production, scripts nuevos y HyperFrames con variables de entorno", hs_prod)
 
     def glosario_ok():
         va = importlib.import_module("video_aprender")

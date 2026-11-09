@@ -36,3 +36,20 @@ https://github.com/snakers4/silero-vad (Copyright (c) 2020-present Silero Team).
 
 ### Ampliación 2026-10-16 — otras skills de HyperFrames leídas (Apache-2.0, commit `490ecaf`)
 Además de las cuatro skills citadas arriba, se leyeron y **reescribieron** (sin copiar código ni texto) ideas y parámetros de: `hyperframes` (router y `references/{brief-contract,intent-interview,pitch-round,production-loop,review-loop,storyboard-format,subagent-dispatch}`), `motion-graphics` (`agents/{director,builder,finalize}`, `references/{motion-vocabulary,shot-plan-ir,builder-contract}`), `general-video`, `faceless-explainer` (`references/{story-design,motion-language,cut-catalog}`), `hyperframes-core` (`SKILL.md`, `references/{creator-editing-recipes,determinism-rules,variables-and-media}`), `hyperframes-animation`, `hyperframes-keyframes`, `hyperframes-audio` y `hyperframes-creative` (`references/{motion-principles,story-spine,beat-direction,narration,video-composition}`), en `references/production-workflow.md`, `references/story-design.md`, `references/motion-doctrine.md` §8–§12, `references/engine-hyperframes.md`, `references/audio-mix.md` (carve), `references/captions-subtitles.md` y los scripts `scripts/carve_music.py` y `scripts/hf_captions.py` (implementaciones propias). Copyright de HeyGen / colaboradores de HyperFrames. No se instaló ninguna skill de HyperFrames en `~/.claude`. `media-use` depende de la CLI de HeyGen con inicio de sesión y créditos: **no se adopta**. Del resto de skills (`figma`, `pr-to-video`, `product-launch-video`, `slideshow`, `music-to-video`, `remotion-to-hyperframes`, `hyperframes-registry`, `hyperframes-studio`, `hyperframes-cli`) solo se conoce la descripción.
+
+## Tercera tanda, 2026-11-08 — fuentes de motion graphics y video con IA (v1.5)
+Todas leídas **solo con lectura** (`gh api`); no se copió código ni texto: las ideas, reglas y números se **reescribieron** y los scripts
+nuevos (`storyboard_lint.py`, `frame_compare.py`, `sync_audit.py`, `align_script.py`) son de implementación propia. Licencias leídas en el `LICENSE` real de cada repo.
+- Barty-Bart/motion-graphics — MIT (Copyright (c) 2026 Bart; fuentes Geist bajo SIL OFL 1.1, iconos de Lucide ISC, SFX CC0 1.0).
+- charlie947/motion-graphics-skills — MIT (Copyright (c) 2026 Charlie Hills).
+- alchaincyf/huashu-art-motion y alchaincyf/huashu-motion — MIT (Copyright (c) 2026 alchaincyf / Huashu). **No se toma nada** de sus activos excluidos (imagen del autor, Clawd de Anthropic, datos Arphic) ni de GSAP (licencia «no charge» propia de GreenSock).
+- Leonxlnx/earshot — MIT (Copyright (c) 2026 Leon Lin). No se usan sus modelos (CLAP, AST).
+- NiazMorshed2007/reanimate — MIT (Copyright (c) 2026 Niaz Morshed). **No se toma nada** de `site/public/examples/` (recreaciones de sitios de terceros).
+- vincentsch/explainroo — MIT (Copyright (c) 2026 Vincent Schmalbach); un módulo de fonemas suyo deriva de misaki (Apache-2.0): no usado.
+- rossark0/rossark-motion-skill — MIT (Copyright (c) 2026 rossark0).
+- win4r/video-director — MIT (Copyright (c) 2026 win4r).
+- talsiach/take-one — MIT (Copyright (c) 2026 Tal Siach); los archivos de anidoodle son Apache-2.0 y **no se usan**; el nombre y el logo «Take One» no están licenciados; los enlaces de afiliado de sus instrucciones se ignoraron.
+- shreyaskarnik/argo — MIT (Copyright (c) 2026 Shreyas Karnik); shaders de gl-transitions (MIT) y de HyperFrames (Apache-2.0) con licencia propia: no usados.
+- awesomeclaude.ai/claude-motion-graphics — **sin licencia clara** (el pie dice MIT; el LICENSE real del repo `webfuse-com/awesome-claude` es CC0 y no contiene esas páginas): solo ideas, nada literal.
+Detalle por fuente: `references/analisis-fuentes/14-motion-graphics-nov-2026.md`.
+

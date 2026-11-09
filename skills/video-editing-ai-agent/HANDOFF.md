@@ -76,6 +76,9 @@ Relación con otras skills:
 | 2026-10-16 | **Biblioteca de videos aprobados**: cada pieza que el usuario aprueba se guarda con su **cita textual**, lo bueno, lo malo y lo «sin decidir» (`scripts/save_approved.py`) | Guille | Un video aprobado es la evidencia más fuerte de gusto, pero la receta es **recomendación con origen, no orden**; lo sin decidir no es preferencia |
 | 2026-10-16 | Empuje de cámara en piezas al compás: sutil (≤ 8 %) y señales ancladas al compás en cada pausa ≥ 1 s (**provisional**); la preferencia estética con/sin empuje **sigue sin decidir** | Guille (parcial) | Medido: sin empuje el gancho queda congelado; no se midió qué «se ve mejor» |
 | 2026-10-16 | Migración al repo gui-skills: memoria dentro de la skill, sin rutas personales, autorizaciones de herramientas personales por usuario | Guille | Compartir las skills con otras personas sin exponer clientes ni credenciales |
+| 2026-11-08 | **v1.5:** se integran como **candidato** las ideas de 13 fuentes de motion graphics (plan validado antes de renderizar, sincronía de sonido medida, comparación con una referencia, guion alineado con la voz, cámara y ritmo con números). **Ninguna herramienta externa se instala** y no se copia código de terceros | Guille pidió integrar lo aprendido; la regla de no instalar queda **pendiente de su OK** | Entender, no copiar; varias fuentes no funcionan en Windows (reanimate, argo, huashu-motion) o tienen riesgos (cadena de suministro en `argo add`, GSAP con licencia propia, afiliados en take-one) |
+| 2026-11-08 | Todo valor numérico tomado de esas fuentes (umbrales, offsets, duraciones) es **punto de partida sin calibrar**: se dice cuál se usó. Los conflictos con `motion-doctrine.md` (movimiento ocioso, deriva de cámara) **se dejan sin resolver** hasta una pieza real (`references/motion-recetas-y-camara.md` §9) | Pendiente de Guille | Las fuentes miden su propio gusto (p. ej. 13 videos de un autor); aquí no se midió nuestro material |
+| 2026-11-08 | Voz local (Kokoro, ~400 MB) y earshot (1.1 GB opcionales) quedan como **candidatos que requieren aprobación explícita** | Pendiente de Guille | Peso, calidad de las voces en español sin escuchar, y que hoy la voz de marca va por ElevenLabs |
 
 ## 4. Registro de trabajos
 
@@ -173,6 +176,14 @@ Relación con otras skills:
 - **Regla candidata:** ninguna
 - **Herramientas:** HyperFrames 0.8.162, ffmpeg loudnorm
 
+### 2026-11-08 · caso-fuentes-motion-01 · guille
+
+- **Qué se hizo:** v1.5.0: se analizaron en solo lectura 13 fuentes de motion graphics y video con IA (12 repos/webs; el hilo de Reddit estaba bloqueado) con informe por fuente (references/analisis-fuentes/14). Se integraron como candidato 4 scripts propios (storyboard_lint, sync_audit, frame_compare, align_script), 4 referencias (sound-design, recrear-referencia, motion-recetas-y-camara, narracion-y-demos), 2 plantillas, compuertas en visual-qa, production-workflow 11 y errores-conocidos 10; HANDSHAKE, NOTICE y UPDATE-LOG al dia; V011 anonimizada (nombre de producto del cliente) y publicada junto con V010.
+- **Salió bien:** Cuatro lectores en paralelo sacaron notas profundas con licencia real de cada repo; selftest 40/40 con 5 pruebas nuevas sinteticas; el escaner de privacidad detecto un termino privado en entradas ajenas antes de publicar; los 4 scripts nuevos encontraron sus propios defectos en una prueba sintetica antes de cerrarse (demasiados golpes falsos, caracteres que rompen la consola de Windows, fusion de una palabra de mas).
+- **Salió mal / incidencia:** El hilo de Reddit no se pudo leer (bloqueo de red; no se eludio). Tres de los cuatro lectores toparon con el limite de uso de 5 horas y hubo que reanudarlos. Todo lo nuevo esta verificado solo con material sintetico: umbrales de las fuentes sin calibrar con material real, sync_audit sin musica densa, frame_compare sin video natural. Los conflictos con motion-doctrine (movimiento ocioso, deriva de camara) siguen sin resolver. Incidencia: Un archivo de memoria sin publicar de otra sesion traia un nombre de producto de cliente y bloqueaba publish_job; se anonimizo con el visto bueno de Guille.
+- **Regla candidata:** Antes de renderizar una pieza por codigo, validar el plan en tabla con storyboard_lint.py: un defecto visto en el plan cuesta un segundo, no 4-20 minutos (candidata: falta una pieza real)
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -191,3 +202,8 @@ Relación con otras skills:
 | Antes de generar voz, confirmar con el usuario el estado de producto y plataformas; la web puede estar desactualizada | caso-reel-03 | candidata |
 | Con mas de ~40 elementos con degradado o desenfoque en una composicion, usar fondo global y vidrio sin backdrop-filter | caso-video-blog-01 | candidata |
 | Para reels derivados de un video horizontal ya aprobado, reutilizar la voz y el guion y reconstruir solo el visual (candidata: falta una segunda pieza que lo confirme) | caso-video-blog-01 | candidata |
+| Pasar todas las comprobaciones automáticas y la revisión independiente no basta: la queja más repetida de los usuarios es «aburrida» y ninguna métrica la detecta; el revisor debe contestar siempre «¿dónde se aplana?» | 13 fuentes (huashu-motion, video-director) — **no visto aún en nuestras piezas** | candidata |
+| Antes de renderizar, validar el plan en tabla con `storyboard_lint.py`: un defecto visto en el plan cuesta un segundo, no 4–20 min | 13 fuentes (huashu-art-motion, video-director, take-one) | candidata |
+| La autoevaluación infla ~10 puntos: manda la puntuación independiente | huashu-art-motion | candidata |
+| Una sincronía alta entre sonido y imagen con música densa no demuestra nada: compararla siempre con el azar (`sync_audit.py`) | earshot | candidata (verificada solo con audio sintético) |
+| Antes de renderizar una pieza por codigo, validar el plan en tabla con storyboard_lint.py: un defecto visto en el plan cuesta un segundo, no 4-20 minutos (candidata: falta una pieza real) | caso-fuentes-motion-01 | candidata |

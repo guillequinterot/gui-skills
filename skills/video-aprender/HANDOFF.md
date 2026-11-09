@@ -75,6 +75,14 @@ una forma de reutilizar contenido ajeno (análisis y referencia, no copia).
 - **Regla candidata:** Clasificar la fuente antes de aprender (captación = pistas, una cuenta = una fuente); lanzar el lote en segundo plano y avisar el tiempo antes (≈ 1 min de pared por minuto de audio).
 - **Herramientas:** yt-dlp 2026.08.19; faster-whisper 1.2.1 (`hotwords`); ffmpeg n8.1.2; Pillow; numpy.
 
+### 2026-11-08 · caso-fuentes-motion-01 · guille
+
+- **Qué se hizo:** v1.5: el modo estilo gana una ruta para RECREAR el movimiento de una referencia: desglose de 5 lineas (Pace, Change, Type, Colour & light, idea unica), separacion MOVES vs LOOK, plan en tabla validado con storyboard_lint.py y comprobacion del clon con frame_compare.py (references/procedimiento.md 11; HANDSHAKE actualizado).
+- **Salió bien:** Se reutilizan los scripts de video-editing-ai-agent sin duplicar nada; la regla de una sola fuente = candidato se mantiene.
+- **Salió mal / incidencia:** Solo se probo la comparacion con material sintetico; el flujo de recrear una referencia real no se ha corrido.
+- **Regla candidata:** ninguna
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)

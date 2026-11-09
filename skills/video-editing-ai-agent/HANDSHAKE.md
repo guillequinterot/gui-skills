@@ -8,8 +8,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.4.0 (`scripts/handshake.py` → `skill_version`) |
-| Última actualización | 2026-10-16 por guille (migración al repo gui-skills) |
+| Versión | 1.5.0 (`scripts/handshake.py` → `skill_version`) |
+| Última actualización | 2026-11-08 por guille (v1.5: ideas de 13 fuentes de motion graphics; sesión de Claude) |
 | Skill principal / padre | ninguna (es la skill única de video) |
 | Llama a | `rea-reverse-engineer` (por porción, para entender una web/app de referencia); `video-aprender` (sub-skill: aprender de un link/archivo) |
 | La llaman | `video-aprender` (usa sus scripts); `direct-visual-design` y `seo-content-system` cuando el entregable es video |
@@ -30,7 +30,9 @@ corre en CPU). Para tu máquina: `python scripts/handshake.py --project <carpeta
 | Silero VAD (dentro de faster-whisper) | verificado | 2026-10-15 | `scripts/vad_segments.py`; valida cruzado la transcripción |
 | `yt-dlp` 2026.08.19 | parcial | 2026-10-16 | YouTube e Instagram **público** OK sin cookies; **cookies, TikTok, videos > 1 h: sin probar**. Requiere autorización personal de cada usuario (ver HANDOFF §2) |
 | PyMuPDF 1.27 | verificado | 2026-10-15 | Solo para `--slides` (PDF de diapositivas) |
-| `selftest.py` | verificado | 2026-10-16 | 35/35 en el PC del mantenedor, repetido sobre la copia del repo tras la migración (87 s) |
+| `selftest.py` | verificado | 2026-11-08 | v1.5: 40/40 en el PC del mantenedor (35 anteriores + 5 nuevos con material sintético); la copia del repo y las junctions de `~/.claude/skills` y `~/.codex/skills` apuntan a la misma carpeta |
+| `storyboard_lint.py`, `frame_compare.py`, `sync_audit.py`, `align_script.py` | verificado **solo con material sintético** | 2026-11-08 | Plan malo/sano, clon 0.2 s tarde, golpes de ruido con un cue a +30 ms, guion con cifra y mal oído. **Sin probar con material real**, con música densa ni con video natural; umbrales de las fuentes sin calibrar |
+| Kokoro, earshot, reanimate, argo, huashu-motion y demás herramientas de las 13 fuentes | **no instaladas** | 2026-11-08 | Solo lectura. Requieren aprobación explícita de Guille (Kokoro ~400 MB; earshot ~1.1 GB opcionales; reanimate y argo no corren en Windows tal cual) |
 | CapCut / Canva / Premiere Pro / After Effects | sin probar | — | Stubs `not_configured` (`references/engines-future.md`); no prometer capacidades |
 | macOS / Linux | sin probar | — | Nada de la skill se ha ejecutado fuera de Windows; las rutas de `handshake.py` y el instalador `.ps1` son de Windows |
 
@@ -40,9 +42,15 @@ corre en CPU). Para tu máquina: `python scripts/handshake.py --project <carpeta
 - Edición por EDL → proyecto de Shotcut (`edl_to_shotcut.py`), color por clip (`grade.py`), subtítulos palabra por palabra en Shotcut, mezcla de música y normalización de loudness (objetivo ≈ −16 LUFS).
 - Piezas desde cero con HyperFrames: render 1080×1920 y 1080×1170, `--batch` con variables, `snapshot`, push entre páginas con `cut_dip.py` (hueco 0 %), música al compás con `beat_grid.py` (122 BPM medidos, fase +0 ms).
 - Biblioteca de videos aprobados (`save_approved.py`: `add` exige cita textual; `suggest`/`recipe` al empezar) — 1 entrada (V001, anonimizada).
+- **v1.5 (sintético):** validar un plan en tabla o `timeline.json` (`storyboard_lint.py`), medir el offset de cada golpe de sonido contra su cue y el volumen del MP4 (`sync_audit.py`), comparar un clon con su referencia (curva de actividad, ventana de movimiento, desfase óptimo) y medir la costura de un bucle (`frame_compare.py`), y unir un guion con los tiempos por palabra de Whisper con `matchRate` (`align_script.py`).
 - `video-aprender` (modos `contenido`, `reunion`, `estilo`): clase pública del MIT OCW (8 min, ecuaciones verificadas con Python), 11 reels públicos de Instagram en lote (26.2 min), clase sintética y pizarra sintética (6/6 estados).
 
 ## Pendientes abiertos
+
+- [ ] **v1.5, probar con una pieza real** `storyboard_lint.py`, `sync_audit.py`, `frame_compare.py` y `align_script.py` y **calibrar los umbrales** con material de Guille; añadir lo aprendido al HANDOFF.
+- [ ] **v1.5, decisiones de Guille:** ¿instalar Kokoro (voz local) o earshot?; resolver los conflictos de `references/motion-recetas-y-camara.md` §9 (movimiento ocioso, deriva de cámara) con una pieza; ¿copiar la biblioteca CC0 de SFX de Barty-Bart (con atribución) a la skill?
+- [ ] **v1.5:** el **hilo de Reddit** no se pudo leer (bloqueado): si Guille pega el texto, revisarlo y añadir sus hallazgos; leer a fondo `lemomo-ai/lemo-opuscar` y `Vincentwei1021/mg-styles-15` (MIT, los cita awesomeclaude.ai).
+- [ ] **v1.5:** script de **pops/flashes** sobre el MP4 (hoy solo se describe en `references/visual-qa.md`); probar en HyperFrames el motion blur por subfotogramas y los overlays con alfa (`references/engine-hyperframes.md`, sección final).
 
 - [ ] Carve (`carve_music.py`) frente a EQ estático y regla «No sidechain» — necesita una pieza con voz en off y escuchar 3 versiones.
 - [ ] Subtítulos con `hf_captions.py` **renderizados** en HyperFrames (la agrupación está probada; el render no).

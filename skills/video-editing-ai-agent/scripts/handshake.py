@@ -137,7 +137,7 @@ def main():
     }
     rec = "shotcut" if engines["shotcut_mcp"]["status"] == "ready" else ("ffmpeg" if ff.get("found") else "none")
     result = {
-        "skill_version": "1.4.0",
+        "skill_version": "1.5.0",
         "generated": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
         "os": sys.platform,
         "python": sys.version.split()[0],
@@ -151,7 +151,7 @@ def main():
             "pymupdf": has_module("fitz"),
             "nota": "Sub-skill video-aprender: aprender de un link/archivo (clase, reunion, referencia); varios links -> aprender_lote.py; --glosario <dominio> (hotwords + correcciones); muestreo de fotogramas automatico si la pantalla no tiene estados estables. Instagram publico sin cookies. Sin PyMuPDF no se pueden leer PDF de diapositivas (--slides)."},
         "production": {
-            "scripts": {n: os.path.exists(os.path.join(scripts_dir, n)) for n in ("beat_grid.py", "motion_energy.py", "cut_dip.py", "self_eval.py", "carve_music.py", "hf_captions.py", "save_approved.py")},
+            "scripts": {n: os.path.exists(os.path.join(scripts_dir, n)) for n in ("beat_grid.py", "motion_energy.py", "cut_dip.py", "self_eval.py", "carve_music.py", "hf_captions.py", "save_approved.py", "storyboard_lint.py", "frame_compare.py", "sync_audit.py", "align_script.py")},
             "preflight": os.path.exists(os.path.join(os.path.dirname(scripts_dir), "references", "errores-conocidos-y-aciertos.md")),
             "approved_videos": approved,
             "nota": "Antes de una pieza nueva: leer references/errores-conocidos-y-aciertos.md y correr `python scripts/save_approved.py suggest --route R --format F`. Al cerrar una pieza APROBADA: `save_approved.py add` con la cita del usuario."},
