@@ -83,6 +83,14 @@ una forma de reutilizar contenido ajeno (análisis y referencia, no copia).
 - **Regla candidata:** ninguna
 - **Herramientas:** no indicadas
 
+### 2026-11-09 · caso-fuentes-motion-01 · guille
+
+- **Qué se hizo:** v1.5.1: version alineada con video-editing-ai-agent; sin cambios de proceso; align_script ahora lee cifras en espanol (util para reuniones y clases con guion).
+- **Salió bien:** Los scripts compartidos siguen siendo una sola fuente de verdad.
+- **Salió mal / incidencia:** Sin pruebas con una reunion real.
+- **Regla candidata:** ninguna
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)

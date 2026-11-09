@@ -79,6 +79,7 @@ Relación con otras skills:
 | 2026-11-08 | **v1.5:** se integran como **candidato** las ideas de 13 fuentes de motion graphics (plan validado antes de renderizar, sincronía de sonido medida, comparación con una referencia, guion alineado con la voz, cámara y ritmo con números). **Ninguna herramienta externa se instala** y no se copia código de terceros | Guille pidió integrar lo aprendido; la regla de no instalar queda **pendiente de su OK** | Entender, no copiar; varias fuentes no funcionan en Windows (reanimate, argo, huashu-motion) o tienen riesgos (cadena de suministro en `argo add`, GSAP con licencia propia, afiliados en take-one) |
 | 2026-11-08 | Todo valor numérico tomado de esas fuentes (umbrales, offsets, duraciones) es **punto de partida sin calibrar**: se dice cuál se usó. Los conflictos con `motion-doctrine.md` (movimiento ocioso, deriva de cámara) **se dejan sin resolver** hasta una pieza real (`references/motion-recetas-y-camara.md` §9) | Pendiente de Guille | Las fuentes miden su propio gusto (p. ej. 13 videos de un autor); aquí no se midió nuestro material |
 | 2026-11-08 | Voz local (Kokoro, ~400 MB) y earshot (1.1 GB opcionales) quedan como **candidatos que requieren aprobación explícita** | Pendiente de Guille | Peso, calidad de las voces en español sin escuchar, y que hoy la voz de marca va por ElevenLabs |
+| 2026-11-09 | **Kokoro instalado** (voz local, entorno fuera del repo) y se resuelven los pendientes de v1.5 que dependían de Guille: leer lemo-opuscar y mg-styles-15, copiar la biblioteca CC0 de efectos, escribir `glitch_scan.py`, probar el alfa de HyperFrames. **earshot no se instala** (lo útil ya está reimplementado sin modelos) | Guille («haz todo lo apruebo e instalar kokoro») | Voz local gratis para borradores y tiempos; la voz de marca sigue en ElevenLabs hasta que Guille escuche una muestra |
 
 ## 4. Registro de trabajos
 
@@ -184,6 +185,14 @@ Relación con otras skills:
 - **Regla candidata:** Antes de renderizar una pieza por codigo, validar el plan en tabla con storyboard_lint.py: un defecto visto en el plan cuesta un segundo, no 4-20 minutos (candidata: falta una pieza real)
 - **Herramientas:** no indicadas
 
+### 2026-11-09 · caso-fuentes-motion-01 · guille
+
+- **Qué se hizo:** v1.5.1: con la aprobacion de Guille se instalo Kokoro (kokoro-onnx 0.6.1, entorno fuera del repo, modelos de la release oficial) y se escribio scripts/voz_local.py (guion -> voz.wav + tiempos por palabra + SRT, cache por hash); scripts/glitch_scan.py (flashes, pops, fotograma 0, congelados, bucle); align_script lee cifras en espanol; biblioteca CC0 de 109 efectos en assets/sfx-cc0; se leyeron lemo-opuscar y mg-styles-15 (rubrica de 7 ejes, compuertas de render roto, resolucion y audio tras el codec); en HyperFrames 0.8.162 se verifico el MOV con alfa real y el flujo 240 fps + tmix. Selftest 43/43 (44/44 con --voz).
+- **Salió bien:** La voz de Kokoro corre en CPU a ~1x el tiempo del audio y Whisper la entiende (matchRate 0.94-0.96); la cache por hash evita regenerar; el MOV con alfa de HyperFrames salio transparente de verdad (alfa 0 en la esquina); las pruebas de los scripts nuevos encontraron un defecto real antes de cerrar (la pausa [pause] en su propia linea se perdia).
+- **Salió mal / incidencia:** No se pudo oir la voz de Kokoro (solo medida con Whisper) ni confirmar la licencia del modelo (Hugging Face no respondio); la palabra bot en un texto en espanol se pronuncio de forma que Whisper entendio voto; el efecto visual del motion blur por 240 fps + tmix no se verifico; los umbrales de los scripts siguen sin calibrar con material real; earshot no se instalo por decision. Incidencia: La primera llamada a transcribe_words con python -I no encuentra faster-whisper (el modo aislado ignora el site-packages del usuario): usar python normal para esos scripts, -I solo para los que no lo necesitan.
+- **Regla candidata:** Una voz generada por IA se valida re-transcribiendola con Whisper y comparando con el guion (matchRate), y se escribe como suena toda palabra en otro idioma (candidata: falta una segunda pieza)
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -207,3 +216,4 @@ Relación con otras skills:
 | La autoevaluación infla ~10 puntos: manda la puntuación independiente | huashu-art-motion | candidata |
 | Una sincronía alta entre sonido y imagen con música densa no demuestra nada: compararla siempre con el azar (`sync_audit.py`) | earshot | candidata (verificada solo con audio sintético) |
 | Antes de renderizar una pieza por codigo, validar el plan en tabla con storyboard_lint.py: un defecto visto en el plan cuesta un segundo, no 4-20 minutos (candidata: falta una pieza real) | caso-fuentes-motion-01 | candidata |
+| Una voz generada por IA se valida re-transcribiendola con Whisper y comparando con el guion (matchRate), y se escribe como suena toda palabra en otro idioma (candidata: falta una segunda pieza) | caso-fuentes-motion-01 | candidata |

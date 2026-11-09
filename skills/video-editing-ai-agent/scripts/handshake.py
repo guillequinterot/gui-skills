@@ -137,7 +137,7 @@ def main():
     }
     rec = "shotcut" if engines["shotcut_mcp"]["status"] == "ready" else ("ffmpeg" if ff.get("found") else "none")
     result = {
-        "skill_version": "1.5.0",
+        "skill_version": "1.5.1",
         "generated": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
         "os": sys.platform,
         "python": sys.version.split()[0],
@@ -151,9 +151,13 @@ def main():
             "pymupdf": has_module("fitz"),
             "nota": "Sub-skill video-aprender: aprender de un link/archivo (clase, reunion, referencia); varios links -> aprender_lote.py; --glosario <dominio> (hotwords + correcciones); muestreo de fotogramas automatico si la pantalla no tiene estados estables. Instagram publico sin cookies. Sin PyMuPDF no se pueden leer PDF de diapositivas (--slides)."},
         "production": {
-            "scripts": {n: os.path.exists(os.path.join(scripts_dir, n)) for n in ("beat_grid.py", "motion_energy.py", "cut_dip.py", "self_eval.py", "carve_music.py", "hf_captions.py", "save_approved.py", "storyboard_lint.py", "frame_compare.py", "sync_audit.py", "align_script.py")},
+            "scripts": {n: os.path.exists(os.path.join(scripts_dir, n)) for n in ("beat_grid.py", "motion_energy.py", "cut_dip.py", "self_eval.py", "carve_music.py", "hf_captions.py", "save_approved.py", "storyboard_lint.py", "frame_compare.py", "sync_audit.py", "align_script.py", "glitch_scan.py", "voz_local.py")},
             "preflight": os.path.exists(os.path.join(os.path.dirname(scripts_dir), "references", "errores-conocidos-y-aciertos.md")),
             "approved_videos": approved,
+            "voz_local": {"kokoro_dir": os.environ.get("VEA_KOKORO_DIR") or os.path.join(os.path.expanduser("~"), ".gui-skills", "kokoro"),
+                          "modelo": os.path.exists(os.path.join(os.environ.get("VEA_KOKORO_DIR") or os.path.join(os.path.expanduser("~"), ".gui-skills", "kokoro"), "models", "kokoro-v1.0.onnx")),
+                          "python_kokoro": os.path.exists(os.path.join(os.environ.get("VEA_KOKORO_DIR") or os.path.join(os.path.expanduser("~"), ".gui-skills", "kokoro"), "venv", "Scripts", "python.exe")),
+                          "nota": "Voz local gratis (Kokoro, kokoro-onnx MIT): ~/.gui-skills/kokoro/venv/Scripts/python scripts/voz_local.py guion.txt -o salida --align. Para borradores y tiempos; la voz de marca la decide una persona que escucha."},
             "nota": "Antes de una pieza nueva: leer references/errores-conocidos-y-aciertos.md y correr `python scripts/save_approved.py suggest --route R --format F`. Al cerrar una pieza APROBADA: `save_approved.py add` con la cita del usuario."},
         "fonts": fonts,
         "future_engines": {k: "not_configured" for k in ["capcut", "canva", "premiere_pro", "after_effects"]},

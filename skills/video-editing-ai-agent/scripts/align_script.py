@@ -11,7 +11,8 @@ Sintaxis del guion (texto plano o .md):
   [pause 0.6]        pausa (solo se anota; no se alinea)
   {mostrado|hablado} lo que se ve en pantalla es distinto de lo que se dice: {20|veinte}, {API|a pe i}, {SQL|sécuel}
   > nota             línea ignorada
-  Los números, símbolos y URL se escriben en su forma HABLADA (o con {mostrado|hablado}); no hay normalización de cifras en español.
+  Las cifras enteras (0 a 999 999, con o sin puntos de miles, y con «%») se leen solas en español, tanto en el guion como en lo que oyó Whisper
+  («35» = treinta y cinco). Decimales, fechas, siglas y URL se escriben en su forma HABLADA o con {mostrado|hablado}.
 
 Uso:
   python align_script.py guion.txt words.json [--key clip.mp4] [-o guion-words.json] [--srt guion.srt]
@@ -41,6 +42,43 @@ def fold(w):
     w = unicodedata.normalize("NFD", w.lower())
     w = "".join(c for c in w if unicodedata.category(c) != "Mn")
     return re.sub(r"[^\w]", "", w, flags=re.U)
+
+
+_U = ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince",
+      "dieciseis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno", "veintidos", "veintitres", "veinticuatro", "veinticinco",
+      "veintiseis", "veintisiete", "veintiocho", "veintinueve"]
+_D = {3: "treinta", 4: "cuarenta", 5: "cincuenta", 6: "sesenta", 7: "setenta", 8: "ochenta", 9: "noventa"}
+_C = ["", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos"]
+
+
+def num_es(n):
+    """Palabras (sin tildes, como las compara `fold`) de un entero 0..999999 en español: 35 -> [treinta, y, cinco]; 2026 -> [dos, mil, veintiseis]."""
+    if n < 30:
+        return [_U[n]]
+    if n < 100:
+        d, u = divmod(n, 10)
+        return [_D[d]] + (["y", _U[u]] if u else [])
+    if n == 100:
+        return ["cien"]
+    if n < 1000:
+        c, r = divmod(n, 100)
+        return [_C[c]] + (num_es(r) if r else [])
+    m, r = divmod(n, 1000)
+    head = ["mil"] if m == 1 else num_es(m) + ["mil"]
+    return head + (num_es(r) if r else [])
+
+
+def expand_digits(raw):
+    """«35», «1.000», «5%» -> lista de palabras habladas en español; None si no es una cifra entera que sepamos leer (decimales, fechas...)."""
+    t = raw.strip().strip(".,;:!?¿¡()\"'")
+    pct = t.endswith("%")
+    t = t.rstrip("%")
+    if re.fullmatch(r"\d{1,3}([.,]\d{3})+", t):
+        t = re.sub(r"[.,]", "", t)
+    if not re.fullmatch(r"\d{1,6}", t):
+        return None
+    out = num_es(int(t))
+    return out + (["por", "ciento"] if pct else [])
 
 
 def lev(a, b):
@@ -86,8 +124,11 @@ def parse_script(text):
                 if sp:
                     toks.append({"shown": m.group(3).strip(), "spoken": sp, "marks": pending}); pending = []
             else:
+                ex = expand_digits(m.group(5))
                 f = fold(m.group(5))
-                if f:
+                if ex:
+                    toks.append({"shown": m.group(5), "spoken": ex, "marks": pending}); pending = []
+                elif f:
                     toks.append({"shown": m.group(5), "spoken": [f], "marks": pending}); pending = []
     return toks, pauses, pending
 
@@ -137,10 +178,19 @@ def build(script_text, heard_words):
     for ti, t in enumerate(toks):
         for w in t["spoken"]:
             spoken.append(w); owner.append(ti)
-    heard = [fold(h["w"]) for h in heard_words]
-    keep = [k for k, h in enumerate(heard) if h]
-    hw = [heard[k] for k in keep]
-    ref = [heard_words[k] for k in keep]
+    hw, ref = [], []
+    for h in heard_words:
+        ex = expand_digits(h["w"])
+        if ex and len(ex) > 1:                    # «35» -> treinta y cinco: reparte el tiempo por longitud
+            tot = sum(len(x) for x in ex)
+            cur = h["s"]
+            for x in ex:
+                d = (h["e"] - h["s"]) * len(x) / tot
+                hw.append(x); ref.append({"s": cur, "e": cur + d, "w": x}); cur += d
+        else:
+            f = ex[0] if ex else fold(h["w"])
+            if f:
+                hw.append(f); ref.append(h)
     pairs = align(spoken, hw)
     s_t, e_t, ok = [None] * len(spoken), [None] * len(spoken), [False] * len(spoken)
     for k, p in enumerate(pairs):

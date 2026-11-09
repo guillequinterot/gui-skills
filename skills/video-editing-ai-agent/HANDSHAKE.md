@@ -8,8 +8,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.5.0 (`scripts/handshake.py` → `skill_version`) |
-| Última actualización | 2026-11-08 por guille (v1.5: ideas de 13 fuentes de motion graphics; sesión de Claude) |
+| Versión | 1.5.1 (`scripts/handshake.py` → `skill_version`) |
+| Última actualización | 2026-11-09 por guille (v1.5.1: Kokoro instalado, glitch_scan, biblioteca CC0; sesión de Claude) |
 | Skill principal / padre | ninguna (es la skill única de video) |
 | Llama a | `rea-reverse-engineer` (por porción, para entender una web/app de referencia); `video-aprender` (sub-skill: aprender de un link/archivo) |
 | La llaman | `video-aprender` (usa sus scripts); `direct-visual-design` y `seo-content-system` cuando el entregable es video |
@@ -30,9 +30,12 @@ corre en CPU). Para tu máquina: `python scripts/handshake.py --project <carpeta
 | Silero VAD (dentro de faster-whisper) | verificado | 2026-10-15 | `scripts/vad_segments.py`; valida cruzado la transcripción |
 | `yt-dlp` 2026.08.19 | parcial | 2026-10-16 | YouTube e Instagram **público** OK sin cookies; **cookies, TikTok, videos > 1 h: sin probar**. Requiere autorización personal de cada usuario (ver HANDOFF §2) |
 | PyMuPDF 1.27 | verificado | 2026-10-15 | Solo para `--slides` (PDF de diapositivas) |
-| `selftest.py` | verificado | 2026-11-08 | v1.5: 40/40 en el PC del mantenedor (35 anteriores + 5 nuevos con material sintético); la copia del repo y las junctions de `~/.claude/skills` y `~/.codex/skills` apuntan a la misma carpeta |
-| `storyboard_lint.py`, `frame_compare.py`, `sync_audit.py`, `align_script.py` | verificado **solo con material sintético** | 2026-11-08 | Plan malo/sano, clon 0.2 s tarde, golpes de ruido con un cue a +30 ms, guion con cifra y mal oído. **Sin probar con material real**, con música densa ni con video natural; umbrales de las fuentes sin calibrar |
-| Kokoro, earshot, reanimate, argo, huashu-motion y demás herramientas de las 13 fuentes | **no instaladas** | 2026-11-08 | Solo lectura. Requieren aprobación explícita de Guille (Kokoro ~400 MB; earshot ~1.1 GB opcionales; reanimate y argo no corren en Windows tal cual) |
+| `selftest.py` | verificado | 2026-11-09 | v1.5.1: 43/43 en el PC del mantenedor y 44/44 con `--voz` (Kokoro real); la copia del repo y las junctions de `~/.claude/skills` y `~/.codex/skills` apuntan a la misma carpeta |
+| `storyboard_lint.py`, `frame_compare.py`, `sync_audit.py`, `align_script.py`, `glitch_scan.py` | verificado **solo con material sintético** | 2026-11-08 | Plan malo/sano, clon 0.2 s tarde, golpes de ruido con un cue a +30 ms, guion con cifra y mal oído. **Sin probar con material real**, con música densa ni con video natural; umbrales de las fuentes sin calibrar |
+| **Kokoro** (`kokoro-onnx` 0.6.1, MIT; modelo `kokoro-v1.0.onnx` + `voices-v1.0.bin`) | **instalado y verificado** | 2026-11-09 | Entorno `~/.gui-skills/kokoro` (fuera del repo, 336 MB de modelos). `scripts/voz_local.py`: ~1× el tiempo del audio en CPU; `matchRate` de Whisper 0.94–0.96 sobre la propia voz. **No se oyó**; licencia del modelo (Apache-2.0 según su tarjeta) **no confirmada aquí** |
+| `voz_local.py` | verificado (voz real + selftest `--voz`) | 2026-11-09 | Solo se probó con frases cortas en español (`em_alex`, `ef_dora`); sin comparar con ElevenLabs |
+| HyperFrames `render --format mov` (ProRes 4444 con alfa) | **verificado** | 2026-11-09 | `yuva444p12le`, alfa 0 en la esquina; 240 fps + `tmix` funciona (efecto visual de motion blur **sin verificar**) |
+| earshot, reanimate, argo, huashu-motion y demás herramientas de las fuentes | **no instaladas** | 2026-11-09 | earshot: lo útil ya está reimplementado sin modelos; reanimate y argo no corren en Windows tal cual |
 | CapCut / Canva / Premiere Pro / After Effects | sin probar | — | Stubs `not_configured` (`references/engines-future.md`); no prometer capacidades |
 | macOS / Linux | sin probar | — | Nada de la skill se ha ejecutado fuera de Windows; las rutas de `handshake.py` y el instalador `.ps1` son de Windows |
 
@@ -48,9 +51,9 @@ corre en CPU). Para tu máquina: `python scripts/handshake.py --project <carpeta
 ## Pendientes abiertos
 
 - [ ] **v1.5, probar con una pieza real** `storyboard_lint.py`, `sync_audit.py`, `frame_compare.py` y `align_script.py` y **calibrar los umbrales** con material de Guille; añadir lo aprendido al HANDOFF.
-- [ ] **v1.5, decisiones de Guille:** ¿instalar Kokoro (voz local) o earshot?; resolver los conflictos de `references/motion-recetas-y-camara.md` §9 (movimiento ocioso, deriva de cámara) con una pieza; ¿copiar la biblioteca CC0 de SFX de Barty-Bart (con atribución) a la skill?
-- [ ] **v1.5:** el **hilo de Reddit** no se pudo leer (bloqueado): si Guille pega el texto, revisarlo y añadir sus hallazgos; leer a fondo `lemomo-ai/lemo-opuscar` y `Vincentwei1021/mg-styles-15` (MIT, los cita awesomeclaude.ai).
-- [ ] **v1.5:** script de **pops/flashes** sobre el MP4 (hoy solo se describe en `references/visual-qa.md`); probar en HyperFrames el motion blur por subfotogramas y los overlays con alfa (`references/engine-hyperframes.md`, sección final).
+- [ ] **v1.5.1, decisiones de Guille:** resolver los conflictos de `references/motion-recetas-y-camara.md` §9 (movimiento ocioso, deriva de cámara) con una pieza; **escuchar una muestra de Kokoro** (`voz_local.py`, voces `ef_dora`/`em_alex`/`em_santa`) y decidir para qué piezas sirve; confirmar la licencia del modelo Kokoro.
+- [ ] **v1.5:** el **hilo de Reddit** no se pudo leer (bloqueado): si Guille pega el texto, revisarlo y añadir sus hallazgos; leer `mexicat/pdoom-video` y `JohnHeibel/ClaudeAnimationBase` (MIT).
+- [ ] **v1.5.1:** probar en HyperFrames el efecto visual del motion blur por 240 fps + `tmix` (el flujo técnico ya funciona) y los criterios de `glitch_scan.py` con material real.
 
 - [ ] Carve (`carve_music.py`) frente a EQ estático y regla «No sidechain» — necesita una pieza con voz en off y escuchar 3 versiones.
 - [ ] Subtítulos con `hf_captions.py` **renderizados** en HyperFrames (la agrupación está probada; el render no).

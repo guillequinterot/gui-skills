@@ -5,7 +5,7 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.5 (sigue la versión de los scripts de `video-editing-ai-agent` 1.5.0) |
+| Versión | 1.5.1 (sigue la versión de los scripts de `video-editing-ai-agent` 1.5.1) |
 | Última actualización | 2026-11-08 por guille (v1.5: modo estilo para recrear un movimiento; sesión de Claude) |
 | Skill principal / padre | `video-editing-ai-agent` (sus scripts viven en `../video-editing-ai-agent/scripts/`) |
 | Llama a | `video-editing-ai-agent` (scripts, plantillas `assets/*-template.md`, glosarios `assets/glosarios/`) |
