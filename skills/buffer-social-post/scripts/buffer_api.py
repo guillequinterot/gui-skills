@@ -137,6 +137,8 @@ def metadatos_desde_args(a, servicio):
         meta["instagram"] = {"type": tipo, "shouldShareToFeed": True}
         if a.primer_comentario:
             meta["instagram"]["firstComment"] = a.primer_comentario
+        if a.ia:
+            meta["instagram"]["isAiGenerated"] = True
     elif servicio == "youtube":
         if not a.video:
             sal({"error": "YOUTUBE_SIN_VIDEO", "ayuda": "YouTube exige --video (URL pública del MP4)."}, 2)
@@ -147,11 +149,33 @@ def metadatos_desde_args(a, servicio):
         if a.primer_comentario or a.ig_tipo:
             sal({"error": "METADATO_NO_SOPORTADO", "ayuda": "--primer-comentario y --ig-tipo no aplican a YouTube."}, 2)
         meta["youtube"] = {"title": a.yt_titulo, "categoryId": a.yt_categoria, "privacy": a.yt_privacidad, "license": "youtube",
-                           "embeddable": True, "madeForKids": False, "notifySubscribers": True, "isAiGenerated": bool(a.yt_ia)}
+                           "embeddable": True, "madeForKids": False, "notifySubscribers": True, "isAiGenerated": bool(a.yt_ia or a.ia)}
+    elif servicio == "facebook":
+        # Verificado en vivo el 2026-11-08: un video a Facebook exige metadata.facebook.type = reel. Para texto o imagen no se envía
+        # metadata salvo que se pida --fb-tipo (publicación de texto/imagen en Facebook: sin probar con este cliente).
+        tipo = a.fb_tipo or ("reel" if a.video else None)
+        if tipo:
+            meta["facebook"] = {"type": tipo}
+        if a.primer_comentario:
+            meta.setdefault("facebook", {})
+            if "type" not in meta["facebook"]:
+                sal({"error": "FACEBOOK_SIN_TIPO", "ayuda": "--primer-comentario en Facebook exige --fb-tipo (post, reel o story)."}, 2)
+            meta["facebook"]["firstComment"] = a.primer_comentario
+        if a.ig_tipo:
+            sal({"error": "METADATO_NO_SOPORTADO", "ayuda": "--ig-tipo solo aplica a Instagram."}, 2)
+    elif servicio == "tiktok":
+        if a.primer_comentario or a.ig_tipo:
+            sal({"error": "METADATO_NO_SOPORTADO", "ayuda": "--primer-comentario y --ig-tipo no aplican a TikTok."}, 2)
+        if a.ia or a.tt_titulo:
+            meta["tiktok"] = {}
+            if a.ia:
+                meta["tiktok"]["isAiGenerated"] = True
+            if a.tt_titulo:
+                meta["tiktok"]["title"] = a.tt_titulo
     elif servicio == "linkedin" and a.primer_comentario:
         meta["linkedin"] = {"firstComment": a.primer_comentario}
     elif a.primer_comentario or a.ig_tipo:
-        sal({"error": "METADATO_NO_SOPORTADO", "ayuda": "--primer-comentario: linkedin o instagram; --ig-tipo: instagram. Pasa --servicio."}, 2)
+        sal({"error": "METADATO_NO_SOPORTADO", "ayuda": "--primer-comentario: linkedin, facebook o instagram; --ig-tipo: instagram. Pasa --servicio."}, 2)
     return meta
 
 
@@ -169,6 +193,13 @@ def cmd_canales(a, clave):
         revisar_errores(c)
         salida.append({"organizacion": o, "canales": c["data"]["channels"]})
     sal({"organizaciones": salida, "limites": h})
+
+
+def cmd_limites(a, clave):
+    """Límites reales del plan (verificado el 2026-11-08: la cuenta de pago leída tenía 5.000 posts programados y 4 canales; el tope de 10 es del plan gratuito)."""
+    d, h = llamar(clave, "query { account { organizations { id name channelCount limits { channels scheduledPosts scheduledStoriesPerChannel } } } }")
+    revisar_errores(d)
+    sal({"organizaciones": d["data"]["account"]["organizations"], "limites": h})
 
 
 def cmd_listar(a, clave):
@@ -288,6 +319,7 @@ def main():
     p.add_argument("--simular", action="store_true")
     s = p.add_subparsers(dest="cmd", required=True)
     s.add_parser("canales")
+    s.add_parser("limites", help="Plan: canales y posts programados permitidos por la organización (1-2 solicitudes)")
     l = s.add_parser("listar"); l.add_argument("--org", required=True); l.add_argument("--canal"); l.add_argument("--estado"); l.add_argument("-n", type=int, default=5)
     for nombre in ("borrador", "programar", "cola", "ahora"):
         c = s.add_parser(nombre)
@@ -296,7 +328,10 @@ def main():
         c.add_argument("--imagen", action="append"); c.add_argument("--documento"); c.add_argument("--miniatura"); c.add_argument("--titulo"); c.add_argument("--video")
         c.add_argument("--cuando"); c.add_argument("--confirmo", action="store_true")
         c.add_argument("--ig-tipo", choices=TIPOS_INSTAGRAM, help="Instagram: post (por defecto; varias imágenes = carrusel), reel o story")
-        c.add_argument("--primer-comentario", help="LinkedIn o Instagram")
+        c.add_argument("--primer-comentario", help="LinkedIn, Facebook (con --fb-tipo) o Instagram")
+        c.add_argument("--fb-tipo", choices=("post", "reel", "story"), help="Facebook: tipo de publicación (con --video se usa reel por defecto; Facebook lo exige para video)")
+        c.add_argument("--ia", action="store_true", help="Marca el contenido como hecho o alterado con IA (voz sintética…) en Instagram, TikTok y YouTube")
+        c.add_argument("--tt-titulo", help="TikTok: título (opcional; el texto del post ya es la descripción)")
         c.add_argument("--yt-titulo", help="YouTube: título (máx. 100); el texto del post es la descripción. OJO: Buffer solo publica YouTube Shorts (≤ 3 min, 9:16 o 1:1); un video horizontal largo se rechaza")
         c.add_argument("--yt-privacidad", choices=("private", "unlisted", "public"), default="private", help="YouTube: por defecto private (seguro)")
         c.add_argument("--yt-categoria", default="27", help="YouTube: categoryId (27 = Educación)")
@@ -316,7 +351,7 @@ def main():
     if a.cmd == "limpiar" and a.simular:
         return cmd_limpiar(a, None)
     clave = cargar_clave(a.key_file)
-    {"canales": cmd_canales, "listar": cmd_listar, "eliminar": cmd_eliminar, "limpiar": cmd_limpiar}[a.cmd](a, clave)
+    {"canales": cmd_canales, "limites": cmd_limites, "listar": cmd_listar, "eliminar": cmd_eliminar, "limpiar": cmd_limpiar}[a.cmd](a, clave)
 
 
 if __name__ == "__main__":

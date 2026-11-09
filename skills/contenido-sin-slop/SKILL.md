@@ -96,6 +96,8 @@ siempre se corrigen), **síntomas con fuente** (patrones descritos en la guía d
 **síntomas candidatos** (observaciones aún sin fuente, sobre todo en español). Tabla de síntomas → causa → arreglo
 en [`references/02-sintomas-de-texto.md`](references/02-sintomas-de-texto.md). Para revisar un contenido párrafo por párrafo, ver «Semáforo por párrafo» más abajo (`--semaforo`).
 
+**Enlaces propios con `utm_*` puestos a propósito** (para medir una campaña en analítica) son un **falso positivo** del detector: se corre con `--ignorar utm` y se anota en el registro del trabajo. Los `utm_*` en fuentes citadas o en enlaces de terceros siguen siendo un resto objetivo y se limpian.
+
 ### 5. Decisión y registro
 
 - **Publicar** si pasa 1 a 3 y no quedan restos objetivos.

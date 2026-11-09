@@ -73,6 +73,14 @@ publicación automática. Es transversal: la llaman `seo-content-system`, `direc
 - **Regla candidata:** En piezas que describen un proceso de la propia marca, escribir solo lo que el dueno confirmo por escrito y dejar como pregunta para el lector lo que falte; no rellenar con suposiciones plausibles.
 - **Herramientas:** no indicadas
 
+### 2026-11-08 · caso-migracion-01 · guille
+
+- **Qué se hizo:** Se documentó que los enlaces propios con utm_* puestos a propósito para medir una campaña son un falso positivo del detector y se corren con --ignorar utm; los utm de fuentes citadas siguen siendo un resto objetivo.
+- **Salió bien:** Con --ignorar utm el texto de red social pasa sin hallazgos y la limpieza de utm en terceros se conserva.
+- **Salió mal / incidencia:** nada relevante
+- **Regla candidata:** ninguna
+- **Herramientas:** slop_lint.py --ignorar utm
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)

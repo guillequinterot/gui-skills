@@ -5,8 +5,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 0.1.0 (publicada en GitHub el 2026-10-28, PR #24; probada con una cuenta real) |
-| Última actualización | 2026-10-28 por guille |
+| Versión | 0.2.0 (0.1.0 publicada el 2026-10-28, PR #24; 0.2.0 el 2026-11-08: video en cuatro canales, Facebook y TikTok, marca de IA, comando `limites`) |
+| Última actualización | 2026-11-08 por guille |
 | Skill principal / padre | ninguna (herramienta de publicación) |
 | Llama a | ninguna (cliente propio sin dependencias) |
 | La llaman | `seo-content-system` y `video-editing-ai-agent` (cuando preparan el post de redes de un artículo o un video); y cualquier flujo de blog |
@@ -25,8 +25,12 @@
 | `--primer-comentario` (LinkedIn/Instagram) y `--ig-tipo` | implementados, **sin publicar** | 2026-10-28 | Verificados solo en simulación (pruebas sin red); falta una publicación real con primer comentario |
 | `buffer_api.py limpiar` (borrar medios del hosting tras `sent`) | **verificado** | 2026-10-28 | Prueba en vivo con una carpeta de prueba: con un post en borrador **se niega** (`NO_ENVIADO`, la carpeta sigue); con un post `sent` **borra** y la URL da 404. Solo borra `assets/social/<slug>/`; el slug se valida. Antes se había limpiado a mano `assets/social/` (5 archivos, ≈ 900 KB). Regla del dueño |
 | Comprobación de URL pública (HEAD) | verificado | 2026-10-28 | 200, `image/jpeg`, sin redirección, también con un User-Agent de robot |
+| **Video vertical** (`ahora`, 1080×1920, ≈ 40 s) en **YouTube Short, TikTok, Instagram reel y Facebook reel** | **verificado** | 2026-11-08 | Publicado a pedido del dueño con la misma voz y música del artículo; los cuatro `sent` en < 1 min. Cada red con su texto. URL pública del MP4 en la biblioteca de medios del CMS, borrada tras `sent` (404 comprobado). YouTube salió en `public` porque se pidió; el valor por defecto sigue siendo `private` |
+| `--fb-tipo` y `type: reel` de Facebook | **verificado** con video | 2026-11-08 | Facebook exige `metadata.facebook.type`; con `--video` el cliente lo envía solo. Publicación de **texto o imagen** en Facebook con este cliente: sin probar (sin `--fb-tipo` no se envía metadata) |
+| `--ia` (marca de IA) en Instagram, TikTok y YouTube | **verificado** con video | 2026-11-08 | Mapea a `isAiGenerated`; en TikTok se envía `metadata.tiktok.isAiGenerated` (y `title` opcional con `--tt-titulo`) |
+| `buffer_api.py limites` | **verificado** | 2026-11-08 | Lee `organization.limits` (canales y posts programados permitidos); 1 solicitud. La cuenta de pago probada: 5.000 posts programados, 4 canales; el tope de 10 es del plan gratuito |
 | `programar`, `cola` | **sin probar** | — | Documentados; solo con orden explícita del dueño |
-| Video, documento (PDF) | **video horizontal en YouTube: falla** · documento sin probar | 2026-10-28 | YouTube por Buffer admite solo Shorts (≤ 3 min, 9:16 o 1:1) y no acepta miniatura propia (ver `references/02`); video para LinkedIn/Instagram y PDF sin probar |
+| Video horizontal en YouTube, documento (PDF) | **video horizontal en YouTube: falla** (solo Shorts) · documento sin probar | 2026-10-28 | YouTube por Buffer admite solo Shorts (≤ 3 min, 9:16 o 1:1) y no acepta miniatura propia (ver `references/02`); video para LinkedIn/Instagram y PDF sin probar |
 | Metadatos de YouTube y `annotations`/`linkAttachment` de LinkedIn | **tipos confirmados, sin implementar** | 2026-10-28 | Por introspección: LinkedIn `annotations`, `linkAttachment`; YouTube `title`, `privacy` (`private`/`public`/`unlisted`), `categoryId`… |
 | Explorador web (`developers.buffer.com/explorer.html`) | **no usado** | 2026-10-28 | Pide teclear la clave en un formulario de la página; no se hace. El mismo esquema se obtiene por introspección con `buffer_api.py`/consulta directa |
 | Cuota | observado | 2026-10-28 | Cuenta con 3.000 solicitudes cada 30 días; las pruebas gastaron ~13 |
