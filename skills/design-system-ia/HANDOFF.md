@@ -65,6 +65,14 @@ Nace de analizar el sistema de código abierto **Helix** (MIT, de Marta Conde) y
 - **Regla candidata:** La entrega de documentacion de un sistema es una carpeta con logo del cliente y capa para IA (sistema.json, llms.txt, AGENTS.md), no solo una pagina
 - **Herramientas:** Claude Code, Python 3, Edge headless, navegador integrado
 
+### 2026-11-12 · caso-ds-02 · guille
+
+- **Qué se hizo:** Segundo caso real, perfil website + gobierno individual (Astro 5, CSS nativo, ES/EN). Se definió el sistema desde el código existente: AGENTS.md, sistema.md, tokens.md (117 tokens generados desde tokens.css), 13 contratos mínimos, vocabulario propuesto, checklist, llms.txt y 3 scripts de verificación (generar tokens, valores crudos, orquestador). Se copió la skill dentro del proyecto para que otra IA en otra PC la instale.
+- **Salió bien:** Contrato mínimo de 7 campos funcionó para website. Los scripts detectaron lo que la revisión a mano no: nombres de clase inventados en 3 contratos y 5 props desviadas del vocabulario (10 usos). Derivar de los .astro reales (código como fuente de verdad) evitó inventar. Contraste de 11 pares y 13 contratos verificados con scripts.
+- **Salió mal / incidencia:** Contratos redactados primero de memoria contenían nombres de clase inexistentes (corregidos tras el script). Cifras de uso del vocabulario salieron mal la primera vez. El checker no compara props de contratos con el código; contraste sobre fotos y estados en navegador no se verificaron. La biblioteca de módulos no se generó (pendiente de decisión del usuario). Incidencia: valores crudos legítimos (máscara #000, 0.01ms de reduced-motion, página-puente) hay que explicarlos en el informe porque el revisor los marca como errores
+- **Regla candidata:** En website con código existente: generar tokens.md con script y validar nombres de clase de cada contrato contra el CSS real antes de darlo por escrito.
+- **Herramientas:** validar_contrato.py, contraste.py, vocabulario_check.py, scripts propios del caso
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -72,3 +80,4 @@ Nace de analizar el sistema de código abierto **Helix** (MIT, de Marta Conde) y
 | Regla | Visto en (casos) | Estado |
 |---|---|---|
 | La entrega de documentacion de un sistema es una carpeta con logo del cliente y capa para IA (sistema.json, llms.txt, AGENTS.md), no solo una pagina | caso-ds-01 | candidata |
+| En website con código existente: generar tokens.md con script y validar nombres de clase de cada contrato contra el CSS real antes de darlo por escrito. | caso-ds-02 | candidata |

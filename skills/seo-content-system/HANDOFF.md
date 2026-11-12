@@ -238,6 +238,14 @@ Relación con otras skills del repo:
 - **Regla candidata:** En cada auditoría de schema, contar los scripts JSON-LD del HTML servido y no solo validar cada uno por separado.
 - **Herramientas:** check_schema_single_block.py, assets/blog-kit, build_hosted.py
 
+### 2026-11-12 · caso-ds-02 · guille
+
+- **Qué se hizo:** Se copió la skill (sin investigación ni cachés) dentro del proyecto de un sitio web ya publicado y se creó un agente seo que la usa; no se ejecutó investigación SEO nueva en esta tarea.
+- **Salió bien:** Empaquetado portable: la skill viaja con el proyecto y un LEEME explica qué partes del protocolo no aplican en una PC sin el repo.
+- **Salió mal / incidencia:** nada relevante
+- **Regla candidata:** ninguna
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
