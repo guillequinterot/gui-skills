@@ -196,6 +196,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Ninguna
 - **Herramientas:** Python con Pillow (supermuestreo 2x), Montserrat estática, lectura visual de la imagen
 
+### 2026-11-14 · caso-presupuesto-01 · guille
+
+- **Qué se hizo:** Presupuesto comercial por fases (sitio web, SEO y redes) como PDF A4 de 3 páginas, diseñado en HTML con la identidad del sitio de Guille (Poppins, tinta casi negra, acento lima solo en barras e insignias) y exportado con Chrome. Estructura: datos y validez, resumen de fases con plazo/pago/valor, detalle por fase, calendario de 6 meses, forma de pago, notas y cómo aceptar.
+- **Salió bien:** Aprobado por el usuario a la primera revisión. Se midió que no hubiera desbordes por página (alto del contenido vs. pie), se comprobó que las cifras y fechas estuvieran en el texto del PDF y que solo se incrustara la fuente de marca. Mover el calendario a la página 2 equilibró las páginas.
+- **Salió mal / incidencia:** El primer render dejó la página 1 pisando el pie (hubo que acortar subtítulos y márgenes) y el símbolo ≈ cayó a una fuente de reserva (se reemplazó por texto). Los supuestos de alcance (plazos, inglés aparte, aceptación) se dieron por escrito para aprobarlos antes de enviar.
+- **Regla candidata:** En documentos comerciales: medir el desborde de cada página por código antes de exportar y evitar símbolos fuera del subconjunto latino de la fuente de marca. Candidata: falta un segundo caso.
+- **Herramientas:** HTML+CSS, Playwright con Chrome, PyMuPDF para verificar fuentes y texto
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -218,6 +226,7 @@ Contenido de la carpeta:
 | Al acomodar un Figma existente al método, comprobar también el ancho de los rellenos full-bleed (imagen y overlay): deben ir a 1920 aunque el contenido respete el padding de 240. Un solo caso: sigue como candidata. | caso-web-hotel-01 | candidata |
 | En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso. | caso-web-hotel-01 | candidata |
 | Ninguna | caso-migracion-01 | candidata |
+| En documentos comerciales: medir el desborde de cada página por código antes de exportar y evitar símbolos fuera del subconjunto latino de la fuente de marca. Candidata: falta un segundo caso. | caso-presupuesto-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
