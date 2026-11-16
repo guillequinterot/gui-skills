@@ -193,6 +193,14 @@ Relación con otras skills:
 - **Regla candidata:** Una voz generada por IA se valida re-transcribiendola con Whisper y comparando con el guion (matchRate), y se escribe como suena toda palabra en otro idioma (candidata: falta una segunda pieza)
 - **Herramientas:** no indicadas
 
+### 2026-11-16 · caso-video-ads-01 · julian
+
+- **Qué se hizo:** Adaptación de un anuncio de 16:9 a 9:16 con pantalla dividida (animación arriba, doctor abajo), subtítulos palabra por palabra con Whisper medium.en, zócalo en caja con barra de acento y render en ffmpeg/libass con un script reproducible
+- **Salió bien:** Los subtítulos viejos quemados se resolvieron con recortes que los dejan fuera (sin cajas); delogo más un desenfoque con máscara de bordes suaves solo donde no había recorte posible; detección de parpadeos de 1 fotograma por diferencia entre fotogramas; saltar 1 fotograma en cada corte de la fuente sin perder la sincronía
+- **Salió mal / incidencia:** Se diseñó antes de tener la referencia: dos rondas perdidas (banda navy y stock con otros médicos). Sin máster limpio hay tramos sin sincronía labial. En Python, las etiquetas ASS en cadenas no crudas (\b, \f, \a) rompían el zócalo en silencio Incidencia: drawtext se cae sin fontconfig; boxblur exige un radio de croma menor que la mitad del plano de croma; faster-whisper decode_audio falla con av: pasar un array numpy
+- **Regla candidata:** Pedir la referencia visual antes del primer render. Cuando un cliente diga que solo aparece su médico, revisar todo el stock y no solo los planos con cara. Al recortar segmentos en los cortes de la fuente, saltar 1 fotograma en la entrada y en la salida
+- **Herramientas:** ffmpeg 9.0.2 (libass), faster-whisper medium.en, fontTools, PIL, qa-video
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -217,3 +225,4 @@ Relación con otras skills:
 | Una sincronía alta entre sonido y imagen con música densa no demuestra nada: compararla siempre con el azar (`sync_audit.py`) | earshot | candidata (verificada solo con audio sintético) |
 | Antes de renderizar una pieza por codigo, validar el plan en tabla con storyboard_lint.py: un defecto visto en el plan cuesta un segundo, no 4-20 minutos (candidata: falta una pieza real) | caso-fuentes-motion-01 | candidata |
 | Una voz generada por IA se valida re-transcribiendola con Whisper y comparando con el guion (matchRate), y se escribe como suena toda palabra en otro idioma (candidata: falta una segunda pieza) | caso-fuentes-motion-01 | candidata |
+| Pedir la referencia visual antes del primer render. Cuando un cliente diga que solo aparece su médico, revisar todo el stock y no solo los planos con cara. Al recortar segmentos en los cortes de la fuente, saltar 1 fotograma en la entrada y en la salida | caso-video-ads-01 | candidata |
