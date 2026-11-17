@@ -204,6 +204,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En documentos comerciales: medir el desborde de cada página por código antes de exportar y evitar símbolos fuera del subconjunto latino de la fuente de marca. Candidata: falta un segundo caso.
 - **Herramientas:** HTML+CSS, Playwright con Chrome, PyMuPDF para verificar fuentes y texto
 
+### 2026-11-17 · caso-web-salud-02 · julian
+
+- **Qué se hizo:** Home de rediseno cerrado en HTML con paleta definitiva, pesos h3/h4 unificados en 500, icono de desplegar en degradado, lineas de tiempo unificadas y bandas que montan; pasado despues a Figma por subagente con el HTML como fuente; decisiones comunes llevadas a una hoja estandar de la libreria (caso-web-salud-03)
+- **Salió bien:** Una regla unica de peso reemplazo los ajustes repetidos por componente; el sincronizador aplico el Home completo sin tocar libreria ni variables
+- **Salió mal / incidencia:** Figma no superpone secciones (bandas imitadas con marcos de fondo), corta lineas distinto que el navegador y no procesa WebP; la variable del azul nuevo queda pendiente
+- **Regla candidata:** Cuando una correccion de estilo se repite en varios componentes, buscar la regla de la libreria que la origina y resolverla una vez a nivel de pagina o libreria
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -227,6 +235,7 @@ Contenido de la carpeta:
 | En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso. | caso-web-hotel-01 | candidata |
 | Ninguna | caso-migracion-01 | candidata |
 | En documentos comerciales: medir el desborde de cada página por código antes de exportar y evitar símbolos fuera del subconjunto latino de la fuente de marca. Candidata: falta un segundo caso. | caso-presupuesto-01 | candidata |
+| Cuando una correccion de estilo se repite en varios componentes, buscar la regla de la libreria que la origina y resolverla una vez a nivel de pagina o libreria | caso-web-salud-02 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
