@@ -204,6 +204,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En documentos comerciales: medir el desborde de cada página por código antes de exportar y evitar símbolos fuera del subconjunto latino de la fuente de marca. Candidata: falta un segundo caso.
 - **Herramientas:** HTML+CSS, Playwright con Chrome, PyMuPDF para verificar fuentes y texto
 
+### 2026-11-20 · caso-web-agencia-01 · julian
+
+- **Qué se hizo:** Fase 1 de una reconstrucción web con GSAP: medición del build compilado a 1440 y 375 en subagente (solo números), tokens CSS y guía de movimiento centrada en líneas SVG de 1 px (componente data-line con DrawSVG), bloque de 7 capas fijado solo en escritorio y alternativa de reducir movimiento
+- **Salió bien:** Medir con getComputedStyle en subagente sonnet sin capturas dio todo lo necesario; leer el CSS de autor del build completó el inventario de líneas; decisiones de cambio agrupadas en una tabla y aprobadas en una ronda
+- **Salió mal / incidencia:** Ojo: un degradado SVG con objectBoundingBox no pinta en líneas de ancho cero; se resuelve con máscara CSS. Queda verificar non-scaling-stroke con DrawSVG en la fase de movimiento
+- **Regla candidata:** ninguna
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
