@@ -204,6 +204,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En documentos comerciales: medir el desborde de cada página por código antes de exportar y evitar símbolos fuera del subconjunto latino de la fuente de marca. Candidata: falta un segundo caso.
 - **Herramientas:** HTML+CSS, Playwright con Chrome, PyMuPDF para verificar fuentes y texto
 
+### 2026-11-20 · caso-web-agencia-01 · julian
+
+- **Qué se hizo:** Maqueta estática de un sitio de una página: hero y dos gráficos redibujados como SVG con texto real, componente de línea con máscaras CSS, sin animación.
+- **Salió bien:** Copy idéntico a la fuente; sin colores nuevos; el hero a todo ancho con disco centrado en la columna derecha; revisión en 3 rondas.
+- **Salió mal / incidencia:** El texto del botón del formulario se partía o cortaba (20 px no cabe en 375 ni 1024: hubo que bajar a 16 px con nowrap); text-wrap balance deja de actuar con más de 6 líneas, usar pretty; el navegador servía CSS viejo (recargar con ?v=N).
+- **Regla candidata:** ninguna
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
