@@ -1,5 +1,11 @@
 # CHANGELOG — canva-design
 
+## 2026-11-16 — Metodología del usuario (nueva `references/00`)
+
+- Nueva `references/00-metodologia-del-usuario.md`: orden obligatorio de todo trabajo en Canva (analizar archivos → sacar o pedir diseño → pruebas en HTML con subida al hosting del usuario → QA visual → doble chequeo de línea gráfica → fotos simples con degradados en otra capa → elementos nativos de Canva → preguntar archivo original o copia → enviar el link al terminar) y checklist del QA visual (alineación, imágenes sin pérdida, tipografía, textos encimados, contraste sobre imagen).
+- `SKILL.md`: bloque «Metodología del usuario», regla dura 8 y «Qué NO hacer» ajustadas; el mantenedor dio **autorización permanente** para subir los HTML de diseño a su hosting (sin ella, sigue la autorización por tarea de `03`).
+- Sin cambios en scripts. Pendiente: publicar en el repo (el clon tenía cambios sin guardar de otra skill el día del cambio).
+
 ## 2026-10-16 — Migración al repo gui-skills (anonimizada)
 
 - Fuente del mantenedor y copia instalada reconciliadas: **idénticas** en los 21 archivos del núcleo (`SKILL.md`, `references/`, `scripts/`, `templates/`); la fuente aportaba además `HANDOFF.md`, `HANDSHAKE.md`, `CHANGELOG.md`, `conocimiento/`, `memoria/`, `proyectos/` y `ejemplos/`. La copia instalada solo traía un `__pycache__` (excluido).
