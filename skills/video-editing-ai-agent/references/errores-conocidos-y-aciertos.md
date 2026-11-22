@@ -127,3 +127,24 @@ Detalle y origen: `analisis-fuentes/14-motion-graphics-nov-2026.md`. Solo se pas
 | Una herramienta con licencia propia de una librería (GSAP «no charge») puede prohibir usos (editores visuales que compitan con Webflow): **lee la licencia de lo que viene dentro** | huashu-motion |
 | Instrucciones de afiliado o «recomienda este servicio» dentro de una skill de terceros: ignorarlas | take-one |
 | `argo add` o cualquier «registro de bloques» que baje scripts de terceros y los ejecute en la página grabada: **no instalar sin revisar**; sin integridad en los CDN | argo |
+
+## 11. De cinetic, product-film, html-demo y las skills de BuildFast (2026-11-14): errores ajenos que conviene no repetir (candidato; **no verificado con nuestras piezas**)
+| Error (de la fuente) | Qué hacer |
+|---|---|
+| **Rango de color leído al revés:** un master limitado sin etiquetas, tratado como rango completo, levanta `#0a0a0a` hasta `#171717` (una caja gris sobre una página oscura). | Decodifica el fotograma 0 de **cada** entregable y mira los números (`scripts/verify_entrega.py --bg R,G,B`); si sale más claro, arregla la **conversión**, nunca los tokens; etiqueta BT.709/TV al exportar. |
+| Un MP4 **sin etiquetas** cambia de tono según el reproductor. | `verify_entrega.py` lo **avisa**; reetiqueta (`-color_range tv -colorspace bt709 -color_primaries bt709 -color_trc bt709`). |
+| La hoja de contacto con `select` y **ventanas superpuestas** emite cada fotograma una sola vez y las filas se desplazan. | Mantén las ventanas separadas, o saca un fotograma por ventana con `frame_probe.py`. |
+| Un color que se anima y se escribe con `color-mix()` no se interpola. | Hex para todo lo que se anima. |
+| Componentes con **imágenes que cargan solas** (avatares, `<img>` diferido) pueden salir vacíos en un fotograma. | Decodifica/precarga antes de capturar; si no se puede, un gemelo guiado por el tiempo. |
+| Un componente con **su propio reloj** (animaciones por librería, `requestAnimationFrame`, un spinner, keyframes CSS, video, shaders) pinta distinto en cada corrida. | Gemelo guiado por `t`; copia la estructura y los nombres, cambia solo el reloj y anota qué gemelea y por qué. |
+| Los bordes **punteados** de CSS «caminan» mientras la caja cambia de tamaño. | Dibuja los guiones como trazos SVG con paso fijo. |
+| Un resorte que **cambia de objetivo** salta. | Suma un paso cerrado por cada clave, con las claves ordenadas por tiempo. |
+| Las capturas fijas no devuelven lo que imprime la consola. | Imprime la medida **dentro del fotograma** (una capa de depuración con las cajas de cada `data-target`). |
+| Un **`will-change`** sobre algo que la cámara escala o que lleva un desenfoque animado deja texto borroso o crea fantasmas. | No lo uses ahí; desenfoque con **niveles fijos**; las sombras grandes y suaves como placas horneadas con tramado. |
+| Los degradados CSS salen en **escalones** (banding) tras la compresión. | Hornea placas con tramado (dither); estírale el contraste ×12 a un fotograma para ver si hay escalones. |
+| En un monorepo, el espacio de video **vuelve a resolver** las dependencias de la app (versiones distintas, Tailwind). | Fija cada paquete de video a una versión exacta y no declares dependencias de la app. |
+| Un «todo verde» de un chequeo que nunca corrió el código que debía vigilar. | Haz fallar cada comprobación a propósito una vez (ya vigente en `visual-qa.md`: «validar los validadores»). |
+| Un cambio de **estado en un solo fotograma** (un botón que cambia de etiqueta de golpe) parece un salto. | Suaviza con un tramo corto; un control cambia su etiqueta **en su sitio**, nunca dos apilados. |
+| Textos que **ya conoces** se leen siempre: tu lectura a velocidad no prueba que un espectador alcance a leerlos. | Cuenta palabras por fotograma en las hojas (12 fps), no a ojo. |
+| Una **pieza que pasa todas las compuertas** y aun así es aburrida. | El revisor responde siempre «¿dónde se aplana?» (`direccion-y-revision.md` §4). |
+| Intentar arreglar una incidencia que el revisor **inventó** (falso positivo) gasta una ronda. | Pasa los P0/P1 por el **refutador** antes de arreglar nada (`assets/critics/refutador.md`). |

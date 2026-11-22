@@ -29,6 +29,10 @@ Esta skill vive en el repo **gui-skills** y sigue [`shared/protocolo-skill.md`](
 
 Reparto: `direct-visual-design` clasifica, analiza referencias, fija dirección y hace el QA de diseño; **`canva-design` decide cómo se construye y se monta en Canva** y verifica el resultado exportado. Si se invoca sola, aplica igualmente los principios de la principal (referencias: mantener/adaptar/evitar; QA estratégico→técnico).
 
+## Metodología del usuario (OBLIGATORIA, 2026-11-16) — detalle en [00-metodologia](references/00-metodologia-del-usuario.md)
+
+Orden de **todo** trabajo en Canva: (1) analizar el/los archivos de Canva completos → (2) sacar el diseño existente; si no hay, **pedir UI kit, logo, imágenes, referencias** → (3) pruebas de diseño en HTML (se pueden subir al hosting del usuario para importar a Canva) → (4) **QA visual**: alineación exacta, imágenes sin recomprimir ni pérdida, textos con su tipografía y bien organizados, sin textos encimados, **contraste de texto sobre imagen** (mejorarlo si no se lee) → (5) doble chequeo del diseño base y de la línea gráfica → (6) fotos con edición simple y **degradados en otra capa**, no sobre la imagen → (7) usar elementos nativos de Canva para organizar → (8) **al empezar preguntar siempre: ¿trabajar en el archivo original o en una copia?** → (9) **al terminar, enviar el link de Canva**.
+
 ## Regla de oro
 
 > **Diseñar en HTML (Canva-ready) → aprobar → importar a Canva → colocar assets → ordenar capas → exportar y verificar → limpiar.**
@@ -52,7 +56,7 @@ Reparto: `direct-visual-design` clasifica, analiza referencias, fija dirección 
 5. **Escala física antes que escala de pantalla:** al pasar a cm, reescalar la tipografía (cuerpo ≥ 28 px a 100 px/cm).
 6. Lo que se inserta entra arriba: **orden de capas** siempre se corrige (ornamentos atrás, fondo al final).
 7. Canva coloca los numerales grandes ~0,1 em más abajo: compensar. Cajas de texto con ancho ≥ 1,15× el real.
-8. **Hosting temporal = publicación:** autorización por tarea, carpeta `_tmp-…` aleatoria, borrado inmediato y comprobación 404.
+8. **Hosting temporal = publicación:** autorización por tarea (salvo que el usuario haya dado una **permanente** para los HTML de diseño: el mantenedor la dio el 2026-11-16, ver `references/00`), carpeta `_tmp-…` aleatoria, borrado inmediato y comprobación 404.
 9. `merge-designs`: una operación por llamada; borrar páginas solo con aprobación de las operaciones exactas.
 10. **Verificar siempre exportando** y mirando; no declarar "listo" sin comparar con el HTML. Decir con franqueza qué no se verificó.
 11. No inventar contenido (firmantes, fechas, cifras). Señalar contradicciones del texto del cliente y esperar su decisión.
@@ -66,7 +70,9 @@ Reparto: `direct-visual-design` clasifica, analiza referencias, fija dirección 
 
 - No usar el navegador integrado del panel para QA de archivos locales (abre una instantánea `data:` sin imágenes ni fuentes).
 - No crear texto nuevo con `add_text` esperando la fuente de marca (se pierde); importar HTML.
-- No reutilizar la autorización de hosting de una tarea anterior.
+- No reutilizar la autorización de hosting de una tarea anterior (salvo que sea una autorización permanente dada por escrito por el usuario; ver regla dura 8).
+- No empezar a editar sin preguntar si se trabaja en el archivo original o en una copia; no dar una tarea por terminada sin enviar el link de Canva.
+- No poner degradados sobre la imagen editada: van en otra capa.
 - No asumir que un diseño importado quedó bien porque la herramienta devolvió "success".
 - No mezclar con el flujo HTML→Figma de `direct-visual-design` (1920/240/80, auto layout): son entregas distintas; si el usuario pide ambas, tratarlas por separado.
 
@@ -74,6 +80,7 @@ Reparto: `direct-visual-design` clasifica, analiza referencias, fija dirección 
 
 | Necesidad | Archivo |
 |---|---|
+| Metodología del usuario: orden de trabajo, preguntas y QA visual (leer primero) | [00-metodologia-del-usuario.md](references/00-metodologia-del-usuario.md) |
 | Proceso completo paso a paso (la receta) | [01-pipeline-html-a-canva.md](references/01-pipeline-html-a-canva.md) |
 | Límites y trucos del conector (importador, edit-design, offsets) | [02-limites-y-trucos-canva-mcp.md](references/02-limites-y-trucos-canva-mcp.md) |
 | Hosting temporal, dominio, autorización, limpieza | [03-hosting-temporal.md](references/03-hosting-temporal.md) |

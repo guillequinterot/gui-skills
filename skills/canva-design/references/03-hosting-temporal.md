@@ -2,7 +2,7 @@
 
 Canva solo importa HTML por **URL pública HTTPS**. Esto implica publicar archivos en internet un rato. Reglas:
 
-1. **Autorización explícita del usuario por tarea.** Se le dice: qué archivos, a qué dominio, que se borrarán al terminar. "Sí, súbelo y bórralo después" vale para esa tarea; la siguiente se vuelve a pedir (así se hizo en las dos rondas de `caso-diplomas-01`).
+1. **Autorización explícita del usuario por tarea** (excepción: si el usuario dio por escrito una autorización **permanente** para los HTML de diseño, como el mantenedor el 2026-11-16, no se vuelve a pedir; ver `00-metodologia-del-usuario.md`). Se le dice: qué archivos, a qué dominio, que se borrarán al terminar. "Sí, súbelo y bórralo después" vale para esa tarea; la siguiente se vuelve a pedir (así se hizo en las dos rondas de `caso-diplomas-01`).
 2. **Subir lo mínimo** (v1.1: un solo HTML por programa con sus assets en la misma subida; **sin fuentes TTF**: el importador ignora `@font-face`; nada de HTML de sondeo fuera de la lista autorizada sin avisar): el HTML y los assets que `upload-asset-from-url` necesita (Canva no descarga las `<img>` del HTML pero sí necesita URL pública para subir el asset). Nada de datos personales extra (en `caso-diplomas-01`: un nombre de pila de ejemplo y texto del diploma).
 3. **Carpeta con sufijo aleatorio y prefijo `_tmp-`** (`_tmp-<slug>-q8m2x5`): no listable, no enlazada. `temp_host.sh cleanup` solo borra carpetas `_tmp-*`.
 4. **Borrar apenas termine la importación y la subida de assets** (no al final de todo el trabajo) y comprobar `404`.

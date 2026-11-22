@@ -193,6 +193,14 @@ Relación con otras skills:
 - **Regla candidata:** Una voz generada por IA se valida re-transcribiendola con Whisper y comparando con el guion (matchRate), y se escribe como suena toda palabra en otro idioma (candidata: falta una segunda pieza)
 - **Herramientas:** no indicadas
 
+### 2026-11-14 · caso-fuentes-video-02 · guille
+
+- **Qué se hizo:** v1.6: se leyeron (solo lectura, ninguna instalada) cinetic (principal), product-film, html-demo, buildfast-skills (generative-film, motion-studio) y taste-skill, todas MIT; se anadio references/direccion-y-revision.md (plan de tiempo con porcentajes, tratamiento con prueba del competidor y accion central, estandar con numeros, revision en dos pasadas, lentes y refutador, clases de defecto), assets/critics/ (5 lentes), tratamiento-template y brand-producto-template, scripts/verify_entrega.py (verifica el entregable decodificando) y scripts/music_edit.py (mapa por compas y corte de musica en compases), y secciones nuevas en production-workflow 12, narracion-y-demos 7 (demo HTML funcion pura de t), story-design 12, motion-recetas 10, errores 11 y visual-qa. Selftest 45/45.
+- **Salió bien:** Los dos scripts nuevos se probaron con material sintetico y fallan donde deben (fondo, duracion y bucle con salto en verify_entrega; compases fuertes y duracion exacta en music_edit); el analisis dice lo que NO se leyo (28 referencias de cinetic) y lo que se rechaza (gusto de la casa, Remotion, -14 LUFS fijo, nunca musica generada).
+- **Salió mal / incidencia:** Nada del proceso nuevo (plan de tiempo, tratamiento, lentes, refutador) se corrio con una pieza real, asi que los umbrales de cinetic siguen sin calibrar; no se oyo ningun empalme de music_edit; el volumen -14/-16 queda como decision de Guille; tres heredocs largos fallaron en el shell y hubo que escribir los textos con la herramienta de escritura. Incidencia: Un heredoc de bash con mucho texto en espanol y comillas invertidas falla con unexpected EOF en esta herramienta: escribir los archivos con Write y aplicarlos con un script de Python.
+- **Regla candidata:** Un revisor distinto debe intentar refutar cada P0/P1 antes de que alguien lo arregle; las prohibiciones de la marca no se rebajan por breves (candidata: falta una pieza real)
+- **Herramientas:** gh api (lectura), ffmpeg, numpy, selftest.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -217,3 +225,4 @@ Relación con otras skills:
 | Una sincronía alta entre sonido y imagen con música densa no demuestra nada: compararla siempre con el azar (`sync_audit.py`) | earshot | candidata (verificada solo con audio sintético) |
 | Antes de renderizar una pieza por codigo, validar el plan en tabla con storyboard_lint.py: un defecto visto en el plan cuesta un segundo, no 4-20 minutos (candidata: falta una pieza real) | caso-fuentes-motion-01 | candidata |
 | Una voz generada por IA se valida re-transcribiendola con Whisper y comparando con el guion (matchRate), y se escribe como suena toda palabra en otro idioma (candidata: falta una segunda pieza) | caso-fuentes-motion-01 | candidata |
+| Un revisor distinto debe intentar refutar cada P0/P1 antes de que alguien lo arregle; las prohibiciones de la marca no se rebajan por breves (candidata: falta una pieza real) | caso-fuentes-video-02 | candidata |

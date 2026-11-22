@@ -8,8 +8,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.5.1 (`scripts/handshake.py` → `skill_version`) |
-| Última actualización | 2026-11-09 por guille (v1.5.1: Kokoro instalado, glitch_scan, biblioteca CC0; sesión de Claude) |
+| Versión | 1.6.0 (`scripts/handshake.py` → `skill_version`) |
+| Última actualización | 2026-11-14 por guille (v1.6: dirección y revisión por lentes con refutador, verify_entrega.py, music_edit.py, ruta de película de producto; sesión de Claude) |
 | Skill principal / padre | ninguna (es la skill única de video) |
 | Llama a | `rea-reverse-engineer` (por porción, para entender una web/app de referencia); `video-aprender` (sub-skill: aprender de un link/archivo) |
 | La llaman | `video-aprender` (usa sus scripts); `direct-visual-design` y `seo-content-system` cuando el entregable es video |
@@ -30,9 +30,12 @@ corre en CPU). Para tu máquina: `python scripts/handshake.py --project <carpeta
 | Silero VAD (dentro de faster-whisper) | verificado | 2026-10-15 | `scripts/vad_segments.py`; valida cruzado la transcripción |
 | `yt-dlp` 2026.08.19 | parcial | 2026-10-16 | YouTube e Instagram **público** OK sin cookies; **cookies, TikTok, videos > 1 h: sin probar**. Requiere autorización personal de cada usuario (ver HANDOFF §2) |
 | PyMuPDF 1.27 | verificado | 2026-10-15 | Solo para `--slides` (PDF de diapositivas) |
-| `selftest.py` | verificado | 2026-11-09 | v1.5.1: 43/43 en el PC del mantenedor y 44/44 con `--voz` (Kokoro real); la copia del repo y las junctions de `~/.claude/skills` y `~/.codex/skills` apuntan a la misma carpeta |
+| `selftest.py` | verificado | 2026-11-14 | v1.6: **45/45** en el PC del mantenedor (291 s); en v1.5.1 fueron 43/43 y 44/44 con `--voz` (Kokoro real); la copia del repo y las junctions de `~/.claude/skills` y `~/.codex/skills` apuntan a la misma carpeta |
 | `storyboard_lint.py`, `frame_compare.py`, `sync_audit.py`, `align_script.py`, `glitch_scan.py` | verificado **solo con material sintético** | 2026-11-08 | Plan malo/sano, clon 0.2 s tarde, golpes de ruido con un cue a +30 ms, guion con cifra y mal oído. **Sin probar con material real**, con música densa ni con video natural; umbrales de las fuentes sin calibrar |
 | **Kokoro** (`kokoro-onnx` 0.6.1, MIT; modelo `kokoro-v1.0.onnx` + `voices-v1.0.bin`) | **instalado y verificado** | 2026-11-09 | Entorno `~/.gui-skills/kokoro` (fuera del repo, 336 MB de modelos). `scripts/voz_local.py`: ~1× el tiempo del audio en CPU; `matchRate` de Whisper 0.94–0.96 sobre la propia voz. **No se oyó**; licencia del modelo (Apache-2.0 según su tarjeta) **no confirmada aquí** |
+| `verify_entrega.py`, `music_edit.py` | verificado **solo con material sintético** | 2026-11-14 | `verify_entrega`: fondo `#0a0a0a` BT.709/TV bien etiquetado pasa; fondo equivocado, duración equivocada y bucle con salto fallan; sin etiquetas avisa y decodifica asumiendo BT.709/TV. `music_edit`: mapa ve los compases 5–8 +13 dB; corte 2×4 compases = 16.000 s. **Sin probar** con un MP4 real de Shotcut/HyperFrames, con música real ni con la costura **oída** |
+| Lentes de `assets/critics/` y el refutador | **sin probar** | 2026-11-14 | Son plantillas de proceso (de cinetic, MIT, reescritas); ninguna se ha corrido con una pieza real |
+| cinetic, product-film, html-demo, buildfast-skills, taste-skill | **leídas, no instaladas** | 2026-11-14 | Informe con lo no leído (≈ 28 referencias de cinetic): `references/analisis-fuentes/15-*.md`; `design-taste-frontend` sigue instalada como secundaria de `direct-visual-design` |
 | `voz_local.py` | verificado (voz real + selftest `--voz`) | 2026-11-09 | Solo se probó con frases cortas en español (`em_alex`, `ef_dora`); sin comparar con ElevenLabs |
 | HyperFrames `render --format mov` (ProRes 4444 con alfa) | **verificado** | 2026-11-09 | `yuva444p12le`, alfa 0 en la esquina; 240 fps + `tmix` funciona (efecto visual de motion blur **sin verificar**) |
 | earshot, reanimate, argo, huashu-motion y demás herramientas de las fuentes | **no instaladas** | 2026-11-09 | earshot: lo útil ya está reimplementado sin modelos; reanimate y argo no corren en Windows tal cual |
@@ -45,10 +48,15 @@ corre en CPU). Para tu máquina: `python scripts/handshake.py --project <carpeta
 - Edición por EDL → proyecto de Shotcut (`edl_to_shotcut.py`), color por clip (`grade.py`), subtítulos palabra por palabra en Shotcut, mezcla de música y normalización de loudness (objetivo ≈ −16 LUFS).
 - Piezas desde cero con HyperFrames: render 1080×1920 y 1080×1170, `--batch` con variables, `snapshot`, push entre páginas con `cut_dip.py` (hueco 0 %), música al compás con `beat_grid.py` (122 BPM medidos, fase +0 ms).
 - Biblioteca de videos aprobados (`save_approved.py`: `add` exige cita textual; `suggest`/`recipe` al empezar) — 1 entrada (V001, anonimizada).
+- **v1.6 (sintético):** verificar un entregable decodificando (`verify_entrega.py`: duración al fotograma, etiquetas BT.709/TV, fondo real, costura de bucle, pico tras el códec) y mapear/cortar la música por compases (`music_edit.py`). **Proceso nuevo sin probar:** dirección con plan de tiempo y tratamiento, revisión por lentes con refutador (`references/direccion-y-revision.md`).
 - **v1.5 (sintético):** validar un plan en tabla o `timeline.json` (`storyboard_lint.py`), medir el offset de cada golpe de sonido contra su cue y el volumen del MP4 (`sync_audit.py`), comparar un clon con su referencia (curva de actividad, ventana de movimiento, desfase óptimo) y medir la costura de un bucle (`frame_compare.py`), y unir un guion con los tiempos por palabra de Whisper con `matchRate` (`align_script.py`).
 - `video-aprender` (modos `contenido`, `reunion`, `estilo`): clase pública del MIT OCW (8 min, ecuaciones verificadas con Python), 11 reels públicos de Instagram en lote (26.2 min), clase sintética y pizarra sintética (6/6 estados).
 
 ## Pendientes abiertos
+
+- [ ] **v1.6, probar con una pieza real** el plan de tiempo con porcentajes, el tratamiento (prueba del competidor, acción central), las lentes y el **refutador**; anotar en el HANDOFF cuál lente sirvió y cuál sobró, y calibrar el «estándar con números» (`direccion-y-revision.md` §3, umbrales de cinetic sin calibrar).
+- [ ] **v1.6, decisiones de Guille:** objetivo de volumen por destino (**−14** que usa cinetic para feed frente a **~−16** nuestro); si el «estándar con números» pasa a ser regla tras una pieza; **oír** un empalme de `music_edit.py cut` y confirmar que no corta una nota.
+- [ ] **v1.6:** leer las ~28 referencias de cinetic que no se leyeron (`sound.md`, `copy-and-type.md`, `transitions.md`, `camera.md`, `imagery.md`…) si una pieza real lo pide; probar si una demo HTML «función pura de `t`» (`narracion-y-demos.md` §7) se renderiza a MP4 con HyperFrames; evaluar si `create-svg-skill` de buildfast sirve a `design-logo-vector` (no se evaluó).
 
 - [ ] **v1.5, probar con una pieza real** `storyboard_lint.py`, `sync_audit.py`, `frame_compare.py` y `align_script.py` y **calibrar los umbrales** con material de Guille; añadir lo aprendido al HANDOFF.
 - [ ] **v1.5.1, decisiones de Guille:** resolver los conflictos de `references/motion-recetas-y-camara.md` §9 (movimiento ocioso, deriva de cámara) con una pieza; **escuchar una muestra de Kokoro** (`voz_local.py`, voces `ef_dora`/`em_alex`/`em_santa`) y decidir para qué piezas sirve; confirmar la licencia del modelo Kokoro.

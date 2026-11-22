@@ -462,12 +462,58 @@ def main():
         return ok, f"frases {textos}; pausas {gaps} (usa la forma hablada, sin marcadores ni notas)"
     check("voz_local: el guion se trocea en frases con la forma hablada, sin marcadores ni notas", voz_texto_ok)
 
+    def entrega_ok():
+        # fondo #0a0a0a bien etiquetado (BT.709/TV), el mismo sin etiquetas, y un bucle que salta
+        tag = os.path.join(tmp, "e_tag.mp4"); untag = os.path.join(tmp, "e_untag.mp4"); jump = os.path.join(tmp, "e_jump.mp4")
+        ff(["-f", "lavfi", "-i", "color=c=0x0a0a0a:s=320x180:r=30:d=2", "-vf", "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p",
+            "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-color_range", "tv", "-c:v", "libx264", tag])
+        ff(["-f", "lavfi", "-i", "color=c=0x0a0a0a:s=320x180:r=30:d=2", "-vf", "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p",
+            "-c:v", "libx264", "-x264-params", "colorprim=undef:transfer=undef:colormatrix=undef", untag])
+        ff(["-f", "lavfi", "-i", "color=c=red:s=320x180:r=30:d=1", "-f", "lavfi", "-i", "color=c=blue:s=320x180:r=30:d=1",
+            "-filter_complex", "[0:v][1:v]concat=n=2:v=1:a=0[v]", "-map", "[v]", "-pix_fmt", "yuv420p", jump])
+        script = os.path.join(HERE, "verify_entrega.py")
+        r_ok = run([script, tag, "--duration", "2", "--bg", "10,10,10", "--loop"], timeout=60)
+        r_bg = run([script, tag, "--duration", "2", "--bg", "23,23,23"], timeout=60)
+        r_un = run([script, untag, "--duration", "2", "--bg", "10,10,10"], timeout=60)
+        r_dur = run([script, tag, "--duration", "3"], timeout=60)
+        r_jump = run([script, jump, "--loop"], timeout=60)
+        ok = (r_ok.returncode == 0 and r_bg.returncode == 1 and "FALLA" in r_bg.stdout
+              and r_un.returncode == 0 and "AVISO" in r_un.stdout and "NO trae etiquetas" in r_un.stdout
+              and r_dur.returncode == 1 and r_jump.returncode == 1 and "SALTA" in r_jump.stdout)
+        return ok, "fondo correcto pasa; fondo equivocado, duración equivocada y bucle con salto fallan; sin etiquetas avisa y no falla"
+    check("verify_entrega: decodifica el fondo, la duración, las etiquetas de color y la costura del bucle", entrega_ok)
+
+    def musica_edit_ok():
+        import numpy as np
+        wav = os.path.join(tmp, "click.wav"); editj = os.path.join(tmp, "music_edit.json"); outw = os.path.join(tmp, "music_edit.wav")
+        sr, bars, bl = 44100, 16, 2.0
+        x = np.zeros(int(sr * (0.5 + bars * bl)), dtype=np.float32)
+        for k in range(bars * 4):
+            i = int((0.5 + k * 0.5) * sr); n = int(0.08 * sr); tt = np.arange(n) / sr
+            amp = 0.9 if 4 <= k // 4 < 8 else 0.2
+            x[i:i + n] += amp * np.sin(2 * np.pi * (60 if k % 4 == 0 else 800) * tt) * np.exp(-tt * 40)
+        import wave
+        with wave.open(wav, "wb") as w:
+            w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr); w.writeframes((np.clip(x, -1, 1) * 32767).astype("<i2").tobytes())
+        json.dump({"source": wav, "out": outw, "bpm": 120, "firstDownbeat": 0.5, "beatsPerBar": 4,
+                   "segments": [{"fromBar": 1, "toBar": 5, "why": "a"}, {"fromBar": 9, "toBar": 13, "why": "b"}], "joinFadeMs": 5, "fadeOutSeconds": 0.5},
+                  open(editj, "w"))
+        rm = run([os.path.join(HERE, "music_edit.py"), "map", wav, "--bpm", "120", "--first-downbeat", "0.5", "--bars", "10"], timeout=60)
+        rc = run([os.path.join(HERE, "music_edit.py"), "cut", editj], timeout=60)
+        with wave.open(outw) as w:
+            dur = w.getnframes() / w.getframerate()
+        lines = [l for l in rm.stdout.splitlines() if l[:6].strip().isdigit()]
+        lev = [float(l.split("|")[2]) for l in lines]
+        ok = (rm.returncode == 0 and rc.returncode == 0 and abs(dur - 16.0) < 0.01 and len(lev) == 10 and lev[4] - lev[0] > 8 and abs(lev[0] - lev[8]) < 1)
+        return ok, f"mapa: compases 5-8 más fuertes (+{lev[4] - lev[0]:.0f} dB); corte de 2×4 compases = {dur:.3f} s (esperado 16.000)"
+    check("music_edit: el mapa ve los compases fuertes y el corte por compases da la duración exacta", musica_edit_ok)
+
     def hs_prod():
         r = run([os.path.join(HERE, "handshake.py"), "--json"])
         d = json.loads(r.stdout)
         pr = d.get("production", {})
         hf = d.get("engines", {}).get("hyperframes", {})
-        ok = all(pr.get("scripts", {}).get(n) for n in ("beat_grid.py", "motion_energy.py", "save_approved.py", "storyboard_lint.py", "frame_compare.py", "sync_audit.py", "align_script.py", "glitch_scan.py", "voz_local.py")) and pr.get("preflight") and "status" in hf and "env_block_git_bash" in hf
+        ok = all(pr.get("scripts", {}).get(n) for n in ("beat_grid.py", "motion_energy.py", "save_approved.py", "storyboard_lint.py", "frame_compare.py", "sync_audit.py", "align_script.py", "glitch_scan.py", "voz_local.py", "verify_entrega.py", "music_edit.py")) and pr.get("preflight") and "status" in hf and "env_block_git_bash" in hf
         return ok, f"production.scripts ok, preflight={pr.get('preflight')}, hyperframes.status={hf.get('status')}, videos aprobados={pr.get('approved_videos', {}).get('count')}"
     check("handshake v1.5: bloque production, scripts nuevos y HyperFrames con variables de entorno", hs_prod)
 

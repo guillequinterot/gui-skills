@@ -204,6 +204,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En documentos comerciales: medir el desborde de cada página por código antes de exportar y evitar símbolos fuera del subconjunto latino de la fuente de marca. Candidata: falta un segundo caso.
 - **Herramientas:** HTML+CSS, Playwright con Chrome, PyMuPDF para verificar fuentes y texto
 
+### 2026-11-18 · caso-cv-01 · guille
+
+- **Qué se hizo:** Currículum personal en PDF A4 de 2 páginas para reclutadores, con la identidad del sitio del propio diseñador (cabecera oscura, acento lima, Poppins, monograma, foto). Contenido tomado del perfil de LinkedIn vigente, notas del proyecto y el sitio; sin métricas inventadas. Texto real, secciones estándar para ATS, enlaces clicables, fuentes incrustadas. Un ajuste pedido por el usuario (herramientas Adobe agrupadas como «Suite de Adobe») y QA visual a 150 dpi.
+- **Salió bien:** Un script de render (HTML a PDF con comprobación de desborde por página) permitió iterar rápido; mover el bloque de recomendaciones a la barra lateral equilibró la página 2; las dos páginas cierran con holgura sobre el pie; se marcaron como pendientes los datos en conflicto entre fuentes en vez de decidirlos.
+- **Salió mal / incidencia:** La primera versión desbordó la página 2 al añadir un bloque nuevo y el contacto tenía etiquetas pegadas al dato; se corrigieron antes de entregar. Una etiqueta de contacto inventada (disponibilidad) se detectó en revisión propia y se reemplazó por un dato verificable. Incidencia: El PDF de LinkedIn exportado con acentos se lee mal en consola (solo visualización); el PDF final está bien. Los datos de contacto y fechas difieren entre LinkedIn, el sitio y los diplomas: se anotaron para confirmar.
+- **Regla candidata:** En un CV, no escribir ningún dato de contacto o disponibilidad que no esté en una fuente; ante conflicto entre fuentes, usar la del sitio propio y dejarlo marcado para confirmar (1 caso).
+- **Herramientas:** HTML+CSS, Playwright/Edge (PDF), PyMuPDF (QA)
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -227,6 +235,7 @@ Contenido de la carpeta:
 | En rectángulos absolutos de fondo (imagen y overlay) usar constraints Stretch desde el principio. En una fila de cards con alturas de contenido desiguales, dejar la más alta en Hug y el resto en Fill; con todas en Fill la fila no se ajusta. Mismo caso que la candidata anterior de full-bleed: siguen siendo candidatas hasta un segundo caso. | caso-web-hotel-01 | candidata |
 | Ninguna | caso-migracion-01 | candidata |
 | En documentos comerciales: medir el desborde de cada página por código antes de exportar y evitar símbolos fuera del subconjunto latino de la fuente de marca. Candidata: falta un segundo caso. | caso-presupuesto-01 | candidata |
+| En un CV, no escribir ningún dato de contacto o disponibilidad que no esté en una fuente; ante conflicto entre fuentes, usar la del sitio propio y dejarlo marcado para confirmar (1 caso). | caso-cv-01 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
