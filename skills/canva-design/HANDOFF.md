@@ -112,6 +112,14 @@ Verificación por exportación: diferencia media HTML↔Canva de referencia 8–
 - **Regla candidata:** Al montar titulares serif ultrabold >=90 px en Canva, subirlos ~0.07-0.08 em tras importar y medir por exportación; verificar el desfase en cada lámina (candidata: falta un segundo caso).
 - **Herramientas:** Canva MCP (import-design-from-url, edit-design, export-design), HTML+Pillow, orquestación multicuenta
 
+### 2026-11-23 · caso-carrusel-02 · guille
+
+- **Qué se hizo:** Montaje en Canva de un carrusel de 6 laminas 1080x1350 (v5, estructura de referente + marca) sobre el diseno ORIGINAL ya entregado: import HTML con marcadores + 53 assets subidos + update_fill/crop_media por pagina + merge-designs (insert al final y delete de las 6 viejas). Export verificado: titulares a 0-1 px del render HTML, diferencia media 0,7-1,5.
+- **Salió bien:** Flujo B (marcadores) + una llamada edit-design por pagina funciona con 17-18 operaciones; las 5 paginas en paralelo sobre la misma transaccion; merge-designs insert (sin after_page_number) conserva el orden; exportar el original tras el delete da 0,00 de diferencia con el intermedio; una fuente condensada de Google (Anton) SI la reconoce el importador.
+- **Salió mal / incidencia:** prepare_multipage_import.py falla (TypeError) si algun <img> trae solo width sin height: hubo que calcular alturas con Pillow/viewBox antes. Titulos Anton largos (>= 18 caracteres a 75-91 px) se parten en 2 lineas en Canva dentro de cajas de 680 px aunque en Chrome caben: ensanchar a 900 px (left 90) con resize_element + position_element lo arregla. Incidencia: prepare_multipage_import.py: <img> sin height -> TypeError. Texto Anton: Canva mide mas ancho que Chrome.
+- **Regla candidata:** Antes del primer edit-design, ensanchar a 900 px las cajas de titulares en fuente condensada con mas de 14 caracteres; en el preparado, calcular height de cada <img> que solo traiga width.
+- **Herramientas:** import-design-from-url, upload-asset-from-url, read-design, edit-design, merge-designs, export-design, temp_host.sh, canva_verify.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -132,6 +140,7 @@ Estas viven en `memoria/inbox-aprendizajes.md` (candidatas, sin promover); se pr
 | Al generar el HTML para flujo B escribir siempre style=width/height en la página y left:0px/top:0px en los img; limitar el ancho de cada caja de texto a (1080 - margen) aunque el 1,15x la desborde. | caso-carrusel-01 | candidata |
 | Tras importar a Canva, compensar top ≈ -0,1 x font-size en titulares Montserrat 800 (101 px: -9/-10; 127 px: -13; 156 px: -16; 116 px: -12) y -1/-2 px en textos de 56-58 px; verificar exportando y comparando bandas de texto con el render del HTML. | caso-carrusel-02 | candidata |
 | Al montar titulares serif ultrabold >=90 px en Canva, subirlos ~0.07-0.08 em tras importar y medir por exportación; verificar el desfase en cada lámina (candidata: falta un segundo caso). | caso-carrusel-02 | candidata |
+| Antes del primer edit-design, ensanchar a 900 px las cajas de titulares en fuente condensada con mas de 14 caracteres; en el preparado, calcular height de cada <img> que solo traiga width. | caso-carrusel-02 | candidata |
 
 ## 6. Anexos heredados
 
