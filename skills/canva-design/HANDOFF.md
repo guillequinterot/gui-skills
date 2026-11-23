@@ -96,6 +96,14 @@ Verificación por exportación: diferencia media HTML↔Canva de referencia 8–
 - **Regla candidata:** Al generar el HTML para flujo B escribir siempre style=width/height en la página y left:0px/top:0px en los img; limitar el ancho de cada caja de texto a (1080 - margen) aunque el 1,15x la desborde.
 - **Herramientas:** Canva MCP (import-design-from-url, edit-design, export-design), Magnific stock, OpenCV, PIL, Chrome headless
 
+### 2026-11-23 · caso-carrusel-02 · guille
+
+- **Qué se hizo:** Carrusel de Instagram de 6 láminas 1080x1350 con texto literal del cliente, diseñado en HTML Canva-ready (ejecutor delegado), aprobado y montado en Canva con el flujo B (marcadores grises, update_fill+crop_media, logo en vector con insert_fill); iconos y brushes renovados por regla de variedad del cliente (siluetas negras con borde blanco y sombra roja, pinceladas y tramas generadas por script con semilla).
+- **Salió bien:** El flujo B conservó el orden de capas sin layer_element; texto nativo y editable con fuentes de Canva; medición independiente con Pillow sobre la exportación (anclajes exactos a 72/1008 px) y comparación de bandas de texto contra el render del HTML; la compensación vertical funcionó a la primera.
+- **Salió mal / incidencia:** Canva bajó los titulares grandes 9-16 px y los textos medianos 2 px respecto al HTML (efecto ya conocido de ~0,1 em); hubo que compensar con position_element y reexportar. Cajas de texto con ancho mayor que el lienzo por white-space:nowrap. Incidencia: Las fotos de stock costaban 40 créditos y quedaban 8: no se pudieron usar; los iconos de stock sí se descargan en SVG sin gastar créditos.
+- **Regla candidata:** Tras importar a Canva, compensar top ≈ -0,1 x font-size en titulares Montserrat 800 (101 px: -9/-10; 127 px: -13; 156 px: -16; 116 px: -12) y -1/-2 px en textos de 56-58 px; verificar exportando y comparando bandas de texto con el render del HTML.
+- **Herramientas:** Canva MCP (import-design-from-url, upload-asset-from-url, edit-design, export-design), Pillow, hosting temporal con carpeta aleatoria (borrado y 404 comprobado)
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -114,6 +122,7 @@ Estas viven en `memoria/inbox-aprendizajes.md` (candidatas, sin promover); se pr
 | Stock: avisar del costo en créditos; ofrecer recorte de persona antes de recurrir a IA generativa | `caso-piezas-universidad-01` | Candidata |
 | Comprobar código de salida y fecha de las previews tras cada render | `caso-piezas-universidad-01` | Candidata |
 | Al generar el HTML para flujo B escribir siempre style=width/height en la página y left:0px/top:0px en los img; limitar el ancho de cada caja de texto a (1080 - margen) aunque el 1,15x la desborde. | caso-carrusel-01 | candidata |
+| Tras importar a Canva, compensar top ≈ -0,1 x font-size en titulares Montserrat 800 (101 px: -9/-10; 127 px: -13; 156 px: -16; 116 px: -12) y -1/-2 px en textos de 56-58 px; verificar exportando y comparando bandas de texto con el render del HTML. | caso-carrusel-02 | candidata |
 
 ## 6. Anexos heredados
 
