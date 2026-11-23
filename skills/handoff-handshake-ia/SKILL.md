@@ -4,7 +4,7 @@ description: Usar para traspasos entre IA o sesiones, arrancar, retomar y cerrar
 ---
 # Handoff y handshake entre IA
 
-**Estado: v0.2, validación parcial** (cinco casos, una lectura por celda; sin evidencia de que reduzca alucinaciones; umbral de uso provisional). Ver [pilotos](references/08-pilotos.md).
+**Estado: v0.2, validación parcial** (cinco casos, una lectura por celda; sin ventaja demostrada salvo con un HANDOFF de unas 1.200 líneas; sin evidencia de que reduzca alucinaciones; umbral de uso provisional). Ver [pilotos](references/08-pilotos.md).
 
 ## Protocolo gui-skills (obligatorio)
 
