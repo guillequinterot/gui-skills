@@ -64,6 +64,14 @@ Cliente seguro de la API GraphQL de Buffer para crear borradores, programar y pu
 - **Regla candidata:** ninguna
 - **Herramientas:** buffer_api.py, test_buffer_api.py
 
+### 2026-11-22 · caso-redes-02 · guille
+
+- **Qué se hizo:** Se programaron 5 posts de un paquete semanal con varios ejecutores: documento PDF y carrusel de 10 imagenes (LinkedIn e Instagram, lunes 18:00), video horizontal (LinkedIn, miercoles 08:00) y reel mas Short con el mismo MP4 vertical (Instagram y YouTube, viernes 12:00). Antes se reintentaron dos posts de video que habian fallado (nuevo post por canal con ahora --confirmo) y se borraron los dos fallidos. Medios en carpetas temporales del hosting, una para el carrusel y otra para los videos, para limpiarlas por separado cuando todo figure sent.
+- **Salió bien:** El orquestador verifico de forma independiente con listar (estado, hora UTC, un solo post por canal) y con el SHA-256 y el tipo de cada URL publica. Texto exacto tomado por programa de los bloques aprobados. Un solo intento por post. Carpeta de medios separada por tipo evita borrar videos al limpiar el carrusel.
+- **Salió mal / incidencia:** listar no devuelve los medios adjuntos ni el mensaje de error de un post fallido; hay que comprobarlos en la respuesta de creacion o en la interfaz. La API no ofrece reintentar un post fallido, solo crear otro. Un ejecutor en modo -p no tenia la clave: hace falta pasar BUFFER_KEY_FILE en el entorno. Incidencia: Cuota del mes baja tras muchas lecturas de diagnostico; un ejecutor ahorro llamadas con un solo listar por canal. Una comparacion de hash fallo por cortar la descarga por tiempo del propio script de prueba; repetida con tiempo suficiente coincidio.
+- **Regla candidata:** Programar varios posts de video con ejecutores distintos: usar una carpeta de medios por tipo de pieza y limpiar solo cuando todos sus posts figuren sent.
+- **Herramientas:** buffer_api.py, hosting por scp con SHA-256
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -72,3 +80,4 @@ Cliente seguro de la API GraphQL de Buffer para crear borradores, programar y pu
 |---|---|---|
 | Ante un campo que la documentación no muestra, usar introspección del tipo antes de enviarlo | banco-pruebas-buffer-api | candidata |
 | Los medios alojados para publicar en redes se borran del hosting tras 'sent' (con comando que se niega antes de ese estado). | banco-pruebas-buffer-api | candidata |
+| Programar varios posts de video con ejecutores distintos: usar una carpeta de medios por tipo de pieza y limpiar solo cuando todos sus posts figuren sent. | caso-redes-02 | candidata |

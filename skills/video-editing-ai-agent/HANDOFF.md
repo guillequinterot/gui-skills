@@ -201,6 +201,14 @@ Relación con otras skills:
 - **Regla candidata:** Un revisor distinto debe intentar refutar cada P0/P1 antes de que alguien lo arregle; las prohibiciones de la marca no se rebajan por breves (candidata: falta una pieza real)
 - **Herramientas:** gh api (lectura), ffmpeg, numpy, selftest.py
 
+### 2026-11-22 · caso-redes-02 · guille
+
+- **Qué se hizo:** Dos videos de motion graphics sin video grabado para el mismo articulo: largo horizontal de 3:17 y corto vertical de 33,8 s, con texto cinetico palabra a palabra, un objeto vectorial por frase, alternancia claro y oscuro, voz grabada por el usuario mejorada con ffmpeg y musica externa generada por IA. Antes se analizaron 4 videos de referencia en modo estilo, se escribio el plan (tratamiento, guion, storyboard validado) y se hicieron versiones provisionales con voz local. El usuario pidio limpiar el registro del texto (menos coloquial) y el guion final se le dio para grabar.
+- **Salió bien:** Flujo voz grabada -> mejorar_voz.py -> align_script (matchRate 0,99 y 1,00 con la grabacion real) -> render -> mezcla con musica extendida por compases quedo reutilizable (CAMBIAR-VOZ-Y-MUSICA). Paquete PARA-SUBIR con textos, capitulos con tiempos reales y lista de comprobacion con hashes. verify_entrega y glitch_scan sin fallos. El usuario aprobo ambos videos.
+- **Salió mal / incidencia:** Los creditos de generacion de voz y musica de la cuenta estaban agotados (8 de 45.000), asi que se cambio el plan a voz y musica del usuario; las sesiones ejecutoras en modo -p no exponian las herramientas MCP de generacion, aunque el conector figuraba conectado. storyboard_lint marco 4 planos de 8 a 9 s en rojo porque el usuario habla mas pausado que la voz local estimada; no se partieron. Un primer encargo del corto salio con voz provisional porque la voz del usuario llego despues de que el ejecutor leyera el encargo. Incidencia: frame_probe con --span y --n entrego etiquetas de tiempo erroneas (0,00 s repetido) y un muestreo de fotogramas vacios que parecio un fallo del video; las hojas de contacto de video_understand mostraron que el video estaba bien. La cola de cierre y las duraciones salieron mas cortas o largas que lo estimado porque la cadencia del locutor cambia el tiempo.
+- **Regla candidata:** Antes de planear voz o musica de pago, consultar el saldo con account_balance y confirmar que el ejecutor tiene las herramientas; si el usuario graba su voz, entregarle el guion final cerrado antes de producir, para no regrabar ni re-renderizar.
+- **Herramientas:** HyperFrames, Kokoro, ffmpeg, mejorar_voz.py, align_script.py, verify_entrega.py
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -226,3 +234,4 @@ Relación con otras skills:
 | Antes de renderizar una pieza por codigo, validar el plan en tabla con storyboard_lint.py: un defecto visto en el plan cuesta un segundo, no 4-20 minutos (candidata: falta una pieza real) | caso-fuentes-motion-01 | candidata |
 | Una voz generada por IA se valida re-transcribiendola con Whisper y comparando con el guion (matchRate), y se escribe como suena toda palabra en otro idioma (candidata: falta una segunda pieza) | caso-fuentes-motion-01 | candidata |
 | Un revisor distinto debe intentar refutar cada P0/P1 antes de que alguien lo arregle; las prohibiciones de la marca no se rebajan por breves (candidata: falta una pieza real) | caso-fuentes-video-02 | candidata |
+| Antes de planear voz o musica de pago, consultar el saldo con account_balance y confirmar que el ejecutor tiene las herramientas; si el usuario graba su voz, entregarle el guion final cerrado antes de producir, para no regrabar ni re-renderizar. | caso-redes-02 | candidata |
