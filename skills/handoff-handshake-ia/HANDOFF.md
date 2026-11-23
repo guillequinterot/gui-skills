@@ -13,7 +13,7 @@ Skill **propia** del mantenedor para que los agentes de IA traspasen proyectos y
 | 2026-11-22 | Estructura: HANDSHAKE vivo con tope de 150 líneas por defecto (configurable), ficha HANDOFF, historial archivado, AGENTS.md, readback, `NO CONSTA`, verificador y paso de reparto | el mantenedor | Las IA alucinan cuando el proyecto crece y el contexto se compacta; el traspaso debe ser lo mínimo para ejecutar sin inventar |
 | 2026-11-22 | Los guardrails se preguntan al dueño en cada proyecto; no se heredan | el mantenedor | Cada proyecto tiene riesgos distintos |
 | 2026-11-22 | Los proyectos existentes se migran solo cuando se retoman, en copia y sin borrar | el mantenedor | Evitar tocar lo que no se usa |
-| 2026-11-22 | Se publica la v0.2 como «validación parcial» aunque quedó a una respuesta del criterio en un caso | Desktop (orquestador), por instrucción de el mantenedor de aprobar y subir si los pilotos lo justificaban | Mejoras medidas en dos casos y mejor resultado en dos proyectos grandes; el repo es privado y se revisa. **El criterio escrito de la skill (igualar o superar al formato anterior en los dos casos re-probados) quedó incumplido por una respuesta; publicar como parcial fue decisión de una IA y el mantenedor debe revisarla** |
+| 2026-11-22 | Se publica la v0.2 como «validación parcial» aunque quedó a una respuesta del criterio en un caso | Desktop (orquestador), por instrucción de el mantenedor de aprobar y subir si los pilotos lo justificaban | Mejoras medidas en dos casos; el repo es privado y se revisa. **El criterio escrito de la skill (igualar o superar al formato anterior en los dos casos re-probados) quedó incumplido por una respuesta; publicar como parcial fue decisión de una IA y el mantenedor debe revisarla** |
 
 ## 4. Registro de trabajos
 <!-- registro:inicio -->
@@ -45,11 +45,19 @@ Skill **propia** del mantenedor para que los agentes de IA traspasen proyectos y
 - **Regla candidata:** Umbral provisional: migrar solo si HANDOFF y HANDSHAKE superan unas 400 líneas, hay varios archivos de estado o contradicciones; si el proyecto es corto y limpio, solo AGENTS.md, Último trabajo real y Estado en una frase. Cinco casos, sin validar.
 - **Herramientas:** Claude Pro CLI, Codex, subagentes de Desktop, verificar.py, privacy_scan.py
 
+### 2026-11-22 · banco-pruebas-handoff-handshake · guille
+
+- **Qué se hizo:** Re-prueba ciega de la v0.2 en los casos 01, 03 y 05 (total v0.2: 30 contra 32 del formato anterior en cinco casos); ajuste del umbral de uso a unas 1.000 líneas, nuevo paso de migración que comprueba que objetivo y rutinas sobreviven y aviso de ruido de puntuación.
+- **Salió bien:** El formato anterior cayó otra vez en la trampa del caso 01 y el nuevo no; la firma de migración ya no tapa el último trabajo real en ningún caso; cero respuestas inventadas; se detectó el ruido de puntuación comparando el mismo texto puntuado dos veces.
+- **Salió mal / incidencia:** No se demostró ventaja de la v0.2: el post bajó de 7 a 5 porque el migrador perdió el objetivo y la rutina de las 21:30; el mismo texto se puntuó 5 y 7 según el evaluador, así que diferencias de 1 o 2 puntos no son distinguibles del ruido; la única ventaja repetida es con un HANDOFF de unas 1.200 líneas (un caso).
+- **Regla candidata:** ninguna
+- **Herramientas:** Codex, Claude Pro CLI, subagentes de Desktop
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
 
 | Regla | Visto en (casos) | Estado |
 |---|---|---|
-| Umbral provisional: migrar solo si HANDOFF y HANDSHAKE superan unas 400 líneas, hay varios archivos de estado o contradicciones; si el proyecto es corto y limpio, solo AGENTS.md, Último trabajo real y Estado en una frase. | caso-handoff-01, caso-handoff-02, caso-handoff-03, caso-handoff-04, caso-handoff-05 | candidata |
+| Umbral provisional: migrar solo si el HANDOFF no cabe en una lectura (unas 1.000 líneas o más) o hay un estado desactualizado conocido; entre 150 y 1.000 líneas sin evidencia en ningún sentido; si es corto y limpio, solo AGENTS.md, Último trabajo real y Estado en una frase. | caso-handoff-01, caso-handoff-02, caso-handoff-03, caso-handoff-04, caso-handoff-05 | candidata |
 
