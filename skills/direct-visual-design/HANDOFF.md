@@ -228,6 +228,14 @@ Contenido de la carpeta:
 - **Regla candidata:** Tras importar a Canva, compensar top ≈ -0,1 x font-size en titulares Montserrat 800 (101 px: -9/-10; 127 px: -13; 156 px: -16; 116 px: -12) y -1/-2 px en textos de 56-58 px; verificar exportando y comparando bandas de texto con el render del HTML.
 - **Herramientas:** Canva MCP (import-design-from-url, upload-asset-from-url, edit-design, export-design), Pillow, hosting temporal con carpeta aleatoria (borrado y 404 comprobado)
 
+### 2026-11-23 · caso-carrusel-02 · guille
+
+- **Qué se hizo:** Rediseño total del carrusel de 6 láminas 1080x1350 tras feedback de la clienta (referente Pinterest: moderno, dinámico, sin cuadrícula): formas onduladas por lámina, óvalos sobre la palabra clave, pegatinas, pie con año en contorno. HTML hecho por un ejecutor, QA de dos pasadas, importado a Canva como diseño nuevo, textos reales editables, logo SVG oficial, verificado por exportación PNG y hosting temporal borrado (404).
+- **Salió bien:** Canva reconoció Fraunces al importar. Centrado dentro de 1 px en las 6 láminas. Compensar la posición vertical de los titulares con position_element dejó 0 px de desfase frente al HTML (medido por mejor desplazamiento contra el render).
+- **Salió mal / incidencia:** Canva coloca los titulares grandes en Fraunces ultrabold (90-110 px) unos 7-8 px más abajo que Chrome; hubo que compensar a mano. Un ejecutor llegó al límite de uso antes de empezar y se reasignó. Incidencia: Desfase vertical de glifos grandes en Canva frente a Chrome (~0.07-0.08 em).
+- **Regla candidata:** Al montar titulares serif ultrabold >=90 px en Canva, subirlos ~0.07-0.08 em tras importar y medir por exportación; verificar el desfase en cada lámina (candidata: falta un segundo caso).
+- **Herramientas:** Canva MCP (import-design-from-url, edit-design, export-design), HTML+Pillow, orquestación multicuenta
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -253,6 +261,7 @@ Contenido de la carpeta:
 | En documentos comerciales: medir el desborde de cada página por código antes de exportar y evitar símbolos fuera del subconjunto latino de la fuente de marca. Candidata: falta un segundo caso. | caso-presupuesto-01 | candidata |
 | En un CV, no escribir ningún dato de contacto o disponibilidad que no esté en una fuente; ante conflicto entre fuentes, usar la del sitio propio y dejarlo marcado para confirmar (1 caso). | caso-cv-01 | candidata |
 | Tras importar a Canva, compensar top ≈ -0,1 x font-size en titulares Montserrat 800 (101 px: -9/-10; 127 px: -13; 156 px: -16; 116 px: -12) y -1/-2 px en textos de 56-58 px; verificar exportando y comparando bandas de texto con el render del HTML. | caso-carrusel-02 | candidata |
+| Al montar titulares serif ultrabold >=90 px en Canva, subirlos ~0.07-0.08 em tras importar y medir por exportación; verificar el desfase en cada lámina (candidata: falta un segundo caso). | caso-carrusel-02 | candidata |
 
 ### Decisiones pendientes heredadas (del cierre del 2026-10-09)
 
