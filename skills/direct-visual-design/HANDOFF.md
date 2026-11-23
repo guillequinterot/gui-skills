@@ -212,6 +212,14 @@ Contenido de la carpeta:
 - **Regla candidata:** En un CV, no escribir ningún dato de contacto o disponibilidad que no esté en una fuente; ante conflicto entre fuentes, usar la del sitio propio y dejarlo marcado para confirmar (1 caso).
 - **Herramientas:** HTML+CSS, Playwright/Edge (PDF), PyMuPDF (QA)
 
+### 2026-11-22 · caso-redes-02 · guille
+
+- **Qué se hizo:** Guia PDF de 12 paginas A4 y carrusel de 10 laminas 1080x1350 (JPG para Instagram y PDF documento para LinkedIn) construidos en HTML con la linea grafica del sitio (verde lima sobre negro y blanco, sin fotos ni personas), mas la miniatura de YouTube y las ilustraciones vectoriales de los videos.
+- **Salió bien:** Contraste medido (minimo 7,3:1 y 10,3:1 en la lamina regenerada), una idea por lamina, hojas de contacto revisadas antes de entregar. Cambiar una sola lamina no altero las otras nueve (mismo hash).
+- **Salió mal / incidencia:** El usuario aprobo el carrusel y despues hubo que regenerar una lamina por una decision de contenido; hay que avisar que aprobar piezas no cubre un cambio posterior.
+- **Regla candidata:** ninguna
+- **Herramientas:** HTML a PDF e imagen, verificacion de hash por lamina
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)

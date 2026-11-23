@@ -81,6 +81,14 @@ publicación automática. Es transversal: la llaman `seo-content-system`, `direc
 - **Regla candidata:** ninguna
 - **Herramientas:** slop_lint.py --ignorar utm
 
+### 2026-11-22 · caso-redes-02 · guille
+
+- **Qué se hizo:** Puerta anti-slop pasada sobre un articulo, una guia PDF, los textos de seis posts y los guiones de dos videos de un mismo paquete semanal; se rehizo el texto de los videos a un registro limpio y se retiro un ejemplo que el articulo presentaba como uso permitido sin que los terminos lo respaldaran.
+- **Salió bien:** El semaforo por parrafo sirvio como compuerta repetible por cada ejecutor; lo no verificable (como cuanto tarda un proceso) se dejo con cautela y se pidio confirmar al usuario. El texto final de los videos se cerro en un solo archivo antes de grabar.
+- **Salió mal / incidencia:** El detector marco en rojo corchetes de plantilla en un prompt (falso positivo); los amarillos quedaron para lectura humana.
+- **Regla candidata:** ninguna
+- **Herramientas:** slop_lint.py, semaforo por parrafo
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
