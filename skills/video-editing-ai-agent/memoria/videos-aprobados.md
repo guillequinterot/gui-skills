@@ -235,3 +235,22 @@ Etiquetas: blog, explainer, trading
 - volumen -16.3 LUFS, ligeramente bajo
 
 Etiquetas: blog, comparativa, trading
+
+## V012 · Video explicativo caso-video-blog-02 (horizontal + vertical) · 2026-11-24
+
+- **Pieza:** Video explicativo de articulo de blog 16:9 y version vertical 9:16 · 1920x1080 y 1080x1920 · 56.0 s · ruta `hyperframes-voz-local` · motor hyperframes · proyecto `caso-video-blog-02`
+- **Mensaje:** tres preguntas que revisar antes de usar un bot en una cuenta de fondeo
+- **Aprobado por usuario:** «Voz aprobada / Aprobados»
+- **Aprobado explícitamente:** voz sintetica local Kokoro em_alex (voz y MP4 aprobados); miniatura con titular corto e interruptor neon; version vertical con subtitulos palabra por palabra
+- **Sin decidir (no usar como preferencia):** voz aun no comparada con la voz de marca de pago; sin musica nueva
+- **Estructura:** gancho > tres preguntas clave > practicas > cierre con boton y aviso legal
+- **Receta:** voz local Kokoro desde guion de 134 palabras; palabras con Whisper corregidas con el guion; hyperframes check; render; normalizar a -15.5 LUFS
+- **Medido:** -15.5 LUFS horizontal; -15.7 LUFS vertical; pico -1.4 dBFS
+
+**Lo bueno (repetir)**
+- voz local sin gasto de creditos; QA de cortes, movimiento y fotogramas pasa
+
+**Lo malo (evitar)**
+- con 7 reglas la lista del vertical se solapaba con los subtitulos (arreglado solo en esa pieza, la plantilla no se toco); Whisper oyo mal 'Rendimientos' en la frase legal
+
+Etiquetas: video, blog, voz-local, vertical, horizontal

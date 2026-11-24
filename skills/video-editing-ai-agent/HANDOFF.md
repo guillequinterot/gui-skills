@@ -209,6 +209,14 @@ Relación con otras skills:
 - **Regla candidata:** Antes de planear voz o musica de pago, consultar el saldo con account_balance y confirmar que el ejecutor tiene las herramientas; si el usuario graba su voz, entregarle el guion final cerrado antes de producir, para no regrabar ni re-renderizar.
 - **Herramientas:** HyperFrames, Kokoro, ffmpeg, mejorar_voz.py, align_script.py, verify_entrega.py
 
+### 2026-11-24 · caso-video-blog-02 · guille
+
+- **Qué se hizo:** Video explicativo de blog (16:9 y 9:16) producido con voz local Kokoro, QA de cortes, movimiento, LUFS y fotogramas; aprobado por el usuario
+- **Salió bien:** Voz local sin gastar creditos; ejecutor delegado con encargo sellado y QA del orquestador
+- **Salió mal / incidencia:** Con 7 reglas la lista de la plantilla vertical se solapa con los subtitulos (arreglado solo en la pieza); Whisper oye mal palabras de la frase legal
+- **Regla candidata:** La plantilla vertical debe admitir 7 nodos en la lista sin solapar subtitulos
+- **Herramientas:** no indicadas
+
 <!-- registro:fin -->
 
 ## 5. Reglas candidatas (sin aprobar)
@@ -235,3 +243,4 @@ Relación con otras skills:
 | Una voz generada por IA se valida re-transcribiendola con Whisper y comparando con el guion (matchRate), y se escribe como suena toda palabra en otro idioma (candidata: falta una segunda pieza) | caso-fuentes-motion-01 | candidata |
 | Un revisor distinto debe intentar refutar cada P0/P1 antes de que alguien lo arregle; las prohibiciones de la marca no se rebajan por breves (candidata: falta una pieza real) | caso-fuentes-video-02 | candidata |
 | Antes de planear voz o musica de pago, consultar el saldo con account_balance y confirmar que el ejecutor tiene las herramientas; si el usuario graba su voz, entregarle el guion final cerrado antes de producir, para no regrabar ni re-renderizar. | caso-redes-02 | candidata |
+| La plantilla vertical debe admitir 7 nodos en la lista sin solapar subtitulos | caso-video-blog-02 | candidata |
